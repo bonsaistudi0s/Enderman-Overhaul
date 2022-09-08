@@ -3,14 +3,15 @@ architectury {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/examplemod.accesswidener")
+    accessWidenerPath = file("src/main/resources/EndermanOverhaul.accesswidener")
 }
 
 dependencies {
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    // Remove the next line if you don't want to depend on the API
+	modImplementation "software.bernie.geckolib:${rootProject.gecko_lib_fabric_version}"
+    modApi("gg.moonflower:pollen:${rootProject.pollen_version}")
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
 }
 
