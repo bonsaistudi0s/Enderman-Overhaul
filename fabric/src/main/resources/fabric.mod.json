@@ -28,6 +28,7 @@
     "fabric": "*",
     "minecraft": ">=1.18.2",
     "architectury": ">=4.9.83",
-    "pollen": ">=1.4.9"
+    "pollen": ">=1.4.9",
+    "geckolib3": ">=3.0.59"
   }
 }

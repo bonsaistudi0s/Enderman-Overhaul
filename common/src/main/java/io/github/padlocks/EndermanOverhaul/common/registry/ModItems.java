@@ -1,20 +1,34 @@
 package io.github.padlocks.EndermanOverhaul.common.registry;
 
 import gg.moonflower.pollen.api.registry.PollinatedRegistry;
+import io.github.padlocks.EndermanOverhaul.common.item.BadlandsHoodItem;
 import io.github.padlocks.EndermanOverhaul.common.item.ModArmorItem;
 import io.github.padlocks.EndermanOverhaul.common.item.ModArmorMaterials;
 import io.github.padlocks.EndermanOverhaul.core.EndermanOverhaul;
-import net.minecraft.core.Registry;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+
+import java.util.function.Supplier;
 
 public class ModItems {
     public static final PollinatedRegistry<Item> ITEMS = PollinatedRegistry.create(Registry.ITEM, EndermanOverhaul.MOD_ID);
-    //private static final Map<ResourceLocation, Supplier<ItemModeledArmor>> MODELED_ARMOR = new WeakHashMap<>();
+    //public static final Supplier<ModArmorItem> BADLANDS_HOOD_B = ITEMS.register("badlands_hood", () -> new BadlandsHoodItem(ModArmorMaterials.BADLANDS_HOOD, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT)));
+
+//    public static final Item BADLANDS_HOOD = registerItem("badlands_hood",
+//        new BadlandsHoodItem(ModArmorMaterials.BADLANDS_HOOD, EquipmentSlot.HEAD,
+//                    new Item.Settings().group(ItemGroup.COMBAT)));
+
+    public static final BadlandsHoodItem BADLANDS_HOOD = registerItem("badlands_hood", new BadlandsHoodItem(
+            ModArmorMaterials.BADLANDS_HOOD, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT)));
 
 
-    public static final Item BADLANDS_HOOD = ITEMS.register("badlands_hood", () -> new ModArmorItem(ModArmorMaterials.BADLANDS_HOOD, EquipmentSlot.HEAD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT))).get();
+    private static <I extends Item> I registerItem(String name, I item) {
+        return ITEMS.register(name, () -> item).get();
+        //return Registry.register(Registry.ITEM, new Identifier(EndermanOverhaul.MOD_ID, name), item);
+    }
     //public static final Supplier<Item> BADLANDS_ENDERMAN_SPAWN_EGG = ITEMS.register("badlands_enderman_spawn_egg", () -> new SpawnEggItemBase<>(ModEntities.BADLANDS_ENDERMAN, 0x74A837, 0xB76CCB, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     //public static final Supplier<Item> CAVE_ENDERMAN_SPAWN_EGG = ITEMS.register("cave_enderman_spawn_egg", () -> new SpawnEggItemBase<>(ModEntities.CAVE_ENDERMAN, 0x74A837, 0xB76CCB, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     //public static final Supplier<Item> FLOWER_FIELDS_ENDERMAN_SPAWN_EGG = ITEMS.register("flower_fields_enderman_spawn_egg", () -> new SpawnEggItemBase<>(ModEntities.FLOWER_ENDERMAN, 0x74A837, 0xB76CCB, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));

@@ -1,33 +1,33 @@
 package io.github.padlocks.EndermanOverhaul.common.entity.base;
 
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.monster.EnderMan;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.Identifier;
+
 public record EndermanType(
-        ResourceLocation texture,
-        ResourceLocation glowingTexture,
-        ResourceLocation model,
-        ResourceLocation animation,
+        Identifier texture,
+        Identifier glowingTexture,
+        Identifier model,
+        Identifier animation,
 
         int melee,
         Collection<Class<? extends LivingEntity>> attackingEntities,
         Collection<DamageSource> immunities,
         Collection<TagKey> restrictedToBlocks,
-        AttributeSupplier attributes,
+        DefaultAttributeContainer attributes,
 
         Supplier<SoundEvent> deathSound,
         Supplier<SoundEvent> hurtSound,
@@ -40,56 +40,56 @@ public record EndermanType(
         boolean provokedWithEyeContact,
         boolean runsWhenAngry,
         boolean canTeleport,
-        ParticleOptions particleEffect,
+        ParticleEffect particleEffect,
         boolean teleportOnInjury,
         int chanceToSpawnWithRiches,
         boolean canPickupBlocks
         ) {
     public static class Builder {
-        private ResourceLocation texture;
-        private ResourceLocation glowingTexture;
-        private ResourceLocation model;
-        private ResourceLocation animation;
+        private Identifier texture;
+        private Identifier glowingTexture;
+        private Identifier model;
+        private Identifier animation;
 
         private int melee = 0;
         private final List<Class<? extends LivingEntity>> attackingEntities = new ArrayList<>();
         private final Collection<DamageSource> immunities = new ArrayList<>();
-        private final AttributeSupplier.Builder attributes = EnderMan.createAttributes();
+        private final DefaultAttributeContainer.Builder attributes = EndermanEntity.createEndermanAttributes();
         private Collection<TagKey> restrictedToBlocks = new ArrayList<>();
 
-        private Supplier<SoundEvent> deathSound = () -> SoundEvents.ENDERMAN_DEATH;
-        private Supplier<SoundEvent> hurtSound = () -> SoundEvents.ENDERMAN_HURT;
-        private Supplier<SoundEvent> ambientSound = () -> SoundEvents.ENDERMAN_AMBIENT;
-        private Supplier<SoundEvent> screamSound = () -> SoundEvents.ENDERMAN_SCREAM;
-        private Supplier<SoundEvent> stareSound = () -> SoundEvents.ENDERMAN_STARE;
-        private Supplier<SoundEvent> teleportSound = () -> SoundEvents.ENDERMAN_TELEPORT;
+        private Supplier<SoundEvent> deathSound = () -> SoundEvents.ENTITY_ENDERMAN_DEATH;
+        private Supplier<SoundEvent> hurtSound = () -> SoundEvents.ENTITY_ENDERMAN_HURT;
+        private Supplier<SoundEvent> ambientSound = () -> SoundEvents.ENTITY_ENDERMAN_AMBIENT;
+        private Supplier<SoundEvent> screamSound = () -> SoundEvents.ENTITY_ENDERMAN_SCREAM;
+        private Supplier<SoundEvent> stareSound = () -> SoundEvents.ENTITY_ENDERMAN_STARE;
+        private Supplier<SoundEvent> teleportSound = () -> SoundEvents.ENTITY_ENDERMAN_TELEPORT;
         private boolean usesAngryAnimation = false;
         private boolean provokedWithEyeContact = true;
         private boolean runsWhenAngry = true;
         private boolean canTeleport = true;
-        private ParticleOptions particleEffect = ParticleTypes.PORTAL;
+        private ParticleEffect particleEffect = ParticleTypes.PORTAL;
         private boolean teleportOnInjury = false;
         private int chanceToSpawnWithRiches = 0;
         private boolean canPickupBlocks = true;
 
-        public Builder setTexture(ResourceLocation texture) {
+        public Builder setTexture(Identifier texture) {
             this.texture = texture;
             return this;
         }
 
-        public Builder setGlowingTexture(ResourceLocation glowingTexture) {
+        public Builder setGlowingTexture(Identifier glowingTexture) {
             this.glowingTexture = glowingTexture;
             return this;
         }
 
 
-        public Builder setModel(ResourceLocation model) {
+        public Builder setModel(Identifier model) {
             this.model = model;
             return this;
         }
 
 
-        public Builder setAnimation(ResourceLocation animation) {
+        public Builder setAnimation(Identifier animation) {
             this.animation = animation;
             return this;
         }
@@ -104,7 +104,7 @@ public record EndermanType(
             return this;
         }
 
-        public Builder addAttribute(Attribute attribute, double value) {
+        public Builder addAttribute(EntityAttribute attribute, double value) {
             this.attributes.add(attribute, value);
             return this;
         }
@@ -175,12 +175,12 @@ public record EndermanType(
             return this.canTeleport;
         }
 
-        public Builder setParticleEffect(ParticleOptions effect) {
+        public Builder setParticleEffect(ParticleEffect effect) {
             this.particleEffect = effect;
             return this;
         }
 
-        public ParticleOptions getParticleEffect() {
+        public ParticleEffect getParticleEffect() {
             return this.particleEffect;
         }
 

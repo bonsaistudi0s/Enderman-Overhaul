@@ -1,37 +1,38 @@
 package io.github.padlocks.EndermanOverhaul.common.entity.base;
 
+import io.github.padlocks.EndermanOverhaul.common.entity.base.EndermanType;
 import gg.moonflower.pollen.api.entity.PollenEntity;
 import gg.moonflower.pollen.pinwheel.api.common.animation.AnimatedEntity;
 import gg.moonflower.pollen.pinwheel.api.common.animation.AnimationEffectHandler;
 import gg.moonflower.pollen.pinwheel.api.common.animation.AnimationState;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.NeutralMob;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.monster.EnderMan;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.Angerable;
+import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 
-public class PassiveEnderman extends Monster implements NeutralMob, AnimatedEntity, PollenEntity {
+public class PassiveEnderman extends HostileEntity implements Angerable, AnimatedEntity, PollenEntity {
 
-    private static final EntityDataAccessor<Optional<BlockState>> DATA_CARRY_STATE = SynchedEntityData.defineId(EnderMan.class, EntityDataSerializers.BLOCK_STATE);
+    private static final TrackedData<Optional<BlockState>> DATA_CARRY_STATE = DataTracker.registerData(EndermanEntity.class, TrackedDataHandlerRegistry.OPTIONAL_BLOCK_STATE);
     private final EndermanType type;
 
     public static final AnimationState WALK_ANIMATION = new AnimationState(20);
@@ -42,62 +43,62 @@ public class PassiveEnderman extends Monster implements NeutralMob, AnimatedEnti
     private AnimationState animationState;
     private int animationTick;
 
-    public PassiveEnderman(EntityType<? extends Monster> entityType, Level level, EndermanType type) {
+    public PassiveEnderman(EntityType<? extends HostileEntity> entityType, World level, EndermanType type) {
         super(entityType, level);
         this.type = type;
-        this.maxUpStep = 1.0F;
+        this.stepHeight = 1.0F;
         this.animationState = AnimationState.EMPTY;
-        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
+        this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
     }
 
     @Override
-    public int getRemainingPersistentAngerTime() {
+    public int getAngerTime() {
         return 0;
     }
 
     @Override
-    public void setRemainingPersistentAngerTime(int i) {
+    public void setAngerTime(int i) {
 
     }
 
     @Nullable
     @Override
-    public UUID getPersistentAngerTarget() {
+    public UUID getAngryAt() {
         return null;
     }
 
     @Override
-    public void setPersistentAngerTarget(@Nullable UUID uUID) {
+    public void setAngryAt(@Nullable UUID uUID) {
 
     }
 
     @Override
-    public void startPersistentAngerTimer() {
+    public void chooseRandomAngerTime() {
 
     }
 
     @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D, 0.0F));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+    protected void initGoals() {
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0D, 0.0F));
+        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(8, new LookAroundGoal(this));
     }
-    public static Supplier<AttributeSupplier.Builder> createAttributes() {
-        return () -> Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.20000001192092896)
-                .add(Attributes.ATTACK_DAMAGE, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
+    public static Supplier<DefaultAttributeContainer.Builder> createAttributes() {
+        return () -> HostileEntity.createHostileAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20000001192092896)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64.0);
     }
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_CARRY_STATE, Optional.empty());
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(DATA_CARRY_STATE, Optional.empty());
     }
 
     @Override
-    public double getAttributeValue(@NotNull Attribute attribute) {
+    public double getAttributeValue(@NotNull EntityAttribute attribute) {
         double val = super.getAttributeValue(attribute);
         //return attribute.equals(Attributes.ATTACK_DAMAGE) ? val * 10 : val;
         return val;

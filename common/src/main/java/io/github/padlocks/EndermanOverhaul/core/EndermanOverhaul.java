@@ -5,10 +5,11 @@ import gg.moonflower.pollen.api.registry.client.EntityRendererRegistry;
 import io.github.padlocks.EndermanOverhaul.client.render.entity.*;
 import io.github.padlocks.EndermanOverhaul.common.registry.ModEntities;
 import io.github.padlocks.EndermanOverhaul.common.registry.ModItems;
-import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 import java.util.logging.Logger;
+import net.minecraft.util.Identifier;
 
 public class EndermanOverhaul {
     public static final String MOD_ID = "endermanoverhaul";
@@ -17,7 +18,6 @@ public class EndermanOverhaul {
     public static final Platform PLATFORM = Platform.builder(MOD_ID)
             .clientInit(() -> EndermanOverhaul::onClientInit)
             .commonInit(EndermanOverhaul::onCommonInit)
-            .clientPostInit(() -> EndermanOverhaul::onClientPostInit)
             .build();
 
     private static void onClientInit() {
@@ -32,14 +32,10 @@ public class EndermanOverhaul {
         ModItems.ITEMS.register(PLATFORM);
         ModEntities.ENTITIES.register(PLATFORM);
         ModEntities.registerEntityAttributes();
+        GeckoLib.initialize();
     }
 
-    private static void onClientPostInit(Platform.ModSetupContext ctx) {
-        ctx.enqueueWork(() -> {
-        });
-    }
-
-    public static ResourceLocation resourceLocation(String string) {
-        return new ResourceLocation(MOD_ID, string);
+    public static Identifier resourceLocation(String string) {
+        return new Identifier(MOD_ID, string);
     }
 }

@@ -1,0 +1,67 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "idle": {
+      "loop": true,
+      "animation_length": 1.2,
+      "bones": {
+        "armorHead": {
+          "rotation": {
+            "0.0": {
+              "post": [0, 0, 0]
+            }
+          }
+        },
+        "armorBody": {
+          "position": {
+            "0.0": {
+              "post": [0, 0, 0]
+            }
+          }
+        },
+        "armorRightArm": {
+          "rotation": {
+            "0.0": {
+              "post": [0, 0, -0.5]
+            }
+          }
+        },
+        "armorLeftArm": {
+          "rotation": {
+            "0.0": {
+              "post": [0, 0, 0.5]
+            }
+          }
+        },
+        "armorLeftLeg": {
+          "rotation": {
+            "0.0": {
+              "post": [0, 0, 0]
+            }
+          }
+        },
+        "armorRightLeg": {
+          "rotation": {
+            "0.0": {
+              "post": [0, 0, 0]
+            }
+          }
+        },
+        "armorLeftBoot": {
+          "rotation": {
+            "0.0": {
+              "post": [0, 0, 0]
+            }
+          }
+        },
+        "armorRightBoot": {
+          "rotation": {
+            "0.0": {
+              "post": [0, 0, 0]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,17 +1,16 @@
 package io.github.padlocks.EndermanOverhaul.common.item;
 
 import io.github.padlocks.EndermanOverhaul.common.registry.ModItems;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-
 import java.util.function.Supplier;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    BADLANDS_HOOD("BadlandsHood", 16, new int[]{2, 5, 7, 2}, 28,
-            SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.of(ModItems.BADLANDS_HOOD));
+    BADLANDS_HOOD("badlands_hood", 16, new int[]{2, 5, 7, 2}, 28,
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems());
 
     private static final int[] BASE_DURABILITY;
     private final String name;
@@ -35,17 +34,17 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }
 
     @Override
-    public int getDurabilityForSlot(EquipmentSlot equipmentSlot) {
-        return BASE_DURABILITY[equipmentSlot.getIndex()] * this.durabilityMultiplier;
+    public int getDurability(EquipmentSlot equipmentSlot) {
+        return BASE_DURABILITY[equipmentSlot.getEntitySlotId()] * this.durabilityMultiplier;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlot equipmentSlot) {
-        return this.protectionAmounts[equipmentSlot.getIndex()];
+    public int getProtectionAmount(EquipmentSlot equipmentSlot) {
+        return this.protectionAmounts[equipmentSlot.getEntitySlotId()];
     }
 
     @Override
-    public int getEnchantmentValue() {
+    public int getEnchantability() {
         return this.enchantability;
     }
 

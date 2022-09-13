@@ -1,17 +1,17 @@
 package io.github.padlocks.EndermanOverhaul.common.entity;
 
-import com.mojang.math.Vector3f;
 import io.github.padlocks.EndermanOverhaul.common.entity.base.EndermanType;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 
 import static io.github.padlocks.EndermanOverhaul.core.EndermanOverhaul.resourceLocation;
 
 public class EndermanTypes {
-    private static final DustParticleOptions SAND_PARTICLE = new DustParticleOptions(new Vector3f(Vec3.fromRGB24((int) Long.parseLong("D3C7A2", 16))), 1f);
-    private static final DustParticleOptions STONE_PARTICLE = new DustParticleOptions(new Vector3f(Vec3.fromRGB24((int) Long.parseLong("97999B", 16))), 1f);
+    private static final DustParticleEffect SAND_PARTICLE = new DustParticleEffect(new Vec3f(Vec3d.unpackRgb((int) Long.parseLong("D3C7A2", 16))), 1f);
+    private static final DustParticleEffect STONE_PARTICLE = new DustParticleEffect(new Vec3f(Vec3d.unpackRgb((int) Long.parseLong("97999B", 16))), 1f);
     public static final EndermanType DEFAULT = new EndermanType.Builder()
             .setTexture(resourceLocation("textures/entity/default/default_enderman.png"))
             .setGlowingTexture(resourceLocation("textures/entity/default/default_enderman_glow.png"))
@@ -26,7 +26,7 @@ public class EndermanTypes {
             .setGlowingTexture(resourceLocation("textures/entity/badlands/badlands_enderman_glow.png"))
             .setModel(resourceLocation("pinwheel/geometry/badlands_enderman.json"))
             .setAnimation(resourceLocation("pinwheel/animations/default_enderman.json"))
-            .setParticleEffect(SAND_PARTICLE)
+            //.setParticleEffect(SAND_PARTICLE)
             .setUsesAngryAnimation(false)
             .build();
 
@@ -36,7 +36,7 @@ public class EndermanTypes {
             .setModel(resourceLocation("pinwheel/geometry/cave_enderman.json"))
             .setAnimation(resourceLocation("pinwheel/animations/default_enderman.json"))
             .setProvokedWithEyeContact(false)
-            .setParticleEffect(STONE_PARTICLE)
+            //.setParticleEffect(STONE_PARTICLE)
             .setChanceToSpawnWithRiches(2)
             .addBlockPickupRestriction(BlockTags.STONE_ORE_REPLACEABLES)
             .addBlockPickupRestriction(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
@@ -47,8 +47,8 @@ public class EndermanTypes {
             .setGlowingTexture(resourceLocation("textures/entity/flower_fields/flower_fields_enderman_glow.png"))
             .setModel(resourceLocation("pinwheel/geometry/flower_fields_enderman.json"))
             .setAnimation(resourceLocation("pinwheel/animations/default_enderman.json"))
-            .addAttribute(Attributes.MAX_HEALTH, 20.0)
-            .addAttribute(Attributes.MOVEMENT_SPEED, 0.2)
+            .addAttribute(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
+            .addAttribute(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
             .setProvokedWithEyeContact(false)
             .setTeleportOnInjury(true)
             .setCanPickupBlocks(false)

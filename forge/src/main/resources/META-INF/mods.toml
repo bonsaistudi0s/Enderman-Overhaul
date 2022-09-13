@@ -43,3 +43,10 @@ mandatory = true
 versionRange = "[1.4.9,)"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "geckolib3"
+mandatory = true
+versionRange = "[3.0.36,)"
+ordering = "NONE"
+side = "BOTH"

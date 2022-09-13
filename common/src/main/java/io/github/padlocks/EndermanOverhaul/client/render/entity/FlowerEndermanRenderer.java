@@ -1,31 +1,32 @@
 package io.github.padlocks.EndermanOverhaul.client.render.entity;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import gg.moonflower.pollen.pinwheel.api.client.animation.AnimatedEntityRenderer;
+import io.github.padlocks.EndermanOverhaul.common.entity.base.BaseEnderman;
 import io.github.padlocks.EndermanOverhaul.common.entity.base.PassiveEnderman;
 import io.github.padlocks.EndermanOverhaul.core.EndermanOverhaul;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class FlowerEndermanRenderer extends AnimatedEntityRenderer<PassiveEnderman> {
-    public static final ResourceLocation ENDERMAN_LOCATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields_enderman");
-    private static final ResourceLocation[] WALK_ANIMATION = new ResourceLocation[]{new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields.walk")};
-    private static final ResourceLocation[] RUN_ANIMATION = new ResourceLocation[]{new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields.run")};
-    private static final ResourceLocation[] IDLE_ANIMATION = new ResourceLocation[]{new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields.idle")};
+    public static final Identifier ENDERMAN_LOCATION = new Identifier(EndermanOverhaul.MOD_ID, "flower_fields_enderman");
+    private static final Identifier[] WALK_ANIMATION = new Identifier[]{new Identifier(EndermanOverhaul.MOD_ID, "flower_fields.walk")};
+    private static final Identifier[] RUN_ANIMATION = new Identifier[]{new Identifier(EndermanOverhaul.MOD_ID, "flower_fields.run")};
+    private static final Identifier[] IDLE_ANIMATION = new Identifier[]{new Identifier(EndermanOverhaul.MOD_ID, "flower_fields.idle")};
 
     private boolean isMoving = true;
 
-    public FlowerEndermanRenderer(EntityRendererProvider.Context context) {
-        super(context, new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields_enderman"), 1.0F);
+    public FlowerEndermanRenderer(EntityRendererFactory.Context context) {
+        super(context, new Identifier(EndermanOverhaul.MOD_ID, "flower_fields_enderman"), 1.0F);
     }
 
     @Override
-    public ResourceLocation[] getAnimations(PassiveEnderman entity) {
+    public Identifier[] getAnimations(PassiveEnderman entity) {
         if (isMoving)
             return WALK_ANIMATION;
         else if (entity.isNoAnimationPlaying())
@@ -34,17 +35,17 @@ public class FlowerEndermanRenderer extends AnimatedEntityRenderer<PassiveEnderm
     }
 
     @Override
-    public ResourceLocation getTextureTableLocation(PassiveEnderman entity) {
+    public Identifier getTextureTableLocation(PassiveEnderman entity) {
         return ENDERMAN_LOCATION;
     }
 
     @Override
-    public void render(PassiveEnderman entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
-        matrixStack.pushPose();
+    public void render(PassiveEnderman entity, float entityYaw, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider buffer, int packedLight) {
+        matrixStack.push();
 
         float limbSwingAmount = 0.0F;
         if (entity.isAlive()) {
-            limbSwingAmount = Mth.lerp(partialTicks, entity.animationSpeedOld, entity.animationSpeed);
+            limbSwingAmount = MathHelper.lerp(partialTicks, entity.lastLimbDistance, entity.limbDistance);
 
             if (limbSwingAmount > 1.0F) {
                 limbSwingAmount = 1.0F;
@@ -52,7 +53,12 @@ public class FlowerEndermanRenderer extends AnimatedEntityRenderer<PassiveEnderm
         }
         this.isMoving = !(limbSwingAmount > -0.15F && limbSwingAmount < 0.15F);
 
-        matrixStack.popPose();
+        matrixStack.pop();
         super.render(entity, entityYaw, partialTicks, matrixStack, buffer, packedLight);
+    }
+
+    @Override
+    public Identifier getTexture(PassiveEnderman entity) {
+        return new Identifier(EndermanOverhaul.MOD_ID, "textures/entity/flower_fields/flower_fields_enderman.png");
     }
 }

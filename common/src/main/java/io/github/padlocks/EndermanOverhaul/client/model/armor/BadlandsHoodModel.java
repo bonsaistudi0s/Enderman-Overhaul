@@ -2,22 +2,22 @@ package io.github.padlocks.EndermanOverhaul.client.model.armor;
 
 import io.github.padlocks.EndermanOverhaul.common.item.BadlandsHoodItem;
 import io.github.padlocks.EndermanOverhaul.core.EndermanOverhaul;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class BadlandsHoodModel extends AnimatedGeoModel<BadlandsHoodItem> {
     @Override
-    public ResourceLocation getModelResource(BadlandsHoodItem object) {
-        return EndermanOverhaul.resourceLocation("pinwheel/geometry/badlands_hood.json");
+    public Identifier getModelResource(BadlandsHoodItem object) {
+        return new Identifier(EndermanOverhaul.MOD_ID, "pinwheel/geometry/badlands_hood.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(BadlandsHoodItem object) {
-        return EndermanOverhaul.resourceLocation("textures/armor/hood/badlands_hood.png");
+    public Identifier getTextureResource(BadlandsHoodItem object) {
+        return new Identifier(EndermanOverhaul.MOD_ID, "textures/models/armor/badlands_hood.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(BadlandsHoodItem animatable) {
-        return null;
+    public Identifier getAnimationResource(BadlandsHoodItem animatable) {
+        return new Identifier(EndermanOverhaul.MOD_ID, "pinwheel/animations/dummy_armor.json");
     }
 }
