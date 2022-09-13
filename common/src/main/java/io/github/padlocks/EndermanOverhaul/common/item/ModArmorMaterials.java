@@ -9,7 +9,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    BADLANDS_HOOD("badlands_hood", 16, new int[]{2, 5, 7, 2}, 28,
+    BADLANDS_HOOD("badlands_hood", 2, new int[]{2, 5, 7, 2}, 15,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.ofItems());
 
     private static final int[] BASE_DURABILITY;

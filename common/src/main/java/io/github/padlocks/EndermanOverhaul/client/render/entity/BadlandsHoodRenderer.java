@@ -14,7 +14,7 @@ public class BadlandsHoodRenderer extends GeoArmorRenderer<BadlandsHoodItem> {
         this.leftArmBone = "armorLeftArm";
         this.rightLegBone = "armorLeftLeg";
         this.leftLegBone = "armorRightLeg";
-        this.rightBootBone = "armorLeftBoot";
-        this.leftBootBone = "armorRightBoot";
+        this.rightBootBone = "armorLeftLeg";
+        this.leftBootBone = "armorRightLeg";
     }
 }

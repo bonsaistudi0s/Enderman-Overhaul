@@ -4,6 +4,7 @@ import gg.moonflower.pollen.api.entity.PollenEntity;
 import gg.moonflower.pollen.pinwheel.api.common.animation.AnimatedEntity;
 import gg.moonflower.pollen.pinwheel.api.common.animation.AnimationEffectHandler;
 import gg.moonflower.pollen.pinwheel.api.common.animation.AnimationState;
+import io.github.padlocks.EndermanOverhaul.common.registry.ModEffects;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -68,12 +69,19 @@ import net.minecraft.world.event.GameEvent;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEntity, PollenEntity {
+public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEntity, PollenEntity, IAnimatable {
     private static final UUID SPEED_MODIFIER_ATTACKING_UUID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final EntityAttributeModifier SPEED_MODIFIER_ATTACKING;
     private static final int DELAY_BETWEEN_CREEPY_STARE_SOUND = 400;
@@ -93,6 +101,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
     public static final AnimationState IDLE_ANIMATION = new AnimationState(20);
     public static final AnimationState ANGRY_ANIMATION = new AnimationState(60);
     private AnimationState animationState;
+    private final AnimationFactory animationFactory = new AnimationFactory(this);
     private int animationTick;
 
     public BaseEnderman(EntityType<? extends BaseEnderman> entityType, World level, EndermanType type) {
@@ -321,7 +330,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
 
     boolean isLookingAtMe(PlayerEntity player) {
         ItemStack itemStack = (ItemStack)player.getInventory().armor.get(3);
-        if (itemStack.isOf(Blocks.CARVED_PUMPKIN.asItem())) {
+        if (itemStack.isOf(Blocks.CARVED_PUMPKIN.asItem()) || player.hasStatusEffect(ModEffects.ENDERMAN_TRUST.get())) {
             return false;
         } else {
             Vec3d vec3 = player.getRotationVec(1.0F).normalize();
@@ -533,6 +542,25 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         DATA_CREEPY = DataTracker.registerData(BaseEnderman.class, TrackedDataHandlerRegistry.BOOLEAN);
         DATA_STARED_AT = DataTracker.registerData(BaseEnderman.class, TrackedDataHandlerRegistry.BOOLEAN);
         PERSISTENT_ANGER_TIME = TimeHelper.betweenSeconds(20, 39);
+    }
+
+    private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event) {
+        if (!(event.getLimbSwingAmount() > -0.15F && event.getLimbSwingAmount() < 0.15F)) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.enderman.walk", true));
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.enderman.idle", true));
+        }
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.animationFactory;
     }
 
     private static class EndermanFreezeWhenLookedAt extends Goal {
