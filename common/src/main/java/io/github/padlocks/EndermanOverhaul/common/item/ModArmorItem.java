@@ -22,7 +22,7 @@ public class ModArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
                     .put(ModArmorMaterials.HOOD,
-                            new StatusEffectInstance(ModEffects.ENDERMAN_TRUST.get(), 400, 1)).build();
+                            new StatusEffectInstance(ModEffects.ENDERMAN_TRUST.get(), 200, 0, false, false, false)).build();
 
     public ModArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings properties) {
         super(material, slot, properties);
@@ -33,8 +33,10 @@ public class ModArmorItem extends ArmorItem {
         if(!world.isClient()) {
             if(entity instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity)entity;
-
-                evaluateArmorEffects(player);
+                ItemStack chestStack = player.getInventory().getArmorStack(2);
+                if (!chestStack.isEmpty()) {
+                    evaluateArmorEffects(player);
+                }
             }
         }
 
@@ -56,20 +58,13 @@ public class ModArmorItem extends ArmorItem {
         boolean hasPlayerEffect = player.hasStatusEffect(mapStatusEffect.getEffectType());
 
         if(hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
-            StatusEffectInstance newEffectInstance = new StatusEffectInstance(mapStatusEffect.getEffectType(),
-                    mapStatusEffect.getDuration(), mapStatusEffect.getAmplifier());
-
-            NbtCompound nbt = new NbtCompound();
-            nbt.putBoolean("HiddenEffect", true);
-            nbt.putBoolean("ShowParticles", false);
-            nbt.putBoolean("ShowIcon", false);
-            newEffectInstance.writeNbt(nbt);
-            player.addStatusEffect(newEffectInstance);
+            player.addStatusEffect(new StatusEffectInstance(mapStatusEffect.getEffectType(),
+                    mapStatusEffect.getDuration(), mapStatusEffect.getAmplifier()));
         }
     }
 
     private boolean hasCorrectArmorOn(ArmorMaterial material, PlayerEntity player) {
-        ArmorItem breastplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
-        return breastplate.getMaterial() == material;
+        ArmorItem chestplate = ((ArmorItem) player.getInventory().getArmorStack(2).getItem());
+        return chestplate.getMaterial() == material;
     }
 }
