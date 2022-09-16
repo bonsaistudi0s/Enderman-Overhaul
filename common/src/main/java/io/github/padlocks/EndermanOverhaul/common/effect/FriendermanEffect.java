@@ -3,9 +3,9 @@ package io.github.padlocks.EndermanOverhaul.common.effect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
-public class EndermanTrustEffect extends StatusEffect
+public class FriendermanEffect extends StatusEffect
 {
-    public EndermanTrustEffect()
+    public FriendermanEffect()
     {
         super(StatusEffectCategory.BENEFICIAL, 0xDF79F9);
     }

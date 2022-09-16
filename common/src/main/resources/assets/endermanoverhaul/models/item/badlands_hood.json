@@ -1,5 +1,5 @@
 {
-	"credit": "",
+	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "endermanoverhaul:models/armor/badlands_hood"
@@ -127,7 +127,8 @@
 			"scale": [1.42, 1.42, 1.42]
 		},
 		"fixed": {
-			"translation": [8, -15, 8.75]
+			"translation": [8, -15, 0],
+			"scale": [1, 1, 0.1]
 		}
 	},
 	"groups": [

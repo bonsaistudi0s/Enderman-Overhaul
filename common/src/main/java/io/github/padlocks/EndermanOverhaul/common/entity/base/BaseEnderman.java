@@ -105,7 +105,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
     private final AnimationFactory animationFactory = new AnimationFactory(this);
     private int animationTick;
     private boolean firstTick = true;
-    private ArrayList<BlockState> riches = new ArrayList<>() {
+    private final ArrayList<BlockState> riches = new ArrayList<>() {
         {
             add(Blocks.COAL_BLOCK.getDefaultState());
             add(Blocks.IRON_BLOCK.getDefaultState());
@@ -134,7 +134,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         this.goalSelector.add(10, new EndermanLeaveBlockGoal(this));
         this.goalSelector.add(11, new EndermanTakeBlockGoal(this));
         this.targetSelector.add(1, new EndermanLookForPlayerGoal(this, this::shouldAngerAt));
-        this.targetSelector.add(2, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.add(2, new RevengeGoal(this));
         this.targetSelector.add(3, new ActiveTargetGoal(this, EndermiteEntity.class, true, false));
         this.targetSelector.add(4, new UniversalAngerGoal(this, false));
     }
@@ -343,7 +343,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
     }
 
     boolean isLookingAtMe(PlayerEntity player) {
-        ItemStack itemStack = (ItemStack)player.getInventory().armor.get(3);
+        ItemStack itemStack = player.getInventory().armor.get(3);
         if (itemStack.isOf(Blocks.CARVED_PUMPKIN.asItem()) || player.hasStatusEffect(ModEffects.ENDERMAN_TRUST.get())) {
             return false;
         } else {
@@ -352,7 +352,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
             double d = vec32.length();
             vec32 = vec32.normalize();
             double e = vec3.dotProduct(vec32);
-            return e > 1.0 - 0.025 / d ? player.canSee(this) : false;
+            return e > 1.0 - 0.025 / d && player.canSee(this);
         }
     }
 
@@ -383,7 +383,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         if (this.world.isDay() && this.age >= this.targetChangeTime + 600) {
             float f = this.getBrightnessAtEyes();
             if (f > 0.5F && this.world.isSkyVisible(this.getBlockPos()) && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
-                this.setTarget((LivingEntity)null);
+                this.setTarget(null);
                 this.teleportRandomly();
             }
         }
@@ -425,7 +425,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         if (bl && !bl2) {
             boolean bl3 = this.teleport(x, y, z, true);
             if (bl3 && !this.isSilent()) {
-                this.world.playSound((PlayerEntity)null, this.prevX, this.prevY, this.prevZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
+                this.world.playSound(null, this.prevX, this.prevY, this.prevZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
                 this.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
             }
 
@@ -480,7 +480,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
 
     @Nullable
     public BlockState getCarriedBlock() {
-        return (BlockState)((Optional)this.dataTracker.get(DATA_CARRY_STATE)).orElse((Object)null);
+        return (BlockState)((Optional)this.dataTracker.get(DATA_CARRY_STATE)).orElse(null);
     }
 
     public boolean damage(DamageSource damageSource, float f) {
@@ -523,15 +523,15 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         Potion potion = PotionUtil.getPotion(itemStack);
         List<StatusEffectInstance> list = PotionUtil.getPotionEffects(itemStack);
         boolean bl = potion == Potions.WATER && list.isEmpty();
-        return bl ? super.damage(damageSource, f) : false;
+        return bl && super.damage(damageSource, f);
     }
 
     public boolean isCreepy() {
-        return (Boolean)this.dataTracker.get(DATA_CREEPY);
+        return this.dataTracker.get(DATA_CREEPY);
     }
 
     public boolean hasBeenStaredAt() {
-        return (Boolean)this.dataTracker.get(DATA_STARED_AT);
+        return this.dataTracker.get(DATA_STARED_AT);
     }
 
     public void setBeingStaredAt() {
@@ -585,7 +585,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
                 return false;
             } else {
                 double d = this.target.squaredDistanceTo(this.enderman);
-                return d > 256.0 ? false : this.enderman.isLookingAtMe((PlayerEntity)this.target);
+                return !(d > 256.0) && this.enderman.isLookingAtMe((PlayerEntity) this.target);
             }
         }
 
@@ -631,7 +631,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
                 if (this.canPlaceBlock(level, blockPos, blockState3, blockState, blockState2, blockPos2)) {
                     level.setBlockState(blockPos, blockState3, 3);
                     level.emitGameEvent(this.enderman, GameEvent.BLOCK_PLACE, blockPos);
-                    this.enderman.setCarriedBlock((BlockState)null);
+                    this.enderman.setCarriedBlock(null);
                 }
 
             }
@@ -722,13 +722,13 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
                     return true;
                 }
             } else {
-                return this.targetEntity != null && this.continueAggroTargetConditions.test(this.enderman, this.targetEntity) ? true : super.shouldContinue();
+                return this.targetEntity != null && this.continueAggroTargetConditions.test(this.enderman, this.targetEntity) || super.shouldContinue();
             }
         }
 
         public void tick() {
             if (this.enderman.getTarget() == null) {
-                super.setTargetEntity((LivingEntity)null);
+                super.setTargetEntity(null);
             }
 
             if (this.pendingTarget != null) {

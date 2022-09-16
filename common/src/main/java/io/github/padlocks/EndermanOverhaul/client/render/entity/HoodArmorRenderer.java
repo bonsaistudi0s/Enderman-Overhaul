@@ -1,7 +1,12 @@
 package io.github.padlocks.EndermanOverhaul.client.render.entity;
 
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
@@ -22,6 +27,13 @@ public class HoodArmorRenderer<T extends ArmorItem & IAnimatable> extends GeoArm
         this.leftLegBone = "armorRightLeg";
         this.rightBootBone = "armorLeftLeg";
         this.leftBootBone = "armorRightLeg";
+    }
+
+    @Override
+    public RenderLayer getRenderType(T animatable, float partialTicks, MatrixStack stack,
+                                     VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn,
+                                     Identifier textureLocation) {
+        return RenderLayer.getEntityTranslucent(getTextureLocation(animatable));
     }
 
     @Override
