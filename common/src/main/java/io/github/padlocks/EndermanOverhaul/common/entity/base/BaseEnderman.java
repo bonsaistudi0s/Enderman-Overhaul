@@ -80,6 +80,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.logging.Logger;
 
 public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEntity, PollenEntity, IAnimatable {
     private static final UUID SPEED_MODIFIER_ATTACKING_UUID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
@@ -103,6 +104,17 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
     private AnimationState animationState;
     private final AnimationFactory animationFactory = new AnimationFactory(this);
     private int animationTick;
+    private boolean firstTick = true;
+    private ArrayList<BlockState> riches = new ArrayList<>() {
+        {
+            add(Blocks.COAL_BLOCK.getDefaultState());
+            add(Blocks.IRON_BLOCK.getDefaultState());
+            add(Blocks.GOLD_BLOCK.getDefaultState());
+            add(Blocks.EMERALD_BLOCK.getDefaultState());
+        }
+
+    };
+    public static final Logger logger = Logger.getLogger("EndermanOverhaul");
 
     public BaseEnderman(EntityType<? extends BaseEnderman> entityType, World level, EndermanType type) {
         super(entityType, level);
@@ -110,17 +122,6 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         this.stepHeight = 1.0F;
         this.animationState = AnimationState.EMPTY;
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
-
-        if (this.type.chanceToSpawnWithRiches() > 0) {
-            if (random.nextInt(1, 101) <= this.type.chanceToSpawnWithRiches()) {
-                ArrayList<BlockState> blocks = new ArrayList<>();
-                blocks.add(Blocks.COAL_BLOCK.getDefaultState());
-                blocks.add(Blocks.IRON_BLOCK.getDefaultState());
-                blocks.add(Blocks.GOLD_BLOCK.getDefaultState());
-                blocks.add(Blocks.EMERALD_BLOCK.getDefaultState());
-                this.setCarriedBlock(blocks.get(random.nextInt(0, blocks.size())));
-            }
-        }
     }
 
     protected void initGoals() {
@@ -146,6 +147,19 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
     public void tick() {
         super.tick();
         this.animationTick();
+
+        if (firstTick) {
+            if (this.type.chanceToSpawnWithRiches() > 0) {
+                int randInt = random.nextInt(1, 101);
+                logger.info("RANDOM_SPAWN_RICHES: " + randInt);
+                if (randInt <= this.type.chanceToSpawnWithRiches()) {
+                    int randIntBlock = random.nextInt(0, riches.size());
+                    logger.info("RANDOM_RICHES_BLOCK: " + randIntBlock);
+                    this.setCarriedBlock(riches.get(randIntBlock));
+                }
+            }
+            firstTick = false;
+        }
     }
 
     @Override
@@ -370,54 +384,46 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
             float f = this.getBrightnessAtEyes();
             if (f > 0.5F && this.world.isSkyVisible(this.getBlockPos()) && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
                 this.setTarget((LivingEntity)null);
-                this._teleport();
+                this.teleportRandomly();
             }
         }
 
         super.mobTick();
     }
 
-    protected boolean teleport() {
+    protected boolean teleportRandomly() {
         if (!this.world.isClient() && this.isAlive() && this.type.canTeleport()) {
             double d = this.getX() + (this.random.nextDouble() - 0.5) * 64.0;
             double e = this.getY() + (double)(this.random.nextInt(64) - 32);
             double f = this.getZ() + (this.random.nextDouble() - 0.5) * 64.0;
-            return this._teleport(d, e, f);
+            return this.teleportTo(d, e, f);
         } else {
             return false;
         }
     }
 
     boolean teleportTowards(Entity entity) {
-        if (this.type.canTeleport()) return false;
-        Vec3d vec3 = new Vec3d(this.getX() - entity.getX(), this.getBodyY(0.5) - entity.getEyeY(), this.getZ() - entity.getZ());
-        vec3 = vec3.normalize();
+        Vec3d vec3d = new Vec3d(this.getX() - entity.getX(), this.getBodyY(0.5) - entity.getEyeY(), this.getZ() - entity.getZ());
+        vec3d = vec3d.normalize();
         double d = 16.0;
-        double e = this.getX() + (this.random.nextDouble() - 0.5) * 8.0 - vec3.x * 16.0;
-        double f = this.getY() + (double)(this.random.nextInt(16) - 8) - vec3.y * 16.0;
-        double g = this.getZ() + (this.random.nextDouble() - 0.5) * 8.0 - vec3.z * 16.0;
-        return this._teleport(e, f, g);
+        double e = this.getX() + (this.random.nextDouble() - 0.5) * 8.0 - vec3d.x * 16.0;
+        double f = this.getY() + (double)(this.random.nextInt(16) - 8) - vec3d.y * 16.0;
+        double g = this.getZ() + (this.random.nextDouble() - 0.5) * 8.0 - vec3d.z * 16.0;
+        return this.teleportTo(e, f, g);
     }
 
-    private boolean _teleport() {
-        double x = this.getX() + (this.random.nextDouble() - 0.5) * 64.0;
-        double y = this.getY() + (double)(this.random.nextInt(64) - 32);
-        double z = this.getZ() + (this.random.nextDouble() - 0.5) * 64.0;
-        return this._teleport(x, y, z);
-    }
+    private boolean teleportTo(double x, double y, double z) {
+        BlockPos.Mutable mutable = new BlockPos.Mutable(x, y, z);
 
-    private boolean _teleport(double d, double e, double f) {
-        BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(d, e, f);
-
-        while(mutableBlockPos.getY() > this.world.getBottomY() && !this.world.getBlockState(mutableBlockPos).getMaterial().blocksMovement()) {
-            mutableBlockPos.move(Direction.DOWN);
+        while(mutable.getY() > this.world.getBottomY() && !this.world.getBlockState(mutable).getMaterial().blocksMovement()) {
+            mutable.move(Direction.DOWN);
         }
 
-        BlockState blockState = this.world.getBlockState(mutableBlockPos);
+        BlockState blockState = this.world.getBlockState(mutable);
         boolean bl = blockState.getMaterial().blocksMovement();
         boolean bl2 = blockState.getFluidState().isIn(FluidTags.WATER);
         if (bl && !bl2) {
-            boolean bl3 = this._teleport(d, e, f);
+            boolean bl3 = this.teleport(x, y, z, true);
             if (bl3 && !this.isSilent()) {
                 this.world.playSound((PlayerEntity)null, this.prevX, this.prevY, this.prevZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
                 this.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
@@ -482,7 +488,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
             return false;
         } else if (this.type.teleportOnInjury()) {
             if (!this.world.isClient()) {
-                this._teleport();
+                this.teleportRandomly();
             }
             return true;
         }
@@ -496,7 +502,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
             }
 
             for(int i = 0; i < 64; ++i) {
-                if (this._teleport()) {
+                if (this.teleportRandomly()) {
                     return true;
                 }
             }
@@ -505,7 +511,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         } else {
             boolean bl2 = super.damage(damageSource, f);
             if (!this.world.isClient() && !(damageSource.getAttacker() instanceof LivingEntity) && this.random.nextInt(10) != 0) {
-                this._teleport();
+                this.teleportRandomly();
             }
 
             return bl2;
@@ -735,7 +741,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
                 if (this.targetEntity != null && !this.enderman.hasVehicle()) {
                     if (this.enderman.isLookingAtMe((PlayerEntity)this.targetEntity)) {
                         if (this.targetEntity.squaredDistanceTo(this.enderman) < 16.0) {
-                            this.enderman.teleport();
+                            this.enderman.teleportRandomly();
                         }
 
                         this.teleportTime = 0;

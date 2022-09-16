@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.badlands_hood",
+				"identifier": "geometry.savanna_hood",
 				"texture_width": 64,
 				"texture_height": 64,
 				"visible_bounds_width": 3,
@@ -20,7 +20,7 @@
 					"parent": "bipedHead",
 					"pivot": [0, 24, 0],
 					"cubes": [
-						{"origin": [-5, 23.5, -4.5], "size": [10, 9, 9], "inflate": 0.3, "uv": [0, 0]}
+						{"origin": [-5, 22.7, -5], "size": [10, 9, 10], "inflate": 0.3, "uv": [0, 0]}
 					]
 				},
 				{
@@ -32,7 +32,7 @@
 					"parent": "bipedBody",
 					"pivot": [0, 24, 0],
 					"cubes": [
-						{"origin": [-4, 14, -3], "size": [8, 9, 6], "inflate": 0.3, "uv": [0, 18]}
+						{"origin": [-4, 14, -3], "size": [8, 9, 6], "inflate": 0.3, "uv": [0, 19]}
 					]
 				},
 				{
@@ -44,16 +44,7 @@
 					"parent": "bipedRightArm",
 					"pivot": [-4, 22, 0],
 					"cubes": [
-						{"origin": [-8.6, 19, -3], "size": [4, 6, 6], "inflate": 0.3, "uv": [30, 18], "mirror": true}
-					]
-				},
-				{
-					"name": "rotation2",
-					"parent": "armorRightArm",
-					"pivot": [-7.1, 19.9, 0],
-					"rotation": [0, 0, 12.5],
-					"cubes": [
-						{"origin": [-8.40948, 14.38658, -2.5], "size": [3, 8, 5], "inflate": 0.3, "uv": [28, 30], "mirror": true}
+						{"origin": [-8.6, 18, -3], "size": [4, 7, 6], "inflate": 0.3, "uv": [28, 19], "mirror": true}
 					]
 				},
 				{
@@ -65,16 +56,7 @@
 					"parent": "bipedLeftArm",
 					"pivot": [4, 22, 0],
 					"cubes": [
-						{"origin": [4.6, 19, -3], "size": [4, 6, 6], "inflate": 0.3, "uv": [30, 18]}
-					]
-				},
-				{
-					"name": "rotation3",
-					"parent": "armorLeftArm",
-					"pivot": [7.1, 19.9, 0],
-					"rotation": [0, 0, -12.5],
-					"cubes": [
-						{"origin": [5.40948, 14.38658, -2.5], "size": [3, 8, 5], "inflate": 0.3, "uv": [28, 30]}
+						{"origin": [4.6, 18, -3], "size": [4, 7, 6], "inflate": 0.3, "uv": [28, 19]}
 					]
 				},
 				{

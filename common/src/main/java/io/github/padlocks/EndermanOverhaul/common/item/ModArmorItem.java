@@ -9,6 +9,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.world.World;
 import org.spongepowered.include.com.google.common.collect.ImmutableMap;
 
@@ -19,8 +21,8 @@ public class ModArmorItem extends ArmorItem {
 
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
-                    .put(ModArmorMaterials.BADLANDS_HOOD,
-                            new StatusEffectInstance(ModEffects.ENDERMAN_TRUST.get(), 400, 0)).build();
+                    .put(ModArmorMaterials.HOOD,
+                            new StatusEffectInstance(ModEffects.ENDERMAN_TRUST.get(), 400, 1)).build();
 
     public ModArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings properties) {
         super(material, slot, properties);
@@ -32,9 +34,7 @@ public class ModArmorItem extends ArmorItem {
             if(entity instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity)entity;
 
-                if(hasFullSuitOfArmorOn(player)) {
-                    evaluateArmorEffects(player);
-                }
+                evaluateArmorEffects(player);
             }
         }
 
@@ -56,28 +56,20 @@ public class ModArmorItem extends ArmorItem {
         boolean hasPlayerEffect = player.hasStatusEffect(mapStatusEffect.getEffectType());
 
         if(hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
-            player.addStatusEffect(new StatusEffectInstance(mapStatusEffect.getEffectType(),
-                    mapStatusEffect.getDuration(), mapStatusEffect.getAmplifier()));
+            StatusEffectInstance newEffectInstance = new StatusEffectInstance(mapStatusEffect.getEffectType(),
+                    mapStatusEffect.getDuration(), mapStatusEffect.getAmplifier());
+
+            NbtCompound nbt = new NbtCompound();
+            nbt.putBoolean("HiddenEffect", true);
+            nbt.putBoolean("ShowParticles", false);
+            nbt.putBoolean("ShowIcon", false);
+            newEffectInstance.writeNbt(nbt);
+            player.addStatusEffect(newEffectInstance);
         }
     }
 
-    private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
-        ItemStack boots = player.getInventory().getArmorStack(0);
-        ItemStack leggings = player.getInventory().getArmorStack(1);
-        ItemStack breastplate = player.getInventory().getArmorStack(2);
-        ItemStack helmet = player.getInventory().getArmorStack(3);
-
-        return !helmet.isEmpty() && !breastplate.isEmpty()
-                && !leggings.isEmpty() && !boots.isEmpty();
-    }
-
     private boolean hasCorrectArmorOn(ArmorMaterial material, PlayerEntity player) {
-        ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
-        ArmorItem leggings = ((ArmorItem)player.getInventory().getArmorStack(1).getItem());
         ArmorItem breastplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
-        ArmorItem helmet = ((ArmorItem)player.getInventory().getArmorStack(3).getItem());
-
-        return helmet.getMaterial() == material && breastplate.getMaterial() == material &&
-                leggings.getMaterial() == material && boots.getMaterial() == material;
+        return breastplate.getMaterial() == material;
     }
 }

@@ -10,9 +10,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class BadlandsHoodItem extends ModArmorItem implements IAnimatable {
+public class HoodArmorItem extends ModArmorItem implements IAnimatable {
     public AnimationFactory factory = new AnimationFactory(this);
-    public BadlandsHoodItem(ArmorMaterial material, EquipmentSlot slot, Settings properties) {
+    public HoodArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings properties) {
         super(material, slot, properties);
     }
 
