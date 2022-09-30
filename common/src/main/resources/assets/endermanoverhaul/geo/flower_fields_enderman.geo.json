@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "flower_fields_enderman",
+				"identifier": "geometry.flower_fields_enderman",
 				"texture_width": 64,
 				"texture_height": 64,
 				"visible_bounds_width": 2,

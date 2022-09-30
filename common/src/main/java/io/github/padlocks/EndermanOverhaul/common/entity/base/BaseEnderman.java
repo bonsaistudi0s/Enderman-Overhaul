@@ -344,7 +344,7 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
 
     boolean isLookingAtMe(PlayerEntity player) {
         ItemStack itemStack = player.getInventory().armor.get(3);
-        if (itemStack.isOf(Blocks.CARVED_PUMPKIN.asItem()) || player.hasStatusEffect(ModEffects.ENDERMAN_TRUST.get())) {
+        if (itemStack.isOf(Blocks.CARVED_PUMPKIN.asItem()) || player.hasStatusEffect(ModEffects.FRIENDERMAN_EFFECT.get())) {
             return false;
         } else {
             Vec3d vec3 = player.getRotationVec(1.0F).normalize();
@@ -550,11 +550,24 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
         PERSISTENT_ANGER_TIME = TimeHelper.betweenSeconds(20, 39);
     }
 
+    private <P extends IAnimatable> PlayState angryController(AnimationEvent<P> event) {
+        if (dataTracker.get(DATA_CREEPY) && type.usesAngryAnimation()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(type.angryAnimation(), true));
+        }
+        return PlayState.CONTINUE;
+    }
+
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event) {
         if (!(event.getLimbSwingAmount() > -0.15F && event.getLimbSwingAmount() < 0.15F)) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.enderman.walk", true));
-        } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.enderman.idle", true));
+            if (dataTracker.get(DATA_CREEPY) && type.usesAngryAnimation() && type.runsWhenAngry()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(type.runAnimation(), true));
+            }
+            else {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation(type.walkAnimation(), true));
+            }
+        }
+        else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(type.idleAnimation(), true));
         }
         return PlayState.CONTINUE;
     }
@@ -562,11 +575,16 @@ public class BaseEnderman extends HostileEntity implements Angerable, AnimatedEn
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "angry_controller", 0, this::angryController));
     }
 
     @Override
     public AnimationFactory getFactory() {
         return this.animationFactory;
+    }
+
+    public boolean isAngry() {
+        return this.dataTracker.get(DATA_CREEPY);
     }
 
     private static class EndermanFreezeWhenLookedAt extends Goal {

@@ -21,7 +21,14 @@ public record EndermanType(
         Identifier texture,
         Identifier glowingTexture,
         Identifier model,
-        Identifier animation,
+
+        String walkAnimation,
+
+        String idleAnimation,
+
+        String angryAnimation,
+
+        String runAnimation,
 
         int melee,
         Collection<Class<? extends LivingEntity>> attackingEntities,
@@ -49,13 +56,16 @@ public record EndermanType(
         private Identifier texture;
         private Identifier glowingTexture;
         private Identifier model;
-        private Identifier animation;
+        private String walkAnimation = "animation.enderman.walk";
+        private String idleAnimation = "animation.enderman.idle";
+        private String angryAnimation = "animation.enderman.angry";
+        private String runAnimation = "animation.enderman.run";
 
         private int melee = 0;
         private final List<Class<? extends LivingEntity>> attackingEntities = new ArrayList<>();
         private final Collection<DamageSource> immunities = new ArrayList<>();
         private final DefaultAttributeContainer.Builder attributes = EndermanEntity.createEndermanAttributes();
-        private Collection<TagKey> restrictedToBlocks = new ArrayList<>();
+        private final Collection<TagKey> restrictedToBlocks = new ArrayList<>();
 
         private Supplier<SoundEvent> deathSound = () -> SoundEvents.ENTITY_ENDERMAN_DEATH;
         private Supplier<SoundEvent> hurtSound = () -> SoundEvents.ENTITY_ENDERMAN_HURT;
@@ -88,9 +98,23 @@ public record EndermanType(
             return this;
         }
 
+        public Builder setWalkAnimation(String animation) {
+            this.walkAnimation = animation;
+            return this;
+        }
 
-        public Builder setAnimation(Identifier animation) {
-            this.animation = animation;
+        public Builder setIdleAnimation(String animation) {
+            this.idleAnimation = animation;
+            return this;
+        }
+
+        public Builder setAngryAnimation(String animation) {
+            this.angryAnimation = animation;
+            return this;
+        }
+
+        public Builder setRunAnimation(String animation) {
+            this.runAnimation = animation;
             return this;
         }
 
@@ -221,7 +245,7 @@ public record EndermanType(
         }
 
         public EndermanType build() {
-            return new EndermanType(texture, glowingTexture, model, animation, melee, attackingEntities, immunities, restrictedToBlocks, attributes.build(), deathSound, hurtSound, ambientSound, screamSound, stareSound, teleportSound, usesAngryAnimation, canTeleport, runsWhenAngry, provokedWithEyeContact, particleEffect, teleportOnInjury, chanceToSpawnWithRiches, canPickupBlocks);
+            return new EndermanType(texture, glowingTexture, model, walkAnimation, idleAnimation, angryAnimation, runAnimation, melee, attackingEntities, immunities, restrictedToBlocks, attributes.build(), deathSound, hurtSound, ambientSound, screamSound, stareSound, teleportSound, usesAngryAnimation, canTeleport, runsWhenAngry, provokedWithEyeContact, particleEffect, teleportOnInjury, chanceToSpawnWithRiches, canPickupBlocks);
         }
     }
 }

@@ -4,6 +4,7 @@ import gg.moonflower.pollen.api.platform.Platform;
 import gg.moonflower.pollen.api.registry.client.EntityRendererRegistry;
 import io.github.padlocks.EndermanOverhaul.client.model.entity.EndermanModel;
 import io.github.padlocks.EndermanOverhaul.client.render.entity.*;
+import io.github.padlocks.EndermanOverhaul.common.entity.EndermanTypes;
 import io.github.padlocks.EndermanOverhaul.common.entity.base.BaseEnderman;
 import io.github.padlocks.EndermanOverhaul.common.entity.base.EndermanType;
 import io.github.padlocks.EndermanOverhaul.common.registry.ModEntities;
@@ -31,11 +32,13 @@ public class EndermanOverhaul {
             .build();
 
     private static void onClientInit() {
-        //registerRenderer(ModEntities.DEFAULT_ENDERMAN, createRenderer(EndermanTypes.DEFAULT));
-        EntityRendererRegistry.register(ModEntities.DEFAULT_ENDERMAN, DefaultEndermanRenderer::new);
-        EntityRendererRegistry.register(ModEntities.BADLANDS_ENDERMAN, BadlandsEndermanRenderer::new);
-        EntityRendererRegistry.register(ModEntities.CAVE_ENDERMAN, CaveEndermanRenderer::new);
-        EntityRendererRegistry.register(ModEntities.FLOWER_ENDERMAN, FlowerEndermanRenderer::new);
+        EntityRendererRegistry.register(() -> EntityType.ENDERMAN, ReplacedEndermanRenderer::new);
+        EntityRendererRegistry.register(ModEntities.BADLANDS_ENDERMAN, createRenderer(EndermanTypes.BADLANDS));
+        EntityRendererRegistry.register(ModEntities.CAVE_ENDERMAN, createRenderer(EndermanTypes.CAVE));
+        EntityRendererRegistry.register(ModEntities.DESERT_ENDERMAN, createRenderer(EndermanTypes.DESERT));
+        EntityRendererRegistry.register(ModEntities.SAVANNA_ENDERMAN, createRenderer(EndermanTypes.SAVANNA));
+        EntityRendererRegistry.register(ModEntities.SNOWY_ENDERMAN, createRenderer(EndermanTypes.SNOWY));
+        EntityRendererRegistry.register(ModEntities.FLOWER_ENDERMAN, createRenderer(EndermanTypes.FLOWER));
 
         HoodArmorRenderer BADLANDS_HOOD_RENDERER = new HoodArmorRenderer(ModItems.BADLANDS_HOOD_MODEL, ModItems.BADLANDS_HOOD);
         GeoArmorRenderer.registerArmorRenderer(BADLANDS_HOOD_RENDERER, ModItems.BADLANDS_HOOD);

@@ -18,7 +18,7 @@ public class ModArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
                     .put(ModArmorMaterials.HOOD,
-                            new StatusEffectInstance(ModEffects.ENDERMAN_TRUST.get(), 200, 0, false, false, false)).build();
+                            new StatusEffectInstance(ModEffects.FRIENDERMAN_EFFECT.get(), 200, 0, false, false, false)).build();
 
     public ModArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings properties) {
         super(material, slot, properties);
