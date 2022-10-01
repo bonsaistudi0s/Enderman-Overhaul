@@ -1,18 +1,27 @@
 package io.github.padlocks.EndermanOverhaul.core;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import gg.moonflower.pollen.api.platform.Platform;
 import gg.moonflower.pollen.api.registry.client.EntityRendererRegistry;
+import gg.moonflower.pollen.api.registry.client.RenderTypeRegistry;
 import io.github.padlocks.EndermanOverhaul.client.model.entity.EndermanModel;
 import io.github.padlocks.EndermanOverhaul.client.render.entity.*;
 import io.github.padlocks.EndermanOverhaul.common.entity.EndermanTypes;
 import io.github.padlocks.EndermanOverhaul.common.entity.base.BaseEnderman;
 import io.github.padlocks.EndermanOverhaul.common.entity.base.EndermanType;
+import io.github.padlocks.EndermanOverhaul.common.registry.ModBlocks;
 import io.github.padlocks.EndermanOverhaul.common.registry.ModEntities;
 import io.github.padlocks.EndermanOverhaul.common.registry.ModItems;
 import io.github.padlocks.EndermanOverhaul.common.world.gen.ModEntitySpawn;
+import net.minecraft.block.Block;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.block.entity.SkullBlockEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.scoreboard.ScoreboardCriterion;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
@@ -29,6 +38,7 @@ public class EndermanOverhaul {
     public static final Platform PLATFORM = Platform.builder(MOD_ID)
             .clientInit(() -> EndermanOverhaul::onClientInit)
             .commonInit(EndermanOverhaul::onCommonInit)
+            .commonPostInit(EndermanOverhaul::onClientPostInit)
             .build();
 
     private static void onClientInit() {
@@ -50,8 +60,17 @@ public class EndermanOverhaul {
         GeoArmorRenderer.registerArmorRenderer(SNOWY_HOOD_RENDERER, ModItems.SNOWY_HOOD);
     }
 
+    public static void onClientPostInit(Platform.ModSetupContext ctx) {
+        ctx.enqueueWork(() -> {
+            RenderTypeRegistry.register(ModBlocks.TINY_SKULL, RenderLayer.getCutoutMipped());
+            RenderTypeRegistry.register(ModBlocks.TINY_SKULL_WALL, RenderLayer.getCutoutMipped());
+        });
+    }
+
+
     private static void onCommonInit() {
         ModItems.ITEMS.register(PLATFORM);
+        ModBlocks.BLOCKS.register(PLATFORM);
         ModEntities.ENTITIES.register(PLATFORM);
         ModEntities.registerEntityAttributes();
         ModEntitySpawn.addEntitySpawn();
@@ -76,4 +95,9 @@ public class EndermanOverhaul {
     public static Identifier resourceLocation(String string) {
         return new Identifier(MOD_ID, string);
     }
+
+//    @ExpectPlatform
+//    public static void registerBlockRenderType(Supplier<Block> block, RenderLayer type) {
+//        throw new AssertionError();
+//    }
 }
