@@ -1,0 +1,7 @@
+{
+  "texture": {
+    "type": "location",
+    "texture": "endermanoverhaul:entity/cave/cave_enderman",
+    "layer": "cutout"
+  }
+}

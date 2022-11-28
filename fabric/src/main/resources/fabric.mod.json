@@ -1,31 +1,34 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "endermanoverhaul",
   "version": "${version}",
-  "name": "Example Mod",
+  "name": "Enderman Overhaul",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Me!"
+    "WeDoBeeVibing (padlocks)",
+    "Bonsai Studios"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/bonsaistudi0s/EndermanOverhaul"
   },
   "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "icon": "assets/enderman_overhaul/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "io.github.padlocks.EndermanOverhaul.fabric.EndermanOverhaulFabric"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "EndermanOverhaul-common.mixins.json",
+    "EndermanOverhaul.mixins.json"
   ],
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.18.2",
-    "architectury": ">=4.9.83"
+    "architectury": ">=4.9.83",
+    "pollen": ">=1.4.9",
+    "geckolib3": ">=3.0.59"
   }
 }

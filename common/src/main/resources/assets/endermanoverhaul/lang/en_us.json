@@ -1,0 +1,25 @@
+{
+  "item.endermanoverhaul.badlands_hood": "Badlands Hood",
+  "item.endermanoverhaul.savanna_hood": "Savanna Hood",
+  "item.endermanoverhaul.snowy_hood": "Snowy Hood",
+
+  "item.endermanoverhaul.default_enderman_spawn_egg": "Enderman Spawn Egg",
+  "item.endermanoverhaul.badlands_enderman_spawn_egg": "Badlands Enderman Spawn Egg",
+  "item.endermanoverhaul.cave_enderman_spawn_egg": "Cave Enderman Spawn Egg",
+  "item.endermanoverhaul.desert_enderman_spawn_egg": "Desert Enderman Spawn Egg",
+  "item.endermanoverhaul.savanna_enderman_spawn_egg": "Savanna Enderman Spawn Egg",
+  "item.endermanoverhaul.snowy_enderman_spawn_egg": "Snowy Enderman Spawn Egg",
+  "item.endermanoverhaul.flower_fields_enderman_spawn_egg": "Flower Fields Enderman Spawn Egg",
+
+  "itemGroup.endermanoverhaul.mod_group": "Enderman Overhaul",
+  "tooltip.endermanoverhaul.enderman_hood": "Enderman are not provoked by eye-contact.",
+  "effect.endermanoverhaul.frienderman": "Frienderman",
+
+  "entity.endermanoverhaul.default_enderman": "Enderman",
+  "entity.endermanoverhaul.badlands_enderman": "Badlands Enderman",
+  "entity.endermanoverhaul.cave_enderman": "Cave Enderman",
+  "entity.endermanoverhaul.desert_enderman": "Desert Enderman",
+  "entity.endermanoverhaul.savanna_enderman": "Savanna Enderman",
+  "entity.endermanoverhaul.snowy_enderman": "Snowy Enderman",
+  "entity.endermanoverhaul.flower_fields_enderman": "Flower Fields Enderman"
+}

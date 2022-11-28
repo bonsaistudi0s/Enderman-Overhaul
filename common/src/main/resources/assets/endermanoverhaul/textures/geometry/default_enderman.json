@@ -1,0 +1,7 @@
+{
+  "texture": {
+    "type": "location",
+    "texture": "endermanoverhaul:entity/default/default_enderman",
+    "layer": "cutout"
+  }
+}

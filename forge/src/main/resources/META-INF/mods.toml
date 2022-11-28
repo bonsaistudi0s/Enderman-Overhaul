@@ -4,32 +4,49 @@ loaderVersion = "[40,)"
 license = "Insert License Here"
 
 [[mods]]
-modId = "examplemod"
+modId = "endermanoverhaul"
 version = "${version}"
-displayName = "Example Mod"
-authors = "Me!"
+displayName = "Enderman Overhaul"
+authors = '''
+WeDoBeeVibing (padlocks)
+Bonsai Studios
+'''
 description = '''
 This is an example description! Tell everyone what your mod is about!
 '''
 #logoFile = ""
 
-[[dependencies.examplemod]]
+[[dependencies.endermanoverhaul]]
 modId = "forge"
 mandatory = true
 versionRange = "[40,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.endermanoverhaul]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.18.2,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.endermanoverhaul]]
 modId = "architectury"
 mandatory = true
 versionRange = "[4.9.83,)"
 ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "pollen"
+mandatory = true
+versionRange = "[1.4.9,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "geckolib3"
+mandatory = true
+versionRange = "[3.0.36,)"
+ordering = "NONE"
 side = "BOTH"
