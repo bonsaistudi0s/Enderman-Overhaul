@@ -1,0 +1,73 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:coal"
+        }
+      ],
+      "functions": [
+        {
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 3.0,
+            "min": 0.0
+          },
+          "function": "minecraft:looting_enchant"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:raw_iron"
+        }
+      ],
+      "functions": [
+        {
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 3.0,
+            "min": 0.0
+          },
+          "function": "minecraft:looting_enchant"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.1,
+          "condition": "minecraft:random_chance_with_looting",
+          "looting_multiplier": 0.025
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald"
+        }
+      ],
+      "functions": [
+        {
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 2.0,
+            "min": 0.0
+          },
+          "function": "minecraft:looting_enchant"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "endermanoverhaul:entities/cave_enderman"
+}

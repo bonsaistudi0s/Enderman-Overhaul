@@ -34,6 +34,6 @@
         "java": ">=17",
         "resourcefullib": ">=2.1.11",
         "resourcefulconfig": ">=2.0.0",
-        "geckolib": ">=4.2.2"
+        "geckolib": ">=4.2.3"
   }
 }

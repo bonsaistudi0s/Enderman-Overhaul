@@ -37,6 +37,7 @@ public class ReplacedEnderman implements GeoReplacedEntity {
             }
             return PlayState.CONTINUE;
         }));
+
         controllerRegistrar.add(new AnimationController<>(this, "creepy_controller", state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;

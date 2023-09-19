@@ -9,6 +9,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.datagen.provider.client.ModLangProvider;
+import tech.alexnijjar.endermanoverhaul.datagen.provider.server.ModBlockTagProvider;
+import tech.alexnijjar.endermanoverhaul.datagen.provider.server.ModLootTableProvider;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -23,5 +25,9 @@ public final class EndermanOverhaulDataGenerator {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(event.includeClient(), new ModLangProvider(packOutput));
+
+        generator.addProvider(event.includeServer(), new ModLootTableProvider(packOutput));
+
+        generator.addProvider(event.includeServer(), new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper));
     }
 }
