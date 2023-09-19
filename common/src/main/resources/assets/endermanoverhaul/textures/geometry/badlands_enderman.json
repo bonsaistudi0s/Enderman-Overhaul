@@ -1,7 +1,0 @@
-{
-  "texture": {
-    "type": "location",
-    "texture": "endermanoverhaul:entity/badlands/badlands_enderman",
-    "layer": "cutout"
-  }
-}

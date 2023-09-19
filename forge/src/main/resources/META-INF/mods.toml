@@ -1,52 +1,49 @@
 modLoader = "javafml"
-loaderVersion = "[40,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+loaderVersion = "[47,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/bonsaistudi0s/endermanoverhaul/issues"
 
 [[mods]]
 modId = "endermanoverhaul"
 version = "${version}"
 displayName = "Enderman Overhaul"
-authors = '''
-WeDoBeeVibing (padlocks)
-Bonsai Studios
-'''
-description = '''
-This is an example description! Tell everyone what your mod is about!
-'''
-#logoFile = ""
+displayURL = "https://modrinth.com/mod/enderman-overhaul"
+logoFile = "icon.png"
+authors = "Alex Nijjar, Joosh"
+credits = ""
+description = "Enderman overhaul adds biome-specific Enderman!"
 
 [[dependencies.endermanoverhaul]]
 modId = "forge"
 mandatory = true
-versionRange = "[40,)"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.2,)"
+versionRange = "[1.20,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
-modId = "architectury"
+modId = "resourcefullib"
 mandatory = true
-versionRange = "[4.9.83,)"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies.endermanoverhaul]]
-modId = "pollen"
-mandatory = true
-versionRange = "[1.4.9,)"
+versionRange = "[2.1.11,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
-modId = "geckolib3"
+modId = "resourcefulconfig"
 mandatory = true
-versionRange = "[3.0.36,)"
+versionRange = "[2.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "geckolib"
+mandatory = true
+versionRange = "[4.2.2,)"
 ordering = "NONE"
 side = "BOTH"

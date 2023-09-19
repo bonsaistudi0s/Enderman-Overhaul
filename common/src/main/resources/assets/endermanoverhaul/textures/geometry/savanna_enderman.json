@@ -1,7 +1,0 @@
-{
-  "texture": {
-    "type": "location",
-    "texture": "endermanoverhaul:entity/savanna/savanna_enderman",
-    "layer": "cutout"
-  }
-}

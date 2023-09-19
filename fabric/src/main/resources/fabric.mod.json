@@ -1,34 +1,39 @@
-{
-  "schemaVersion": 1,
-  "id": "endermanoverhaul",
-  "version": "${version}",
-  "name": "Enderman Overhaul",
-  "description": "This is an example description! Tell everyone what your mod is about!",
-  "authors": [
-    "WeDoBeeVibing (padlocks)",
-    "Bonsai Studios"
-  ],
-  "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/bonsaistudi0s/EndermanOverhaul"
-  },
-  "license": "Insert License Here",
-  "icon": "assets/enderman_overhaul/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "io.github.padlocks.EndermanOverhaul.fabric.EndermanOverhaulFabric"
-    ]
-  },
-  "mixins": [
-    "EndermanOverhaul-common.mixins.json",
-    "EndermanOverhaul.mixins.json"
-  ],
-  "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.18.2",
-    "architectury": ">=4.9.83",
-    "pollen": ">=1.4.9",
-    "geckolib3": ">=3.0.59"
+ {
+    "schemaVersion": 1,
+    "id": "endermanoverhaul",
+    "version": "${version}",
+    "name": "Enderman Overhaul",
+    "description": "Enderman overhaul adds biome-specific Enderman!",
+    "authors": ["Alex Nijjar", "Joosh"],
+    "contributors": [""],
+    "contact": {
+        "website": "https://modrinth.com/mod/enderman-overhaul",
+        "repo": "https://github.com/bonsaistudi0s/endermanoverhaul",
+        "issues": "https://github.com/bonsaistudi0s/endermanoverhaul/issues"
+    },
+    "license": "ARR",
+    "icon": "icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "tech.alexnijjar.endermanoverhaul.fabric.EndermanOverhaulFabric::init",
+            "tech.alexnijjar.endermanoverhaul.EndermanOverhaul::postInit"
+        ]
+        ,
+        "client": [
+            "tech.alexnijjar.endermanoverhaul.client.fabric.EndermanOverhaulClientFabric::init"
+        ]
+    },
+    "mixins": [
+        "endermanoverhaul-common.mixins.json",
+        "endermanoverhaul.mixins.json"
+    ],
+    "depends": {
+        "fabric": "*",
+        "minecraft": ">=1.20",
+        "java": ">=17",
+        "resourcefullib": ">=2.1.11",
+        "resourcefulconfig": ">=2.0.0",
+        "geckolib": ">=4.2.2"
   }
 }

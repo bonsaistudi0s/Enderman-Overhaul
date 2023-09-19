@@ -1,7 +1,0 @@
-{
-  "texture": {
-    "type": "location",
-    "texture": "endermanoverhaul:entity/flower_fields/flower_fields_enderman",
-    "layer": "cutout"
-  }
-}

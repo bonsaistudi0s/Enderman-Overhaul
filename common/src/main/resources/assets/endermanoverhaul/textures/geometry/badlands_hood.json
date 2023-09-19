@@ -1,7 +1,0 @@
-{
-  "texture": {
-    "type": "location",
-    "texture": "endermanoverhaul:models/armor/badlands_hood",
-    "layer": "cutout"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "texture": {
-    "type": "location",
-    "texture": "endermanoverhaul:entity/desert/desert_enderman",
-    "layer": "cutout"
-  }
-}

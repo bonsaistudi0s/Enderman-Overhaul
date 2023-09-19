@@ -1,2 +1,1 @@
-# EndermanOverhaul
-Bonsai Studios
+# Enderman Overhaul
