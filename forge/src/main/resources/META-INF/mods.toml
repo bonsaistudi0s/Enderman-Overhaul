@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
-license = "MIT"
+license = "ARR"
 issueTrackerURL = "https://github.com/bonsaistudi0s/endermanoverhaul/issues"
 
 [[mods]]
