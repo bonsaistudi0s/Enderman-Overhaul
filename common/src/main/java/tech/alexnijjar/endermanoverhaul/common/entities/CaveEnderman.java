@@ -22,7 +22,7 @@ public class CaveEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 40.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.15)
+            .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 32.0);
     }
@@ -57,7 +57,7 @@ public class CaveEnderman extends BaseEnderman {
         super.tick();
         if (level().isClientSide()) return;
         if (level().getGameTime() % 20 == 0) {
-            if (this.isAlive() && level().canSeeSky(this.blockPosition())) {
+            if (this.isAlive() && level().canSeeSky(this.blockPosition()) && level().isDay()) {
                 this.hurt(damageSources().onFire(), 1.0f);
             }
         }

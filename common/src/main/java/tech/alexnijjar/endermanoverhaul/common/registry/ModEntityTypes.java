@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.levelgen.Heightmap;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.CaveEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.SavannaEnderman;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -21,8 +22,14 @@ public class ModEntityTypes {
             .sized(0.6f, 2.6f)
             .build("cave_enderman"));
 
+    public static final RegistryEntry<EntityType<SavannaEnderman>> SAVANNA_ENDERMAN = ENTITY_TYPES.register("savanna_enderman", () ->
+        EntityType.Builder.of(SavannaEnderman::new, MobCategory.MONSTER)
+            .sized(0.6f, 2.8f)
+            .build("savanna_enderman"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
+        attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
