@@ -89,12 +89,16 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
         return true;
     }
 
+    public boolean hasParticles() {
+        return true;
+    }
+
     @Nullable
     public ParticleOptions getCustomParticles() {
         return null;
     }
 
-    public boolean canCarryBlocks() {
+    public boolean canPickupBlocks() {
         return true;
     }
 
@@ -117,7 +121,7 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
     @Override
     public void aiStep() {
         ParticleOptions customParticleType = getCustomParticles();
-        if (this.level().isClientSide() && customParticleType != null) {
+        if (hasParticles() && this.level().isClientSide() && customParticleType != null) {
             for (int i = 0; i < 2; ++i) {
                 this.level().addParticle(customParticleType,
                     this.getRandomX(0.5),
@@ -203,7 +207,7 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
 
     public class EndermanTakeBlockGoal extends Goal {
         public boolean canUse() {
-            if (!canCarryBlocks()) return false;
+            if (!canPickupBlocks()) return false;
             if (BaseEnderman.this.getCarriedBlock() != null) {
                 return false;
             } else if (!BaseEnderman.this.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
