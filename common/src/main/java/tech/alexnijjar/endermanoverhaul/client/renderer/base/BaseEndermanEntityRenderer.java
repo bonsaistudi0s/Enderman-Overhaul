@@ -16,6 +16,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     public static final ResourceLocation ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "enderman");
     public static final ResourceLocation ICE_SPIKES_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "ice_spikes_enderman");
     public static final ResourceLocation SNOWY_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "snowy_enderman");
+    public static final ResourceLocation DESERT_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "desert_enderman");
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman) {
         this(renderManager, enderman, ANIMATION);

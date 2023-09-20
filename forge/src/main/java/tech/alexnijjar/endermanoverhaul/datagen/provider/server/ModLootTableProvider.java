@@ -43,7 +43,7 @@ public class ModLootTableProvider extends LootTableProvider {
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))))
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.EMERALD).apply(SetItemCountFunction
-                        .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
+                        .setCount(UniformGenerator.between(0.0f, 2.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.1f, 0.025f))));
 
@@ -76,6 +76,13 @@ public class ModLootTableProvider extends LootTableProvider {
                     .add(LootItem.lootTableItem(Items.SNOWBALL).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+
+            output.accept(getEntity(ModEntityTypes.DESERT_ENDERMAN.get()), getDefaultEndermanLootTable() // TODO add snowy hood
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.EMERALD).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 2.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
+                    .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.05f, 0.025f))));
 
 
             output.accept(getEntity(ModEntityTypes.SWAMP_ENDERMAN.get()), getDefaultEndermanLootTable());
