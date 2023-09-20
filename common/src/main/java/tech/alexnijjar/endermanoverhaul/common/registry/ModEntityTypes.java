@@ -13,6 +13,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.*;
+import tech.alexnijjar.endermanoverhaul.common.entities.summons.Scarab;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -117,6 +118,12 @@ public class ModEntityTypes {
             .sized(0.6f, 4.1f)
             .build("windswept_hills_enderman"));
 
+    // Summons
+    public static final RegistryEntry<EntityType<Scarab>> SCARAB = ENTITY_TYPES.register("scarab", () ->
+        EntityType.Builder.of(Scarab::new, MobCategory.MONSTER)
+            .sized(0.3f, 0.5f)
+            .build("scarab"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(BADLANDS_ENDERMAN, BadlandsEnderman::createAttributes);
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
@@ -136,6 +143,9 @@ public class ModEntityTypes {
         attributes.accept(SWAMP_ENDERMAN, SwampEnderman::createAttributes);
         attributes.accept(WARPED_FOREST_ENDERMAN, WarpedForestEnderman::createAttributes);
         attributes.accept(WINDSWEPT_HILLS_ENDERMAN, WindsweptHillsEnderman::createAttributes);
+
+        // Summons
+        attributes.accept(SCARAB, Scarab::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
@@ -157,5 +167,8 @@ public class ModEntityTypes {
         SpawnPlacements.register(SWAMP_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(WARPED_FOREST_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(WINDSWEPT_HILLS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+
+        // Summons
+        SpawnPlacements.register(SCARAB.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
     }
 }

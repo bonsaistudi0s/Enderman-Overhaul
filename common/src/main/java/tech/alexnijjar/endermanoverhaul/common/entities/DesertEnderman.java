@@ -1,6 +1,7 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -11,6 +12,8 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.summons.Scarab;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 public class DesertEnderman extends BaseEnderman {
@@ -50,6 +53,20 @@ public class DesertEnderman extends BaseEnderman {
     @Override
     public void die(@NotNull DamageSource damageSource) {
         super.die(damageSource);
-        // TODO Spawns 3 scarabs on death
+        for (int i = 0; i < 3; i++) {
+            Scarab scarab = ModEntityTypes.SCARAB.get().create(level());
+            if (scarab == null) return;
+            scarab.setPos(this.position());
+            level().addFreshEntity(scarab);
+        }
+
+        for (int i = 0; i < 10; ++i) {
+            this.level().addParticle(ParticleTypes.LARGE_SMOKE,
+                this.getRandomX(0.5),
+                this.getRandomY() - 0.75,
+                this.getRandomZ(0.5),
+                (this.random.nextDouble() - 0.5) * 0.5, -this.random.nextDouble(),
+                (this.random.nextDouble() - 0.5) * 0.5);
+        }
     }
 }
