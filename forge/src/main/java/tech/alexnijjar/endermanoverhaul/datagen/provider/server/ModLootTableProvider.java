@@ -32,7 +32,7 @@ public class ModLootTableProvider extends LootTableProvider {
     private static class EntityLootTables implements LootTableSubProvider {
         @Override
         public void generate(@NotNull BiConsumer<ResourceLocation, LootTable.Builder> output) {
-            output.accept(getEntity(ModEntityTypes.CAVE_ENDERMAN.get()), LootTable.lootTable()
+            output.accept(getEntity(ModEntityTypes.CAVE_ENDERMAN.get()), getDefaultEndermanLootTable()
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.COAL).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
@@ -47,35 +47,30 @@ public class ModLootTableProvider extends LootTableProvider {
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.1f, 0.025f))));
 
-            output.accept(getEntity(ModEntityTypes.SAVANNA_ENDERMAN.get()), LootTable.lootTable()
-                .withPool(LootPool.lootPool()
-                    .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction
-                        .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
-                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))))
+            output.accept(getEntity(ModEntityTypes.SAVANNA_ENDERMAN.get()), getDefaultEndermanLootTable()
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.ACACIA_LOG).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 4.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 
-            output.accept(getEntity(ModEntityTypes.NETHER_WASTES_ENDERMAN.get()), LootTable.lootTable()
-                .withPool(LootPool.lootPool()
-                    .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction
-                        .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
-                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))))
+            output.accept(getEntity(ModEntityTypes.NETHER_WASTES_ENDERMAN.get()), getDefaultEndermanLootTable()
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.BONE).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 
-            output.accept(getEntity(ModEntityTypes.CRIMSON_FOREST_ENDERMAN.get()), LootTable.lootTable()
-                .withPool(LootPool.lootPool()
-                    .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction
-                        .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
-                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))))
+            output.accept(getEntity(ModEntityTypes.CRIMSON_FOREST_ENDERMAN.get()), getDefaultEndermanLootTable()
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CRIMSON_FUNGUS).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+
+            output.accept(getEntity(ModEntityTypes.ICE_SPIKES_ENDERMAN.get()), getDefaultEndermanLootTable()
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.PACKED_ICE).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+
 
             output.accept(getEntity(ModEntityTypes.SWAMP_ENDERMAN.get()), getDefaultEndermanLootTable());
         }

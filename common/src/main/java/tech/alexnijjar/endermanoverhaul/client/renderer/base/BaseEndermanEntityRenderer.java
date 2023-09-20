@@ -14,11 +14,17 @@ import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntityRenderer<T> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "enderman");
+    public static final ResourceLocation ICE_SPIKES_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "ice_spikes_enderman");
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman) {
+        this(renderManager, enderman, ANIMATION);
+    }
+
+    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman, ResourceLocation animation) {
         this(renderManager,
             BuiltInRegistries.ENTITY_TYPE.getKey(enderman),
             getTexture(enderman),
+            animation,
             getGlowTexture(enderman));
     }
 

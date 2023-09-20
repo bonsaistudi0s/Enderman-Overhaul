@@ -1,6 +1,7 @@
-// 1.20.1	2023-09-19T23:00:40.900317	Loot Tables
-bd02405180fc7074f77fcbeb00c41693c6a74994 data/endermanoverhaul/loot_tables/entities/cave_enderman.json
+// 1.20.1	2023-09-19T23:35:30.84742	Loot Tables
+9e26da23691fe739810f7a6c995c00c0b09839c4 data/endermanoverhaul/loot_tables/entities/cave_enderman.json
 9ea5c5cffa52dd6f34211dead31fec7823b06b5b data/endermanoverhaul/loot_tables/entities/crimson_forest_enderman.json
+5040de1036a7cbdfe1828ca9ce4d5326082ac564 data/endermanoverhaul/loot_tables/entities/ice_spikes_enderman.json
 6320f5117f1ce8530689631853989fbbfb5b8fe7 data/endermanoverhaul/loot_tables/entities/nether_wastes_enderman.json
 bd90cc13c096857178fe00182acbf2ff5bad6714 data/endermanoverhaul/loot_tables/entities/savanna_enderman.json
 0ce0ae263b28e7d7f00352e30df192e0d1dbeda6 data/endermanoverhaul/loot_tables/entities/swamp_enderman.json

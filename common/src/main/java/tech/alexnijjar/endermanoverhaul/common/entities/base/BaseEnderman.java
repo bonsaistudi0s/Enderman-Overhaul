@@ -9,9 +9,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -143,17 +141,17 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
 
     @Override
     public boolean doHurtTarget(@NotNull Entity target) {
-		if (super.doHurtTarget(target)) {
+        if (super.doHurtTarget(target)) {
             var effect = getHitEffect();
-			if (effect != null && target instanceof LivingEntity entity) {
-					entity.addEffect(effect);
-			}
+            if (effect != null && target instanceof LivingEntity entity) {
+                entity.addEffect(effect);
+            }
 
-			return true;
-		} else {
-			return false;
-		}
-	}
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     protected void registerGoals() {
@@ -189,8 +187,8 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
 
     @Override
     protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions dimensions) {
-		return 2.55f + (this.getType().getDimensions().height - 2.9f);
-	}
+        return 2.55f + (this.getType().getDimensions().height - 2.9f);
+    }
 
     public boolean teleportTowards(Entity target) {
         if (!this.canTeleport()) return false;

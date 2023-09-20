@@ -1,7 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -11,19 +10,21 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
-public class SwampEnderman extends BaseEnderman {
+public class IceSpikesEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-            .add(Attributes.MAX_HEALTH, 50.0)
+            .add(Attributes.MAX_HEALTH, 60.0)
             .add(Attributes.MOVEMENT_SPEED, 0.3)
-            .add(Attributes.ATTACK_DAMAGE, 7.0)
-            .add(Attributes.FOLLOW_RANGE, 32.0);
+            .add(Attributes.ATTACK_DAMAGE, 8.0)
+            .add(Attributes.FOLLOW_RANGE, 64.0)
+            .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
     }
 
-    public SwampEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+    public IceSpikesEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
-        this.xpReward = 8;
+        this.xpReward = 12;
     }
 
     @Override
@@ -32,8 +33,8 @@ public class SwampEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean hasParticles() {
-        return false;
+    public @Nullable ParticleOptions getCustomParticles() {
+        return ModParticleTypes.SNOW.get();
     }
 
     @Override
@@ -41,18 +42,5 @@ public class SwampEnderman extends BaseEnderman {
         return false;
     }
 
-    @Override
-    public double getVisionRange() {
-        return 32.0;
-    }
-
-    @Override
-    public boolean isSensitiveToWater() {
-        return false;
-    }
-
-    @Override
-    public @Nullable MobEffectInstance getHitEffect() {
-        return new MobEffectInstance(new MobEffectInstance(MobEffects.POISON, 100, 2));
-    }
+    // TODO: implement dynamic hitbox when creepy
 }

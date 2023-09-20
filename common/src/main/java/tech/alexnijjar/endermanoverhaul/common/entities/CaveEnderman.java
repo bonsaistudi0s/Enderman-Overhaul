@@ -1,7 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -12,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 import tech.alexnijjar.endermanoverhaul.common.tags.ModBlockTags;
 
 public class CaveEnderman extends BaseEnderman {
@@ -39,7 +39,7 @@ public class CaveEnderman extends BaseEnderman {
 
     @Override
     public ParticleOptions getCustomParticles() {
-        return ParticleTypes.ASH;
+        return ModParticleTypes.DUST.get();
     }
 
     @Override

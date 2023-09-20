@@ -32,16 +32,21 @@ public class ModEntityTypes {
             .fireImmune()
             .build("nether_wastes_enderman"));
 
-     public static final RegistryEntry<EntityType<CrimsonForestEnderman>> CRIMSON_FOREST_ENDERMAN = ENTITY_TYPES.register("crimson_forest_enderman", () ->
+    public static final RegistryEntry<EntityType<CrimsonForestEnderman>> CRIMSON_FOREST_ENDERMAN = ENTITY_TYPES.register("crimson_forest_enderman", () ->
         EntityType.Builder.of(CrimsonForestEnderman::new, MobCategory.MONSTER)
             .sized(0.6f, 3.1f)
             .fireImmune()
             .build("crimson_forest_enderman"));
 
-     public static final RegistryEntry<EntityType<SwampEnderman>> SWAMP_ENDERMAN = ENTITY_TYPES.register("swamp_enderman", () ->
+    public static final RegistryEntry<EntityType<SwampEnderman>> SWAMP_ENDERMAN = ENTITY_TYPES.register("swamp_enderman", () ->
         EntityType.Builder.of(SwampEnderman::new, MobCategory.MONSTER)
             .sized(0.6f, 3.8f)
             .build("swamp_enderman"));
+
+    public static final RegistryEntry<EntityType<IceSpikesEnderman>> ICE_SPIKES_ENDERMAN = ENTITY_TYPES.register("ice_spikes_enderman", () ->
+        EntityType.Builder.of(IceSpikesEnderman::new, MobCategory.MONSTER)
+            .sized(0.6f, 3.9f)
+            .build("ice_spikes_enderman"));
 
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
@@ -49,6 +54,7 @@ public class ModEntityTypes {
         attributes.accept(NETHER_WASTES_ENDERMAN, NetherWastesEnderman::createAttributes);
         attributes.accept(CRIMSON_FOREST_ENDERMAN, CrimsonForestEnderman::createAttributes);
         attributes.accept(SWAMP_ENDERMAN, SwampEnderman::createAttributes);
+        attributes.accept(ICE_SPIKES_ENDERMAN, IceSpikesEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
