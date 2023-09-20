@@ -71,6 +71,12 @@ public class ModLootTableProvider extends LootTableProvider {
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 
+            output.accept(getEntity(ModEntityTypes.SNOWY_ENDERMAN.get()), getDefaultEndermanLootTable() // TODO add snowy hood
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.SNOWBALL).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+
 
             output.accept(getEntity(ModEntityTypes.SWAMP_ENDERMAN.get()), getDefaultEndermanLootTable());
             output.accept(getEntity(ModEntityTypes.DARK_OAK_ENDERMAN.get()), getDefaultEndermanLootTable());
