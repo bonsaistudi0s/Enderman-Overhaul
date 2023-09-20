@@ -13,10 +13,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -32,7 +30,7 @@ public class EndEnderman extends BaseEnderman {
 
     public EndEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
-        this.xpReward = 8;
+        xpReward = 8;
     }
 
     public static @NotNull AttributeSupplier.Builder createAttributes() {

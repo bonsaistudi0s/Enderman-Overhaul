@@ -10,6 +10,11 @@ import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class SavannaEnderman extends BaseEnderman {
+
+    public SavannaEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 40.0)
@@ -18,12 +23,13 @@ public class SavannaEnderman extends BaseEnderman {
             .add(Attributes.FOLLOW_RANGE, 32.0);
     }
 
-    public SavannaEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
-    }
-
     @Override
     public boolean canOpenMouth() {
         return false;
+    }
+
+    @Override
+    public double getVisionRange() {
+        return 32.0;
     }
 }

@@ -10,6 +10,12 @@ import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class NetherWastesEnderman extends BaseEnderman {
+
+    public NetherWastesEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+        xpReward = 6;
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 40.0)
@@ -18,14 +24,13 @@ public class NetherWastesEnderman extends BaseEnderman {
             .add(Attributes.FOLLOW_RANGE, 64.0);
     }
 
-    public NetherWastesEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
-    }
-
     @Override
     public double getVisionRange() {
         return 64.0;
     }
 
-    // TODO: implement dynamic hitbox when creepy
+    @Override
+    public boolean hasLargeCreepyHitbox() {
+        return true;
+    }
 }

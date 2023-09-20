@@ -11,16 +11,17 @@ import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.PassiveEnderman;
 
 public class FlowerFieldsEnderman extends PassiveEnderman {
+
+    public FlowerFieldsEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 20.0)
             .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 1.0)
             .add(Attributes.FOLLOW_RANGE, 64);
-    }
-
-    public FlowerFieldsEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
     }
 
     @Override

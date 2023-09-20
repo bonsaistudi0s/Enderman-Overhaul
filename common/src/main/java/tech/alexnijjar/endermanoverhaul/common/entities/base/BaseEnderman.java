@@ -132,6 +132,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return 0;
     }
 
+    public boolean hasLargeCreepyHitbox() {
+        return false;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -181,6 +185,12 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     }
 
     @Override
+    public @NotNull EntityDimensions getDimensions(@NotNull Pose pose) {
+        if (!hasLargeCreepyHitbox() || !isCreepy()) return super.getDimensions(pose);
+        return super.getDimensions(pose).scale(1, 1.15f);
+    }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new EndermanFreezeWhenLookedAt());
@@ -214,7 +224,13 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
     @Override
     protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions dimensions) {
-        return 2.55f + (this.getType().getDimensions().height - 2.9f);
+        return 2.55f + (dimensions.height - 2.9f);
+    }
+
+    @Override
+    public void setTarget(@Nullable LivingEntity target) {
+        super.setTarget(target);
+        refreshDimensions();
     }
 
     public boolean teleportTowards(Entity target) {

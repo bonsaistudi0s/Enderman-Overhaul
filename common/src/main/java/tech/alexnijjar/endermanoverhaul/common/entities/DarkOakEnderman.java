@@ -13,6 +13,11 @@ import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class DarkOakEnderman extends BaseEnderman {
+
+    public DarkOakEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 50.0)
@@ -20,10 +25,6 @@ public class DarkOakEnderman extends BaseEnderman {
             .add(Attributes.ATTACK_DAMAGE, 8.0)
             .add(Attributes.FOLLOW_RANGE, 64.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
-    }
-
-    public DarkOakEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
     }
 
     @Override

@@ -13,6 +13,12 @@ import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 public class IceSpikesEnderman extends BaseEnderman {
+
+    public IceSpikesEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+        xpReward = 12;
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 60.0)
@@ -20,11 +26,6 @@ public class IceSpikesEnderman extends BaseEnderman {
             .add(Attributes.ATTACK_DAMAGE, 8.0)
             .add(Attributes.FOLLOW_RANGE, 64.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
-    }
-
-    public IceSpikesEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
-        this.xpReward = 12;
     }
 
     @Override
@@ -42,5 +43,8 @@ public class IceSpikesEnderman extends BaseEnderman {
         return false;
     }
 
-    // TODO: implement dynamic hitbox when creepy
+    @Override
+    public boolean hasLargeCreepyHitbox() {
+        return true;
+    }
 }

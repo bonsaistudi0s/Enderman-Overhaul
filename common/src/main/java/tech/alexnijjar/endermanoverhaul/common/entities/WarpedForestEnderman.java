@@ -10,6 +10,12 @@ import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class WarpedForestEnderman extends BaseEnderman {
+
+    public WarpedForestEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+        xpReward = 8;
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 50.0)
@@ -17,11 +23,6 @@ public class WarpedForestEnderman extends BaseEnderman {
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 32.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
-    }
-
-    public WarpedForestEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
-        xpReward = 8;
     }
 
     @Override
@@ -39,5 +40,8 @@ public class WarpedForestEnderman extends BaseEnderman {
         return 32.0;
     }
 
-    // TODO: implement dynamic hitbox when creepy
+    @Override
+    public boolean hasLargeCreepyHitbox() {
+        return true;
+    }
 }

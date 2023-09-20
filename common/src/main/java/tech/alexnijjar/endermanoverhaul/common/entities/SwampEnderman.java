@@ -13,17 +13,18 @@ import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class SwampEnderman extends BaseEnderman {
+
+    public SwampEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+        xpReward = 8;
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 50.0)
             .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 7.0)
             .add(Attributes.FOLLOW_RANGE, 32.0);
-    }
-
-    public SwampEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
-        this.xpReward = 8;
     }
 
     @Override

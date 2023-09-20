@@ -23,7 +23,7 @@ public class EndIslandsEnderman extends BaseEnderman {
 
     public EndIslandsEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
-        this.xpReward = 42;
+        xpReward = 42;
     }
 
     public static @NotNull AttributeSupplier.Builder createAttributes() {

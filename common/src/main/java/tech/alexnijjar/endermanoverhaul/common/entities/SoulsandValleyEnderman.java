@@ -27,7 +27,7 @@ public class SoulsandValleyEnderman extends BaseEnderman {
 
     public SoulsandValleyEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
-        this.xpReward = 8;
+        xpReward = 8;
     }
 
     public static @NotNull AttributeSupplier.Builder createAttributes() {

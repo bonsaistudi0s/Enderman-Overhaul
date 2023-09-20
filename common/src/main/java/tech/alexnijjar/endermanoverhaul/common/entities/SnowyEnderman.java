@@ -17,17 +17,18 @@ import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 public class SnowyEnderman extends BaseEnderman {
+
+    public SnowyEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+        super(entityType, level);
+        xpReward = 8;
+    }
+
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 35.0)
             .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 42.0);
-    }
-
-    public SnowyEnderman(EntityType<? extends EnderMan> entityType, Level level) {
-        super(entityType, level);
-        this.xpReward = 8;
     }
 
     @Override

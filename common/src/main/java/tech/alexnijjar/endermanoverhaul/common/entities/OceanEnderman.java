@@ -1,10 +1,14 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -24,6 +28,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,19 +40,20 @@ import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 public class OceanEnderman extends BaseEnderman {
-    public static @NotNull AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes()
-            .add(Attributes.MAX_HEALTH, 30.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.3)
-            .add(Attributes.ATTACK_DAMAGE, 6.0)
-            .add(Attributes.FOLLOW_RANGE, 64.0);
-    }
 
     public OceanEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
         xpReward = 6;
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
         this.moveControl = new OceanEndermanMoveControl();
+    }
+
+    public static @NotNull AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+            .add(Attributes.MAX_HEALTH, 30.0)
+            .add(Attributes.MOVEMENT_SPEED, 0.3)
+            .add(Attributes.ATTACK_DAMAGE, 6.0)
+            .add(Attributes.FOLLOW_RANGE, 64.0);
     }
 
     @Override
@@ -143,6 +149,13 @@ public class OceanEnderman extends BaseEnderman {
         }
 
         super.aiStep();
+    }
+
+    @SuppressWarnings({"deprecation", "unused"})
+    public static boolean checkSpawnRules(EntityType<OceanEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
+        if (!serverLevel.getFluidState(pos.below()).is(FluidTags.WATER)) return false;
+        boolean bl = serverLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(serverLevel, pos, random) && (mobSpawnType == MobSpawnType.SPAWNER || serverLevel.getFluidState(pos).is(FluidTags.WATER));
+        return random.nextInt(40) == 0 && pos.getY() < serverLevel.getSeaLevel() - 5 && bl;
     }
 
     protected void handleAirSupply(int airSupply) {

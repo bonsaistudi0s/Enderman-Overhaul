@@ -15,6 +15,7 @@ import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 import tech.alexnijjar.endermanoverhaul.common.tags.ModBlockTags;
 
 public class CaveEnderman extends BaseEnderman {
+
     public CaveEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
     }
