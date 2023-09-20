@@ -9,21 +9,23 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
-public class SavannaEnderman extends BaseEnderman {
+public class NetherWastesEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 40.0)
             .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 7.0)
-            .add(Attributes.FOLLOW_RANGE, 32.0);
+            .add(Attributes.FOLLOW_RANGE, 64.0);
     }
 
-    public SavannaEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+    public NetherWastesEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
     }
 
     @Override
-    public boolean canOpenMouth() {
-        return false;
+    public double getVisionRange() {
+        return 64.0;
     }
+
+    // TODO: implement dynamic hitbox when creepy
 }

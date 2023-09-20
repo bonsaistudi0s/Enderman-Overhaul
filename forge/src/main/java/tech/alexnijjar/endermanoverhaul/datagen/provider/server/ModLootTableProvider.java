@@ -56,6 +56,16 @@ public class ModLootTableProvider extends LootTableProvider {
                     .add(LootItem.lootTableItem(Items.ACACIA_LOG).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 4.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+
+            output.accept(getEntity(ModEntityTypes.NETHER_WASTES_ENDERMAN.get()), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))))
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.BONE).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
         }
     }
 

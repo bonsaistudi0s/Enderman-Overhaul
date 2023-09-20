@@ -106,6 +106,10 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
         return true;
     }
 
+    public double getVisionRange() {
+        return 256.0;
+    }
+
     public TagKey<Block> getCarriableBlockTag() {
         return BlockTags.ENDERMAN_HOLDABLE;
     }
@@ -280,7 +284,7 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
                 return false;
             } else {
                 double d = this.target.distanceToSqr(BaseEnderman.this);
-                return !(d > 256.0) && BaseEnderman.this.isLookingAtMe((Player) this.target);
+                return !(d > getVisionRange()) && BaseEnderman.this.isLookingAtMe((Player) this.target);
             }
         }
 
@@ -370,7 +374,7 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
                         }
 
                         this.teleportTime = 0;
-                    } else if (this.target.distanceToSqr(BaseEnderman.this) > 256.0 && this.teleportTime++ >= this.adjustedTickDelay(30) && BaseEnderman.this.teleportTowards(this.target)) {
+                    } else if (this.target.distanceToSqr(BaseEnderman.this) > getVisionRange() && this.teleportTime++ >= this.adjustedTickDelay(30) && BaseEnderman.this.teleportTowards(this.target)) {
                         this.teleportTime = 0;
                     }
                 }

@@ -48,6 +48,11 @@ public class CaveEnderman extends BaseEnderman {
     }
 
     @Override
+    public double getVisionRange() {
+        return 32.0;
+    }
+
+    @Override
     public TagKey<Block> getCarriableBlockTag() {
         return ModBlockTags.CAVE_ENDERMAN_HOLDEABLE;
     }
