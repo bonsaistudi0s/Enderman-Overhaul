@@ -4,9 +4,10 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.level.levelgen.Heightmap;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.*;
 
@@ -85,6 +86,11 @@ public class ModEntityTypes {
             .fireImmune()
             .build("end_enderman"));
 
+    public static final RegistryEntry<EntityType<FlowerFieldsEnderman>> FLOWER_FIELDS_ENDERMAN = ENTITY_TYPES.register("flower_fields_enderman", () ->
+        EntityType.Builder.of(FlowerFieldsEnderman::new, MobCategory.CREATURE)
+            .sized(0.5f, 1.5f)
+            .build("flower_fields_enderman"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
         attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
@@ -99,12 +105,10 @@ public class ModEntityTypes {
         attributes.accept(DESERT_ENDERMAN, DesertEnderman::createAttributes);
         attributes.accept(SOULSAND_VALLEY_ENDERMAN, SoulsandValleyEnderman::createAttributes);
         attributes.accept(END_ENDERMAN, EndEnderman::createAttributes);
+        attributes.accept(FLOWER_FIELDS_ENDERMAN, FlowerFieldsEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
-    }
-
-    public static <T extends Mob> void registerSpawnPlacement(EntityType<T> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
-        SpawnPlacements.register(entityType, decoratorType, heightMapType, decoratorPredicate);
+//        SpawnPlacements.register(entityType, decoratorType, heightMapType, decoratorPredicate);
     }
 }

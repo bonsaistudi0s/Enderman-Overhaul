@@ -43,7 +43,7 @@ import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
-public class BaseEnderman extends EnderMan implements GeoEntity {
+public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public BaseEnderman(EntityType<? extends EnderMan> entityType, Level level) {
