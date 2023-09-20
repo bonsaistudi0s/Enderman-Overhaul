@@ -66,7 +66,6 @@ public class CaveEnderman extends BaseEnderman {
                 this.hurt(damageSources().onFire(), 1.0f);
             }
         }
-        super.tick();
     }
 
     // TODO Fix speed issue

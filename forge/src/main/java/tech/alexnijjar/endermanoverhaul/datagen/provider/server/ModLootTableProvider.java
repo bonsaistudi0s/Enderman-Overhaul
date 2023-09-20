@@ -96,9 +96,15 @@ public class ModLootTableProvider extends LootTableProvider {
                         .setCount(UniformGenerator.between(0.0f, 2.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 
-            output.accept(getEntity(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN.get()), getDefaultEndermanLootTable() // TODO add corrupted pearl
+            output.accept(getEntity(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN.get()), getDefaultEndermanLootTable()
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.RED_MUSHROOM).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+
+            output.accept(getEntity(ModEntityTypes.WARPED_FOREST_ENDERMAN.get()), getDefaultEndermanLootTable()
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.WARPED_FUNGUS).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 

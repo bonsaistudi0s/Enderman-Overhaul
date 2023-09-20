@@ -102,6 +102,12 @@ public class ModEntityTypes {
             .fireImmune()
             .build("end_islands_enderman"));
 
+    public static final RegistryEntry<EntityType<WarpedForestEnderman>> WARPED_FOREST_ENDERMAN = ENTITY_TYPES.register("warped_forest_enderman", () ->
+        EntityType.Builder.of(WarpedForestEnderman::new, MobCategory.MONSTER)
+            .sized(0.8f, 2.4f)
+            .fireImmune()
+            .build("warped_forest_enderman"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
         attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
@@ -119,6 +125,7 @@ public class ModEntityTypes {
         attributes.accept(FLOWER_FIELDS_ENDERMAN, FlowerFieldsEnderman::createAttributes);
         attributes.accept(MUSHROOM_FIELDS_ENDERMAN, MushroomFieldsEnderman::createAttributes);
         attributes.accept(END_ISLANDS_ENDERMAN, EndIslandsEnderman::createAttributes);
+        attributes.accept(WARPED_FOREST_ENDERMAN, WarpedForestEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
