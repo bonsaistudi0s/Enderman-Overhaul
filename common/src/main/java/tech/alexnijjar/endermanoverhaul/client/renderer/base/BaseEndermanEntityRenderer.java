@@ -41,7 +41,9 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
         super(renderManager, new DefaultedEntityGeoModel<T>(assetPath)
             .withAltTexture(texture)
             .withAltAnimations(animation));
-        addRenderLayer(new CustomEnderEyesLayer<>(this, glow));
+        if (glow != null) {
+            addRenderLayer(new CustomEnderEyesLayer<>(this, glow));
+        }
     }
 
     public @NotNull Vec3 getRenderOffset(T entity, float partialTicks) {
@@ -53,12 +55,12 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
         }
     }
 
-    private static ResourceLocation getTexture(EntityType<?> enderman) {
+    protected static ResourceLocation getTexture(EntityType<?> enderman) {
         String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
         return new ResourceLocation(EndermanOverhaul.MOD_ID, "%s/%s".formatted(name.replace("_enderman", ""), name));
     }
 
-    private static ResourceLocation getGlowTexture(EntityType<?> enderman) {
+    protected static ResourceLocation getGlowTexture(EntityType<?> enderman) {
         String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
         return new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/%s/%s_glow.png".formatted(name.replace("_enderman", ""), name));
     }

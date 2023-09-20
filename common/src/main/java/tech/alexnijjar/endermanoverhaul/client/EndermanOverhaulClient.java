@@ -4,6 +4,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.EntityType;
 import tech.alexnijjar.endermanoverhaul.client.particles.EndermanParticle;
+import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.ReplacedEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
 import tech.alexnijjar.endermanoverhaul.client.utils.ClientPlatformUtils;
@@ -33,6 +34,7 @@ public class EndermanOverhaulClient {
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.SOULSAND_VALLEY_ENDERMAN.get(), BaseEndermanEntityRenderer.SOULSAND_VALLEY_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.END_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.END_ENDERMAN.get(), BaseEndermanEntityRenderer.END_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.FLOWER_FIELDS_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.FLOWER_FIELDS_ENDERMAN.get(), BaseEndermanEntityRenderer.FLOWER_FIELDS_ANIMATION));
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN, MushroomFieldsEndermanRenderer::new);
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> register) {

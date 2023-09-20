@@ -37,4 +37,9 @@ public abstract class PassiveEnderman extends BaseEnderman {
     public boolean isAngryAt(@NotNull LivingEntity entity) {
         return false;
     }
+
+    @Override
+    public boolean isCreepy() {
+        return false;
+    }
 }

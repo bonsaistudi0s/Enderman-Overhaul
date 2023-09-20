@@ -91,6 +91,11 @@ public class ModEntityTypes {
             .sized(0.5f, 1.5f)
             .build("flower_fields_enderman"));
 
+    public static final RegistryEntry<EntityType<MushroomFieldsEnderman>> MUSHROOM_FIELDS_ENDERMAN = ENTITY_TYPES.register("mushroom_fields_enderman", () ->
+        EntityType.Builder.of(MushroomFieldsEnderman::new, MobCategory.CREATURE)
+            .sized(0.6f, 2.6f)
+            .build("mushroom_fields_enderman"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
         attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
@@ -106,6 +111,7 @@ public class ModEntityTypes {
         attributes.accept(SOULSAND_VALLEY_ENDERMAN, SoulsandValleyEnderman::createAttributes);
         attributes.accept(END_ENDERMAN, EndEnderman::createAttributes);
         attributes.accept(FLOWER_FIELDS_ENDERMAN, FlowerFieldsEnderman::createAttributes);
+        attributes.accept(MUSHROOM_FIELDS_ENDERMAN, MushroomFieldsEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
