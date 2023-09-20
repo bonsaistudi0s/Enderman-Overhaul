@@ -59,7 +59,6 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, state -> {
             if (state.isMoving()) {
-
                 state.getController().setAnimation(isCreepy() && canRunWhenAngry() ?
                     ConstantAnimations.RUN :
                     ConstantAnimations.WALK);

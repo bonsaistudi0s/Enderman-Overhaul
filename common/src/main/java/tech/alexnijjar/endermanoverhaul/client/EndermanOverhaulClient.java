@@ -4,6 +4,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.EntityType;
 import tech.alexnijjar.endermanoverhaul.client.particles.EndermanParticle;
+import tech.alexnijjar.endermanoverhaul.client.renderer.EndIslandsEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.ReplacedEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
@@ -35,6 +36,7 @@ public class EndermanOverhaulClient {
         ClientPlatformUtils.registerRenderer(ModEntityTypes.END_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.END_ENDERMAN.get(), BaseEndermanEntityRenderer.END_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.FLOWER_FIELDS_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.FLOWER_FIELDS_ENDERMAN.get(), BaseEndermanEntityRenderer.FLOWER_FIELDS_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN, MushroomFieldsEndermanRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.END_ISLANDS_ENDERMAN, EndIslandsEndermanRenderer::new);
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> register) {

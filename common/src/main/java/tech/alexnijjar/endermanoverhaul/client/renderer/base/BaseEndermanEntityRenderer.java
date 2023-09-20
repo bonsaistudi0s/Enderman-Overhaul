@@ -20,6 +20,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     public static final ResourceLocation SOULSAND_VALLEY_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "soulsand_valley_enderman");
     public static final ResourceLocation END_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "end_enderman");
     public static final ResourceLocation FLOWER_FIELDS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields_enderman");
+    public static final ResourceLocation END_ISLANDS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "end_islands_enderman");
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman) {
         this(renderManager, enderman, ANIMATION);
@@ -46,6 +47,11 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
         }
     }
 
+    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, DefaultedEntityGeoModel<T> model) {
+        super(renderManager, model);
+    }
+
+    @Override
     public @NotNull Vec3 getRenderOffset(T entity, float partialTicks) {
         if (entity.isCreepy()) {
             Level level = entity.level();
