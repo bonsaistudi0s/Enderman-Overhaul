@@ -1,6 +1,7 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -20,6 +22,8 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.summons.Spirit;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 public class SoulsandValleyEnderman extends BaseEnderman {
@@ -111,6 +115,21 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     @Override
     public void die(@NotNull DamageSource damageSource) {
         super.die(damageSource);
-        // TODO Summons 3 spirits on death.
+        for (int i = 0; i < 3; i++) {
+            Spirit spirit = ModEntityTypes.SPIRIT.get().create(level());
+            if (spirit == null) return;
+            spirit.setPos(getX(), getY() + 2, getZ());
+            spirit.addDeltaMovement(new Vec3(0, 0.5, 0));
+            level().addFreshEntity(spirit);
+        }
+
+        for (int i = 0; i < 10; ++i) {
+            this.level().addParticle(ParticleTypes.SOUL,
+                this.getRandomX(0.5),
+                this.getRandomY() - 1.25,
+                this.getRandomZ(0.5),
+                (this.random.nextDouble() - 0.5) * 0.5, -this.random.nextDouble(),
+                (this.random.nextDouble() - 0.5) * 0.5);
+        }
     }
 }

@@ -9,6 +9,7 @@ import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRe
 import tech.alexnijjar.endermanoverhaul.client.renderer.ReplacedEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.summons.ScarabRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderer.summons.SpiritRenderer;
 import tech.alexnijjar.endermanoverhaul.client.utils.ClientPlatformUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
@@ -43,6 +44,7 @@ public class EndermanOverhaulClient {
 
         // Summons
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SCARAB, ScarabRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.SPIRIT, SpiritRenderer::new);
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> register) {

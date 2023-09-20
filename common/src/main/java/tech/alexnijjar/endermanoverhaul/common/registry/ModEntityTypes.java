@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.*;
 import tech.alexnijjar.endermanoverhaul.common.entities.summons.Scarab;
+import tech.alexnijjar.endermanoverhaul.common.entities.summons.Spirit;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -124,6 +125,11 @@ public class ModEntityTypes {
             .sized(0.3f, 0.5f)
             .build("scarab"));
 
+    public static final RegistryEntry<EntityType<Spirit>> SPIRIT = ENTITY_TYPES.register("spirit", () ->
+        EntityType.Builder.of(Spirit::new, MobCategory.MONSTER)
+            .sized(0.3f, 0.3f)
+            .build("spirit"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(BADLANDS_ENDERMAN, BadlandsEnderman::createAttributes);
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
@@ -146,6 +152,7 @@ public class ModEntityTypes {
 
         // Summons
         attributes.accept(SCARAB, Scarab::createAttributes);
+        attributes.accept(SPIRIT, Spirit::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
@@ -170,5 +177,6 @@ public class ModEntityTypes {
 
         // Summons
         SpawnPlacements.register(SCARAB.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(SPIRIT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
     }
 }
