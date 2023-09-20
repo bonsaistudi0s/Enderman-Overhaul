@@ -1,0 +1,68 @@
+{
+  "variants": {
+    "rotation=0": {
+      "model": "endermanoverhaul:block/tiny_skull",
+      "y": 0
+    },
+    "rotation=1": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_1",
+      "y": 0
+    },
+    "rotation=2": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_2",
+      "y": 0
+    },
+    "rotation=3": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_3",
+      "y": 0
+    },
+    "rotation=4": {
+      "model": "endermanoverhaul:block/tiny_skull",
+      "y": 90
+    },
+    "rotation=5": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_1",
+      "y": 90
+    },
+    "rotation=6": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_2",
+      "y": 90
+    },
+    "rotation=7": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_3",
+      "y": 90
+    },
+    "rotation=8": {
+      "model": "endermanoverhaul:block/tiny_skull",
+      "y": 180
+    },
+    "rotation=9": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_1",
+      "y": 180
+    },
+    "rotation=10": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_2",
+      "y": 180
+    },
+    "rotation=11": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_3",
+      "y": 180
+    },
+    "rotation=12": {
+      "model": "endermanoverhaul:block/tiny_skull",
+      "y": 270
+    },
+    "rotation=13": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_1",
+      "y": 270
+    },
+    "rotation=14": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_2",
+      "y": 270
+    },
+    "rotation=15": {
+      "model": "endermanoverhaul:block/tiny_skull_angle_3",
+      "y": 270
+    }
+  }
+}

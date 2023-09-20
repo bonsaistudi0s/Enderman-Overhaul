@@ -13,11 +13,13 @@ import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +34,12 @@ public class ModLootTableProvider extends LootTableProvider {
     private static class EntityLootTables implements LootTableSubProvider {
         @Override
         public void generate(@NotNull BiConsumer<ResourceLocation, LootTable.Builder> output) {
-            output.accept(getEntity(ModEntityTypes.BADLANDS_ENDERMAN.get()), getDefaultEndermanLootTable()); // TODO Add Badlands hood, tiny skull
+            output.accept(getEntity(ModEntityTypes.BADLANDS_ENDERMAN.get()), getDefaultEndermanLootTable()
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(ModItems.TINY_SKULL.get()).apply(SetItemCountFunction
+                        .setCount(ConstantValue.exactly(1.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
+                    .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.1f, 0.025f))));// TODO Add Badlands hood
 
             output.accept(getEntity(ModEntityTypes.CAVE_ENDERMAN.get()), getDefaultEndermanLootTable()
                 .withPool(LootPool.lootPool()

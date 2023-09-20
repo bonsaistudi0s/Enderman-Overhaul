@@ -1,0 +1,67 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "cutout",
+	"texture_size": [128, 128],
+	"textures": {
+		"0": "endermanoverhaul:entity/badlands/badlands_enderman",
+		"particle": "endermanoverhaul:entity/badlands/badlands_enderman"
+	},
+	"elements": [
+		{
+			"name": "right_arm",
+			"from": [6, 3, 7],
+			"to": [6, 6, 9],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 2.75, 7.25]},
+			"faces": {
+				"north": {"uv": [7, 6.25, 7, 6.625], "texture": "#0"},
+				"east": {"uv": [7, 6.25, 7.25, 6.625], "texture": "#0"},
+				"south": {"uv": [7.25, 6.25, 7.25, 6.625], "texture": "#0"},
+				"west": {"uv": [6.25, 6.25, 6.5, 6.625], "texture": "#0"},
+				"up": {"uv": [7, 6.25, 7, 6], "texture": "#0"},
+				"down": {"uv": [7, 6, 7, 6.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "right_arm",
+			"from": [10, 3, 7],
+			"to": [10, 6, 9],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 2.75, 7.25]},
+			"faces": {
+				"north": {"uv": [7, 6.25, 7, 6.625], "texture": "#0"},
+				"east": {"uv": [7, 6.25, 7.25, 6.625], "texture": "#0"},
+				"south": {"uv": [7.25, 6.25, 7.25, 6.625], "texture": "#0"},
+				"west": {"uv": [6.25, 6.25, 6.5, 6.625], "texture": "#0"},
+				"up": {"uv": [7, 6.25, 7, 6], "texture": "#0"},
+				"down": {"uv": [7, 6, 7, 6.25], "texture": "#0"}
+			}
+		},
+		{
+			"name": "right_arm",
+			"from": [7, 0, 5],
+			"to": [9, 2, 7],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 2.75, 7.25]},
+			"faces": {
+				"north": {"uv": [0, 0.25, 0.25, 0.5], "texture": "#0"},
+				"east": {"uv": [0.75, 0.25, 1, 0.5], "texture": "#0"},
+				"south": {"uv": [0.75, 0.25, 1, 0.5], "texture": "#0"},
+				"west": {"uv": [0.25, 0.25, 0.5, 0.5], "texture": "#0"},
+				"up": {"uv": [0.5, 0.25, 0.25, 0], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [4.5, 6.375, 4.375, 6.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "right_arm",
+			"from": [6, 0, 7],
+			"to": [10, 3, 10],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 2.75, 7.25]},
+			"faces": {
+				"north": {"uv": [4, 6.25, 4.5, 6.625], "texture": "#0"},
+				"east": {"uv": [5.375, 6.25, 5.75, 6.625], "texture": "#0"},
+				"south": {"uv": [4.875, 6.25, 5.375, 6.625], "texture": "#0"},
+				"west": {"uv": [4.5, 6.25, 4.875, 6.625], "texture": "#0"},
+				"up": {"uv": [4.875, 6.25, 4.5, 5.75], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [4.625, 6.5, 4.5, 6.375], "texture": "#0"}
+			}
+		}
+	]
+}

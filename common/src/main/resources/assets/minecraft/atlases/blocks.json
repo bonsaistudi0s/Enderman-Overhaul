@@ -1,0 +1,8 @@
+{
+    "sources": [
+        {
+            "type": "single",
+            "resource": "endermanoverhaul:entity/badlands/badlands_enderman"
+        }
+    ]
+}
