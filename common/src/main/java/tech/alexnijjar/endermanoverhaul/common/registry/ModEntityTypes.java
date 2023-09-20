@@ -73,6 +73,12 @@ public class ModEntityTypes {
             .sized(0.6f, 3.1f)
             .build("desert_enderman"));
 
+    public static final RegistryEntry<EntityType<SoulsandValleyEnderman>> SOULSAND_VALLEY_ENDERMAN = ENTITY_TYPES.register("soulsand_valley_enderman", () ->
+        EntityType.Builder.of(SoulsandValleyEnderman::new, MobCategory.MONSTER)
+            .sized(0.6f, 2.5f)
+            .fireImmune()
+            .build("soulsand_valley_enderman"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
         attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
@@ -85,6 +91,7 @@ public class ModEntityTypes {
         attributes.accept(BADLANDS_ENDERMAN, BadlandsEnderman::createAttributes);
         attributes.accept(SNOWY_ENDERMAN, SnowyEnderman::createAttributes);
         attributes.accept(DESERT_ENDERMAN, DesertEnderman::createAttributes);
+        attributes.accept(SOULSAND_VALLEY_ENDERMAN, SoulsandValleyEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {

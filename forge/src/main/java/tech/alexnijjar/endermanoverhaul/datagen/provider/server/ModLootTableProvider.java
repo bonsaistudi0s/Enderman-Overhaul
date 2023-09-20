@@ -84,6 +84,11 @@ public class ModLootTableProvider extends LootTableProvider {
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.05f, 0.025f))));
 
+            output.accept(getEntity(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN.get()), getDefaultEndermanLootTable()
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.BONE).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 
             output.accept(getEntity(ModEntityTypes.SWAMP_ENDERMAN.get()), getDefaultEndermanLootTable());
             output.accept(getEntity(ModEntityTypes.DARK_OAK_ENDERMAN.get()), getDefaultEndermanLootTable());

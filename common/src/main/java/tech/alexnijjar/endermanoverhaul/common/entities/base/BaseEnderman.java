@@ -106,6 +106,7 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
         return false;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean canTeleport() {
         return true;
     }

@@ -1,10 +1,7 @@
 package tech.alexnijjar.endermanoverhaul;
 
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
-import tech.alexnijjar.endermanoverhaul.common.registry.ModBlocks;
-import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
-import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
-import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
+import tech.alexnijjar.endermanoverhaul.common.registry.*;
 import tech.alexnijjar.endermanoverhaul.config.EndermanOverhaulConfig;
 
 public class EndermanOverhaul {
@@ -18,6 +15,7 @@ public class EndermanOverhaul {
         ModItems.ITEMS.init();
         ModEntityTypes.ENTITY_TYPES.init();
         ModParticleTypes.PARTICLE_TYPES.init();
+        ModSoundEvents.SOUND_EVENTS.init();
     }
 
     public static void postInit() {
