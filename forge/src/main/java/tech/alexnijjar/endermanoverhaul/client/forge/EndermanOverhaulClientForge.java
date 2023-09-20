@@ -16,7 +16,7 @@ public class EndermanOverhaulClientForge {
     }
 
     @SubscribeEvent
-    private static void onRegisterParticles(RegisterParticleProvidersEvent event) {
+    public static void onRegisterParticles(RegisterParticleProvidersEvent event) {
         EndermanOverhaulClient.onRegisterParticles((type, provider) -> event.registerSpriteSet(type, provider::create));
     }
 }

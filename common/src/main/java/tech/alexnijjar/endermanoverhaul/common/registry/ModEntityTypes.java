@@ -48,6 +48,11 @@ public class ModEntityTypes {
             .sized(0.6f, 3.9f)
             .build("ice_spikes_enderman"));
 
+    public static final RegistryEntry<EntityType<DarkOakEnderman>> DARK_OAK_ENDERMAN = ENTITY_TYPES.register("dark_oak_enderman", () ->
+        EntityType.Builder.of(DarkOakEnderman::new, MobCategory.MONSTER)
+            .sized(0.7f, 3.5f)
+            .build("dark_oak_enderman"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
         attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
@@ -55,6 +60,7 @@ public class ModEntityTypes {
         attributes.accept(CRIMSON_FOREST_ENDERMAN, CrimsonForestEnderman::createAttributes);
         attributes.accept(SWAMP_ENDERMAN, SwampEnderman::createAttributes);
         attributes.accept(ICE_SPIKES_ENDERMAN, IceSpikesEnderman::createAttributes);
+        attributes.accept(DARK_OAK_ENDERMAN, DarkOakEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {

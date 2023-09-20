@@ -123,6 +123,33 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
         return BlockTags.ENDERMAN_HOLDABLE;
     }
 
+    @Nullable
+    public MobEffectInstance getAreaEffect() {
+        return null;
+    }
+
+    public int getAreaEffectRange() {
+        return 0;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        tickAreaEffect();
+    }
+
+    protected void tickAreaEffect() {
+        if (level().isClientSide()) return;
+        if (level().getGameTime() % 20 != 0) return;
+        var areaEffect = getAreaEffect();
+        if (areaEffect == null || getAreaEffectRange() == 0) return;
+        LivingEntity target = getTarget();
+        if (target == null) return;
+        if (this.distanceToSqr(target) <= getAreaEffectRange() * getAreaEffectRange()) {
+            target.addEffect(areaEffect);
+        }
+    }
+
     @Override
     public void aiStep() {
         ParticleOptions customParticleType = getCustomParticles();
