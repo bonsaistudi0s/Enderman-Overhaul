@@ -74,6 +74,7 @@ public class ModLootTableProvider extends LootTableProvider {
 
             output.accept(getEntity(ModEntityTypes.SWAMP_ENDERMAN.get()), getDefaultEndermanLootTable());
             output.accept(getEntity(ModEntityTypes.DARK_OAK_ENDERMAN.get()), getDefaultEndermanLootTable());
+            output.accept(getEntity(ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN.get()), getDefaultEndermanLootTable());
         }
     }
 

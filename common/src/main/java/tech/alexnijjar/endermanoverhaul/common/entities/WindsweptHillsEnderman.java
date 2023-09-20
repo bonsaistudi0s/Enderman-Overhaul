@@ -12,18 +12,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
-public class DarkOakEnderman extends BaseEnderman {
+public class WindsweptHillsEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 50.0)
             .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 8.0)
-            .add(Attributes.FOLLOW_RANGE, 64.0)
+            .add(Attributes.FOLLOW_RANGE, 128.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
     }
 
-    public DarkOakEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+    public WindsweptHillsEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
+        this.xpReward = 16;
     }
 
     @Override
@@ -37,8 +38,18 @@ public class DarkOakEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean hasParticles() {
+        return false;
+    }
+
+    @Override
+    public boolean canPickupBlocks() {
+        return false;
+    }
+
+    @Override
     public @Nullable MobEffectInstance getAreaEffect() {
-        return new MobEffectInstance(MobEffects.BLINDNESS, 40, 1);
+        return new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2);
     }
 
     @Override
