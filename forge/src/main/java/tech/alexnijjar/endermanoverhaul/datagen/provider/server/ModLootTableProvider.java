@@ -90,6 +90,12 @@ public class ModLootTableProvider extends LootTableProvider {
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 
+            output.accept(getEntity(ModEntityTypes.END_ENDERMAN.get()), getDefaultEndermanLootTable() // TODO add corrupted pearl
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.CHORUS_FRUIT).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 2.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+
             output.accept(getEntity(ModEntityTypes.SWAMP_ENDERMAN.get()), getDefaultEndermanLootTable());
             output.accept(getEntity(ModEntityTypes.DARK_OAK_ENDERMAN.get()), getDefaultEndermanLootTable());
             output.accept(getEntity(ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN.get()), getDefaultEndermanLootTable());
