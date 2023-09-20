@@ -38,6 +38,7 @@ public class EndermanOverhaulClient {
         ClientPlatformUtils.registerRenderer(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN, MushroomFieldsEndermanRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.END_ISLANDS_ENDERMAN, EndIslandsEndermanRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.WARPED_FOREST_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.WARPED_FOREST_ENDERMAN.get(), BaseEndermanEntityRenderer.WARPED_FOREST_ANIMATION));
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.OCEAN_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.OCEAN_ENDERMAN.get(), BaseEndermanEntityRenderer.OCEAN_ANIMATION));
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> register) {
@@ -45,5 +46,6 @@ public class EndermanOverhaulClient {
         register.accept(ModParticleTypes.SNOW.get(), EndermanParticle.Provider::new);
         register.accept(ModParticleTypes.SAND.get(), spriteSet -> new EndermanParticle.Provider(spriteSet, 0.8588235294117647f, 0.8274509803921568f, 0.6274509803921569f));
         register.accept(ModParticleTypes.SOUL_FIRE_FLAME.get(), EndermanParticle.Provider::new);
+        register.accept(ModParticleTypes.BUBBLE.get(), EndermanParticle.Provider::new);
     }
 }

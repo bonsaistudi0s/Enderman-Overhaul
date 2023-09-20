@@ -9,4 +9,5 @@ public class ConstantAnimations {
     public static final RawAnimation ANGRY = RawAnimation.begin().thenLoop("animation.enderman.angry");
     public static final RawAnimation BITE = RawAnimation.begin().thenLoop("animation.enderman.bite");
     public static final RawAnimation POSSESS = RawAnimation.begin().thenLoop("animation.enderman.possess");
+    public static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.enderman.swim");
 }

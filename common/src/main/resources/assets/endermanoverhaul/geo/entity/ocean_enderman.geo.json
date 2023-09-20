@@ -1,0 +1,74 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.ocean_enderman",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "main",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "main",
+					"pivot": [0, 19, 0],
+					"cubes": [
+						{"origin": [-3.5, 19, -2], "size": [7, 6, 4], "uv": [0, 23]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 25, 0],
+					"cubes": [
+						{"origin": [-4.5, 25, -3], "size": [9, 6, 6], "uv": [0, 0]},
+						{"origin": [-6.5, 27, -3], "size": [7, 9, 0], "uv": [16, 41]},
+						{"origin": [-6.5, 28, -1], "size": [7, 7, 0], "uv": [16, 50]},
+						{"origin": [1.5, 28, 0], "size": [7, 8, 0], "uv": [0, 12]}
+					]
+				},
+				{
+					"name": "left_arm",
+					"parent": "body",
+					"pivot": [4.5, 23, 0],
+					"cubes": [
+						{"origin": [3.5, 7, -1], "size": [2, 18, 2], "uv": [8, 33]},
+						{"origin": [3.5, 10, 0], "size": [6, 18, 0], "uv": [22, 23]}
+					]
+				},
+				{
+					"name": "right_arm",
+					"parent": "body",
+					"pivot": [-4.5, 23, 0],
+					"cubes": [
+						{"origin": [-5.5, 7, -1], "size": [2, 18, 2], "uv": [34, 21]},
+						{"origin": [-10.5, 12, 0], "size": [6, 18, 0], "uv": [38, 0]}
+					]
+				},
+				{
+					"name": "left_leg",
+					"parent": "main",
+					"pivot": [1.5, 18, 0],
+					"cubes": [
+						{"origin": [0.5, 0, -1], "size": [2, 19, 2], "uv": [30, 0]}
+					]
+				},
+				{
+					"name": "right_leg",
+					"parent": "main",
+					"pivot": [-1.5, 18, 0],
+					"cubes": [
+						{"origin": [-2.5, 0, -1], "size": [2, 19, 2], "uv": [0, 33]}
+					]
+				}
+			]
+		}
+	]
+}

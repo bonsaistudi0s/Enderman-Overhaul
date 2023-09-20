@@ -114,6 +114,7 @@ public class ModLootTableProvider extends LootTableProvider {
             output.accept(getEntity(ModEntityTypes.BADLANDS_ENDERMAN.get()), getDefaultEndermanLootTable()); // TODO Add Badlands hood, tiny skull
             output.accept(getEntity(ModEntityTypes.FLOWER_FIELDS_ENDERMAN.get()), getDefaultEndermanLootTable());
             output.accept(getEntity(ModEntityTypes.END_ISLANDS_ENDERMAN.get()), getDefaultEndermanLootTable()); // TODO drop Ancient pearl 1-3
+            output.accept(getEntity(ModEntityTypes.OCEAN_ENDERMAN.get()), getDefaultEndermanLootTable()); // TODO drop Ancient pearl 1-3
         }
     }
 
