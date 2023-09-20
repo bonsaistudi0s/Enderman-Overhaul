@@ -1,4 +1,5 @@
-// 1.20.1	2023-09-20T00:23:30.972056	Loot Tables
+// 1.20.1	2023-09-20T00:40:10.611201	Loot Tables
+739cf7b264fcee5aa229458a6af3b51dd814563a data/endermanoverhaul/loot_tables/entities/badlands_enderman.json
 9e26da23691fe739810f7a6c995c00c0b09839c4 data/endermanoverhaul/loot_tables/entities/cave_enderman.json
 9ea5c5cffa52dd6f34211dead31fec7823b06b5b data/endermanoverhaul/loot_tables/entities/crimson_forest_enderman.json
 d79e93a62113505d178b5deb01c8305818176cc1 data/endermanoverhaul/loot_tables/entities/dark_oak_enderman.json

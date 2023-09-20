@@ -13,4 +13,5 @@ public class ModParticleTypes {
 
     public static final RegistryEntry<SimpleParticleType> DUST = PARTICLE_TYPES.register("dust", () -> new SimpleParticleType(false) {});
     public static final RegistryEntry<SimpleParticleType> SNOW = PARTICLE_TYPES.register("snow", () -> new SimpleParticleType(false) {});
+    public static final RegistryEntry<SimpleParticleType> SAND = PARTICLE_TYPES.register("sand", () -> new SimpleParticleType(false) {});
 }
