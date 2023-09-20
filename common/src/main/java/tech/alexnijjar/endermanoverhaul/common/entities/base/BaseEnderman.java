@@ -9,9 +9,10 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -31,6 +32,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -114,6 +116,11 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
         return 256.0;
     }
 
+    @Nullable
+    public MobEffectInstance getHitEffect() {
+        return null;
+    }
+
     public TagKey<Block> getCarriableBlockTag() {
         return BlockTags.ENDERMAN_HOLDABLE;
     }
@@ -133,6 +140,20 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
         }
         super.aiStep();
     }
+
+    @Override
+    public boolean doHurtTarget(@NotNull Entity target) {
+		if (super.doHurtTarget(target)) {
+            var effect = getHitEffect();
+			if (effect != null && target instanceof LivingEntity entity) {
+					entity.addEffect(effect);
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
 
     @Override
     protected void registerGoals() {
@@ -165,6 +186,11 @@ public class BaseEnderman extends EnderMan implements GeoEntity {
         double e = vec3.dot(vec32);
         return e > 1.0 - 0.025 / d && player.hasLineOfSight(this);
     }
+
+    @Override
+    protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions dimensions) {
+		return 2.55f + (this.getType().getDimensions().height - 2.9f);
+	}
 
     public boolean teleportTowards(Entity target) {
         if (!this.canTeleport()) return false;

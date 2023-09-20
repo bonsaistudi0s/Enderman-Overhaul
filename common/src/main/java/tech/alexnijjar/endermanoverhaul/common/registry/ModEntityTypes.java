@@ -8,10 +8,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.levelgen.Heightmap;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
-import tech.alexnijjar.endermanoverhaul.common.entities.CaveEnderman;
-import tech.alexnijjar.endermanoverhaul.common.entities.CrimsonForestEnderman;
-import tech.alexnijjar.endermanoverhaul.common.entities.NetherWastesEnderman;
-import tech.alexnijjar.endermanoverhaul.common.entities.SavannaEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.*;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -41,11 +38,17 @@ public class ModEntityTypes {
             .fireImmune()
             .build("crimson_forest_enderman"));
 
+     public static final RegistryEntry<EntityType<SwampEnderman>> SWAMP_ENDERMAN = ENTITY_TYPES.register("swamp_enderman", () ->
+        EntityType.Builder.of(SwampEnderman::new, MobCategory.MONSTER)
+            .sized(0.6f, 3.8f)
+            .build("swamp_enderman"));
+
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(CAVE_ENDERMAN, CaveEnderman::createAttributes);
         attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
         attributes.accept(NETHER_WASTES_ENDERMAN, NetherWastesEnderman::createAttributes);
         attributes.accept(CRIMSON_FOREST_ENDERMAN, CrimsonForestEnderman::createAttributes);
+        attributes.accept(SWAMP_ENDERMAN, SwampEnderman::createAttributes);
     }
 
     public static void registerSpawnPlacements() {
