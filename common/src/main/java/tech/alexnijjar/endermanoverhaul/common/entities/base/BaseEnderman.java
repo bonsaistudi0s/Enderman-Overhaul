@@ -233,6 +233,12 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         refreshDimensions();
     }
 
+    @Override
+    protected boolean teleport() {
+        if (!canTeleport()) return false;
+        return super.teleport();
+    }
+
     public boolean teleportTowards(Entity target) {
         if (!this.canTeleport()) return false;
         Vec3 vec3 = new Vec3(this.getX() - target.getX(), this.getY(0.5) - target.getEyeY(), this.getZ() - target.getZ());

@@ -3,6 +3,9 @@ package tech.alexnijjar.endermanoverhaul.client;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import tech.alexnijjar.endermanoverhaul.client.particles.EndermanParticle;
 import tech.alexnijjar.endermanoverhaul.client.renderer.EndIslandsEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRenderer;
@@ -14,11 +17,17 @@ import tech.alexnijjar.endermanoverhaul.client.utils.ClientPlatformUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class EndermanOverhaulClient {
+    private static final Map<Item, Supplier<GeoArmorRenderer<?>>> ARMOR_RENDERERS = new HashMap<>();
+
     public static void init() {
         registerEntityRenderers();
+        registerArmorRenderers();
     }
 
     private static void registerEntityRenderers() {
@@ -53,5 +62,15 @@ public class EndermanOverhaulClient {
         register.accept(ModParticleTypes.SAND.get(), spriteSet -> new EndermanParticle.Provider(spriteSet, 0.8588235294117647f, 0.8274509803921568f, 0.6274509803921569f));
         register.accept(ModParticleTypes.SOUL_FIRE_FLAME.get(), EndermanParticle.Provider::new);
         register.accept(ModParticleTypes.BUBBLE.get(), EndermanParticle.Provider::new);
+    }
+
+    public static void registerArmorRenderers() {
+//        ARMOR_RENDERERS.put(ModItems.BADLANDS_HOOD.get(), () -> new HoodRenderer(ModItems.BADLANDS_HOOD.get()));
+//        ARMOR_RENDERERS.put(ModItems.SAVANNAS_HOOD.get(), () -> new HoodRenderer(ModItems.SAVANNAS_HOOD.get()));
+//        ARMOR_RENDERERS.put(ModItems.SNOWY_HOOD.get(), () -> new HoodRenderer(ModItems.SNOWY_HOOD.get()));
+    }
+
+    public static GeoArmorRenderer<?> getArmorRenderer(ItemLike item) {
+        return ARMOR_RENDERERS.get(item.asItem()).get();
     }
 }
