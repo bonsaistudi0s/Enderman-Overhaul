@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:has_structure/mineshaft_mesa",
+    {
+      "id": "#c:is_badlands",
+      "required": false
+    }
+  ]
+}

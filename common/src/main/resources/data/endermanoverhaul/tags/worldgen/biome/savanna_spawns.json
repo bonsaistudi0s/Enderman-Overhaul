@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:is_savanna",
+    {
+      "id": "#c:savanna",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#endermanoverhaul:flower_fields_spawns",
+  "spawners":
+  {
+    "type": "endermanoverhaul:flower_fields_enderman",
+    "weight": 10,
+    "minCount": 1,
+    "maxCount": 4
+  }
+}

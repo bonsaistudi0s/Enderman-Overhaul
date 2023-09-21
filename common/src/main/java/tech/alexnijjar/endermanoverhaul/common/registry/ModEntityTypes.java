@@ -4,10 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -61,7 +58,7 @@ public class ModEntityTypes {
             .build("end_islands_enderman"));
 
     public static final RegistryEntry<EntityType<FlowerFieldsEnderman>> FLOWER_FIELDS_ENDERMAN = ENTITY_TYPES.register("flower_fields_enderman", () ->
-        EntityType.Builder.of(FlowerFieldsEnderman::new, MobCategory.CREATURE)
+        EntityType.Builder.of(FlowerFieldsEnderman::new, MobCategory.MONSTER)
             .sized(0.5f, 1.5f)
             .build("flower_fields_enderman"));
 
@@ -71,7 +68,7 @@ public class ModEntityTypes {
             .build("ice_spikes_enderman"));
 
     public static final RegistryEntry<EntityType<MushroomFieldsEnderman>> MUSHROOM_FIELDS_ENDERMAN = ENTITY_TYPES.register("mushroom_fields_enderman", () ->
-        EntityType.Builder.of(MushroomFieldsEnderman::new, MobCategory.CREATURE)
+        EntityType.Builder.of(MushroomFieldsEnderman::new, MobCategory.AMBIENT)
             .sized(0.6f, 2.6f)
             .build("mushroom_fields_enderman"));
 
@@ -128,6 +125,7 @@ public class ModEntityTypes {
     public static final RegistryEntry<EntityType<Spirit>> SPIRIT = ENTITY_TYPES.register("spirit", () ->
         EntityType.Builder.of(Spirit::new, MobCategory.MONSTER)
             .sized(0.3f, 0.3f)
+            .fireImmune()
             .build("spirit"));
 
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
@@ -157,15 +155,15 @@ public class ModEntityTypes {
 
     public static void registerSpawnPlacements() {
         SpawnPlacements.register(BADLANDS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
-        SpawnPlacements.register(CAVE_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(CAVE_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CaveEnderman::checkSpawnRules);
         SpawnPlacements.register(CRIMSON_FOREST_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(DARK_OAK_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(DESERT_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(END_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(END_ISLANDS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
-        SpawnPlacements.register(FLOWER_FIELDS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(FLOWER_FIELDS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
         SpawnPlacements.register(ICE_SPIKES_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
-        SpawnPlacements.register(MUSHROOM_FIELDS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
+        SpawnPlacements.register(MUSHROOM_FIELDS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
         SpawnPlacements.register(NETHER_WASTES_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(OCEAN_ENDERMAN.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, OceanEnderman::checkSpawnRules);
         SpawnPlacements.register(SAVANNA_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);

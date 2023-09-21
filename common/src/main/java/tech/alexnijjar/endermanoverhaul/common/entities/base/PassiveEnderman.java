@@ -42,4 +42,9 @@ public abstract class PassiveEnderman extends BaseEnderman {
     public boolean isCreepy() {
         return false;
     }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return false;
+    }
 }

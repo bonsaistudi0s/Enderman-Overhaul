@@ -56,6 +56,13 @@ public class OceanEnderman extends BaseEnderman {
             .add(Attributes.FOLLOW_RANGE, 64.0);
     }
 
+    @SuppressWarnings({"deprecation", "unused"})
+    public static boolean checkSpawnRules(EntityType<OceanEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
+        if (!serverLevel.getFluidState(pos.below()).is(FluidTags.WATER)) return false;
+        boolean bl = serverLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(serverLevel, pos, random) && (mobSpawnType == MobSpawnType.SPAWNER || serverLevel.getFluidState(pos).is(FluidTags.WATER));
+        return random.nextInt(40) == 0 && pos.getY() < serverLevel.getSeaLevel() - 5 && bl;
+    }
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, state -> {
@@ -94,6 +101,11 @@ public class OceanEnderman extends BaseEnderman {
 
     @Override
     public boolean canPickupBlocks() {
+        return false;
+    }
+
+    @Override
+    public boolean canTeleport() {
         return false;
     }
 
@@ -151,13 +163,6 @@ public class OceanEnderman extends BaseEnderman {
         super.aiStep();
     }
 
-    @SuppressWarnings({"deprecation", "unused"})
-    public static boolean checkSpawnRules(EntityType<OceanEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
-        if (!serverLevel.getFluidState(pos.below()).is(FluidTags.WATER)) return false;
-        boolean bl = serverLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(serverLevel, pos, random) && (mobSpawnType == MobSpawnType.SPAWNER || serverLevel.getFluidState(pos).is(FluidTags.WATER));
-        return random.nextInt(40) == 0 && pos.getY() < serverLevel.getSeaLevel() - 5 && bl;
-    }
-
     protected void handleAirSupply(int airSupply) {
         if (this.isAlive() && !this.isInWaterOrBubble()) {
             this.setAirSupply(airSupply - 1);
@@ -183,7 +188,7 @@ public class OceanEnderman extends BaseEnderman {
 
             if (this.operation == MoveControl.Operation.MOVE_TO && !OceanEnderman.this.getNavigation().isDone()) {
                 float f = (float) (this.speedModifier * OceanEnderman.this.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                if (OceanEnderman.this.isCreepy()) f *= 2;
+                if (OceanEnderman.this.isCreepy()) f *= 3;
                 OceanEnderman.this.setSpeed(Mth.lerp(0.125f, OceanEnderman.this.getSpeed(), f));
                 double d = this.wantedX - OceanEnderman.this.getX();
                 double e = this.wantedY - OceanEnderman.this.getY();
@@ -212,7 +217,7 @@ public class OceanEnderman extends BaseEnderman {
         }
 
         public boolean canUse() {
-            return super.canUse();
+            return super.canUse() && !OceanEnderman.this.isCreepy();
         }
     }
 }

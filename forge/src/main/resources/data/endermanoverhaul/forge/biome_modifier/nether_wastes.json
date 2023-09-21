@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#endermanoverhaul:nether_wastes_spawns",
+  "spawners":
+  {
+    "type": "endermanoverhaul:nether_wastes_enderman",
+    "weight": 1,
+    "minCount": 4,
+    "maxCount": 4
+  }
+}

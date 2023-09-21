@@ -1,14 +1,19 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
@@ -26,6 +31,13 @@ public class CaveEnderman extends BaseEnderman {
             .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 32.0);
+    }
+
+    @SuppressWarnings({"deprecation", "unused"})
+    public static boolean checkSpawnRules(EntityType<CaveEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
+        return pos.getY() < serverLevel.getSeaLevel() &&
+            !serverLevel.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) &&
+            Monster.checkMonsterSpawnRules(enderman, serverLevel, mobSpawnType, pos, random);
     }
 
     @Override
@@ -68,6 +80,4 @@ public class CaveEnderman extends BaseEnderman {
             }
         }
     }
-
-    // TODO Fix speed issue
 }

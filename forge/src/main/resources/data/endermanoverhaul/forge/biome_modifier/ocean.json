@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#endermanoverhaul:ocean_spawns",
+  "spawners":
+  {
+    "type": "endermanoverhaul:ocean_enderman",
+    "weight": 10,
+    "minCount": 1,
+    "maxCount": 4
+  }
+}

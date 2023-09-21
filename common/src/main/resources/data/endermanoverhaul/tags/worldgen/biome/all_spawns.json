@@ -1,0 +1,22 @@
+{
+  "values": [
+    "#endermanoverhaul:badlands_spawns",
+    "#endermanoverhaul:cave_spawns",
+    "#endermanoverhaul:crimson_forest_spawns",
+    "#endermanoverhaul:dark_oak_spawns",
+    "#endermanoverhaul:desert_spawns",
+    "#endermanoverhaul:end_islands_spawns",
+    "#endermanoverhaul:end_spawns",
+    "#endermanoverhaul:flower_fields_spawns",
+    "#endermanoverhaul:ice_spikes_spawns",
+    "#endermanoverhaul:mushroom_fields_spawns",
+    "#endermanoverhaul:nether_wastes_spawns",
+    "#endermanoverhaul:ocean_spawns",
+    "#endermanoverhaul:savanna_spawns",
+    "#endermanoverhaul:snowy_spawns",
+    "#endermanoverhaul:soulsand_valley_spawns",
+    "#endermanoverhaul:swamp_spawns",
+    "#endermanoverhaul:warped_forest_spawns",
+    "#endermanoverhaul:windswept_hills_spawns"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#endermanoverhaul:warped_forest_spawns",
+  "spawners":
+  {
+    "type": "endermanoverhaul:warped_forest_enderman",
+    "weight": 1,
+    "minCount": 4,
+    "maxCount": 4
+  },
+  "spawn_costs": {
+    "endermanoverhaul:warped_forest_enderman": {
+      "charge": 1.0,
+      "energy_budget": 0.12
+    }
+  }
+}

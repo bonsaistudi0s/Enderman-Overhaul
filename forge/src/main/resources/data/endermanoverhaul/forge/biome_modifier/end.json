@@ -1,0 +1,17 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#endermanoverhaul:end_spawns",
+  "spawners":
+  {
+    "type": "endermanoverhaul:end_enderman",
+    "weight": 2,
+    "minCount": 1,
+    "maxCount": 4
+  },
+  "spawn_costs": {
+    "endermanoverhaul:end_enderman": {
+      "charge": 0.7,
+      "energy_budget": 0.15
+    }
+  }
+}
