@@ -4,7 +4,8 @@
     "package": "tech.alexnijjar.endermanoverhaul.mixins",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-        "common.EnderManMixin"
+        "common.EnderManMixin",
+        "common.IronGolemMixin"
     ],
     "client": [
     ],

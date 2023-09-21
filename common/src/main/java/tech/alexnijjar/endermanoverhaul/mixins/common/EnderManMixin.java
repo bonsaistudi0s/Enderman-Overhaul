@@ -22,7 +22,11 @@ public abstract class EnderManMixin extends Monster implements NeutralMob {
     }
 
     @SuppressWarnings("ConstantValue")
-    @Inject(method = "aiStep", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method = "aiStep",
+        at = @At("HEAD"),
+        cancellable = true
+    )
     private void endermanoverhaul$aiStep(CallbackInfo ci) {
         if ((Object) this instanceof BaseEnderman enderman && (!enderman.hasParticles() || enderman.getCustomParticles() != null)) {
             this.jumping = false;

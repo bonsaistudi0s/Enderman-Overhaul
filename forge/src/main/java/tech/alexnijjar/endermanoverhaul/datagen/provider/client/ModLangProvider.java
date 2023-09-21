@@ -39,5 +39,26 @@ public class ModLangProvider extends LanguageProvider {
                     .replace("_", " "))));
 
         add("itemGroup.endermanoverhaul.main", "Enderman Overhaul");
+
+        add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
+        add("config.endermanoverhaul.allowSpawning", "Allow Spawning");
+        add("config.endermanoverhaul.spawnBadlandsEnderman", "Spawn Badlands Enderman");
+        add("config.endermanoverhaul.spawnCaveEnderman", "Spawn Cave Enderman");
+        add("config.endermanoverhaul.spawnCrimsonForestEnderman", "Spawn Crimson Forest Enderman");
+        add("config.endermanoverhaul.spawnDarkOakEnderman", "Spawn Dark Oak Enderman");
+        add("config.endermanoverhaul.spawnDesertEnderman", "Spawn Desert Enderman");
+        add("config.endermanoverhaul.spawnEndEnderman", "Spawn End Enderman");
+        add("config.endermanoverhaul.spawnEndIslandsEnderman", "Spawn End Islands Enderman");
+        add("config.endermanoverhaul.spawnFlowerFieldsEnderman", "Spawn Flower Fields Enderman");
+        add("config.endermanoverhaul.spawnIceSpikesEnderman", "Spawn Ice Spikes Enderman");
+        add("config.endermanoverhaul.spawnMushroomFieldsEnderman", "Spawn Mushroom Fields Enderman");
+        add("config.endermanoverhaul.spawnNetherWastesEnderman", "Spawn Nether Wastes Enderman");
+        add("config.endermanoverhaul.spawnOceanEnderman", "Spawn Ocean Enderman");
+        add("config.endermanoverhaul.spawnSavannaEnderman", "Spawn Savanna Enderman");
+        add("config.endermanoverhaul.spawnSnowyEnderman", "Spawn Snowy Enderman");
+        add("config.endermanoverhaul.spawnSoulsandValleyEnderman", "Spawn Soulsand Valley Enderman");
+        add("config.endermanoverhaul.spawnSwampEnderman", "Spawn Swamp Enderman");
+        add("config.endermanoverhaul.spawnWarpedForestEnderman", "Spawn Warped Forest Enderman");
+        add("config.endermanoverhaul.spawnWindsweptHillsEnderman", "Spawn Windswept Hills Enderman");
     }
 }

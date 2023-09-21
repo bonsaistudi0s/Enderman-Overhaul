@@ -6,6 +6,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
+import tech.alexnijjar.endermanoverhaul.client.config.EndermanOverhaulClientConfig;
 import tech.alexnijjar.endermanoverhaul.client.particles.EndermanParticle;
 import tech.alexnijjar.endermanoverhaul.client.renderer.EndIslandsEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRenderer;
@@ -26,6 +28,7 @@ public class EndermanOverhaulClient {
     private static final Map<Item, Supplier<GeoArmorRenderer<?>>> ARMOR_RENDERERS = new HashMap<>();
 
     public static void init() {
+        EndermanOverhaul.CONFIGURATOR.registerConfig(EndermanOverhaulClientConfig.class);
         registerEntityRenderers();
         registerArmorRenderers();
     }

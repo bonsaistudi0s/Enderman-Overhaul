@@ -18,10 +18,12 @@
         "main": [
             "tech.alexnijjar.endermanoverhaul.fabric.EndermanOverhaulFabric::init",
             "tech.alexnijjar.endermanoverhaul.EndermanOverhaul::postInit"
-        ]
-        ,
+        ],
         "client": [
             "tech.alexnijjar.endermanoverhaul.client.fabric.EndermanOverhaulClientFabric::init"
+        ],
+        "modmenu": [
+            "tech.alexnijjar.endermanoverhaul.common.config.fabric.ModMenuConfig"
         ]
     },
     "mixins": [

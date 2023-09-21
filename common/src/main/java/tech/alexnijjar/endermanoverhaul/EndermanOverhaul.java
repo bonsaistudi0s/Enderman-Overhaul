@@ -1,8 +1,8 @@
 package tech.alexnijjar.endermanoverhaul;
 
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
+import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.registry.*;
-import tech.alexnijjar.endermanoverhaul.config.EndermanOverhaulConfig;
 
 public class EndermanOverhaul {
 
