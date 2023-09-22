@@ -35,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
+import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
@@ -56,8 +57,14 @@ public class OceanEnderman extends BaseEnderman {
             .add(Attributes.FOLLOW_RANGE, 64.0);
     }
 
+    public static boolean checkMonsterSpawnRules(@NotNull EntityType<? extends Monster> type, ServerLevelAccessor level, @NotNull MobSpawnType spawnType, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        if (!EndermanOverhaulConfig.spawnOceanEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
+        return BaseEnderman.checkMonsterSpawnRules(type, level, spawnType, pos, random);
+    }
+
     @SuppressWarnings({"deprecation", "unused"})
     public static boolean checkSpawnRules(EntityType<OceanEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
+        if (!EndermanOverhaulConfig.spawnOceanEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
         if (!serverLevel.getFluidState(pos.below()).is(FluidTags.WATER)) return false;
         boolean bl = serverLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(serverLevel, pos, random) && (mobSpawnType == MobSpawnType.SPAWNER || serverLevel.getFluidState(pos).is(FluidTags.WATER));
         return random.nextInt(40) == 0 && pos.getY() < serverLevel.getSeaLevel() - 5 && bl;

@@ -15,6 +15,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
+import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 import tech.alexnijjar.endermanoverhaul.common.tags.ModBlockTags;
@@ -30,11 +31,12 @@ public class CaveEnderman extends BaseEnderman {
             .add(Attributes.MAX_HEALTH, 40.0)
             .add(Attributes.MOVEMENT_SPEED, 0.3)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
-            .add(Attributes.FOLLOW_RANGE, 32.0);
+            .add(Attributes.FOLLOW_RANGE, 24.0);
     }
 
-    @SuppressWarnings({"deprecation", "unused"})
+    @SuppressWarnings("deprecation")
     public static boolean checkSpawnRules(EntityType<CaveEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
+        if (!EndermanOverhaulConfig.spawnCaveEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
         return pos.getY() < serverLevel.getSeaLevel() &&
             !serverLevel.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) &&
             Monster.checkMonsterSpawnRules(enderman, serverLevel, mobSpawnType, pos, random);
@@ -62,7 +64,7 @@ public class CaveEnderman extends BaseEnderman {
 
     @Override
     public double getVisionRange() {
-        return 32.0;
+        return 24.0;
     }
 
     @Override

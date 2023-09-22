@@ -1,12 +1,17 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
+import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
 public class WarpedForestEnderman extends BaseEnderman {
@@ -23,6 +28,11 @@ public class WarpedForestEnderman extends BaseEnderman {
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 32.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
+    }
+
+    public static boolean checkMonsterSpawnRules(@NotNull EntityType<? extends Monster> type, ServerLevelAccessor level, @NotNull MobSpawnType spawnType, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        if (!EndermanOverhaulConfig.spawnWarpedForestEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
+        return BaseEnderman.checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     @Override

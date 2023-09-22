@@ -35,7 +35,7 @@ EndermanOverhaulFabric {
         addSpawn(ModEntityTypes.DARK_OAK_ENDERMAN, ModBiomeTags.DARK_OAK_SPAWNS);
         addSpawn(ModEntityTypes.DESERT_ENDERMAN, ModBiomeTags.DESERT_SPAWNS);
         addSpawnWithCost(ModEntityTypes.END_ENDERMAN, tag(ModBiomeTags.END_SPAWNS), 2, 1, 4, 0.7, 0.15);
-        addSpawnWithCost(ModEntityTypes.END_ISLANDS_ENDERMAN, tag(ModBiomeTags.END_ISLANDS_SPAWNS), 1, 1, 1, 0.7, 0.15);
+        addSpawnWithCost(ModEntityTypes.END_ISLANDS_ENDERMAN, tag(ModBiomeTags.END_ISLANDS_SPAWNS), 1, 1, 1, 0.5, 0.08);
         addSpawn(ModEntityTypes.FLOWER_FIELDS_ENDERMAN, ModBiomeTags.FLOWER_FIELDS_SPAWNS);
         addSpawn(ModEntityTypes.ICE_SPIKES_ENDERMAN, ModBiomeTags.ICE_SPIKES_SPAWNS);
         addSpawnWithCost(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN, tag(ModBiomeTags.MUSHROOM_SPAWNS), 3, 1, 2, 0.7, 0.15);

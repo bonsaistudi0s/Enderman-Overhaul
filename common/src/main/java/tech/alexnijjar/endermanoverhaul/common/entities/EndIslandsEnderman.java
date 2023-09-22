@@ -1,20 +1,25 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
+import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
@@ -31,7 +36,13 @@ public class EndIslandsEnderman extends BaseEnderman {
             .add(Attributes.MAX_HEALTH, 80.0)
             .add(Attributes.MOVEMENT_SPEED, 0.35)
             .add(Attributes.ATTACK_DAMAGE, 10.0)
-            .add(Attributes.FOLLOW_RANGE, 64);
+            .add(Attributes.FOLLOW_RANGE, 32);
+    }
+
+    public static boolean checkMonsterSpawnRules(@NotNull EntityType<? extends Monster> type, ServerLevelAccessor level, @NotNull MobSpawnType spawnType, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        if (!EndermanOverhaulConfig.spawnEndIslandsEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
+        if (random.nextInt(5) != 0) return false;
+        return BaseEnderman.checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     @Override
@@ -85,7 +96,7 @@ public class EndIslandsEnderman extends BaseEnderman {
 
     @Override
     public double getVisionRange() {
-        return 64.0;
+        return 32.0;
     }
 
     @Override
