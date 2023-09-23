@@ -36,10 +36,6 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
             getGlowTexture(enderman));
     }
 
-    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, ResourceLocation assetPath, ResourceLocation texture, ResourceLocation glow) {
-        this(renderManager, assetPath, texture, ANIMATION, glow);
-    }
-
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, ResourceLocation assetPath, ResourceLocation texture, ResourceLocation animation, ResourceLocation glow) {
         super(renderManager, new DefaultedEntityGeoModel<T>(assetPath)
             .withAltTexture(texture)
@@ -47,6 +43,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
         if (glow != null) {
             addRenderLayer(new CustomEnderEyesLayer<>(this, glow));
         }
+        addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.animatable));
     }
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, DefaultedEntityGeoModel<T> model) {

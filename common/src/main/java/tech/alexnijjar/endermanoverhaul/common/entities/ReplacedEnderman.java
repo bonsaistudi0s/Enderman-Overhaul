@@ -45,6 +45,14 @@ public class ReplacedEnderman implements GeoReplacedEntity {
             state.getController().setAnimation(ConstantAnimations.ANGRY);
             return PlayState.CONTINUE;
         }));
+
+        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", state -> {
+            EnderMan enderman = getEndermanFromState(state);
+            if (enderman == null) return PlayState.STOP;
+            if (enderman.getCarriedBlock() == null) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.HOLDING);
+            return PlayState.CONTINUE;
+        }));
     }
 
     @Override

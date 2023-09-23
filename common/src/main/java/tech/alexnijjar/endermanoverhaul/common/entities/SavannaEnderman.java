@@ -10,6 +10,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -41,5 +42,10 @@ public class SavannaEnderman extends BaseEnderman {
     @Override
     public double getVisionRange() {
         return 32.0;
+    }
+
+    @Override
+    public Vec3 getHeldBlockOffset() {
+        return new Vec3(0, 0.2, -0.15);
     }
 }

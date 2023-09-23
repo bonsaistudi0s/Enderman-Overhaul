@@ -11,6 +11,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
@@ -44,5 +45,10 @@ public class BadlandsEnderman extends BaseEnderman {
     @Override
     public @Nullable ParticleOptions getCustomParticles() {
         return ModParticleTypes.SAND.get();
+    }
+
+    @Override
+    public Vec3 getHeldBlockOffset() {
+        return new Vec3(0, -0.1, 0);
     }
 }

@@ -74,6 +74,13 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
             state.getController().setAnimation(ConstantAnimations.ANGRY);
             return PlayState.CONTINUE;
         }));
+
+        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", state -> {
+            if (!canPickupBlocks()) return PlayState.STOP;
+            if (getCarriedBlock() == null) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.HOLDING);
+            return PlayState.CONTINUE;
+        }));
     }
 
     public boolean canOpenMouth() {
@@ -99,6 +106,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
     public boolean canPickupBlocks() {
         return true;
+    }
+
+    public Vec3 getHeldBlockOffset() {
+        return Vec3.ZERO;
     }
 
     public boolean isAlwaysHostile() {

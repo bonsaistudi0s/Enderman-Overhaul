@@ -10,6 +10,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderer.base.CustomCarriedBlockLayer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.CustomEnderEyesLayer;
 import tech.alexnijjar.endermanoverhaul.common.entities.ReplacedEnderman;
 
@@ -24,6 +25,7 @@ public class ReplacedEndermanRenderer extends GeoReplacedEntityRenderer<EnderMan
             new ReplacedEnderman());
 
         addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW));
+        addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.currentEntity));
     }
 
     public @NotNull Vec3 getRenderOffset(EnderMan entity, float partialTicks) {
