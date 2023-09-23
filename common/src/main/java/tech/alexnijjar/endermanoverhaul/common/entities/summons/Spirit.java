@@ -75,6 +75,11 @@ public class Spirit extends Monster implements GeoEntity {
     }
 
     @Override
+    public boolean isSensitiveToWater() {
+        return true;
+    }
+
+    @Override
     protected void checkFallDamage(double y, boolean onGround, @NotNull BlockState state, @NotNull BlockPos pos) {
     }
 
