@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
+import tech.alexnijjar.endermanoverhaul.common.items.CorruptedPearlItem;
 
 import java.util.function.Supplier;
 
@@ -55,6 +56,8 @@ public class ModItems {
 //    public static final RegistryEntry<Item> BADLANDS_HOOD = ITEMS.register("badlands_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
 //    public static final RegistryEntry<Item> SAVANNAS_HOOD = ITEMS.register("savanna_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
 //    public static final RegistryEntry<Item> SNOWY_HOOD = ITEMS.register("snowy_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryEntry<Item> CORRUPTED_PEARL = ITEMS.register("corrupted_pearl", () -> new CorruptedPearlItem(new Item.Properties()));
 
     @ExpectPlatform
     public static Supplier<Item> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {

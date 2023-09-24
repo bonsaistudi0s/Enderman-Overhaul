@@ -40,6 +40,8 @@ public class ModLangProvider extends LanguageProvider {
 
         add("itemGroup.endermanoverhaul.main", "Enderman Overhaul");
 
+        add("tooltip.endermanoverhaul.corrupted_pearl", "Teleports targets to a random location");
+
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");
         add("config.endermanoverhaul.spawnBadlandsEnderman", "Spawn Badlands Enderman");

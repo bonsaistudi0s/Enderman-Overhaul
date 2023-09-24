@@ -119,7 +119,7 @@ public class EndEnderman extends BaseEnderman {
             this.playSound(SoundEvents.PHANTOM_BITE, 10.0f, 0.95f + this.random.nextFloat() * 0.1f);
             entityData.set(DATA_BITING_TICKS, 7);
             if (target instanceof LivingEntity entity && random.nextBoolean()) {
-                teleportPlayer(entity);
+                teleportTarget(entity, level(), 24);
             }
             return true;
         } else {
@@ -127,26 +127,26 @@ public class EndEnderman extends BaseEnderman {
         }
     }
 
-    public void teleportPlayer(LivingEntity target) {
-        if (level().isClientSide) return;
+    public static void teleportTarget(LivingEntity target, Level level, int range) {
+        if (level.isClientSide) return;
 
         double x = target.getX();
         double y = target.getY();
         double z = target.getZ();
 
-        for (int i = 0; i < 16; ++i) {
-            double g = target.getX() + (random.nextDouble() - 0.5) * 16.0;
-            double h = Mth.clamp(target.getY() + (double) (random.nextInt(16) - 8), level().getMinBuildHeight(), level().getMinBuildHeight() + ((ServerLevel) level()).getLogicalHeight() - 1);
-            double j = target.getZ() + (random.nextDouble() - 0.5) * 16.0;
+        for (int i = 0; i < range; ++i) {
+            double g = target.getX() + (level.random.nextDouble() - 0.5) * range;
+            double h = Mth.clamp(target.getY() + (double) (level.random.nextInt(range) - 8), level.getMinBuildHeight(), level.getMinBuildHeight() + ((ServerLevel) level).getLogicalHeight() - 1);
+            double j = target.getZ() + (level.random.nextDouble() - 0.5) * range;
             if (target.isPassenger()) {
                 target.stopRiding();
             }
 
             Vec3 position = target.position();
             if (target.randomTeleport(g, h, j, true)) {
-                level().gameEvent(GameEvent.TELEPORT, position, GameEvent.Context.of(target));
+                level.gameEvent(GameEvent.TELEPORT, position, GameEvent.Context.of(target));
                 SoundEvent soundEvent = SoundEvents.CHORUS_FRUIT_TELEPORT;
-                level().playSound(null, x, y, z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
+                level.playSound(null, x, y, z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
                 if (target instanceof Player player) {
                     NetworkHandler.CHANNEL.sendToPlayer(new ClientboundFlashScreenPacket(), player);
                 }

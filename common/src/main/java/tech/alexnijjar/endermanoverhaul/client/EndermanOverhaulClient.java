@@ -1,5 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.client;
 
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.EntityType;
@@ -59,6 +60,9 @@ public class EndermanOverhaulClient {
         // Summons
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SCARAB, ScarabRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SPIRIT, SpiritRenderer::new);
+
+        // Projectiles
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.CORRUPTED_PEARL, ThrownItemRenderer::new);
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> register) {

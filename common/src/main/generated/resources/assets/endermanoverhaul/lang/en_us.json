@@ -22,6 +22,7 @@
   "config.endermanoverhaul.spawnWindsweptHillsEnderman": "Spawn Windswept Hills Enderman",
   "entity.endermanoverhaul.badlands_enderman": "Badlands Enderman",
   "entity.endermanoverhaul.cave_enderman": "Cave Enderman",
+  "entity.endermanoverhaul.corrupted_pearl": "Corrupted Pearl",
   "entity.endermanoverhaul.crimson_forest_enderman": "Crimson Forest Enderman",
   "entity.endermanoverhaul.dark_oak_enderman": "Dark Oak Enderman",
   "entity.endermanoverhaul.desert_enderman": "Desert Enderman",
@@ -42,6 +43,7 @@
   "entity.endermanoverhaul.windswept_hills_enderman": "Windswept Hills Enderman",
   "item.endermanoverhaul.badlands_enderman_spawn_egg": "Badlands Enderman Spawn Egg",
   "item.endermanoverhaul.cave_enderman_spawn_egg": "Cave Enderman Spawn Egg",
+  "item.endermanoverhaul.corrupted_pearl": "Corrupted Pearl",
   "item.endermanoverhaul.crimson_forest_enderman_spawn_egg": "Crimson Forest Enderman Spawn Egg",
   "item.endermanoverhaul.dark_oak_enderman_spawn_egg": "Dark Oak Enderman Spawn Egg",
   "item.endermanoverhaul.desert_enderman_spawn_egg": "Desert Enderman Spawn Egg",
@@ -60,5 +62,6 @@
   "item.endermanoverhaul.swamp_enderman_spawn_egg": "Swamp Enderman Spawn Egg",
   "item.endermanoverhaul.warped_forest_enderman_spawn_egg": "Warped Forest Enderman Spawn Egg",
   "item.endermanoverhaul.windswept_hills_enderman_spawn_egg": "Windswept Hills Enderman Spawn Egg",
-  "itemGroup.endermanoverhaul.main": "Enderman Overhaul"
+  "itemGroup.endermanoverhaul.main": "Enderman Overhaul",
+  "tooltip.endermanoverhaul.corrupted_pearl": "Teleports targets to a random location"
 }
