@@ -10,7 +10,7 @@ import tech.alexnijjar.endermanoverhaul.common.entities.summons.Spirit;
 
 public class SpiritRenderer extends GeoEntityRenderer<Spirit> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(EndermanOverhaul.MOD_ID, "spirit/spirit");
-        public static final ResourceLocation GLOW = new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/spirit/spirit_glow.png");
+    public static final ResourceLocation GLOW = new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/spirit/spirit_glow.png");
 
     public SpiritRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<Spirit>(new ResourceLocation(EndermanOverhaul.MOD_ID, "spirit"))

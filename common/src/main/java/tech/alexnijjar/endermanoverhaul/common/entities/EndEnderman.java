@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -29,6 +30,8 @@ import software.bernie.geckolib.core.object.PlayState;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.networking.NetworkHandler;
+import tech.alexnijjar.endermanoverhaul.networking.messages.ClientboundFlashScreenPacket;
 
 public class EndEnderman extends BaseEnderman {
     private static final EntityDataAccessor<Integer> DATA_BITING_TICKS = SynchedEntityData.defineId(EndEnderman.class, EntityDataSerializers.INT);
@@ -144,6 +147,9 @@ public class EndEnderman extends BaseEnderman {
                 level().gameEvent(GameEvent.TELEPORT, position, GameEvent.Context.of(target));
                 SoundEvent soundEvent = SoundEvents.CHORUS_FRUIT_TELEPORT;
                 level().playSound(null, x, y, z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
+                if (target instanceof Player player) {
+                    NetworkHandler.CHANNEL.sendToPlayer(new ClientboundFlashScreenPacket(), player);
+                }
                 target.playSound(soundEvent, 1.0F, 1.0F);
                 break;
             }

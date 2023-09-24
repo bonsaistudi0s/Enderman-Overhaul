@@ -5,12 +5,14 @@ import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.client.EndermanOverhaulClient;
+import tech.alexnijjar.endermanoverhaul.client.gui.FlashOverlay;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -32,5 +34,10 @@ public class EndermanOverhaulClientForge {
     @SubscribeEvent
     public static void onRegisterParticles(RegisterParticleProvidersEvent event) {
         EndermanOverhaulClient.onRegisterParticles((type, provider) -> event.registerSpriteSet(type, provider::create));
+    }
+
+    @SubscribeEvent
+    public static void onRegisterClientHud(RenderGuiEvent.Post event) {
+        FlashOverlay.render(event.getGuiGraphics());
     }
 }

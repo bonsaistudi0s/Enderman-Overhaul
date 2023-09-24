@@ -3,6 +3,7 @@ package tech.alexnijjar.endermanoverhaul;
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.registry.*;
+import tech.alexnijjar.endermanoverhaul.networking.NetworkHandler;
 
 public class EndermanOverhaul {
 
@@ -11,6 +12,7 @@ public class EndermanOverhaul {
 
     public static void init() {
         CONFIGURATOR.registerConfig(EndermanOverhaulConfig.class);
+        NetworkHandler.init();
         ModBlocks.BLOCKS.init();
         ModItems.ITEMS.init();
         ModEntityTypes.ENTITY_TYPES.init();
