@@ -3,6 +3,7 @@ package tech.alexnijjar.endermanoverhaul.common.entities.base;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -45,6 +46,8 @@ import java.util.function.Predicate;
 
 public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    private int lastStareSound = Integer.MIN_VALUE;
 
     public BaseEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
@@ -147,6 +150,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return false;
     }
 
+    public SoundEvent getStareSound() {
+        return SoundEvents.ENDERMAN_STARE;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -162,6 +169,16 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         if (target == null) return;
         if (this.distanceToSqr(target) <= getAreaEffectRange() * getAreaEffectRange()) {
             target.addEffect(areaEffect);
+        }
+    }
+
+    @Override
+    public void playStareSound() {
+        if (this.tickCount >= this.lastStareSound + 400) {
+            this.lastStareSound = this.tickCount;
+            if (!this.isSilent()) {
+                this.level().playLocalSound(this.getX(), this.getEyeY(), this.getZ(), getStareSound(), this.getSoundSource(), 2.5F, 1.0F, false);
+            }
         }
     }
 

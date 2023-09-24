@@ -6,6 +6,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,6 +31,7 @@ import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.summons.Spirit;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class SoulsandValleyEnderman extends BaseEnderman {
     private static final EntityDataAccessor<Integer> DATA_BITING_TICKS = SynchedEntityData.defineId(SoulsandValleyEnderman.class, EntityDataSerializers.INT);
@@ -141,5 +143,20 @@ public class SoulsandValleyEnderman extends BaseEnderman {
                 (this.random.nextDouble() - 0.5) * 0.5, -this.random.nextDouble(),
                 (this.random.nextDouble() - 0.5) * 0.5);
         }
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundEvents.CAVE_ENDERMAN_AMBIENT.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
+        return ModSoundEvents.CAVE_ENDERMAN_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundEvents.CAVE_ENDERMAN_HURT.get();
     }
 }

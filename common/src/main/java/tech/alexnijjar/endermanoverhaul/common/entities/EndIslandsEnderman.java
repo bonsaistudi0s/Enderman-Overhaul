@@ -4,8 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -22,6 +24,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class EndIslandsEnderman extends BaseEnderman {
     private static final EntityDataAccessor<Integer> DATA_POSSESSING_TICKS = SynchedEntityData.defineId(EndIslandsEnderman.class, EntityDataSerializers.INT);
@@ -124,5 +127,25 @@ public class EndIslandsEnderman extends BaseEnderman {
 
     public boolean isPossessing() {
         return entityData.get(DATA_POSSESSING_TICKS) > 0;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundEvents.TALL_ENDERMAN_AMBIENT.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
+        return ModSoundEvents.TALL_ENDERMAN_DEATH.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundEvents.TALL_ENDERMAN_DEATH.get();
+    }
+
+    @Override
+    public SoundEvent getStareSound() {
+        return ModSoundEvents.TALL_ENDERMAN_STARE.get();
     }
 }

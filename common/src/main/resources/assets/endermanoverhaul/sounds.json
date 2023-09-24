@@ -1,2 +1,55 @@
 {
+    "cave_enderman_ambient": {
+        "sounds": [
+            "endermanoverhaul:cave/idle1",
+            "endermanoverhaul:cave/idle2",
+            "endermanoverhaul:cave/idle3",
+            "endermanoverhaul:cave/idle4"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.cave_enderman.ambient"
+    },
+    "cave_enderman_hurt": {
+        "sounds": [
+            "endermanoverhaul:cave/hit1",
+            "endermanoverhaul:cave/hit2",
+            "endermanoverhaul:cave/hit3"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.cave_enderman.hurt"
+    },
+    "plant_enderman_ambient": {
+        "sounds": [
+            "endermanoverhaul:plant/idle1",
+            "endermanoverhaul:plant/idle2"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.plant_enderman.ambient"
+    },
+    "plant_enderman_hurt": {
+        "sounds": [
+            "endermanoverhaul:plant/hit1",
+            "endermanoverhaul:plant/hit2",
+            "endermanoverhaul:plant/hit3",
+            "endermanoverhaul:plant/hit4"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.plant_enderman.hurt"
+    },
+    "tall_enderman_ambient": {
+        "sounds": [
+            "endermanoverhaul:tall/idle1",
+            "endermanoverhaul:tall/idle2"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.tall_enderman.ambient"
+    },
+    "tall_enderman_death": {
+        "sounds": [
+            "endermanoverhaul:tall/death1",
+            "endermanoverhaul:tall/death2"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.tall_enderman.death"
+    },
+    "tall_enderman_stare": {
+        "sounds": [
+            "endermanoverhaul:tall/stare"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.tall_enderman.stare"
+    }
 }

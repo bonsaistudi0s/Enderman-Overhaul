@@ -1,7 +1,9 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -16,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class WindsweptHillsEnderman extends BaseEnderman {
 
@@ -66,5 +69,25 @@ public class WindsweptHillsEnderman extends BaseEnderman {
     @Override
     public int getAreaEffectRange() {
         return 20;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundEvents.TALL_ENDERMAN_AMBIENT.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
+        return ModSoundEvents.TALL_ENDERMAN_DEATH.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundEvents.TALL_ENDERMAN_DEATH.get();
+    }
+
+    @Override
+    public SoundEvent getStareSound() {
+        return ModSoundEvents.TALL_ENDERMAN_STARE.get();
     }
 }
