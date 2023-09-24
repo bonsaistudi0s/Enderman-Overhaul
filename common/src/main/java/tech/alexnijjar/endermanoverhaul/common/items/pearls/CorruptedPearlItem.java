@@ -1,5 +1,6 @@
-package tech.alexnijjar.endermanoverhaul.common.items;
+package tech.alexnijjar.endermanoverhaul.common.items.pearls;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -44,6 +45,6 @@ public class CorruptedPearlItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.corrupted_pearl"));
+        tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.corrupted_pearl").withStyle(ChatFormatting.GRAY));
     }
 }

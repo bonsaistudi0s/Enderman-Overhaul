@@ -41,6 +41,12 @@ public class ModLangProvider extends LanguageProvider {
         add("itemGroup.endermanoverhaul.main", "Enderman Overhaul");
 
         add("tooltip.endermanoverhaul.corrupted_pearl", "Teleports targets to a random location");
+        add("tooltip.endermanoverhaul.soul_pearl_1", "Shift-right click to bind an entity");
+        add("tooltip.endermanoverhaul.soul_pearl_2", "Teleports the bound entity to the target location");
+        add("tooltip.endermanoverhaul.ancient_pearl", "Summons a baby enderman to fight for you");
+
+        add("tooltip.endermanoverhaul.bound_to", "Bound to: %s");
+        add("tooltip.endermanoverhaul.not_bound", "Not bound");
 
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");

@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.*;
 import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.ThrownCorruptedPearl;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.ThrownSoulPearl;
 import tech.alexnijjar.endermanoverhaul.common.entities.summons.Scarab;
 import tech.alexnijjar.endermanoverhaul.common.entities.summons.Spirit;
 
@@ -138,8 +139,14 @@ public class ModEntityTypes {
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
-            .fireImmune()
             .build("corrupted_pearl"));
+
+    public static final RegistryEntry<EntityType<ThrownSoulPearl>> SOUL_PEARL = ENTITY_TYPES.register("soul_pearl", () ->
+        EntityType.Builder.<ThrownSoulPearl>of(ThrownSoulPearl::new, MobCategory.MISC)
+            .sized(0.25f, 0.25f)
+            .clientTrackingRange(4)
+            .updateInterval(10)
+            .build("soul_pearl"));
 
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
         attributes.accept(BADLANDS_ENDERMAN, BadlandsEnderman::createAttributes);

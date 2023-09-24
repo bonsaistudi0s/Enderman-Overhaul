@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-24T13:20:21.508533	Loot Tables
+// 1.20.1	2023-09-24T14:10:26.473759	Loot Tables
 2069ca7dde9d8718356187f77a2e5a63c02a64c3 data/endermanoverhaul/loot_tables/entities/badlands_enderman.json
 9a3d6237947bcdb91c7aeb41de1c50e074b6bed1 data/endermanoverhaul/loot_tables/entities/cave_enderman.json
 9ea5c5cffa52dd6f34211dead31fec7823b06b5b data/endermanoverhaul/loot_tables/entities/crimson_forest_enderman.json
@@ -13,7 +13,7 @@ b0757a0b06bd70996b8f472c1687729df8606dfc data/endermanoverhaul/loot_tables/entit
 a92e116ea5eb6b4400bada4f089a395ec989cd35 data/endermanoverhaul/loot_tables/entities/ocean_enderman.json
 bd90cc13c096857178fe00182acbf2ff5bad6714 data/endermanoverhaul/loot_tables/entities/savanna_enderman.json
 fb0d22e0d8e5c1cf716e940709442849ef99b9ff data/endermanoverhaul/loot_tables/entities/snowy_enderman.json
-649dc9b7116134dd29991a4f880035588dd69180 data/endermanoverhaul/loot_tables/entities/soulsand_valley_enderman.json
+6be21e857fb50bce234cca8c909d125d68b2cd37 data/endermanoverhaul/loot_tables/entities/soulsand_valley_enderman.json
 0ce0ae263b28e7d7f00352e30df192e0d1dbeda6 data/endermanoverhaul/loot_tables/entities/swamp_enderman.json
 92633b105bfa23315129a920fc5ac10d59bc18f6 data/endermanoverhaul/loot_tables/entities/warped_forest_enderman.json
 163ba014b3896b39156d40b64de707b15e33947a data/endermanoverhaul/loot_tables/entities/windswept_hills_enderman.json

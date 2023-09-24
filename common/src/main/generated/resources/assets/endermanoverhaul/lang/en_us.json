@@ -36,6 +36,7 @@
   "entity.endermanoverhaul.savanna_enderman": "Savanna Enderman",
   "entity.endermanoverhaul.scarab": "Scarab",
   "entity.endermanoverhaul.snowy_enderman": "Snowy Enderman",
+  "entity.endermanoverhaul.soul_pearl": "Soul Pearl",
   "entity.endermanoverhaul.soulsand_valley_enderman": "Soulsand Valley Enderman",
   "entity.endermanoverhaul.spirit": "Spirit",
   "entity.endermanoverhaul.swamp_enderman": "Swamp Enderman",
@@ -57,11 +58,17 @@
   "item.endermanoverhaul.savanna_enderman_spawn_egg": "Savanna Enderman Spawn Egg",
   "item.endermanoverhaul.scarab_spawn_egg": "Scarab Spawn Egg",
   "item.endermanoverhaul.snowy_enderman_spawn_egg": "Snowy Enderman Spawn Egg",
+  "item.endermanoverhaul.soul_pearl": "Soul Pearl",
   "item.endermanoverhaul.soulsand_valley_enderman_spawn_egg": "Soulsand Valley Enderman Spawn Egg",
   "item.endermanoverhaul.spirit_spawn_egg": "Spirit Spawn Egg",
   "item.endermanoverhaul.swamp_enderman_spawn_egg": "Swamp Enderman Spawn Egg",
   "item.endermanoverhaul.warped_forest_enderman_spawn_egg": "Warped Forest Enderman Spawn Egg",
   "item.endermanoverhaul.windswept_hills_enderman_spawn_egg": "Windswept Hills Enderman Spawn Egg",
   "itemGroup.endermanoverhaul.main": "Enderman Overhaul",
-  "tooltip.endermanoverhaul.corrupted_pearl": "Teleports targets to a random location"
+  "tooltip.endermanoverhaul.ancient_pearl": "Summons a baby enderman to fight for you",
+  "tooltip.endermanoverhaul.bound_to": "Bound to: %s",
+  "tooltip.endermanoverhaul.corrupted_pearl": "Teleports targets to a random location",
+  "tooltip.endermanoverhaul.not_bound": "Not bound",
+  "tooltip.endermanoverhaul.soul_pearl_1": "Shift-right click to bind an entity",
+  "tooltip.endermanoverhaul.soul_pearl_2": "Teleports the bound entity to the target location"
 }

@@ -63,6 +63,7 @@ public class EndermanOverhaulClient {
 
         // Projectiles
         ClientPlatformUtils.registerRenderer(ModEntityTypes.CORRUPTED_PEARL, ThrownItemRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.SOUL_PEARL, ThrownItemRenderer::new);
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> register) {

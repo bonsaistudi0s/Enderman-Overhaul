@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-24T11:51:40.358115	Item Models: endermanoverhaul
+// 1.20.1	2023-09-24T13:34:10.533737	Item Models: endermanoverhaul
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/badlands_enderman_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/cave_enderman_spawn_egg.json
 13fe034b9be25a7b0b4e33c7648d1577ddd2891f assets/endermanoverhaul/models/item/corrupted_pearl.json
@@ -15,6 +15,7 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/savanna_enderman_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/scarab_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/snowy_enderman_spawn_egg.json
+2e15936b407dae68aacca51c53c796af7c7bf102 assets/endermanoverhaul/models/item/soul_pearl.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/soulsand_valley_enderman_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/spirit_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/swamp_enderman_spawn_egg.json
