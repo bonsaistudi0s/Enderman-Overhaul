@@ -30,7 +30,7 @@ public class SwampEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 50.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.3)
+            .add(Attributes.MOVEMENT_SPEED, 0.27)
             .add(Attributes.ATTACK_DAMAGE, 7.0)
             .add(Attributes.FOLLOW_RANGE, 32.0);
     }

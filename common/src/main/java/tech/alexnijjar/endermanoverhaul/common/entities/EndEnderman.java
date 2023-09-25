@@ -116,6 +116,11 @@ public class EndEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean runWhenAngry() {
+        return false;
+    }
+
+    @Override
     public boolean doHurtTarget(@NotNull Entity target) {
         if (super.doHurtTarget(target)) {
             this.playSound(SoundEvents.PHANTOM_BITE, 10.0f, 0.95f + this.random.nextFloat() * 0.1f);

@@ -32,7 +32,7 @@ public class CaveEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 40.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.3)
+            .add(Attributes.MOVEMENT_SPEED, 0.27)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 24.0);
     }

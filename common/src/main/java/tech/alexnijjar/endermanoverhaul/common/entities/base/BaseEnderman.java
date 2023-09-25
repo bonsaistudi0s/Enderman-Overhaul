@@ -154,6 +154,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return SoundEvents.ENDERMAN_STARE;
     }
 
+    public boolean runWhenAngry() {
+        return true;
+    }
+
     @Override
     public void tick() {
         super.tick();

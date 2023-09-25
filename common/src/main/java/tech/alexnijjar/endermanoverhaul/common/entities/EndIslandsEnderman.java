@@ -37,7 +37,7 @@ public class EndIslandsEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 80.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.35)
+            .add(Attributes.MOVEMENT_SPEED, 0.21)
             .add(Attributes.ATTACK_DAMAGE, 10.0)
             .add(Attributes.FOLLOW_RANGE, 32);
     }
