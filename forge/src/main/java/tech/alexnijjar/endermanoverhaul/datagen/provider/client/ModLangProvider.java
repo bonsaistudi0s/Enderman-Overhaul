@@ -5,6 +5,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.codehaus.plexus.util.StringUtils;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
+import tech.alexnijjar.endermanoverhaul.common.constants.ConstantComponents;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModBlocks;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
@@ -40,13 +41,18 @@ public class ModLangProvider extends LanguageProvider {
 
         add("itemGroup.endermanoverhaul.main", "Enderman Overhaul");
 
-        add("tooltip.endermanoverhaul.corrupted_pearl", "Teleports targets to a random location");
-        add("tooltip.endermanoverhaul.soul_pearl_1", "Shift-right click to bind an entity");
-        add("tooltip.endermanoverhaul.soul_pearl_2", "Teleports the bound entity to the target location");
-        add("tooltip.endermanoverhaul.ancient_pearl", "Summons a baby enderman to fight for you");
+        add(ConstantComponents.CORRUPTED_PEARL_TOOLTIP.getString(), "Teleports targets to a random location");
+        add(ConstantComponents.SOUL_PEARL_TOOLTIP_1.getString(), "Shift-right click to bind an entity");
+        add(ConstantComponents.SOUL_PEARL_TOOLTIP_2.getString(), "Teleports the bound entity to the target location");
+        add(ConstantComponents.ANCIENT_PEARL_TOOLTIP.getString(), "Summons a baby enderman to fight for you");
+        add(ConstantComponents.BUBBLE_PEARL_TOOLTIP.getString(), "Faster Ender Pearl with no gravity");
+        add(ConstantComponents.ICY_PEARL_TOOLTIP.getString(), "Freezes nearby targets on hit");
+        add(ConstantComponents.SUMMONER_PEARL_TOOLTIP.getString(), "Teleports nearby targets on hit");
+        add(ConstantComponents.CRIMSON_PEARL_TOOLTIP.getString(), "Applies Strength II when teleporting");
+        add(ConstantComponents.WARPED_PEARL_TOOLTIP.getString(), "Applies Resistance II when teleporting");
 
         add("tooltip.endermanoverhaul.bound_to", "Bound to: %s");
-        add("tooltip.endermanoverhaul.not_bound", "Not bound");
+        add(ConstantComponents.NOT_BOUND.getString(), "Not bound");
 
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");

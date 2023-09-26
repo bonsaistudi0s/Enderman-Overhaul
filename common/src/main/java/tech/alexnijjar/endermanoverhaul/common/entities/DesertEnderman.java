@@ -70,7 +70,7 @@ public class DesertEnderman extends BaseEnderman {
             level().addFreshEntity(scarab);
         }
 
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; i++) {
             this.level().addParticle(ParticleTypes.LARGE_SMOKE,
                 this.getRandomX(0.5),
                 this.getRandomY() - 0.75,

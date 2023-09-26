@@ -67,7 +67,7 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
 
-        for (int i = 0; i < 32; ++i) {
+        for (int i = 0; i < 32; i++) {
             this.level().addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), this.random.nextGaussian(), 0.0, this.random.nextGaussian());
         }
 

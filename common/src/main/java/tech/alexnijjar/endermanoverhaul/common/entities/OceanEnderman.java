@@ -29,7 +29,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -73,7 +75,13 @@ public class OceanEnderman extends BaseEnderman {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, state -> {
-            state.getController().setAnimation(ConstantAnimations.SWIM);
+            if (isInWater()) {
+                state.getController().setAnimation(ConstantAnimations.SWIM);
+                return PlayState.CONTINUE;
+            }
+            state.getController().setAnimation(state.isMoving() ?
+                ConstantAnimations.WALK :
+                ConstantAnimations.IDLE);
             return PlayState.CONTINUE;
         }));
     }
@@ -81,8 +89,8 @@ public class OceanEnderman extends BaseEnderman {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new EndermanFreezeWhenLookedAt());
-        this.goalSelector.addGoal(2, new OceanEndermanSwimGoal());
-        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.0, false));
+        this.goalSelector.addGoal(1, new OceanEndermanSwimGoal());
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new EndermanLookForPlayerGoal(this::isAngryAt));
@@ -104,6 +112,11 @@ public class OceanEnderman extends BaseEnderman {
     @Override
     public @Nullable ParticleOptions getCustomParticles() {
         return ModParticleTypes.BUBBLE.get();
+    }
+
+    @Override
+    public int getParticleCount() {
+        return 1;
     }
 
     @Override
@@ -161,10 +174,13 @@ public class OceanEnderman extends BaseEnderman {
     @Override
     public void aiStep() {
         if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0f - 1.0f) * 0.05f, 0.4000000059604645, (this.random.nextFloat() * 2.0f - 1.0f) * 0.05f));
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0f - 1.0f) * 0.05f, 0.4, (this.random.nextFloat() * 2.0f - 1.0f) * 0.05f));
             this.setOnGround(false);
             this.hasImpulse = true;
             this.playSound(SoundEvents.TADPOLE_FLOP, this.getSoundVolume(), this.getVoicePitch());
+            if (random.nextInt(3) == 0) {
+                teleportToWater();
+            }
         }
 
         super.aiStep();
@@ -182,6 +198,24 @@ public class OceanEnderman extends BaseEnderman {
         }
     }
 
+    private void teleportToWater() {
+        int range = 10;
+        BlockPos.betweenClosedStream(
+                Mth.floor(getX() - range),
+                Mth.floor(getY() - 5),
+                Mth.floor(getZ() - range),
+                Mth.floor(getX() + range),
+                Mth.floor(getY()),
+                Mth.floor(getZ() + range))
+            .filter(pos -> level().getFluidState(pos).is(FluidTags.WATER) && level().getBlockState(pos.below()).getFluidState().is(FluidTags.WATER))
+            .findAny()
+            .ifPresent(pos -> {
+                level().gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(OceanEnderman.this));
+                teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0f, 1.0f);
+            });
+    }
+
     private class OceanEndermanMoveControl extends MoveControl {
 
         OceanEndermanMoveControl() {
@@ -189,30 +223,33 @@ public class OceanEnderman extends BaseEnderman {
         }
 
         public void tick() {
-            if (OceanEnderman.this.isEyeInFluid(FluidTags.WATER)) {
-                OceanEnderman.this.setDeltaMovement(OceanEnderman.this.getDeltaMovement().add(0.0, 0.005, 0.0));
+            if (isEyeInFluid(FluidTags.WATER)) {
+                setDeltaMovement(getDeltaMovement().add(0.0, 0.005, 0.0));
             }
 
-            if (this.operation == MoveControl.Operation.MOVE_TO && !OceanEnderman.this.getNavigation().isDone()) {
-                float f = (float) (this.speedModifier * OceanEnderman.this.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                if (OceanEnderman.this.isCreepy()) f *= 3;
-                OceanEnderman.this.setSpeed(Mth.lerp(0.125f, OceanEnderman.this.getSpeed(), f));
-                double d = this.wantedX - OceanEnderman.this.getX();
-                double e = this.wantedY - OceanEnderman.this.getY();
-                double g = this.wantedZ - OceanEnderman.this.getZ();
+            if (this.operation == MoveControl.Operation.MOVE_TO && !getNavigation().isDone()) {
+                float f = (float) (this.speedModifier * getAttributeValue(Attributes.MOVEMENT_SPEED));
+                if (isCreepy()) f *= 3;
+                setSpeed(Mth.lerp(0.125f, getSpeed(), f));
+                double d = this.wantedX - getX();
+                double e = this.wantedY - getY();
+                double g = this.wantedZ - getZ();
                 if (e != 0.0) {
                     double h = Math.sqrt(d * d + e * e + g * g);
-                    OceanEnderman.this.setDeltaMovement(OceanEnderman.this.getDeltaMovement().add(0.0, (double) OceanEnderman.this.getSpeed() * (e / h) * 0.1, 0.0));
+                    setDeltaMovement(getDeltaMovement().add(0.0, (double) getSpeed() * (e / h) * 0.1, 0.0));
                 }
 
                 if (d != 0.0 || g != 0.0) {
                     float i = (float) (Mth.atan2(g, d) * 57.3) - 90.0f;
-                    OceanEnderman.this.setYRot(this.rotlerp(OceanEnderman.this.getYRot(), i, 90.0f));
-                    OceanEnderman.this.yBodyRot = OceanEnderman.this.getYRot();
+                    setYRot(this.rotlerp(getYRot(), i, 90.0f));
+                    yBodyRot = getYRot();
                 }
 
+                if (isCreepy()) {
+                    addDeltaMovement(new Vec3(getDeltaMovement().x * 0.15, 0, getDeltaMovement().z * 0.15));
+                }
             } else {
-                OceanEnderman.this.setSpeed(0.0F);
+                setSpeed(0);
             }
         }
     }
@@ -224,7 +261,7 @@ public class OceanEnderman extends BaseEnderman {
         }
 
         public boolean canUse() {
-            return super.canUse() && !OceanEnderman.this.isCreepy();
+            return super.canUse() && !isCreepy();
         }
     }
 }

@@ -107,6 +107,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return null;
     }
 
+    public int getParticleCount() {
+        return 2;
+    }
+
     public boolean canPickupBlocks() {
         return true;
     }
@@ -190,7 +194,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     public void aiStep() {
         ParticleOptions customParticleType = getCustomParticles();
         if (hasParticles() && this.level().isClientSide() && customParticleType != null) {
-            for (int i = 0; i < 2; ++i) {
+            for (int i = 0; i < getParticleCount(); i++) {
                 this.level().addParticle(customParticleType,
                     this.getRandomX(0.5),
                     this.getRandomY() - 0.25,
@@ -276,7 +280,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         Vec3 vec3 = new Vec3(this.getX() - target.getX(), this.getY(0.5) - target.getEyeY(), this.getZ() - target.getZ());
         vec3 = vec3.normalize();
         double e = this.getX() + (this.random.nextDouble() - 0.5) * 8.0 - vec3.x * 16.0;
-        double f = this.getY() + (double) (this.random.nextInt(16) - 8) - vec3.y * 16.0;
+        double f = this.getY() + (this.random.nextInt(16) - 8) - vec3.y * 16.0;
         double g = this.getZ() + (this.random.nextDouble() - 0.5) * 8.0 - vec3.z * 16.0;
         return this.teleport(e, f, g);
     }
@@ -330,7 +334,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
             int k = Mth.floor(BaseEnderman.this.getZ() - 2.0 + randomSource.nextDouble() * 4.0);
             BlockPos blockPos = new BlockPos(i, j, k);
             BlockState blockState = level.getBlockState(blockPos);
-            Vec3 vec3 = new Vec3((double) BaseEnderman.this.getBlockX() + 0.5, j + 0.5, BaseEnderman.this.getBlockZ() + 0.5);
+            Vec3 vec3 = new Vec3(BaseEnderman.this.getBlockX() + 0.5, j + 0.5, BaseEnderman.this.getBlockZ() + 0.5);
             Vec3 vec32 = new Vec3(i + 0.5, j + 0.5, k + 0.5);
             BlockHitResult blockHitResult = level.clip(new ClipContext(vec3, vec32, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, BaseEnderman.this));
             boolean bl = blockHitResult.getBlockPos().equals(blockPos);

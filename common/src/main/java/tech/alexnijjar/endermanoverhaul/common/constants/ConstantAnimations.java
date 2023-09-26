@@ -14,4 +14,6 @@ public class ConstantAnimations {
 
     public static final RawAnimation SCARAB_WALK = RawAnimation.begin().thenLoop("animation.scarab.walk");
     public static final RawAnimation SPIRIT_FLY = RawAnimation.begin().thenLoop("animation.spirit.fly");
+
+    public static final RawAnimation SPIN = RawAnimation.begin().thenLoop("animation.enderman.spin");
 }

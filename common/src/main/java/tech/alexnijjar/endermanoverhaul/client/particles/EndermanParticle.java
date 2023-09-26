@@ -52,13 +52,13 @@ public class EndermanParticle extends TextureSheetParticle {
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {
-            float f = (float) this.age / (float) this.lifetime;
+            float f = (float) this.age / this.lifetime;
             float g = f;
             f = -f + f * f * 2.0F;
-            f = 1.0F - f;
-            this.x = this.xStart + this.xd * (double) f;
-            this.y = this.yStart + this.yd * (double) f + (double) (1.0F - g);
-            this.z = this.zStart + this.zd * (double) f;
+            f = 1.0f - f;
+            this.x = this.xStart + this.xd * f;
+            this.y = this.yStart + this.yd * f + (1.0f - g);
+            this.z = this.zStart + this.zd * f;
         }
     }
 

@@ -135,7 +135,7 @@ public class SoulsandValleyEnderman extends BaseEnderman {
             level().addFreshEntity(spirit);
         }
 
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; i++) {
             this.level().addParticle(ParticleTypes.SOUL,
                 this.getRandomX(0.5),
                 this.getRandomY() - 1.25,

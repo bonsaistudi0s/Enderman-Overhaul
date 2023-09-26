@@ -11,6 +11,7 @@ import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.client.config.EndermanOverhaulClientConfig;
 import tech.alexnijjar.endermanoverhaul.client.particles.EndermanParticle;
 import tech.alexnijjar.endermanoverhaul.client.renderer.EndIslandsEndermanRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderer.EnderBulletRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.ReplacedEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
@@ -62,14 +63,20 @@ public class EndermanOverhaulClient {
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SPIRIT, SpiritRenderer::new);
 
         // Projectiles
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.ENDER_BULLET, EnderBulletRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.CORRUPTED_PEARL, ThrownItemRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SOUL_PEARL, ThrownItemRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.BUBBLE_PEARL, ThrownItemRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.SUMMONER_PEARL, ThrownItemRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.ICY_PEARL, ThrownItemRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.CRIMSON_PEARL, ThrownItemRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.WARPED_PEARL, ThrownItemRenderer::new);
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> register) {
         register.accept(ModParticleTypes.DUST.get(), spriteSet -> new EndermanParticle.Provider(spriteSet, 0.7f, 0.7f, 0.7f));
         register.accept(ModParticleTypes.SNOW.get(), EndermanParticle.Provider::new);
-        register.accept(ModParticleTypes.SAND.get(), spriteSet -> new EndermanParticle.Provider(spriteSet, 0.8588235294117647f, 0.8274509803921568f, 0.6274509803921569f));
+        register.accept(ModParticleTypes.SAND.get(), spriteSet -> new EndermanParticle.Provider(spriteSet, 0.86f, 0.83f, 0.63f));
         register.accept(ModParticleTypes.SOUL_FIRE_FLAME.get(), EndermanParticle.Provider::new);
         register.accept(ModParticleTypes.BUBBLE.get(), EndermanParticle.Provider::new);
     }

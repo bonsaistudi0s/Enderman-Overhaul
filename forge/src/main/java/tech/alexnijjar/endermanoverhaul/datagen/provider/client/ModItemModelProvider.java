@@ -22,6 +22,11 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(ModItems.CORRUPTED_PEARL.get());
         basicItem(ModItems.SOUL_PEARL.get());
+        basicItem(ModItems.BUBBLE_PEARL.get());
+        basicItem(ModItems.SUMMONER_PEARL.get());
+        basicItem(ModItems.ICY_PEARL.get());
+        basicItem(ModItems.CRIMSON_PEARL.get());
+        basicItem(ModItems.WARPED_PEARL.get());
         ModItems.SPAWN_EGGS.getEntries().stream().map(RegistryEntry::get).forEach(this::spawnEggItem);
     }
 

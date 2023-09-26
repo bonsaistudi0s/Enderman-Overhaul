@@ -15,8 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
-import tech.alexnijjar.endermanoverhaul.common.items.pearls.CorruptedPearlItem;
-import tech.alexnijjar.endermanoverhaul.common.items.pearls.SoulPearlItem;
+import tech.alexnijjar.endermanoverhaul.common.items.pearls.*;
 
 import java.util.function.Supplier;
 
@@ -60,6 +59,11 @@ public class ModItems {
 
     public static final RegistryEntry<Item> CORRUPTED_PEARL = ITEMS.register("corrupted_pearl", () -> new CorruptedPearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> SOUL_PEARL = ITEMS.register("soul_pearl", () -> new SoulPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> BUBBLE_PEARL = ITEMS.register("bubble_pearl", () -> new BubblePearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> SUMMONER_PEARL = ITEMS.register("summoner_pearl", () -> new SummonerPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> ICY_PEARL = ITEMS.register("icy_pearl", () -> new IcyPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> CRIMSON_PEARL = ITEMS.register("crimson_pearl", () -> new CrimsonPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> WARPED_PEARL = ITEMS.register("warped_pearl", () -> new WarpedPearlItem(new Item.Properties().stacksTo(16)));
 
     @ExpectPlatform
     public static Supplier<Item> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {

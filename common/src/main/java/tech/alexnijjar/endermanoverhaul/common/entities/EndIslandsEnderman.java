@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -24,6 +25,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.EnderBullet;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class EndIslandsEnderman extends BaseEnderman {
@@ -67,6 +69,7 @@ public class EndIslandsEnderman extends BaseEnderman {
         super.tick();
     }
 
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_POSSESSING_TICKS, 0);
@@ -115,6 +118,14 @@ public class EndIslandsEnderman extends BaseEnderman {
         }
     }
 
+    @Override
+    public void die(@NotNull DamageSource damageSource) {
+        super.die(damageSource);
+        if (getTarget() != null) {
+            spawnProjectiles(getTarget());
+        }
+    }
+
     // anger all enderman in the nearby area
     private void possess(LivingEntity target) {
         if (target == null) return;
@@ -123,6 +134,15 @@ public class EndIslandsEnderman extends BaseEnderman {
         level().getEntities(this, getBoundingBox().inflate(15.0)).stream()
             .filter(entity -> entity instanceof EnderMan)
             .forEach(entity -> ((EnderMan) entity).setTarget(target));
+
+        spawnProjectiles(target);
+    }
+
+    public void spawnProjectiles(Entity target) {
+        for (int i = 0; i < 3; i++) {
+            EnderBullet bullet = new EnderBullet(level(), this, target, getDirection().getAxis());
+            level().addFreshEntity(bullet);
+        }
     }
 
     public boolean isPossessing() {

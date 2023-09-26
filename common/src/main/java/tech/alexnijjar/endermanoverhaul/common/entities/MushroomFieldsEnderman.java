@@ -56,7 +56,7 @@ public class MushroomFieldsEnderman extends PassiveEnderman {
         boolean hurt = super.hurt(source, amount);
 
         if (source.getEntity() == null) return hurt;
-        for (int i = 0; i < 64; ++i) {
+        for (int i = 0; i < 64; i++) {
             if (this.teleport()) return true;
         }
         return hurt;

@@ -12,18 +12,19 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.EnderpearlItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tech.alexnijjar.endermanoverhaul.common.constants.ConstantComponents;
 import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.ThrownSoulPearl;
 import tech.alexnijjar.endermanoverhaul.common.tags.ModEntityTypeTags;
 
 import java.util.List;
 
-public class SoulPearlItem extends Item {
+public class SoulPearlItem extends EnderpearlItem {
     public SoulPearlItem(Properties properties) {
         super(properties);
     }
@@ -67,8 +68,8 @@ public class SoulPearlItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.soul_pearl_1").withStyle(ChatFormatting.GRAY));
-        tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.soul_pearl_2").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(ConstantComponents.SOUL_PEARL_TOOLTIP_1);
+        tooltipComponents.add(ConstantComponents.SOUL_PEARL_TOOLTIP_2);
 
         if (level == null) return;
         CompoundTag tag = stack.getOrCreateTag();
@@ -76,12 +77,12 @@ public class SoulPearlItem extends Item {
             int id = tag.getInt("BoundEntity");
             Entity entity = level.getEntity(id);
             if (entity == null) {
-                tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.not_bound").withStyle(ChatFormatting.RED));
+                tooltipComponents.add(ConstantComponents.NOT_BOUND);
             } else {
                 tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.bound_to", entity.getDisplayName().getString()).withStyle(ChatFormatting.GREEN));
             }
         } else {
-            tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.not_bound").withStyle(ChatFormatting.RED));
+            tooltipComponents.add(ConstantComponents.NOT_BOUND);
         }
     }
 }
