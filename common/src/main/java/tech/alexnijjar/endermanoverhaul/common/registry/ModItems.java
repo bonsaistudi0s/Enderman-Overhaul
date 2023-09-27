@@ -9,12 +9,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
+import tech.alexnijjar.endermanoverhaul.common.items.CorruptedBlade;
 import tech.alexnijjar.endermanoverhaul.common.items.pearls.*;
 
 import java.util.function.Supplier;
@@ -64,6 +62,10 @@ public class ModItems {
     public static final RegistryEntry<Item> ICY_PEARL = ITEMS.register("icy_pearl", () -> new IcyPearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> CRIMSON_PEARL = ITEMS.register("crimson_pearl", () -> new CrimsonPearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> WARPED_PEARL = ITEMS.register("warped_pearl", () -> new WarpedPearlItem(new Item.Properties().stacksTo(16)));
+
+    public static final RegistryEntry<Item> ENDERMAN_TOOTH = ITEMS.register("enderman_tooth", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> CORRUPTED_BLADE = ITEMS.register("corrupted_blade", () -> new CorruptedBlade(Tiers.IRON, 3, -2.4f, new Item.Properties()));
+
 
     @ExpectPlatform
     public static Supplier<Item> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {

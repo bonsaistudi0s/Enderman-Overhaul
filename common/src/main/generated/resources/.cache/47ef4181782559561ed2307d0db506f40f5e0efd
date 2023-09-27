@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-25T15:32:32.950451	Item Models: endermanoverhaul
+// 1.20.1	2023-09-26T13:02:20.469777	Item Models: endermanoverhaul
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/badlands_enderman_spawn_egg.json
 bdc027cb806b155773be7937ccc4a56d75a3b891 assets/endermanoverhaul/models/item/bubble_pearl.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/cave_enderman_spawn_egg.json
@@ -9,6 +9,7 @@ bdc027cb806b155773be7937ccc4a56d75a3b891 assets/endermanoverhaul/models/item/bub
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/desert_enderman_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/end_enderman_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/end_islands_enderman_spawn_egg.json
+863c9ddde9d7ee0df1c2016749bd6696057bb2e3 assets/endermanoverhaul/models/item/enderman_tooth.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/flower_fields_enderman_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/endermanoverhaul/models/item/ice_spikes_enderman_spawn_egg.json
 7e9be80e77100a930197a0a651324540198be415 assets/endermanoverhaul/models/item/icy_pearl.json

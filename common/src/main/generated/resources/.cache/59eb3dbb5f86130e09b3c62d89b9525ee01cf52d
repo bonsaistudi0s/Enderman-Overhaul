@@ -1,10 +1,10 @@
-// 1.20.1	2023-09-26T02:05:06.10571	Loot Tables
+// 1.20.1	2023-09-26T16:04:32.282401	Loot Tables
 2069ca7dde9d8718356187f77a2e5a63c02a64c3 data/endermanoverhaul/loot_tables/entities/badlands_enderman.json
 9a3d6237947bcdb91c7aeb41de1c50e074b6bed1 data/endermanoverhaul/loot_tables/entities/cave_enderman.json
 34e1f76729a284eeb841cc016aaae1b9b0817710 data/endermanoverhaul/loot_tables/entities/crimson_forest_enderman.json
 d79e93a62113505d178b5deb01c8305818176cc1 data/endermanoverhaul/loot_tables/entities/dark_oak_enderman.json
 077e3c84ef51442ae161bcc3d26f164becd7921b data/endermanoverhaul/loot_tables/entities/desert_enderman.json
-6707a8a7d2f3f350a6c7f981ba83cc24abe99e8b data/endermanoverhaul/loot_tables/entities/end_enderman.json
+bc7f2f3853c89bf2489df28c6b3373bba80ba4d0 data/endermanoverhaul/loot_tables/entities/end_enderman.json
 ab91177ff0868f946aa8b95b87e09dd3c531f4fd data/endermanoverhaul/loot_tables/entities/end_islands_enderman.json
 b0684286b7d0e48c38b14d6daeb2787be532cd85 data/endermanoverhaul/loot_tables/entities/flower_fields_enderman.json
 9cd7d0f89e5811c7a0c14bffc360645406c31c31 data/endermanoverhaul/loot_tables/entities/ice_spikes_enderman.json

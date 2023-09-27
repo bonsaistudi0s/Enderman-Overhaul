@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "endermanoverhaul:item/corrupted_blade"
+  }
+}

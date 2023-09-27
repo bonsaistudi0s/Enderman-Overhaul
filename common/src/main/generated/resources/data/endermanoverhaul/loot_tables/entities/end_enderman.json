@@ -81,6 +81,42 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.04,
+          "condition": "minecraft:random_chance_with_looting",
+          "looting_multiplier": 0.025
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:looting_enchant"
+            }
+          ],
+          "name": "endermanoverhaul:enderman_tooth"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "endermanoverhaul:entities/end_enderman"

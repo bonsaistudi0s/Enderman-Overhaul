@@ -81,7 +81,12 @@ public class ModLootTableProvider extends LootTableProvider {
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
                     .add(LootItem.lootTableItem(ModItems.CORRUPTED_PEARL.get()).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
-                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))))
+                .withPool(LootPool.lootPool()
+                    .add(LootItem.lootTableItem(ModItems.ENDERMAN_TOOTH.get()).apply(SetItemCountFunction
+                        .setCount(UniformGenerator.between(0.0f, 2.0f))).apply(LootingEnchantFunction
+                        .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
+                    .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.04f, 0.025f))));
 
             output.accept(getEntity(ModEntityTypes.END_ISLANDS_ENDERMAN.get()), getDefaultEndermanLootTable()); // TODO drop Ancient pearl 1-3
 

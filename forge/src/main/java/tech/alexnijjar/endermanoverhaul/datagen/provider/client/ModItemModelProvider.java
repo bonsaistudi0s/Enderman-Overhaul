@@ -27,6 +27,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.ICY_PEARL.get());
         basicItem(ModItems.CRIMSON_PEARL.get());
         basicItem(ModItems.WARPED_PEARL.get());
+        basicItem(ModItems.ENDERMAN_TOOTH.get());
         ModItems.SPAWN_EGGS.getEntries().stream().map(RegistryEntry::get).forEach(this::spawnEggItem);
     }
 
