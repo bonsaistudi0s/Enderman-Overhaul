@@ -11,7 +11,6 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
-@Debug(export = true)
 @Mixin(EnderMan.class)
 public abstract class EnderManMixin extends Monster implements NeutralMob {
 

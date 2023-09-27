@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 
 public class ModEntityTypeTags {
-    public static final TagKey<EntityType<?>> IGNORE_SOUL_PEARL = tag("ignores_soul_pearl");
+    public static final TagKey<EntityType<?>> CANT_BE_TELEPORTED = tag("cant_be_teleported");
 
     private static TagKey<EntityType<?>> tag(String name) {
         return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(EndermanOverhaul.MOD_ID, name));

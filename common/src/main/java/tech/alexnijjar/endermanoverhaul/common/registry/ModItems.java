@@ -12,8 +12,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
-import tech.alexnijjar.endermanoverhaul.common.items.CorruptedBlade;
+import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedBladeItem;
 import tech.alexnijjar.endermanoverhaul.common.items.pearls.*;
+import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShielditem;
 
 import java.util.function.Supplier;
 
@@ -22,7 +23,7 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, EndermanOverhaul.MOD_ID);
     public static final ResourcefulRegistry<Item> SPAWN_EGGS = ResourcefulRegistries.create(ITEMS);
     public static final Supplier<CreativeModeTab> TAB = new ResourcefulCreativeTab(new ResourceLocation(EndermanOverhaul.MOD_ID, "main"))
-        .setItemIcon(() -> Items.ENDER_PEARL)
+        .setItemIcon(() -> ModItems.CORRUPTED_PEARL.get())
         .addRegistry(ITEMS)
         .build();
 
@@ -64,7 +65,8 @@ public class ModItems {
     public static final RegistryEntry<Item> WARPED_PEARL = ITEMS.register("warped_pearl", () -> new WarpedPearlItem(new Item.Properties().stacksTo(16)));
 
     public static final RegistryEntry<Item> ENDERMAN_TOOTH = ITEMS.register("enderman_tooth", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> CORRUPTED_BLADE = ITEMS.register("corrupted_blade", () -> new CorruptedBlade(Tiers.IRON, 3, -2.4f, new Item.Properties()));
+    public static final RegistryEntry<Item> CORRUPTED_BLADE = ITEMS.register("corrupted_blade", () -> new CorruptedBladeItem(Tiers.IRON, 3, -2.4f, new Item.Properties()));
+    public static final RegistryEntry<Item> CORRUPTED_SHIELD = ITEMS.register("corrupted_shield", () -> new CorruptedShielditem(new Item.Properties().durability(672)));
 
 
     @ExpectPlatform

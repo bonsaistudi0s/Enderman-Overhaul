@@ -1,0 +1,41 @@
+{
+    "parent": "builtin/entity",
+    "gui_light": "front",
+    "textures": {
+        "particle": "endermanoverhaul:item/enderman_tooth"
+    },
+    "display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 0],
+			"translation": [0.75, -5, 2.25]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, -90, 0],
+			"translation": [0.75, -5, 2.25]
+		},
+		"firstperson_righthand": {
+			"rotation": [7, 0, -5],
+			"translation": [0, -5.75, 1.25]
+		},
+		"firstperson_lefthand": {
+			"rotation": [7, 0, -5],
+			"translation": [0, -5.75, 1.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [-1.5, -1, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"fixed": {
+			"translation": [0, -2, -3]
+		}
+	},
+    "overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "endermanoverhaul:item/corrupted_shield_blocking"
+        }
+    ]
+}

@@ -1,8 +1,10 @@
 package tech.alexnijjar.endermanoverhaul.client;
 
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -15,10 +17,12 @@ import tech.alexnijjar.endermanoverhaul.client.renderer.EnderBulletRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.ReplacedEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderer.items.CorruptedShieldRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.summons.ScarabRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.summons.SpiritRenderer;
 import tech.alexnijjar.endermanoverhaul.client.utils.ClientPlatformUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 import java.util.HashMap;
@@ -27,12 +31,15 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class EndermanOverhaulClient {
+    private static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
     private static final Map<Item, Supplier<GeoArmorRenderer<?>>> ARMOR_RENDERERS = new HashMap<>();
 
     public static void init() {
         EndermanOverhaul.CONFIGURATOR.registerConfig(EndermanOverhaulClientConfig.class);
         registerEntityRenderers();
         registerArmorRenderers();
+        registerItemRenderers();
+        registerItemProperties();
     }
 
     private static void registerEntityRenderers() {
@@ -87,7 +94,20 @@ public class EndermanOverhaulClient {
 //        ARMOR_RENDERERS.put(ModItems.SNOWY_HOOD.get(), () -> new HoodRenderer(ModItems.SNOWY_HOOD.get()));
     }
 
+    private static void registerItemRenderers() {
+        ITEM_RENDERERS.put(ModItems.CORRUPTED_SHIELD.get().asItem(), new CorruptedShieldRenderer());
+    }
+
+    public static void registerItemProperties() {
+        ClientPlatformUtils.registerItemProperty(ModItems.CORRUPTED_SHIELD.get(), new ResourceLocation("blocking"), (stack, level, entity, i) ->
+            entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+    }
+
     public static GeoArmorRenderer<?> getArmorRenderer(ItemLike item) {
         return ARMOR_RENDERERS.get(item.asItem()).get();
+    }
+
+    public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {
+        return ITEM_RENDERERS.get(item.asItem());
     }
 }

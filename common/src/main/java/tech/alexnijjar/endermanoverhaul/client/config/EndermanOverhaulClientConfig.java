@@ -12,5 +12,5 @@ public final class EndermanOverhaulClientConfig {
         type = EntryType.BOOLEAN,
         translation = "config.endermanoverhaul.replaceDefaultEnderman"
     )
-    public static boolean replaceDefaultEnderman = true;
+    public static boolean replaceDefaultEnderman = false;
 }

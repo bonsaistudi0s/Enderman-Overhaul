@@ -56,7 +56,7 @@ public class SoulPearlItem extends EnderpearlItem {
 
     @Override
     public @NotNull InteractionResult interactLivingEntity(@NotNull ItemStack stack, @NotNull Player player, @NotNull LivingEntity interactionTarget, @NotNull InteractionHand usedHand) {
-        if (!player.level().isClientSide() && player.isShiftKeyDown() && !interactionTarget.getType().is(ModEntityTypeTags.IGNORE_SOUL_PEARL)) {
+        if (!player.level().isClientSide() && player.isShiftKeyDown() && !interactionTarget.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) {
             CompoundTag tag = stack.getOrCreateTag();
             tag.putInt("BoundEntity", interactionTarget.getId());
             player.displayClientMessage(Component.translatable("tooltip.endermanoverhaul.bound_to", interactionTarget.getDisplayName().getString()), true);

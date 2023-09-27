@@ -51,6 +51,9 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CRIMSON_PEARL_TOOLTIP.getString(), "Applies Strength II when teleporting");
         add(ConstantComponents.WARPED_PEARL_TOOLTIP.getString(), "Applies Resistance II when teleporting");
 
+        add(ConstantComponents.CORRUPTED_BLADE_TOOLTIP.getString(), "Teleports targets randomly");
+        add(ConstantComponents.CORRUPTED_SHIELD_TOOLTIP.getString(), "Teleports attackers randomly");
+
         add("tooltip.endermanoverhaul.bound_to", "Bound to: %s");
         add(ConstantComponents.NOT_BOUND.getString(), "Not bound");
 

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "o": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "endermanoverhaul:enderman_tooth"
+    }
+  },
+  "pattern": [
+    "ToT",
+    "oWo",
+    "ToT"
+  ],
+  "result": {
+    "item": "endermanoverhaul:corrupted_shield"
+  },
+  "show_notification": true
+}
