@@ -1,6 +1,5 @@
 package tech.alexnijjar.endermanoverhaul.common.entities.projectiles;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -16,8 +15,11 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
+import tech.alexnijjar.endermanoverhaul.common.tags.ModEntityTypeTags;
 
 public class ThrownSoulPearl extends ThrowableItemProjectile {
     @Nullable
@@ -67,13 +69,11 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
 
-        for (int i = 0; i < 32; i++) {
-            this.level().addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), this.random.nextGaussian(), 0.0, this.random.nextGaussian());
-        }
-
         if (this.level().isClientSide() || this.isRemoved()) return;
+        ModUtils.sendParticles((ServerLevel) level(), ModParticleTypes.SOUL_FIRE_FLAME.get(), this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 32, this.random.nextGaussian(), 0.0, this.random.nextGaussian(), 0.1);
 
         if (boundEntity != null) {
+            if (boundEntity.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) return;
             if (this.random.nextFloat() < 0.05f && this.level().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)) {
                 Endermite endermite = EntityType.ENDERMITE.create(this.level());
                 if (endermite != null) {

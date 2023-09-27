@@ -53,7 +53,7 @@ public class DarkOakEnderman extends BaseEnderman {
 
     @Override
     public @Nullable MobEffectInstance getAreaEffect() {
-        return new MobEffectInstance(MobEffects.BLINDNESS, 40, 1);
+        return new MobEffectInstance(MobEffects.DARKNESS, 100, 1);
     }
 
     @Override
@@ -64,6 +64,11 @@ public class DarkOakEnderman extends BaseEnderman {
     @Override
     public Vec3 getHeldBlockOffset() {
         return new Vec3(0, -0.6, 0);
+    }
+
+    @Override
+    public boolean speedUpWhenAngry() {
+        return false;
     }
 
     @Override

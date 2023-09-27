@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
+import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
 import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedBladeItem;
 import tech.alexnijjar.endermanoverhaul.common.items.pearls.*;
 import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShielditem;
@@ -52,9 +53,9 @@ public class ModItems {
 
     public static final RegistryEntry<Item> TINY_SKULL = ITEMS.register("tiny_skull", () -> new BlockItem(ModBlocks.TINY_SKULL.get(), new Item.Properties().stacksTo(16)));
 
-//    public static final RegistryEntry<Item> BADLANDS_HOOD = ITEMS.register("badlands_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
-//    public static final RegistryEntry<Item> SAVANNAS_HOOD = ITEMS.register("savanna_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
-//    public static final RegistryEntry<Item> SNOWY_HOOD = ITEMS.register("snowy_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> BADLANDS_HOOD = ITEMS.register("badlands_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> SAVANNAS_HOOD = ITEMS.register("savanna_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> SNOWY_HOOD = ITEMS.register("snowy_hood", () -> new HoodItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryEntry<Item> CORRUPTED_PEARL = ITEMS.register("corrupted_pearl", () -> new CorruptedPearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> SOUL_PEARL = ITEMS.register("soul_pearl", () -> new SoulPearlItem(new Item.Properties().stacksTo(16)));

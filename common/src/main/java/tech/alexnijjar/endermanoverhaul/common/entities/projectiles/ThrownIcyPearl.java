@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -20,6 +21,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 
@@ -47,16 +49,15 @@ public class ThrownIcyPearl extends ThrowableItemProjectile {
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
 
-        for (int i = 0; i < 32; ++i) {
-            this.level().addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), this.random.nextGaussian(), 0.0, this.random.nextGaussian());
-        }
-
         if (this.level().isClientSide() || this.isRemoved()) return;
+        ModUtils.sendParticles((ServerLevel) level(), ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 32, this.random.nextGaussian(), 0.0, this.random.nextGaussian(), 0.1);
+
         Entity entity = this.getOwner();
         if (entity instanceof ServerPlayer serverPlayer) {
             if (serverPlayer.connection.isAcceptingMessages() && serverPlayer.level() == this.level() && !serverPlayer.isSleeping()) {
                 List<Entity> nearbyEntities = level().getEntities(this, getBoundingBox().inflate(4.0), e -> e instanceof LivingEntity);
                 for (var nearby : nearbyEntities) {
+                    if (nearby == serverPlayer) continue;
                     if (!(nearby instanceof LivingEntity target)) continue;
                     target.setTicksFrozen(target.getTicksRequiredToFreeze() * 5);
                     target.hurt(this.damageSources().freeze(), 8.0f);
@@ -65,20 +66,32 @@ public class ThrownIcyPearl extends ThrowableItemProjectile {
                 }
 
                 BlockPos.betweenClosedStream(
-                        Mth.floor(getX() - 4),
-                        Mth.floor(getY() - 2),
-                        Mth.floor(getZ() - 4),
-                        Mth.floor(getX() + 4),
-                        Mth.floor(getY() + 2),
-                        Mth.floor(getZ() + 4))
+                        Mth.floor(getX() - 1),
+                        Mth.floor(getY() - 1),
+                        Mth.floor(getZ() - 1),
+                        Mth.floor(getX() + 1),
+                        Mth.floor(getY() + 1),
+                        Mth.floor(getZ() + 1))
                     .filter(pos -> level().getFluidState(pos).is(FluidTags.WATER))
-                    .forEach(pos -> level().setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState()));
+                    .forEach(pos -> level().setBlockAndUpdate(pos, Blocks.FROSTED_ICE.defaultBlockState()));
+
+                if (serverPlayer.connection.isAcceptingMessages() && serverPlayer.level() == this.level() && !serverPlayer.isSleeping()) {
+                    if (entity.isPassenger()) {
+                        serverPlayer.dismountTo(this.getX(), this.getY(), this.getZ());
+                    } else {
+                        entity.teleportTo(this.getX(), this.getY(), this.getZ());
+                    }
+
+                    entity.hurt(this.damageSources().fall(), 5.0f);
+                    entity.resetFallDistance();
+                }
             }
         } else if (entity != null) {
             entity.teleportTo(this.getX(), this.getY(), this.getZ());
             entity.resetFallDistance();
         }
 
+        level().playSound(null, getX(), getY(), getZ(), SoundEvents.ENDER_EYE_DEATH, getSoundSource(), 1.0f, 1.0f);
         this.discard();
     }
 

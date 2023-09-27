@@ -63,12 +63,17 @@ public class WindsweptHillsEnderman extends BaseEnderman {
 
     @Override
     public @Nullable MobEffectInstance getAreaEffect() {
-        return new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2);
+        return new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2);
     }
 
     @Override
     public int getAreaEffectRange() {
         return 20;
+    }
+
+    @Override
+    public boolean speedUpWhenAngry() {
+        return false;
     }
 
     @Override

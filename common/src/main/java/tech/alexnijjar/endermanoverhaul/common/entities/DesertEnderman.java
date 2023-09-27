@@ -61,6 +61,11 @@ public class DesertEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean speedUpWhenAngry() {
+        return false;
+    }
+
+    @Override
     public void die(@NotNull DamageSource damageSource) {
         super.die(damageSource);
         for (int i = 0; i < 3; i++) {

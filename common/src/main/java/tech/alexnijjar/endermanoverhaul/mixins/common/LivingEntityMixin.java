@@ -29,6 +29,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow protected ItemStack useItem;
 
+    @Shadow public abstract boolean attackable();
+
     public LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
@@ -72,6 +74,7 @@ public abstract class LivingEntityMixin extends Entity {
 
         if (attacker.level().random.nextInt(4) != 0) {
             ModUtils.teleportTarget(attacker.level(), attacker, 32);
+            attacker.hurt(attacker.damageSources().fall(), 4.0f);
         }
     }
 }

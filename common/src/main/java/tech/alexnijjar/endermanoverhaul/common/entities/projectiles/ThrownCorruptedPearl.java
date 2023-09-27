@@ -58,11 +58,8 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
     protected void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
 
-        for (int i = 0; i < 32; i++) {
-            this.level().addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), this.random.nextGaussian(), 0.0, this.random.nextGaussian());
-        }
-
         if (this.level().isClientSide() || this.isRemoved()) return;
+        ModUtils.sendParticles((ServerLevel) level(), ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 32, this.random.nextGaussian(), 0.0, this.random.nextGaussian(), 0.1);
 
         if (!(result.getEntity() instanceof LivingEntity target)) {
             this.discard();

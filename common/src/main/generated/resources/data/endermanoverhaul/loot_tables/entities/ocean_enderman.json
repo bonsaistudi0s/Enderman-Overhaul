@@ -26,13 +26,7 @@
             }
           ],
           "name": "minecraft:ender_pearl"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
+        },
         {
           "type": "minecraft:item",
           "functions": [

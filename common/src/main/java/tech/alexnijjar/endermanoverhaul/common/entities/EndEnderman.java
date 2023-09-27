@@ -84,6 +84,11 @@ public class EndEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean canShake() {
+        return false;
+    }
+
+    @Override
     public boolean isProvokedByEyeContact() {
         return false;
     }
@@ -109,7 +114,7 @@ public class EndEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean runWhenAngry() {
+    public boolean speedUpWhenAngry() {
         return false;
     }
 

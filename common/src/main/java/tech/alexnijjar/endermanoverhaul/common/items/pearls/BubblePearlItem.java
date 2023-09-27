@@ -31,7 +31,7 @@ public class BubblePearlItem extends EnderpearlItem {
         if (!level.isClientSide()) {
             ThrownBubblePearl pearl = new ThrownBubblePearl(level, player);
             pearl.setItem(itemStack);
-            pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1.7f, 0.1f);
+            pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1.3f, 0.1f);
             level.addFreshEntity(pearl);
         }
 

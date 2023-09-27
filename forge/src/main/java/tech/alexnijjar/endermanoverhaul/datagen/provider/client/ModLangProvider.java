@@ -45,7 +45,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.SOUL_PEARL_TOOLTIP_1.getString(), "Shift-right click to bind an entity");
         add(ConstantComponents.SOUL_PEARL_TOOLTIP_2.getString(), "Teleports the bound entity to the target location");
         add(ConstantComponents.ANCIENT_PEARL_TOOLTIP.getString(), "Summons a baby enderman to fight for you");
-        add(ConstantComponents.BUBBLE_PEARL_TOOLTIP.getString(), "Faster Ender Pearl with no gravity");
+        add(ConstantComponents.BUBBLE_PEARL_TOOLTIP.getString(), "Accurate Ender Pearl with no gravity");
         add(ConstantComponents.ICY_PEARL_TOOLTIP.getString(), "Freezes nearby targets on hit");
         add(ConstantComponents.SUMMONER_PEARL_TOOLTIP.getString(), "Teleports nearby targets on hit");
         add(ConstantComponents.CRIMSON_PEARL_TOOLTIP.getString(), "Applies Strength II when teleporting");
@@ -56,6 +56,15 @@ public class ModLangProvider extends LanguageProvider {
 
         add("tooltip.endermanoverhaul.bound_to", "Bound to: %s");
         add(ConstantComponents.NOT_BOUND.getString(), "Not bound");
+
+        add("subtitles.endermanoverhaul.entity.bubble_pop", "Bubble Pearl Pops");
+        add("subtitles.endermanoverhaul.entity.cave_enderman.ambient", "Cave Enderman vwoops");
+        add("subtitles.endermanoverhaul.entity.cave_enderman.hurt", "Cave Enderman hurts");
+        add("subtitles.endermanoverhaul.entity.plant_enderman.ambient", "Plant Enderman vwoops");
+        add("subtitles.endermanoverhaul.entity.plant_enderman.hurt", "Plant Enderman hurts");
+        add("subtitles.endermanoverhaul.entity.tall_enderman.ambient", "Tall Enderman vwoops");
+        add("subtitles.endermanoverhaul.entity.tall_enderman.death", "Tall Enderman dies");
+        add("subtitles.endermanoverhaul.entity.tall_enderman.stare", "Tall Enderman cries out");
 
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");

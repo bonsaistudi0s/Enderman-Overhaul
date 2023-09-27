@@ -40,6 +40,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
+import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
@@ -91,6 +92,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     }
 
     public boolean canRunWhenAngry() {
+        return true;
+    }
+
+    public boolean canShake() {
         return true;
     }
 
@@ -158,7 +163,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return SoundEvents.ENDERMAN_STARE;
     }
 
-    public boolean runWhenAngry() {
+    public boolean speedUpWhenAngry() {
         return true;
     }
 
@@ -247,6 +252,9 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
     public boolean isLookingAtMe(Player player) {
         if (!this.isProvokedByEyeContact()) return false;
+        if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof HoodItem) {
+            return false;
+        }
         ItemStack itemStack = player.getInventory().armor.get(3);
         if (itemStack.is(Blocks.CARVED_PUMPKIN.asItem())) return false;
 

@@ -59,7 +59,7 @@ public class WarpedForestEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean runWhenAngry() {
+    public boolean speedUpWhenAngry() {
         return false;
     }
 

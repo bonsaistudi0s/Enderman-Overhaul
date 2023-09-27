@@ -52,7 +52,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
 
     @Override
     public @NotNull Vec3 getRenderOffset(T entity, float partialTicks) {
-        if (entity.isCreepy()) {
+        if (entity.isCreepy() && entity.canShake()) {
             Level level = entity.level();
             return new Vec3(level.random.nextGaussian() * 0.02, 0.0, level.random.nextGaussian() * 0.02);
         } else {

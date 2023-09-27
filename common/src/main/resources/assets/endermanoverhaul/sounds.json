@@ -1,4 +1,10 @@
 {
+    "bubble_pop": {
+        "sounds": [
+            "endermanoverhaul:bubble_pop"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.bubble_pop"
+    },
     "cave_enderman_ambient": {
         "sounds": [
             "endermanoverhaul:cave/idle1",

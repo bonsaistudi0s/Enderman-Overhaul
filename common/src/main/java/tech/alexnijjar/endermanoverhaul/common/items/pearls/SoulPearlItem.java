@@ -61,6 +61,7 @@ public class SoulPearlItem extends EnderpearlItem {
             tag.putInt("BoundEntity", interactionTarget.getId());
             player.displayClientMessage(Component.translatable("tooltip.endermanoverhaul.bound_to", interactionTarget.getDisplayName().getString()), true);
             player.getItemInHand(usedHand).setTag(tag);
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EVOKER_CAST_SPELL, SoundSource.NEUTRAL, 1.0f, 1.0f);
             return InteractionResult.SUCCESS;
         }
         return super.interactLivingEntity(stack, player, interactionTarget, usedHand);
@@ -84,5 +85,10 @@ public class SoulPearlItem extends EnderpearlItem {
         } else {
             tooltipComponents.add(ConstantComponents.NOT_BOUND);
         }
+    }
+
+    @Override
+    public boolean isFoil(@NotNull ItemStack stack) {
+        return stack.hasTag() && stack.getOrCreateTag().contains("BoundEntity");
     }
 }

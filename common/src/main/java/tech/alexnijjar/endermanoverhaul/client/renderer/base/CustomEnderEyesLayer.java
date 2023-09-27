@@ -35,7 +35,7 @@ public class CustomEnderEyesLayer<T extends GeoAnimatable> extends GeoRenderLaye
             glow, vertexConsumer,
             partialTick,
             LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
-            1, 1, 1, 1
+            0.65f, 0.65f, 0.65f, 1
         );
     }
 }

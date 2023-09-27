@@ -1,6 +1,8 @@
 package tech.alexnijjar.endermanoverhaul.common;
 
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,6 +16,11 @@ import tech.alexnijjar.endermanoverhaul.networking.NetworkHandler;
 import tech.alexnijjar.endermanoverhaul.networking.messages.ClientboundFlashScreenPacket;
 
 public class ModUtils {
+    public static <T extends ParticleOptions> void sendParticles(ServerLevel level, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
+        for (ServerPlayer player : level.players()) {
+            level.sendParticles(player, particle, true, x, y, z, count, deltaX, deltaY, deltaZ, speed);
+        }
+    }
 
     public static void teleportTarget(Level level, LivingEntity target, int range) {
         if (level.isClientSide()) return;

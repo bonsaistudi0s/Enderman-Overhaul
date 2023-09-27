@@ -18,6 +18,7 @@ import tech.alexnijjar.endermanoverhaul.client.renderer.MushroomFieldsEndermanRe
 import tech.alexnijjar.endermanoverhaul.client.renderer.ReplacedEndermanRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.items.CorruptedShieldRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderer.items.HoodRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.summons.ScarabRenderer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.summons.SpiritRenderer;
 import tech.alexnijjar.endermanoverhaul.client.utils.ClientPlatformUtils;
@@ -89,9 +90,9 @@ public class EndermanOverhaulClient {
     }
 
     public static void registerArmorRenderers() {
-//        ARMOR_RENDERERS.put(ModItems.BADLANDS_HOOD.get(), () -> new HoodRenderer(ModItems.BADLANDS_HOOD.get()));
-//        ARMOR_RENDERERS.put(ModItems.SAVANNAS_HOOD.get(), () -> new HoodRenderer(ModItems.SAVANNAS_HOOD.get()));
-//        ARMOR_RENDERERS.put(ModItems.SNOWY_HOOD.get(), () -> new HoodRenderer(ModItems.SNOWY_HOOD.get()));
+        ARMOR_RENDERERS.put(ModItems.BADLANDS_HOOD.get(), () -> new HoodRenderer(ModItems.BADLANDS_HOOD.get()));
+        ARMOR_RENDERERS.put(ModItems.SAVANNAS_HOOD.get(), () -> new HoodRenderer(ModItems.SAVANNAS_HOOD.get()));
+        ARMOR_RENDERERS.put(ModItems.SNOWY_HOOD.get(), () -> new HoodRenderer(ModItems.SNOWY_HOOD.get()));
     }
 
     private static void registerItemRenderers() {
