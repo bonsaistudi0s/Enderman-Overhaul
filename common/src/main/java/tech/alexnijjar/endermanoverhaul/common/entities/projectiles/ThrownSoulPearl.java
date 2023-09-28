@@ -71,7 +71,7 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
 
         if (this.level().isClientSide() || this.isRemoved()) return;
         for (int i = 0; i < 32; ++i) {
-            ModUtils.sendParticles((ServerLevel) level(), ModParticleTypes.SOUL_FIRE_FLAME.get(), this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
+            ModUtils.sendParticles((ServerLevel) level(), ModParticleTypes.SOUL_FIRE_FLAME.get(), this.getX(), (this.getY() - 1) + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
         }
 
         if (boundEntity != null) {

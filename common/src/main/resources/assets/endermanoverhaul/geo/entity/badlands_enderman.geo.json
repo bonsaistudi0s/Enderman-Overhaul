@@ -28,6 +28,11 @@
 				{
 					"name": "head",
 					"parent": "body",
+					"pivot": [0, 41, -0.5]
+				},
+				{
+					"name": "head_rotation",
+					"parent": "head",
 					"pivot": [0, 41, -0.5],
 					"cubes": [
 						{"origin": [-5, 40.5, -4.5], "size": [10, 9, 9], "uv": [0, 0]},

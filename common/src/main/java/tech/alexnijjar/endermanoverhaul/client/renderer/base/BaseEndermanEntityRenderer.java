@@ -7,7 +7,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -29,24 +28,27 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     }
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman, ResourceLocation animation) {
+        this(renderManager, enderman, animation, true);
+    }
+
+    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman, ResourceLocation animation, boolean turnsHead) {
         this(renderManager,
             BuiltInRegistries.ENTITY_TYPE.getKey(enderman),
             getTexture(enderman),
             animation,
-            getGlowTexture(enderman));
+            getGlowTexture(enderman),
+            turnsHead);
     }
 
-    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, ResourceLocation assetPath, ResourceLocation texture, ResourceLocation animation, ResourceLocation glow) {
-        super(renderManager, new DefaultedEntityGeoModel<T>(assetPath, true)
-            .withAltTexture(texture)
-            .withAltAnimations(animation));
+    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, ResourceLocation assetPath, ResourceLocation texture, ResourceLocation animation, ResourceLocation glow, boolean turnsHead) {
+        super(renderManager, new BaseEndermanModel<>(assetPath, turnsHead, texture, animation));
         if (glow != null) {
             addRenderLayer(new CustomEnderEyesLayer<>(this, glow));
         }
         addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.animatable));
     }
 
-    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, DefaultedEntityGeoModel<T> model) {
+    public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, BaseEndermanModel<T> model) {
         super(renderManager, model);
     }
 

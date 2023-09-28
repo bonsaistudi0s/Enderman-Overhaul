@@ -44,7 +44,12 @@
 					"name": "head",
 					"parent": "body",
 					"pivot": [0, 36.8, -0.5],
-					"rotation": [5, 0, 0],
+					"rotation": [5, 0, 0]
+				},
+				{
+					"name": "head_rotation",
+					"parent": "head",
+					"pivot": [0, 36.8, -0.5],
 					"cubes": [
 						{"origin": [-4, 36.8, -4.5], "size": [8, 7, 8], "uv": [0, 0]}
 					]

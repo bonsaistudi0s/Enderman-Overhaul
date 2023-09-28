@@ -6,10 +6,10 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanModel;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.CustomCarriedBlockLayer;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.CustomEnderEyesLayer;
 import tech.alexnijjar.endermanoverhaul.common.entities.ReplacedEnderman;
@@ -19,9 +19,11 @@ public class ReplacedEndermanRenderer extends GeoReplacedEntityRenderer<EnderMan
     public static final ResourceLocation GLOW = new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/default/default_enderman_glow.png");
 
     public ReplacedEndermanRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<ReplacedEnderman>(new ResourceLocation(EndermanOverhaul.MOD_ID, "default_enderman"), true)
-                .withAltTexture(TEXTURE)
-                .withAltAnimations(BaseEndermanEntityRenderer.ANIMATION),
+        super(renderManager, new BaseEndermanModel<>(
+                new ResourceLocation(EndermanOverhaul.MOD_ID, "default_enderman"),
+                true,
+                TEXTURE,
+                BaseEndermanEntityRenderer.ANIMATION),
             new ReplacedEnderman());
 
         addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW));

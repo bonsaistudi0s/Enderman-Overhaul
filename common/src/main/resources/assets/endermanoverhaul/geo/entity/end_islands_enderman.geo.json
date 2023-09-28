@@ -34,6 +34,11 @@
 				{
 					"name": "head",
 					"parent": "neck",
+					"pivot": [0, 66, 0]
+				},
+				{
+					"name": "head_rotation",
+					"parent": "head",
 					"pivot": [0, 66, 0],
 					"cubes": [
 						{"origin": [-7.5, 66, -4.5], "size": [15, 4, 9], "uv": [0, 0]}
@@ -41,7 +46,7 @@
 				},
 				{
 					"name": "head_2",
-					"parent": "head",
+					"parent": "head_rotation",
 					"pivot": [-0.5, 67, -1],
 					"cubes": [
 						{"origin": [-6.5, 64, -5.5], "size": [13, 4, 5], "uv": [32, 33]}
@@ -49,7 +54,7 @@
 				},
 				{
 					"name": "left_gills",
-					"parent": "head",
+					"parent": "head_rotation",
 					"pivot": [7.5, 68, 0],
 					"rotation": [0, -60, 0],
 					"cubes": [
@@ -58,7 +63,7 @@
 				},
 				{
 					"name": "right_gills",
-					"parent": "head",
+					"parent": "head_rotation",
 					"pivot": [-7.5, 68, 0],
 					"rotation": [0, 60, 0],
 					"cubes": [

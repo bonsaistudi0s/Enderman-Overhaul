@@ -14,6 +14,7 @@ public class MushroomFieldsEndermanRenderer extends BaseEndermanEntityRenderer<M
             BuiltInRegistries.ENTITY_TYPE.getKey(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN.get()),
             getTexture(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN.get()),
             ANIMATION,
-            null);
+            null,
+            true);
     }
 }
