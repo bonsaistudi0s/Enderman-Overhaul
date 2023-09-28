@@ -37,7 +37,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     }
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, ResourceLocation assetPath, ResourceLocation texture, ResourceLocation animation, ResourceLocation glow) {
-        super(renderManager, new DefaultedEntityGeoModel<T>(assetPath)
+        super(renderManager, new DefaultedEntityGeoModel<T>(assetPath, true)
             .withAltTexture(texture)
             .withAltAnimations(animation));
         if (glow != null) {

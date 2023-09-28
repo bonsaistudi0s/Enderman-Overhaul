@@ -1,5 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.common.items.pearls;
 
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -104,5 +105,19 @@ public class SoulPearlItem extends EnderpearlItem {
     @Override
     public boolean isFoil(@NotNull ItemStack stack) {
         return stack.hasTag() && stack.getOrCreateTag().contains("BoundEntity");
+    }
+
+    // Fabric disabling of nbt change animation
+    @SuppressWarnings("unused")
+    @PlatformOnly(PlatformOnly.FABRIC)
+    public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
+        return false;
+    }
+
+    // Forge disabling of nbt change animation
+    @SuppressWarnings("unused")
+    @PlatformOnly(PlatformOnly.FORGE)
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return false;
     }
 }

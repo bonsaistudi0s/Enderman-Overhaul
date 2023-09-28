@@ -74,7 +74,7 @@ public class OceanEnderman extends BaseEnderman {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, 20, state -> {
             if (isInWater()) {
                 state.getController().setAnimation(ConstantAnimations.SWIM);
                 return PlayState.CONTINUE;

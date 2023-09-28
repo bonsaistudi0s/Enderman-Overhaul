@@ -19,7 +19,7 @@ public class ReplacedEndermanRenderer extends GeoReplacedEntityRenderer<EnderMan
     public static final ResourceLocation GLOW = new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/default/default_enderman_glow.png");
 
     public ReplacedEndermanRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<ReplacedEnderman>(new ResourceLocation(EndermanOverhaul.MOD_ID, "default_enderman"))
+        super(renderManager, new DefaultedEntityGeoModel<ReplacedEnderman>(new ResourceLocation(EndermanOverhaul.MOD_ID, "default_enderman"), true)
                 .withAltTexture(TEXTURE)
                 .withAltAnimations(BaseEndermanEntityRenderer.ANIMATION),
             new ReplacedEnderman());

@@ -81,7 +81,15 @@ public class ThrownIcyPearl extends ThrowableItemProjectile {
                     if (entity.isPassenger()) {
                         serverPlayer.dismountTo(this.getX(), this.getY(), this.getZ());
                     } else {
-                        entity.teleportTo(this.getX(), this.getY(), this.getZ());
+                        if (level().getBlockState(this.blockPosition()).is(Blocks.FROSTED_ICE)) {
+                            if (level().getBlockState(this.blockPosition().above()).is(Blocks.FROSTED_ICE)) {
+                                entity.teleportTo(this.getX(), this.getY() + 2, this.getZ());
+                            } else {
+                                entity.teleportTo(this.getX(), this.getY() + 1, this.getZ());
+                            }
+                        } else {
+                            entity.teleportTo(this.getX(), this.getY(), this.getZ());
+                        }
                     }
 
                     entity.hurt(this.damageSources().fall(), 5.0f);

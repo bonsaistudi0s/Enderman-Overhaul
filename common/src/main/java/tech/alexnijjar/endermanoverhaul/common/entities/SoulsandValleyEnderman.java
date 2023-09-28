@@ -58,7 +58,7 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         super.registerControllers(controllerRegistrar);
-        controllerRegistrar.add(new AnimationController<>(this, "bite_controller", state -> {
+        controllerRegistrar.add(new AnimationController<>(this, "bite_controller", 20, state -> {
             if (entityData.get(DATA_BITING_TICKS) <= 0) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.BITE);
             return PlayState.CONTINUE;

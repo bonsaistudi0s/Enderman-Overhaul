@@ -53,7 +53,7 @@ public class EndIslandsEnderman extends BaseEnderman {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         super.registerControllers(controllerRegistrar);
-        controllerRegistrar.add(new AnimationController<>(this, "possessing_controller", state -> {
+        controllerRegistrar.add(new AnimationController<>(this, "possessing_controller", 20, state -> {
             if (entityData.get(DATA_POSSESSING_TICKS) <= 0) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.POSSESS);
             return PlayState.CONTINUE;

@@ -15,7 +15,7 @@ import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 public class EndIslandsEndermanRenderer extends BaseEndermanEntityRenderer<EndIslandsEnderman> {
 
     public EndIslandsEndermanRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<EndIslandsEnderman>(BuiltInRegistries.ENTITY_TYPE.getKey(ModEntityTypes.END_ISLANDS_ENDERMAN.get()))
+        super(renderManager, new DefaultedEntityGeoModel<EndIslandsEnderman>(BuiltInRegistries.ENTITY_TYPE.getKey(ModEntityTypes.END_ISLANDS_ENDERMAN.get()), true)
             .withAltTexture(getTexture(ModEntityTypes.END_ISLANDS_ENDERMAN.get()))
             .withAltAnimations(END_ISLANDS_ANIMATION));
 
