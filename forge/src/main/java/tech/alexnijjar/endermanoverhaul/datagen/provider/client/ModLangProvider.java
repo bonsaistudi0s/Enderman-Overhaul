@@ -44,7 +44,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CORRUPTED_PEARL_TOOLTIP.getString(), "Teleports targets to a random location");
         add(ConstantComponents.SOUL_PEARL_TOOLTIP_1.getString(), "Shift-right click to bind an entity");
         add(ConstantComponents.SOUL_PEARL_TOOLTIP_2.getString(), "Teleports the bound entity to the target location");
-        add(ConstantComponents.ANCIENT_PEARL_TOOLTIP.getString(), "Summons a baby enderman to fight for you");
+        add(ConstantComponents.ANCIENT_PEARL_TOOLTIP.getString(), "Summons a friendly enderman to fight for you");
         add(ConstantComponents.BUBBLE_PEARL_TOOLTIP.getString(), "Accurate Ender Pearl with no gravity");
         add(ConstantComponents.ICY_PEARL_TOOLTIP.getString(), "Freezes nearby targets on hit");
         add(ConstantComponents.SUMMONER_PEARL_TOOLTIP.getString(), "Teleports nearby targets on hit");
@@ -56,6 +56,8 @@ public class ModLangProvider extends LanguageProvider {
 
         add("tooltip.endermanoverhaul.bound_to", "Bound to: %s");
         add(ConstantComponents.NOT_BOUND.getString(), "Not bound");
+
+        add("tag.item.endermanoverhaul.ender_pearls", "Ender Pearls");
 
         add("subtitles.endermanoverhaul.entity.bubble_pop", "Bubble Pearl Pops");
         add("subtitles.endermanoverhaul.entity.cave_enderman.ambient", "Cave Enderman vwoops");

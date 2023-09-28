@@ -82,6 +82,7 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
         this.discard();
     }
 
+    @Override
     protected void onHit(@NotNull HitResult result) {
         if (result.getType() == HitResult.Type.BLOCK) {
             this.discard();

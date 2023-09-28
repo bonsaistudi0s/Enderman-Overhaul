@@ -72,6 +72,7 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
         this.discard();
     }
 
+    @Override
     public void tick() {
         setDeltaMovement(getDeltaMovement().multiply(1.01, 1.01, 1.01));
         Entity entity = this.getOwner();

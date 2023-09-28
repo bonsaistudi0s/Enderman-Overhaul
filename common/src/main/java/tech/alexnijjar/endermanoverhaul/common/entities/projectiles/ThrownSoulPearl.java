@@ -66,6 +66,7 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
         result.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.0f);
     }
 
+    @Override
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
 

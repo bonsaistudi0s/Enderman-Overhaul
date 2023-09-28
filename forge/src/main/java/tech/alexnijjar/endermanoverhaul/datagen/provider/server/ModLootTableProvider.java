@@ -88,7 +88,7 @@ public class ModLootTableProvider extends LootTableProvider {
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.04f, 0.025f))));
 
-            output.accept(getEntity(ModEntityTypes.END_ISLANDS_ENDERMAN.get()), getDefaultEndermanLootTable()); // TODO drop Ancient pearl 1-3
+            output.accept(getEntity(ModEntityTypes.END_ISLANDS_ENDERMAN.get()), getDefaultEndermanLootTable(ModItems.ANCIENT_PEARL));
 
             output.accept(getEntity(ModEntityTypes.FLOWER_FIELDS_ENDERMAN.get()), getDefaultEndermanLootTable());
 

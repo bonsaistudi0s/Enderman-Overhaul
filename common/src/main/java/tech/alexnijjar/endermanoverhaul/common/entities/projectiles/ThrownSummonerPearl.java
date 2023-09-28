@@ -35,11 +35,13 @@ public class ThrownSummonerPearl extends ThrowableItemProjectile {
         return ModItems.SUMMONER_PEARL.get();
     }
 
+    @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
         result.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.0f);
     }
 
+    @Override
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
 
@@ -63,6 +65,7 @@ public class ThrownSummonerPearl extends ThrowableItemProjectile {
         this.discard();
     }
 
+    @Override
     public void tick() {
         Entity entity = this.getOwner();
         if (entity instanceof Player && !entity.isAlive()) {

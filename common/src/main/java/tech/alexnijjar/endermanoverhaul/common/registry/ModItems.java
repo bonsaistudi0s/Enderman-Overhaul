@@ -9,12 +9,15 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
-import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedBladeItem;
 import tech.alexnijjar.endermanoverhaul.common.items.pearls.*;
+import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedBladeItem;
 import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShielditem;
 
 import java.util.function.Supplier;
@@ -59,6 +62,7 @@ public class ModItems {
 
     public static final RegistryEntry<Item> CORRUPTED_PEARL = ITEMS.register("corrupted_pearl", () -> new CorruptedPearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> SOUL_PEARL = ITEMS.register("soul_pearl", () -> new SoulPearlItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryEntry<Item> ANCIENT_PEARL = ITEMS.register("ancient_pearl", () -> new AncientPearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> BUBBLE_PEARL = ITEMS.register("bubble_pearl", () -> new BubblePearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> SUMMONER_PEARL = ITEMS.register("summoner_pearl", () -> new SummonerPearlItem(new Item.Properties().stacksTo(16)));
     public static final RegistryEntry<Item> ICY_PEARL = ITEMS.register("icy_pearl", () -> new IcyPearlItem(new Item.Properties().stacksTo(16)));

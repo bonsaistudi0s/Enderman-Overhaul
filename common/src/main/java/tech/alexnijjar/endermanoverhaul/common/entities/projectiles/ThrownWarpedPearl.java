@@ -36,11 +36,13 @@ public class ThrownWarpedPearl extends ThrowableItemProjectile {
         return ModItems.WARPED_PEARL.get();
     }
 
+    @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
         result.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.0f);
     }
 
+    @Override
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
 
@@ -78,6 +80,7 @@ public class ThrownWarpedPearl extends ThrowableItemProjectile {
         this.discard();
     }
 
+    @Override
     public void tick() {
         Entity entity = this.getOwner();
         if (entity instanceof Player && !entity.isAlive()) {
@@ -89,6 +92,7 @@ public class ThrownWarpedPearl extends ThrowableItemProjectile {
     }
 
     @Nullable
+    @Override
     public Entity changeDimension(@NotNull ServerLevel destination) {
         Entity entity = this.getOwner();
         if (entity != null && entity.level().dimension() != destination.dimension()) {

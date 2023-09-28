@@ -22,6 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(ModItems.CORRUPTED_PEARL.get());
         basicItem(ModItems.SOUL_PEARL.get());
+        basicItem(ModItems.ANCIENT_PEARL.get());
         basicItem(ModItems.BUBBLE_PEARL.get());
         basicItem(ModItems.SUMMONER_PEARL.get());
         basicItem(ModItems.ICY_PEARL.get());
