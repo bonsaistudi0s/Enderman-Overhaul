@@ -449,19 +449,6 @@
 						}
 					}
 				},
-				"head_2": {
-					"rotation": {
-						"0.0": {
-							"vector": [-5, 0, 0]
-						},
-						"0.6": {
-							"vector": [5, 0, 0]
-						},
-						"1.2": {
-							"vector": [-5, 0, 0]
-						}
-					}
-				},
 				"right_arm": {
 					"position": {
 						"0.0": {
@@ -525,6 +512,25 @@
 						"1.2": {
 							"vector": [-2.5, 0, 0],
 							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"head": {
+					"rotation": {
+						"0.0": {
+							"vector": [-0.52, 0, 0]
+						},
+						"0.28": {
+							"vector": [-5, 0, 0],
+							"easing": "easeOutSine"
+						},
+						"0.88": {
+							"vector": [5, 0, 0],
+							"easing": "easeInOutSine"
+						},
+						"1.2": {
+							"vector": [-0.52, 0, 0],
+							"easing": "easeInSine"
 						}
 					}
 				}

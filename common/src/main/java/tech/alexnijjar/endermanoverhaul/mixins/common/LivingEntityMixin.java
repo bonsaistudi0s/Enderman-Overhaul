@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,9 +28,8 @@ import tech.alexnijjar.endermanoverhaul.common.tags.ModEntityTypeTags;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
-    @Shadow protected ItemStack useItem;
-
-    @Shadow public abstract boolean attackable();
+    @Shadow
+    protected ItemStack useItem;
 
     public LivingEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -37,7 +37,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(
         method = "hurt",
-        at = @At("TAIL")
+        at = @At("HEAD")
     )
     private void endermanoverhaul$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!(((Object) this) instanceof Player entity)) return;
@@ -68,13 +68,23 @@ public abstract class LivingEntityMixin extends Entity {
         at = @At("TAIL")
     )
     private void endermanoverhaul$blockUsingShield(LivingEntity attacker, CallbackInfo ci) {
-        if (!(((Object) this) instanceof Player)) return;
+        if (!(((Object) this) instanceof Player player)) return;
         if (!useItem.is(ModItems.CORRUPTED_SHIELD.get())) return;
         if (attacker.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) return;
 
         if (attacker.level().random.nextInt(4) != 0) {
             ModUtils.teleportTarget(attacker.level(), attacker, 32);
-            attacker.hurt(attacker.damageSources().fall(), 4.0f);
+            attacker.hurt(attacker.damageSources().fall(), 2.0f);
+        }
+
+        if (attacker.canDisableShield()) {
+            float f = 0.25f + EnchantmentHelper.getBlockEfficiency(player) * 0.0375f;
+
+            if (this.random.nextFloat() < f) {
+                player.getCooldowns().addCooldown(ModItems.CORRUPTED_SHIELD.get(), 100);
+                player.stopUsingItem();
+                this.level().broadcastEntityEvent(this, (byte) 30);
+            }
         }
     }
 }

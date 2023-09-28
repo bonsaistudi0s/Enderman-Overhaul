@@ -27,7 +27,7 @@ public class IceSpikesEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 60.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.27)
+            .add(Attributes.MOVEMENT_SPEED, 0.216)
             .add(Attributes.ATTACK_DAMAGE, 8.0)
             .add(Attributes.FOLLOW_RANGE, 64.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
@@ -50,6 +50,11 @@ public class IceSpikesEnderman extends BaseEnderman {
 
     @Override
     public boolean canPickupBlocks() {
+        return false;
+    }
+
+    @Override
+    public boolean speedUpWhenAngry() {
         return false;
     }
 

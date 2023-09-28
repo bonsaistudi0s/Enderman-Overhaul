@@ -45,7 +45,9 @@ public class ThrownCrimsonPearl extends ThrowableItemProjectile {
         super.onHit(result);
 
         if (this.level().isClientSide() || this.isRemoved()) return;
-        ModUtils.sendParticles((ServerLevel) level(), ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 32, this.random.nextGaussian(), 0.0, this.random.nextGaussian(), 0.1);
+        for (int i = 0; i < 32; ++i) {
+            ModUtils.sendParticles((ServerLevel) level(), ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
+        }
 
         if (!(getOwner() instanceof LivingEntity entity)) return;
         if (entity instanceof ServerPlayer serverPlayer) {

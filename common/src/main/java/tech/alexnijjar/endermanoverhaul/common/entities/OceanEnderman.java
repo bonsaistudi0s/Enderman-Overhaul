@@ -210,7 +210,7 @@ public class OceanEnderman extends BaseEnderman {
             .filter(pos -> level().getFluidState(pos).is(FluidTags.WATER) && level().getBlockState(pos.below()).getFluidState().is(FluidTags.WATER))
             .findAny()
             .ifPresent(pos -> {
-                level().gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(OceanEnderman.this));
+                level().gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(this));
                 teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
                 playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0f, 1.0f);
             });

@@ -30,7 +30,7 @@ public class SnowyEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 35.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.27)
+            .add(Attributes.MOVEMENT_SPEED, 0.216)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 42.0);
     }

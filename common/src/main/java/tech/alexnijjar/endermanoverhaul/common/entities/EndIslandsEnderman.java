@@ -111,6 +111,11 @@ public class EndIslandsEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean speedUpWhenAngry() {
+        return false;
+    }
+
+    @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
         if (level().getGameTime() % 200 == 0 && random.nextBoolean()) {

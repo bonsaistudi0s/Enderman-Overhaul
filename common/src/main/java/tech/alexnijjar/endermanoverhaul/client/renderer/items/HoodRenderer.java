@@ -20,10 +20,10 @@ public class HoodRenderer extends GeoArmorRenderer<HoodItem> {
         setAllVisible(false);
 
         if (EquipmentSlot.CHEST == currentSlot) {
-            setBoneVisible(this.head, true);
-            setBoneVisible(this.body, true);
-            setBoneVisible(this.rightArm, true);
-            setBoneVisible(this.leftArm, true);
+            setBoneVisible(this.getHeadBone(), true);
+            setBoneVisible(this.getBodyBone(), true);
+            setBoneVisible(this.getRightArmBone(), true);
+            setBoneVisible(this.getLeftArmBone(), true);
         }
     }
 }

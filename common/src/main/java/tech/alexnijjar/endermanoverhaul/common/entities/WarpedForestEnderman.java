@@ -27,7 +27,7 @@ public class WarpedForestEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 50.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.225)
+            .add(Attributes.MOVEMENT_SPEED, 0.2475)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 32.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
@@ -40,6 +40,11 @@ public class WarpedForestEnderman extends BaseEnderman {
 
     @Override
     public boolean canPickupBlocks() {
+        return false;
+    }
+
+    @Override
+    public boolean canShake() {
         return false;
     }
 

@@ -47,7 +47,9 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
         super.onHit(result);
 
         if (this.level().isClientSide() || this.isRemoved()) return;
-        ModUtils.sendParticles((ServerLevel) level(), ModParticleTypes.BUBBLE.get(), this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 32, this.random.nextGaussian(), 0.0, this.random.nextGaussian(), 0.1);
+        for (int i = 0; i < 32; ++i) {
+            ModUtils.sendParticles((ServerLevel) level(), ModParticleTypes.BUBBLE.get(), this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
+        }
 
         Entity entity = this.getOwner();
         if (entity instanceof ServerPlayer serverPlayer) {
@@ -71,14 +73,22 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
     }
 
     public void tick() {
+        setDeltaMovement(getDeltaMovement().multiply(1.01, 1.01, 1.01));
         Entity entity = this.getOwner();
         if (entity instanceof Player && !entity.isAlive()) {
-            level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.BUBBLE_POP.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
             this.discard();
         } else {
             super.tick();
         }
-        if (this.tickCount >= 200) this.discard();
+        if (this.tickCount >= 420) {
+            if (!level().isClientSide()) {
+                for (int i = 0; i < 32; ++i) {
+                    ModUtils.sendParticles((ServerLevel) level(), ModParticleTypes.BUBBLE.get(), this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
+                }
+            }
+            level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.BUBBLE_POP.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
+            this.discard();
+        }
     }
 
     @Nullable
