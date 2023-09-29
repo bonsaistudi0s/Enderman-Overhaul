@@ -62,12 +62,12 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
         }
     }
 
-    protected static ResourceLocation getTexture(EntityType<?> enderman) {
+    public static ResourceLocation getTexture(EntityType<?> enderman) {
         String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
         return new ResourceLocation(EndermanOverhaul.MOD_ID, "%s/%s".formatted(name.replace("_enderman", ""), name));
     }
 
-    protected static ResourceLocation getGlowTexture(EntityType<?> enderman) {
+    public static ResourceLocation getGlowTexture(EntityType<?> enderman) {
         String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
         return new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/%s/%s_glow.png".formatted(name.replace("_enderman", ""), name));
     }

@@ -13,6 +13,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.*;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.AxolotlPetEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.HammerheadPetEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.*;
 import tech.alexnijjar.endermanoverhaul.common.entities.summons.Scarab;
 import tech.alexnijjar.endermanoverhaul.common.entities.summons.Spirit;
@@ -120,6 +123,22 @@ public class ModEntityTypes {
             .sized(0.6f, 4.1f)
             .build("windswept_hills_enderman"));
 
+    // Pets
+    public static final RegistryEntry<EntityType<PetEnderman>> PET_ENDERMAN = ENTITY_TYPES.register("pet_enderman", () ->
+        EntityType.Builder.<PetEnderman>of(PetEnderman::new, MobCategory.CREATURE)
+            .sized(0.8f, 2.8f)
+            .build("pet_enderman"));
+
+    public static final RegistryEntry<EntityType<HammerheadPetEnderman>> HAMMERHEAD_PET_ENDERMAN = ENTITY_TYPES.register("hammerhead_pet_enderman", () ->
+        EntityType.Builder.<HammerheadPetEnderman>of(HammerheadPetEnderman::new, MobCategory.CREATURE)
+            .sized(1.0f, 2.6f)
+            .build("hammerhead_pet_enderman"));
+
+    public static final RegistryEntry<EntityType<AxolotlPetEnderman>> AXOLOTL_PET_ENDERMAN = ENTITY_TYPES.register("axolotl_pet_enderman", () ->
+        EntityType.Builder.<AxolotlPetEnderman>of(AxolotlPetEnderman::new, MobCategory.CREATURE)
+            .sized(0.8f, 2.7f)
+            .build("axolotl_pet_enderman"));
+
     // Summons
     public static final RegistryEntry<EntityType<Scarab>> SCARAB = ENTITY_TYPES.register("scarab", () ->
         EntityType.Builder.of(Scarab::new, MobCategory.MONSTER)
@@ -152,6 +171,13 @@ public class ModEntityTypes {
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("soul_pearl"));
+
+    public static final RegistryEntry<EntityType<ThrownAncientPearl>> ANCIENT_PEARL = ENTITY_TYPES.register("ancient_pearl", () ->
+        EntityType.Builder.<ThrownAncientPearl>of(ThrownAncientPearl::new, MobCategory.MISC)
+            .sized(0.25f, 0.25f)
+            .clientTrackingRange(4)
+            .updateInterval(10)
+            .build("ancient_pearl"));
 
     public static final RegistryEntry<EntityType<ThrownBubblePearl>> BUBBLE_PEARL = ENTITY_TYPES.register("bubble_pearl", () ->
         EntityType.Builder.<ThrownBubblePearl>of(ThrownBubblePearl::new, MobCategory.MISC)
@@ -207,6 +233,11 @@ public class ModEntityTypes {
         attributes.accept(SWAMP_ENDERMAN, SwampEnderman::createAttributes);
         attributes.accept(WARPED_FOREST_ENDERMAN, WarpedForestEnderman::createAttributes);
         attributes.accept(WINDSWEPT_HILLS_ENDERMAN, WindsweptHillsEnderman::createAttributes);
+
+        // Pets
+        attributes.accept(PET_ENDERMAN, PetEnderman::createAttributes);
+        attributes.accept(HAMMERHEAD_PET_ENDERMAN, HammerheadPetEnderman::createAttributes);
+        attributes.accept(AXOLOTL_PET_ENDERMAN, AxolotlPetEnderman::createAttributes);
 
         // Summons
         attributes.accept(SCARAB, Scarab::createAttributes);

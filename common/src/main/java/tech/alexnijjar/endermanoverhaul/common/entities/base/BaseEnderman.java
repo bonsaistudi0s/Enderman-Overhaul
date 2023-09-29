@@ -61,7 +61,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
             if (state.isMoving()) {
                 state.getController().setAnimation(isCreepy() && canRunWhenAngry() ?
                     ConstantAnimations.RUN :
@@ -72,14 +72,14 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "creepy_controller", 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, "creepy_controller", 5, state -> {
             if (!canOpenMouth()) return PlayState.STOP;
             if (!isCreepy()) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ANGRY);
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", 5, state -> {
             if (!canPickupBlocks()) return PlayState.STOP;
             if (getCarriedBlock() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.HOLDING);

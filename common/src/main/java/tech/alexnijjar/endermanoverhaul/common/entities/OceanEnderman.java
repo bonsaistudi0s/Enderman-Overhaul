@@ -7,9 +7,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -20,7 +18,7 @@ import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
@@ -29,6 +27,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -43,12 +42,16 @@ import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 public class OceanEnderman extends BaseEnderman {
+    protected final WaterBoundPathNavigation waterNavigation;
+    protected final GroundPathNavigation groundNavigation;
 
     public OceanEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
         xpReward = 6;
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
         this.moveControl = new OceanEndermanMoveControl();
+        this.waterNavigation = new WaterBoundPathNavigation(this, level);
+        this.groundNavigation = new GroundPathNavigation(this, level);
     }
 
     public static @NotNull AttributeSupplier.Builder createAttributes() {
@@ -74,7 +77,7 @@ public class OceanEnderman extends BaseEnderman {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
             if (isInWater()) {
                 state.getController().setAnimation(ConstantAnimations.SWIM);
                 return PlayState.CONTINUE;
@@ -126,7 +129,7 @@ public class OceanEnderman extends BaseEnderman {
 
     @Override
     public boolean canTeleport() {
-        return false;
+        return isCreepy() || getAirSupply() <= 20;
     }
 
     @Override
@@ -141,7 +144,7 @@ public class OceanEnderman extends BaseEnderman {
 
     @Override
     public boolean isPushedByFluid() {
-        return false;
+        return !this.isSwimming();
     }
 
     @Override
@@ -167,28 +170,41 @@ public class OceanEnderman extends BaseEnderman {
     }
 
     @Override
-    protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
-        return new WaterBoundPathNavigation(this, level);
+    public void travel(@NotNull Vec3 travelVector) {
+        if (this.isControlledByLocalInstance() && this.isInWater()) {
+            this.moveRelative(0.01f, travelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9));
+        } else {
+            super.travel(travelVector);
+        }
+        super.travel(travelVector);
     }
 
     @Override
-    public void aiStep() {
-        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0f - 1.0f) * 0.05f, 0.4, (this.random.nextFloat() * 2.0f - 1.0f) * 0.05f));
-            this.setOnGround(false);
-            this.hasImpulse = true;
-            this.playSound(SoundEvents.TADPOLE_FLOP, this.getSoundVolume(), this.getVoicePitch());
-            if (random.nextInt(3) == 0) {
-                teleportToWater();
+    public void updateSwimming() {
+        if (!this.level().isClientSide) {
+            if (this.isEffectiveAi() && level().getBlockState(blockPosition().above().above()).is(Blocks.WATER)) {
+                this.navigation = this.waterNavigation;
+                this.setSwimming(true);
+            } else {
+                this.navigation = this.groundNavigation;
+                this.setSwimming(false);
             }
         }
-
-        super.aiStep();
+        super.updateSwimming();
     }
 
     protected void handleAirSupply(int airSupply) {
         if (this.isAlive() && !this.isInWaterOrBubble()) {
             this.setAirSupply(airSupply - 1);
+            if (this.getAirSupply() <= 20 && level().getGameTime() % 20 == 0) {
+                if (!teleportToWater()) {
+                    for (int i = 0; i < 64; i++) {
+                        if (this.teleport()) break;
+                    }
+                }
+            }
             if (this.getAirSupply() == -20) {
                 this.setAirSupply(0);
                 this.hurt(this.damageSources().drown(), 2.0f);
@@ -198,22 +214,23 @@ public class OceanEnderman extends BaseEnderman {
         }
     }
 
-    private void teleportToWater() {
-        int range = 10;
-        BlockPos.betweenClosedStream(
-                Mth.floor(getX() - range),
-                Mth.floor(getY() - 5),
-                Mth.floor(getZ() - range),
-                Mth.floor(getX() + range),
-                Mth.floor(getY()),
-                Mth.floor(getZ() + range))
-            .filter(pos -> level().getFluidState(pos).is(FluidTags.WATER) && level().getBlockState(pos.below()).getFluidState().is(FluidTags.WATER))
-            .findAny()
-            .ifPresent(pos -> {
+    private boolean teleportToWater() {
+        RandomSource randomSource = getRandom();
+        BlockPos blockPos = blockPosition();
+
+        for (int i = 0; i < 10; ++i) {
+            BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(20) - 10, 2 - randomSource.nextInt(8), randomSource.nextInt(20) - 10);
+            if (level().getBlockState(blockPos2).is(Blocks.WATER)) {
+                Vec3 pos = Vec3.atBottomCenterOf(blockPos2);
+                if (pos == null) return false;
                 level().gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(this));
-                teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                teleportTo(pos.x() + 0.5, pos.y(), pos.z() + 0.5);
                 playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0f, 1.0f);
-            });
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private class OceanEndermanMoveControl extends MoveControl {
@@ -222,34 +239,46 @@ public class OceanEnderman extends BaseEnderman {
             super(OceanEnderman.this);
         }
 
+        @Override
         public void tick() {
-            if (isEyeInFluid(FluidTags.WATER)) {
-                setDeltaMovement(getDeltaMovement().add(0.0, 0.005, 0.0));
+            if (!isInWater()) {
+                setSpeed(isCreepy() ? 0.2f : 0);
+                return;
             }
 
-            if (this.operation == MoveControl.Operation.MOVE_TO && !getNavigation().isDone()) {
-                float f = (float) (this.speedModifier * getAttributeValue(Attributes.MOVEMENT_SPEED));
-                if (isCreepy()) f *= 3;
-                setSpeed(Mth.lerp(0.125f, getSpeed(), f));
-                double d = this.wantedX - getX();
-                double e = this.wantedY - getY();
-                double g = this.wantedZ - getZ();
-                if (e != 0.0) {
-                    double h = Math.sqrt(d * d + e * e + g * g);
-                    setDeltaMovement(getDeltaMovement().add(0.0, (double) getSpeed() * (e / h) * 0.1, 0.0));
+            LivingEntity livingEntity = getTarget();
+            if (isInWater()) {
+                if (livingEntity != null && livingEntity.getY() > getY()) {
+                    setDeltaMovement(getDeltaMovement().add(0.0, 0.002, 0.0));
                 }
 
-                if (d != 0.0 || g != 0.0) {
-                    float i = (float) (Mth.atan2(g, d) * 57.3) - 90.0f;
-                    setYRot(this.rotlerp(getYRot(), i, 90.0f));
-                    yBodyRot = getYRot();
+                if (this.operation != MoveControl.Operation.MOVE_TO || getNavigation().isDone()) {
+                    setSpeed(0.0F);
+                    return;
                 }
+
+                double d = this.wantedX - getX();
+                double e = this.wantedY - getY();
+                double f = this.wantedZ - getZ();
+                double g = Math.sqrt(d * d + e * e + f * f);
+                e /= g;
+                float h = (float) (Mth.atan2(f, d) * 57.2957763671875) - 90.0F;
+                setYRot(this.rotlerp(getYRot(), h, 90.0F));
+                yBodyRot = getYRot();
+                float i = (float) (this.speedModifier * getAttributeValue(Attributes.MOVEMENT_SPEED));
+                float j = Mth.lerp(0.125F, getSpeed(), i);
+                setSpeed(j);
+                setDeltaMovement(getDeltaMovement().add(j * d * 0.005, j * e * 0.1, j * f * 0.005));
 
                 if (isCreepy()) {
                     addDeltaMovement(new Vec3(getDeltaMovement().x * 0.15, 0, getDeltaMovement().z * 0.15));
                 }
             } else {
-                setSpeed(0);
+                if (!onGround()) {
+                    setDeltaMovement(getDeltaMovement().add(0.0, -0.008, 0.0));
+                }
+
+                super.tick();
             }
         }
     }

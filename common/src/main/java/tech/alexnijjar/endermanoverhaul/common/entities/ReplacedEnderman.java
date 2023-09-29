@@ -24,7 +24,7 @@ public class ReplacedEnderman implements GeoReplacedEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
 
@@ -38,7 +38,7 @@ public class ReplacedEnderman implements GeoReplacedEntity {
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "creepy_controller", 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, "creepy_controller", 5, state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
             if (!enderman.isCreepy()) return PlayState.STOP;
@@ -46,7 +46,7 @@ public class ReplacedEnderman implements GeoReplacedEntity {
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", 5, state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
             if (enderman.getCarriedBlock() == null) return PlayState.STOP;

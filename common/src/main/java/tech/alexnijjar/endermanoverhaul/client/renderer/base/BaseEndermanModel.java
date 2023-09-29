@@ -30,7 +30,7 @@ public class BaseEndermanModel<T extends GeoAnimatable> extends DefaultedEntityG
         if (headRotation == null) return;
 
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-        head.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
-        head.setRotY(entityData.netHeadYaw() * Mth.DEG_TO_RAD);
+        headRotation.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
+        headRotation.setRotY(entityData.netHeadYaw() * Mth.DEG_TO_RAD);
     }
 }

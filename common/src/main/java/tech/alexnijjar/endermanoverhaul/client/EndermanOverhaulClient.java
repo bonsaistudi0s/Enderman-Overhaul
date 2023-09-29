@@ -66,6 +66,11 @@ public class EndermanOverhaulClient {
         ClientPlatformUtils.registerRenderer(ModEntityTypes.WARPED_FOREST_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.WARPED_FOREST_ENDERMAN.get(), BaseEndermanEntityRenderer.WARPED_FOREST_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN.get()));
 
+        // Pets
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.PET_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.PET_ENDERMAN.get()));
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.HAMMERHEAD_PET_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.HAMMERHEAD_PET_ENDERMAN.get()));
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.AXOLOTL_PET_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.AXOLOTL_PET_ENDERMAN.get()));
+
         // Summons
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SCARAB, ScarabRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SPIRIT, SpiritRenderer::new);
@@ -73,6 +78,7 @@ public class EndermanOverhaulClient {
         // Projectiles
         ClientPlatformUtils.registerRenderer(ModEntityTypes.ENDER_BULLET, EnderBulletRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.CORRUPTED_PEARL, ThrownItemRenderer::new);
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.ANCIENT_PEARL, ThrownItemRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SOUL_PEARL, ThrownItemRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.BUBBLE_PEARL, ThrownItemRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SUMMONER_PEARL, ThrownItemRenderer::new);

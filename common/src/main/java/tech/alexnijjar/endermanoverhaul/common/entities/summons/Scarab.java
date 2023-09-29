@@ -46,7 +46,7 @@ public class Scarab extends Monster implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 20, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
             if (!state.isMoving()) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.SCARAB_WALK);
             return PlayState.CONTINUE;

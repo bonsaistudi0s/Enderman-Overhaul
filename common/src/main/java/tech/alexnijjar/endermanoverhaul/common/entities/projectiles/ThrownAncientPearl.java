@@ -15,6 +15,10 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.AxolotlPetEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.BasePetEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.HammerheadPetEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 
@@ -50,7 +54,15 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
         if (!(getOwner() instanceof LivingEntity entity)) return;
         if (entity instanceof ServerPlayer serverPlayer) {
             if (serverPlayer.connection.isAcceptingMessages()) {
-                // TODO Summon Friendly Enderman
+                BasePetEnderman pet = switch (this.random.nextInt(3)) {
+                    case 0 -> new PetEnderman(level(), serverPlayer);
+                    case 1 -> new HammerheadPetEnderman(level(), serverPlayer);
+                    case 2 -> new AxolotlPetEnderman(level(), serverPlayer);
+                    default -> null;
+                };
+                if (pet == null) return;
+                pet.setPos(this.getX(), this.getY(), this.getZ());
+                level().addFreshEntity(pet);
             }
         }
 
@@ -59,14 +71,14 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
 
     @Override
     public void tick() {
-		Entity entity = this.getOwner();
-		if (entity instanceof Player && !entity.isAlive()) {
-			this.discard();
-		} else {
-			super.tick();
-		}
+        Entity entity = this.getOwner();
+        if (entity instanceof Player && !entity.isAlive()) {
+            this.discard();
+        } else {
+            super.tick();
+        }
 
-	}
+    }
 
     @Nullable
     public Entity changeDimension(@NotNull ServerLevel destination) {
