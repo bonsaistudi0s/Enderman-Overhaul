@@ -12,6 +12,7 @@ public class ConstantAnimations {
     public static final RawAnimation POSSESS = RawAnimation.begin().thenLoop("animation.enderman.possess");
     public static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.enderman.swim");
 
+    public static final RawAnimation SCARAB_IDLE = RawAnimation.begin().thenLoop("animation.scarab.idle");
     public static final RawAnimation SCARAB_WALK = RawAnimation.begin().thenLoop("animation.scarab.walk");
     public static final RawAnimation SPIRIT_FLY = RawAnimation.begin().thenLoop("animation.spirit.fly");
 

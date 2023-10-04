@@ -26,6 +26,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.BasePetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.EnderBullet;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
@@ -172,6 +173,10 @@ public class EndIslandsEnderman extends BaseEnderman {
             LivingEntity target = getTarget();
             if (target != null && target.isAlive()) {
                 if (isPossessing()) {
+                    if (tickCount + 500 >= this.nextAttackTickCount) {
+                        entityData.set(DATA_POSSESSING, false);
+                        return true;
+                    }
                     return false;
                 } else {
                     return tickCount >= this.nextAttackTickCount;
@@ -203,6 +208,7 @@ public class EndIslandsEnderman extends BaseEnderman {
             entityData.set(DATA_POSSESSING, false);
             level().getEntities(EndIslandsEnderman.this, getBoundingBox().inflate(15.0)).stream()
                 .filter(entity -> entity instanceof EnderMan)
+                .filter(entity -> !(entity instanceof BasePetEnderman))
                 .forEach(entity -> ((EnderMan) entity).setTarget(target));
 
             playSound(SoundEvents.SHULKER_SHOOT, 1.0f, 1.0f);

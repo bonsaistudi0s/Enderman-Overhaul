@@ -67,36 +67,6 @@
 							"easing": "easeInSine"
 						}
 					}
-				},
-				"left_gills": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.44": {
-							"vector": [0, 10, 0],
-							"easing": "easeInOutSine"
-						},
-						"0.96": {
-							"vector": [0, 0, 0],
-							"easing": "easeInOutSine"
-						}
-					}
-				},
-				"right_gills": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.44": {
-							"vector": [0, -10, 0],
-							"easing": "easeInOutSine"
-						},
-						"0.96": {
-							"vector": [0, 0, 0],
-							"easing": "easeInOutSine"
-						}
-					}
 				}
 			}
 		},
