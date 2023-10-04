@@ -11,10 +11,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
@@ -57,7 +54,7 @@ public class OceanEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 30.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.3)
+            .add(Attributes.MOVEMENT_SPEED, 0.16)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 64.0);
     }
@@ -77,7 +74,7 @@ public class OceanEnderman extends BaseEnderman {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
+        controllerRegistrar.add(new AnimationController<>(this, 0, state -> {
             if (isInWater()) {
                 state.getController().setAnimation(ConstantAnimations.SWIM);
                 return PlayState.CONTINUE;
@@ -93,6 +90,7 @@ public class OceanEnderman extends BaseEnderman {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new EndermanFreezeWhenLookedAt());
         this.goalSelector.addGoal(1, new OceanEndermanSwimGoal());
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
@@ -108,7 +106,7 @@ public class OceanEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return false;
     }
 
@@ -152,6 +150,11 @@ public class OceanEnderman extends BaseEnderman {
         int airSupply = this.getAirSupply();
         super.baseTick();
         this.handleAirSupply(airSupply);
+    }
+
+    @Override
+    public boolean speedUpWhenAngry() {
+        return false;
     }
 
     @Override
@@ -218,8 +221,8 @@ public class OceanEnderman extends BaseEnderman {
         RandomSource randomSource = getRandom();
         BlockPos blockPos = blockPosition();
 
-        for (int i = 0; i < 10; ++i) {
-            BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(20) - 10, 2 - randomSource.nextInt(8), randomSource.nextInt(20) - 10);
+        for (int i = 0; i < 100; ++i) {
+            BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(30) - 10, 2 - randomSource.nextInt(8), randomSource.nextInt(30) - 10);
             if (level().getBlockState(blockPos2).is(Blocks.WATER)) {
                 Vec3 pos = Vec3.atBottomCenterOf(blockPos2);
                 if (pos == null) return false;
@@ -242,43 +245,36 @@ public class OceanEnderman extends BaseEnderman {
         @Override
         public void tick() {
             if (!isInWater()) {
-                setSpeed(isCreepy() ? 0.2f : 0);
+                super.tick();
                 return;
             }
 
             LivingEntity livingEntity = getTarget();
-            if (isInWater()) {
-                if (livingEntity != null && livingEntity.getY() > getY()) {
-                    setDeltaMovement(getDeltaMovement().add(0.0, 0.002, 0.0));
-                }
+            if (livingEntity != null && livingEntity.getY() > getY()) {
+                setDeltaMovement(getDeltaMovement().add(0.0, 0.002, 0.0));
+            }
 
-                if (this.operation != MoveControl.Operation.MOVE_TO || getNavigation().isDone()) {
-                    setSpeed(0.0F);
-                    return;
-                }
+            if (this.operation != MoveControl.Operation.MOVE_TO || getNavigation().isDone()) {
+                setSpeed(0.0F);
+                return;
+            }
 
-                double d = this.wantedX - getX();
-                double e = this.wantedY - getY();
-                double f = this.wantedZ - getZ();
-                double g = Math.sqrt(d * d + e * e + f * f);
-                e /= g;
-                float h = (float) (Mth.atan2(f, d) * 57.2957763671875) - 90.0F;
-                setYRot(this.rotlerp(getYRot(), h, 90.0F));
-                yBodyRot = getYRot();
-                float i = (float) (this.speedModifier * getAttributeValue(Attributes.MOVEMENT_SPEED));
-                float j = Mth.lerp(0.125F, getSpeed(), i);
-                setSpeed(j);
-                setDeltaMovement(getDeltaMovement().add(j * d * 0.005, j * e * 0.1, j * f * 0.005));
+            double d = this.wantedX - getX();
+            double e = this.wantedY - getY();
+            double f = this.wantedZ - getZ();
+            double g = Math.sqrt(d * d + e * e + f * f);
+            e /= g;
+            float h = (float) (Mth.atan2(f, d) * 57.2957763671875) - 90.0F;
+            setYRot(this.rotlerp(getYRot(), h, 90.0F));
+            yBodyRot = getYRot();
+            float i = (float) (this.speedModifier * getAttributeValue(Attributes.MOVEMENT_SPEED));
+            float j = Mth.lerp(0.125F, getSpeed(), i);
+            setSpeed(j);
+            j *= 15;
+            setDeltaMovement(getDeltaMovement().add(j * d * 0.005, j * e * 0.025, j * f * 0.005));
 
-                if (isCreepy()) {
-                    addDeltaMovement(new Vec3(getDeltaMovement().x * 0.15, 0, getDeltaMovement().z * 0.15));
-                }
-            } else {
-                if (!onGround()) {
-                    setDeltaMovement(getDeltaMovement().add(0.0, -0.008, 0.0));
-                }
-
-                super.tick();
+            if (isCreepy()) {
+                addDeltaMovement(new Vec3(getDeltaMovement().x * 0.18, 0, getDeltaMovement().z * 0.18));
             }
         }
     }

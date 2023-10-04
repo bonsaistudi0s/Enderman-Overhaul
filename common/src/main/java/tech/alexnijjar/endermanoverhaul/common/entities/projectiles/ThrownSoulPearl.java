@@ -87,6 +87,10 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
 
             boundEntity.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
             boundEntity.hurt(this.damageSources().fall(), 5.0f);
+            if (isOnFire()) {
+                boundEntity.setSecondsOnFire(5);
+                boundEntity.hurt(this.damageSources().onFire(), 10.0f);
+            }
             boundEntity.resetFallDistance();
             boundEntity.teleportTo(this.getX(), this.getY(), this.getZ());
         }

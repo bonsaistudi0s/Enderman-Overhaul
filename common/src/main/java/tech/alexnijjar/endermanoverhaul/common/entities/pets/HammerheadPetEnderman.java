@@ -28,7 +28,7 @@ public class HammerheadPetEnderman extends BasePetEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return false;
     }
 }

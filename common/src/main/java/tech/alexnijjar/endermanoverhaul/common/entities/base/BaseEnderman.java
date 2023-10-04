@@ -63,7 +63,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
             if (state.isMoving()) {
-                state.getController().setAnimation(isCreepy() && canRunWhenAngry() ?
+                state.getController().setAnimation(isCreepy() && playRunAnimWhenAngry() ?
                     ConstantAnimations.RUN :
                     ConstantAnimations.WALK);
             } else {
@@ -91,7 +91,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return true;
     }
 
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return true;
     }
 

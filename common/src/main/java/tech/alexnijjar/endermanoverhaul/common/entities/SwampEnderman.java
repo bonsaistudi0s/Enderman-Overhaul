@@ -41,7 +41,7 @@ public class SwampEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return false;
     }
 

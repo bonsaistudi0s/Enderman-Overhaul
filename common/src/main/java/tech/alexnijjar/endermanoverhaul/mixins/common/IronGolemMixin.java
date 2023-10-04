@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.PassiveEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
 
 @Mixin(IronGolem.class)
 public abstract class IronGolemMixin {
@@ -17,7 +18,7 @@ public abstract class IronGolemMixin {
         cancellable = true
     )
     private static void endermanoverhaul$onRegisterAttackGoal(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (entity instanceof PassiveEnderman) {
+        if (entity instanceof PassiveEnderman || entity instanceof PetEnderman) {
             cir.setReturnValue(false);
         }
     }

@@ -25,7 +25,7 @@ public class FlowerFieldsEnderman extends PassiveEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 20.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.3)
+            .add(Attributes.MOVEMENT_SPEED, 0.24)
             .add(Attributes.ATTACK_DAMAGE, 1.0)
             .add(Attributes.FOLLOW_RANGE, 64);
     }
@@ -41,7 +41,7 @@ public class FlowerFieldsEnderman extends PassiveEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return false;
     }
 

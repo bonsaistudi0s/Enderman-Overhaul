@@ -11,7 +11,7 @@ import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 public class ModSoundEvents {
     public static final ResourcefulRegistry<SoundEvent> SOUND_EVENTS = ResourcefulRegistries.create(BuiltInRegistries.SOUND_EVENT, EndermanOverhaul.MOD_ID);
 
-     public static final RegistryEntry<SoundEvent> BUBBLE_POP = SOUND_EVENTS.register("bubble_pop", () ->
+    public static final RegistryEntry<SoundEvent> BUBBLE_POP = SOUND_EVENTS.register("bubble_pop", () ->
         SoundEvent.createVariableRangeEvent(new ResourceLocation(EndermanOverhaul.MOD_ID, "bubble_pop")));
 
     public static final RegistryEntry<SoundEvent> CAVE_ENDERMAN_AMBIENT = SOUND_EVENTS.register("cave_enderman_ambient", () ->

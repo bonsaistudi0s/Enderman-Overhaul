@@ -39,7 +39,7 @@ public class IceSpikesEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return false;
     }
 

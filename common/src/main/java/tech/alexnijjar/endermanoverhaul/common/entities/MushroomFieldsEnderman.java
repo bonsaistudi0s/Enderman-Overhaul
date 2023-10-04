@@ -26,7 +26,7 @@ public class MushroomFieldsEnderman extends PassiveEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 40.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.216)
+            .add(Attributes.MOVEMENT_SPEED, 0.1944)
             .add(Attributes.ATTACK_DAMAGE, 1.0)
             .add(Attributes.FOLLOW_RANGE, 64);
     }
@@ -42,7 +42,7 @@ public class MushroomFieldsEnderman extends PassiveEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return false;
     }
 

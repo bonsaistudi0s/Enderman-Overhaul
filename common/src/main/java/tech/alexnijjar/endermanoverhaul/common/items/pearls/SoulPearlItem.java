@@ -47,8 +47,6 @@ public class SoulPearlItem extends EnderpearlItem {
             pearl.setItem(itemStack);
             pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1.5f, 1.0f);
             level.addFreshEntity(pearl);
-            player.getItemInHand(usedHand).removeTagKey("BoundEntity");
-            player.getItemInHand(usedHand).removeTagKey("BoundType");
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));
@@ -62,12 +60,26 @@ public class SoulPearlItem extends EnderpearlItem {
     @Override
     public @NotNull InteractionResult interactLivingEntity(@NotNull ItemStack stack, @NotNull Player player, @NotNull LivingEntity interactionTarget, @NotNull InteractionHand usedHand) {
         if (!player.level().isClientSide() && player.isShiftKeyDown() && !interactionTarget.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) {
-            CompoundTag tag = stack.getOrCreateTag();
+            CompoundTag originalTag = stack.getOrCreateTag();
+            if (originalTag.contains("BoundEntity") && interactionTarget.getId() == originalTag.getInt("BoundEntity")) {
+                return InteractionResult.PASS;
+            }
+
+            ItemStack copy = stack.copy();
+            copy.setCount(1);
+            CompoundTag tag = copy.getOrCreateTag();
             tag.putInt("BoundEntity", interactionTarget.getId());
             tag.putString("BoundType", BuiltInRegistries.ENTITY_TYPE.getKey(interactionTarget.getType()).toString());
             player.displayClientMessage(Component.translatable("tooltip.endermanoverhaul.bound_to", interactionTarget.getDisplayName().getString()), true);
-            player.getItemInHand(usedHand).setTag(tag);
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EVOKER_CAST_SPELL, SoundSource.NEUTRAL, 1.0f, 1.0f);
+            if (stack.getCount() == 1) {
+                player.setItemInHand(usedHand, copy);
+            } else {
+                stack.shrink(1);
+                if (!player.getInventory().add(copy)) {
+                    player.drop(copy, false);
+                }
+            }
             return InteractionResult.SUCCESS;
         }
         return super.interactLivingEntity(stack, player, interactionTarget, usedHand);

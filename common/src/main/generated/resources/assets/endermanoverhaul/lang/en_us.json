@@ -97,6 +97,7 @@
   "subtitles.endermanoverhaul.entity.tall_enderman.stare": "Tall Enderman cries out",
   "tag.item.endermanoverhaul.ender_pearls": "Ender Pearls",
   "tooltip.endermanoverhaul.ancient_pearl": "Summons a friendly enderman to fight for you",
+  "tooltip.endermanoverhaul.ancient_pet": "Pet health: %.1f",
   "tooltip.endermanoverhaul.bound_to": "Bound to: %s",
   "tooltip.endermanoverhaul.bubble_pearl": "Accurate Ender Pearl with no gravity",
   "tooltip.endermanoverhaul.corrupted_blade": "Teleports targets randomly",

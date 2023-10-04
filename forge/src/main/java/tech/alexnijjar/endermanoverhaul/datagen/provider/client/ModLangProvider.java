@@ -55,6 +55,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CORRUPTED_SHIELD_TOOLTIP.getString(), "Teleports attackers randomly");
 
         add("tooltip.endermanoverhaul.bound_to", "Bound to: %s");
+        add("tooltip.endermanoverhaul.ancient_pet", "Pet health: %.1f");
         add(ConstantComponents.NOT_BOUND.getString(), "Not bound");
 
         add("tag.item.endermanoverhaul.ender_pearls", "Ender Pearls");

@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -53,6 +54,11 @@ public class Spirit extends Monster implements GeoEntity {
             state.getController().setAnimation(ConstantAnimations.SPIRIT_FLY);
             return PlayState.CONTINUE;
         }));
+    }
+
+    @Override
+    public @NotNull MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     protected void registerGoals() {

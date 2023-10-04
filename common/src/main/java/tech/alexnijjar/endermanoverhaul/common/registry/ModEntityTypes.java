@@ -88,7 +88,6 @@ public class ModEntityTypes {
     public static final RegistryEntry<EntityType<OceanEnderman>> OCEAN_ENDERMAN = ENTITY_TYPES.register("ocean_enderman", () ->
         EntityType.Builder.of(OceanEnderman::new, MobCategory.MONSTER)
             .sized(0.6f, 2.0f)
-            .fireImmune()
             .build("ocean_enderman"));
 
     public static final RegistryEntry<EntityType<SavannaEnderman>> SAVANNA_ENDERMAN = ENTITY_TYPES.register("savanna_enderman", () ->

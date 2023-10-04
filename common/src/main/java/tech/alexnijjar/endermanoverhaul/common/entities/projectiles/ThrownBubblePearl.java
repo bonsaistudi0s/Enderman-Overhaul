@@ -40,7 +40,7 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
 
     @Override
     protected float getGravity() {
-        return 0;
+        return isInWater() ? 0.01f : 0;
     }
 
     protected void onHit(@NotNull HitResult result) {

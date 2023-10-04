@@ -16,19 +16,26 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.AxolotlPetEnderman;
-import tech.alexnijjar.endermanoverhaul.common.entities.pets.BasePetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.HammerheadPetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 
 public class ThrownAncientPearl extends ThrowableItemProjectile {
+    @Nullable
+    private Entity existingPet;
+
     public ThrownAncientPearl(EntityType<? extends ThrownAncientPearl> type, Level level) {
         super(type, level);
     }
 
     public ThrownAncientPearl(Level level, LivingEntity shooter) {
+        this(level, shooter, null);
+    }
+
+    public ThrownAncientPearl(Level level, LivingEntity shooter, @Nullable Entity existingPet) {
         super(ModEntityTypes.ANCIENT_PEARL.get(), shooter, level);
+        this.existingPet = existingPet;
     }
 
     @Override
@@ -54,12 +61,7 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
         if (!(getOwner() instanceof LivingEntity entity)) return;
         if (entity instanceof ServerPlayer serverPlayer) {
             if (serverPlayer.connection.isAcceptingMessages()) {
-                BasePetEnderman pet = switch (this.random.nextInt(3)) {
-                    case 0 -> new PetEnderman(level(), serverPlayer);
-                    case 1 -> new HammerheadPetEnderman(level(), serverPlayer);
-                    case 2 -> new AxolotlPetEnderman(level(), serverPlayer);
-                    default -> null;
-                };
+                Entity pet = existingPet != null ? existingPet : createPet(serverPlayer);
                 if (pet == null) return;
                 pet.setPos(this.getX(), this.getY(), this.getZ());
                 level().addFreshEntity(pet);
@@ -67,6 +69,15 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
         }
 
         this.discard();
+    }
+
+    private Entity createPet(ServerPlayer player) {
+        return switch (this.random.nextInt(3)) {
+            case 0 -> new PetEnderman(level(), player);
+            case 1 -> new HammerheadPetEnderman(level(), player);
+            case 2 -> new AxolotlPetEnderman(level(), player);
+            default -> null;
+        };
     }
 
     @Override

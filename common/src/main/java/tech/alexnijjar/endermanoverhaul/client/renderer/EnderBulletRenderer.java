@@ -18,6 +18,6 @@ public class EnderBulletRenderer extends GeoEntityRenderer<EnderBullet> {
 
     @Override
     public RenderType getRenderType(EnderBullet animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-        return RenderType.entityTranslucent(texture);
+        return RenderType.entityTranslucentEmissive(texture);
     }
 }

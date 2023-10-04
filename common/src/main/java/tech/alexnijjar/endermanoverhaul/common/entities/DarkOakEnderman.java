@@ -47,7 +47,12 @@ public class DarkOakEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
+        return false;
+    }
+
+    @Override
+    public boolean canShake() {
         return false;
     }
 

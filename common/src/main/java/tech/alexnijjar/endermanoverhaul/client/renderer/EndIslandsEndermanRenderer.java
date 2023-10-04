@@ -7,9 +7,9 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanEntityRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanModel;
 import tech.alexnijjar.endermanoverhaul.client.renderer.base.CustomEnderEyesLayer;
 import tech.alexnijjar.endermanoverhaul.common.entities.EndIslandsEnderman;
-import tech.alexnijjar.endermanoverhaul.client.renderer.base.BaseEndermanModel;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 
 public class EndIslandsEndermanRenderer extends BaseEndermanEntityRenderer<EndIslandsEnderman> {

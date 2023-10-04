@@ -47,7 +47,7 @@ public class WindsweptHillsEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean canRunWhenAngry() {
+    public boolean playRunAnimWhenAngry() {
         return false;
     }
 

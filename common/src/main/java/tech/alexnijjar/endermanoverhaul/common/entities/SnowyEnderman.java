@@ -5,7 +5,9 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -30,7 +32,7 @@ public class SnowyEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 35.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.216)
+            .add(Attributes.MOVEMENT_SPEED, 0.1944)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 42.0);
     }
@@ -64,5 +66,18 @@ public class SnowyEnderman extends BaseEnderman {
     protected void onChangedBlock(@NotNull BlockPos pos) {
         super.onChangedBlock(pos);
         FrostWalkerEnchantment.onEntityMoved(this, this.level(), pos, 2);
+    }
+
+    @Override
+    public boolean doHurtTarget(@NotNull Entity target) {
+        if (super.doHurtTarget(target)) {
+            if (target instanceof LivingEntity entity && !entity.isFullyFrozen()) {
+                entity.setTicksFrozen(entity.getTicksFrozen() + 100);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
