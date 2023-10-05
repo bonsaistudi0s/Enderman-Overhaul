@@ -62,6 +62,11 @@ public class DarkOakEnderman extends BaseEnderman {
     }
 
     @Override
+    public @Nullable SoundEvent getAreaEffectSound() {
+        return ModSoundEvents.DARK_OAK_DARKNESS.get();
+    }
+
+    @Override
     public int getAreaEffectRange() {
         return 20;
     }
@@ -78,7 +83,7 @@ public class DarkOakEnderman extends BaseEnderman {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return ModSoundEvents.TALL_ENDERMAN_AMBIENT.get();
+        return ModSoundEvents.DARK_OAK_ENDERMAN_AMBIENT.get();
     }
 
     @Override
@@ -93,6 +98,6 @@ public class DarkOakEnderman extends BaseEnderman {
 
     @Override
     public SoundEvent getStareSound() {
-        return ModSoundEvents.TALL_ENDERMAN_STARE.get();
+        return ModSoundEvents.DARK_OAK_ENDERMAN_STARE.get();
     }
 }

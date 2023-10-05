@@ -18,8 +18,7 @@ import tech.alexnijjar.endermanoverhaul.common.tags.ModBiomeTags;
 
 import java.util.function.Predicate;
 
-public class
-EndermanOverhaulFabric {
+public class EndermanOverhaulFabric {
 
     public static void init() {
         EndermanOverhaul.init();

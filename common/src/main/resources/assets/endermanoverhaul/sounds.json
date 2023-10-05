@@ -57,5 +57,24 @@
             "endermanoverhaul:tall/stare"
         ],
         "subtitle": "subtitles.endermanoverhaul.entity.tall_enderman.stare"
+    },
+    "dark_oak_enderman_ambient": {
+        "sounds": [
+            "endermanoverhaul:dark_oak/idle1",
+            "endermanoverhaul:dark_oak/idle2"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.dark_oak_enderman.ambient"
+    },
+    "dark_oak_enderman_darkness": {
+        "sounds": [
+            "endermanoverhaul:dark_oak/darkness"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.dark_oak_enderman.darkness"
+    },
+    "dark_oak_enderman_stare": {
+        "sounds": [
+            "endermanoverhaul:dark_oak/stare"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.dark_oak_enderman.stare"
     }
 }

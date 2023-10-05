@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
@@ -151,6 +152,11 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         return null;
     }
 
+    @Nullable
+    public SoundEvent getAreaEffectSound() {
+        return null;
+    }
+
     public int getAreaEffectRange() {
         return 0;
     }
@@ -181,6 +187,9 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         LivingEntity target = getTarget();
         if (target == null) return;
         if (this.distanceToSqr(target) <= getAreaEffectRange() * getAreaEffectRange()) {
+            if (getAreaEffectSound() != null && !target.hasEffect(areaEffect.getEffect())) {
+                level().playSound(null, target.blockPosition(), getAreaEffectSound(), SoundSource.HOSTILE, 1, 1);
+            }
             target.addEffect(areaEffect);
         }
     }

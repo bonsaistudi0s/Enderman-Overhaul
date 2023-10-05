@@ -34,4 +34,13 @@ public class ModSoundEvents {
 
     public static final RegistryEntry<SoundEvent> TALL_ENDERMAN_STARE = SOUND_EVENTS.register("tall_enderman_stare", () ->
         SoundEvent.createVariableRangeEvent(new ResourceLocation(EndermanOverhaul.MOD_ID, "tall_enderman_stare")));
+
+    public static final RegistryEntry<SoundEvent> DARK_OAK_ENDERMAN_AMBIENT = SOUND_EVENTS.register("dark_oak_enderman_ambient", () ->
+        SoundEvent.createVariableRangeEvent(new ResourceLocation(EndermanOverhaul.MOD_ID, "dark_oak_enderman_ambient")));
+
+    public static final RegistryEntry<SoundEvent> DARK_OAK_DARKNESS = SOUND_EVENTS.register("dark_oak_enderman_darkness", () ->
+        SoundEvent.createVariableRangeEvent(new ResourceLocation(EndermanOverhaul.MOD_ID, "dark_oak_enderman_darkness")));
+
+    public static final RegistryEntry<SoundEvent> DARK_OAK_ENDERMAN_STARE = SOUND_EVENTS.register("dark_oak_enderman_stare", () ->
+        SoundEvent.createVariableRangeEvent(new ResourceLocation(EndermanOverhaul.MOD_ID, "dark_oak_enderman_stare")));
 }
