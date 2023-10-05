@@ -2,6 +2,7 @@ package tech.alexnijjar.endermanoverhaul.common.entities.pets;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -259,6 +260,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
             this.saveWithoutId(petTag);
             ItemStack pearl = ModItems.ANCIENT_PEARL.get().getDefaultInstance();
             entityTag.put("PetEntity", petTag);
+            entityTag.putString("PetType", BuiltInRegistries.ENTITY_TYPE.getKey(getType()).getPath());
             pearl.setTag(entityTag);
             BehaviorUtils.throwItem(this, pearl, position());
             playSound(SoundEvents.ENDERMAN_TELEPORT);

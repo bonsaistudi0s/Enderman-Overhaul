@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantComponents;
-import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.ThrownAncientPearl;
 
 import java.util.List;
@@ -37,7 +36,11 @@ public class AncientPearlItem extends EnderpearlItem {
 
             CompoundTag tag = stack.getOrCreateTag();
             if (tag.contains("PetEntity")) {
-                PetEnderman pet = new PetEnderman(level, player);
+                var pet = ThrownAncientPearl.createPet(level, player, switch (tag.getString("PetType")) {
+                    case "hammerhead_pet_enderman" -> 1;
+                    case "axolotl_pet_enderman" -> 2;
+                    default -> 0;
+                });
                 pet.load(tag.getCompound("PetEntity"));
 
                 pearl = new ThrownAncientPearl(level, player, pet);

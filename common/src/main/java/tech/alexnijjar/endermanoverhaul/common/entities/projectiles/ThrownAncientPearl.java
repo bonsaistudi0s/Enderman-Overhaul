@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.AxolotlPetEnderman;
+import tech.alexnijjar.endermanoverhaul.common.entities.pets.BasePetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.HammerheadPetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
@@ -75,12 +76,7 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
     }
 
     private Entity createPet(ServerPlayer player) {
-        return switch (this.random.nextInt(3)) {
-            case 0 -> new PetEnderman(level(), player);
-            case 1 -> new HammerheadPetEnderman(level(), player);
-            case 2 -> new AxolotlPetEnderman(level(), player);
-            default -> null;
-        };
+        return createPet(level(), player, this.random.nextInt(3));
     }
 
     @Override
@@ -102,5 +98,13 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
         }
 
         return super.changeDimension(destination);
+    }
+
+    public static BasePetEnderman createPet(Level level, Player player, int id) {
+        return switch (id) {
+            case 1 -> new HammerheadPetEnderman(level, player);
+            case 2 -> new AxolotlPetEnderman(level, player);
+            default -> new PetEnderman(level, player);
+        };
     }
 }
