@@ -89,6 +89,11 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean playArmSwingAnimWhenAttacking() {
+        return false;
+    }
+
+    @Override
     public boolean isProvokedByEyeContact() {
         return false;
     }
@@ -133,6 +138,7 @@ public class SoulsandValleyEnderman extends BaseEnderman {
             spirit.setPos(getX(), getY() + 2, getZ());
             spirit.addDeltaMovement(new Vec3(0, 0.5, 0));
             level().addFreshEntity(spirit);
+            spirit.setTarget(this.getTarget());
         }
 
         for (int i = 0; i < 10; i++) {

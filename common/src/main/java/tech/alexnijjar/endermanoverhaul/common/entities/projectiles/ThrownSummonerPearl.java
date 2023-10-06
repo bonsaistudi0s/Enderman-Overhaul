@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -53,7 +54,10 @@ public class ThrownSummonerPearl extends ThrowableItemProjectile {
         Entity entity = this.getOwner();
         if (entity instanceof ServerPlayer serverPlayer) {
             if (serverPlayer.connection.isAcceptingMessages() && serverPlayer.level() == this.level() && !serverPlayer.isSleeping()) {
-                List<Entity> nearbyEntities = level().getEntities(this, getBoundingBox().inflate(8.0), e -> e instanceof LivingEntity);
+                List<Entity> nearbyEntities = level().getEntities(this, getBoundingBox().inflate(8.0), e -> e instanceof LivingEntity).stream()
+                    .limit(serverPlayer.server.getGameRules().getInt(GameRules.RULE_MAX_ENTITY_CRAMMING))
+                    .toList();
+
                 for (var target : nearbyEntities) {
                     if (target == serverPlayer) continue;
                     if (target.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) continue;

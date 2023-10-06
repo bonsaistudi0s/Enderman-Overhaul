@@ -49,6 +49,11 @@ public class WarpedForestEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean playArmSwingAnimWhenAttacking() {
+        return false;
+    }
+
+    @Override
     public boolean hasParticles() {
         return false;
     }

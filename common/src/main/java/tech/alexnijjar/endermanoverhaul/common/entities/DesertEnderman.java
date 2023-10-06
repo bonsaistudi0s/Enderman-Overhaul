@@ -73,6 +73,7 @@ public class DesertEnderman extends BaseEnderman {
             if (scarab == null) return;
             scarab.setPos(this.position());
             level().addFreshEntity(scarab);
+            scarab.setTarget(this.getTarget());
         }
 
         for (int i = 0; i < 10; i++) {

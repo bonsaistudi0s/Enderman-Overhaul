@@ -86,6 +86,13 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
             state.getController().setAnimation(ConstantAnimations.HOLDING);
             return PlayState.CONTINUE;
         }));
+
+        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
+            if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
+            if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.ATTACK);
+            return PlayState.CONTINUE;
+        }));
     }
 
     public boolean canOpenMouth() {
@@ -97,6 +104,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     }
 
     public boolean canShake() {
+        return true;
+    }
+
+    public boolean playArmSwingAnimWhenAttacking() {
         return true;
     }
 
@@ -115,6 +126,10 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
     public int getParticleCount() {
         return 2;
+    }
+
+    public int getParticleRate() {
+        return 1;
     }
 
     public boolean canPickupBlocks() {
@@ -207,7 +222,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     @Override
     public void aiStep() {
         ParticleOptions customParticleType = getCustomParticles();
-        if (hasParticles() && this.level().isClientSide() && customParticleType != null) {
+        if (hasParticles() && this.level().isClientSide() && customParticleType != null && level().getGameTime() % getParticleRate() == 0) {
             for (int i = 0; i < getParticleCount(); i++) {
                 this.level().addParticle(customParticleType,
                     this.getRandomX(0.5),

@@ -54,7 +54,7 @@ public class OceanEnderman extends BaseEnderman {
     public static @NotNull AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH, 30.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.16)
+            .add(Attributes.MOVEMENT_SPEED, 0.13)
             .add(Attributes.ATTACK_DAMAGE, 6.0)
             .add(Attributes.FOLLOW_RANGE, 64.0);
     }
@@ -79,9 +79,16 @@ public class OceanEnderman extends BaseEnderman {
                 state.getController().setAnimation(ConstantAnimations.SWIM);
                 return PlayState.CONTINUE;
             }
-            state.getController().setAnimation(state.isMoving() ?
+            state.getController().setAnimation(state.getLimbSwingAmount() > 0.1 || state.getLimbSwingAmount() < -0.1 ?
                 ConstantAnimations.WALK :
                 ConstantAnimations.IDLE);
+            return PlayState.CONTINUE;
+        }));
+
+        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
+            if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
+            if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.ATTACK);
             return PlayState.CONTINUE;
         }));
     }
@@ -118,6 +125,11 @@ public class OceanEnderman extends BaseEnderman {
     @Override
     public int getParticleCount() {
         return 1;
+    }
+
+    @Override
+    public int getParticleRate() {
+        return 4;
     }
 
     @Override

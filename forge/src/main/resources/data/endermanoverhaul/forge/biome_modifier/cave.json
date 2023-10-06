@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#endermanoverhaul:cave_spawns",
+  "spawners":
+  {
+    "type": "endermanoverhaul:cave_enderman",
+    "weight": 10,
+    "minCount": 1,
+    "maxCount": 4
+  }
+}

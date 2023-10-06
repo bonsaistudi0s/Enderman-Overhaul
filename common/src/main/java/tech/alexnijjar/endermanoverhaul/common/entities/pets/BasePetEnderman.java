@@ -87,6 +87,13 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
             }
             return PlayState.CONTINUE;
         }));
+
+        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
+            if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
+            if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.ATTACK);
+            return PlayState.CONTINUE;
+        }));
     }
 
     protected void registerGoals() {

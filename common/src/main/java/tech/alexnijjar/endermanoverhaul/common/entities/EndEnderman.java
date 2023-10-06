@@ -89,6 +89,11 @@ public class EndEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean playArmSwingAnimWhenAttacking() {
+        return false;
+    }
+
+    @Override
     public boolean isProvokedByEyeContact() {
         return false;
     }
