@@ -58,6 +58,7 @@ public class ReplacedEnderman implements GeoReplacedEntity {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
             if (enderman.getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
+            if (enderman.getTarget() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ATTACK);
             return PlayState.CONTINUE;
         }));

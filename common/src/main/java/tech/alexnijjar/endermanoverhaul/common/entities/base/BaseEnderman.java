@@ -90,6 +90,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
             if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
             if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
+            if (getTarget() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ATTACK);
             return PlayState.CONTINUE;
         }));
