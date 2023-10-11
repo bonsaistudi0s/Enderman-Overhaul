@@ -1,0 +1,16 @@
+{
+  "values": [
+    "#endermanoverhaul:badlands_spawns",
+    "#endermanoverhaul:dark_oak_spawns",
+    "#endermanoverhaul:desert_spawns",
+    "#endermanoverhaul:flower_fields_spawns",
+    "#endermanoverhaul:ice_spikes_spawns",
+    "#endermanoverhaul:ocean_spawns",
+    "#endermanoverhaul:savanna_spawns",
+    "#endermanoverhaul:snowy_spawns",
+    "#endermanoverhaul:swamp_spawns",
+    "#endermanoverhaul:windswept_hills_spawns",
+    "minecraft:dripstone_caves",
+    "minecraft:lush_caves"
+  ]
+}

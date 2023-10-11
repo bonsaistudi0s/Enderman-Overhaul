@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:has_structure/end_city",
+    {
+      "id": "#c:end_islands",
+      "required": false
+    }
+  ]
+}
