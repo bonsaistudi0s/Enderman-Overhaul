@@ -18,7 +18,7 @@ import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
 import tech.alexnijjar.endermanoverhaul.common.items.pearls.*;
 import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedBladeItem;
-import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShielditem;
+import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShieldItem;
 
 import java.util.function.Supplier;
 
@@ -71,7 +71,7 @@ public class ModItems {
 
     public static final RegistryEntry<Item> ENDERMAN_TOOTH = ITEMS.register("enderman_tooth", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> CORRUPTED_BLADE = ITEMS.register("corrupted_blade", () -> new CorruptedBladeItem(Tiers.IRON, 3, -2.4f, new Item.Properties()));
-    public static final RegistryEntry<Item> CORRUPTED_SHIELD = ITEMS.register("corrupted_shield", () -> new CorruptedShielditem(new Item.Properties().durability(672)));
+    public static final RegistryEntry<Item> CORRUPTED_SHIELD = ITEMS.register("corrupted_shield", () -> new CorruptedShieldItem(new Item.Properties().durability(672)));
 
 
     @ExpectPlatform

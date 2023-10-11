@@ -25,6 +25,7 @@ import java.util.function.Supplier;
 
 public class ModEntityTypes {
     public static final ResourcefulRegistry<EntityType<?>> ENTITY_TYPES = ResourcefulRegistries.create(BuiltInRegistries.ENTITY_TYPE, EndermanOverhaul.MOD_ID);
+    public static final ResourcefulRegistry<EntityType<?>> PEARLS = ResourcefulRegistries.create(ENTITY_TYPES);
 
     public static final RegistryEntry<EntityType<BadlandsEnderman>> BADLANDS_ENDERMAN = ENTITY_TYPES.register("badlands_enderman", () ->
         EntityType.Builder.of(BadlandsEnderman::new, MobCategory.MONSTER)
@@ -157,56 +158,56 @@ public class ModEntityTypes {
             .clientTrackingRange(8)
             .build("ender_bullet"));
 
-    public static final RegistryEntry<EntityType<ThrownCorruptedPearl>> CORRUPTED_PEARL = ENTITY_TYPES.register("corrupted_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownCorruptedPearl>> CORRUPTED_PEARL = PEARLS.register("corrupted_pearl", () ->
         EntityType.Builder.<ThrownCorruptedPearl>of(ThrownCorruptedPearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("corrupted_pearl"));
 
-    public static final RegistryEntry<EntityType<ThrownSoulPearl>> SOUL_PEARL = ENTITY_TYPES.register("soul_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownSoulPearl>> SOUL_PEARL = PEARLS.register("soul_pearl", () ->
         EntityType.Builder.<ThrownSoulPearl>of(ThrownSoulPearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("soul_pearl"));
 
-    public static final RegistryEntry<EntityType<ThrownAncientPearl>> ANCIENT_PEARL = ENTITY_TYPES.register("ancient_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownAncientPearl>> ANCIENT_PEARL = PEARLS.register("ancient_pearl", () ->
         EntityType.Builder.<ThrownAncientPearl>of(ThrownAncientPearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("ancient_pearl"));
 
-    public static final RegistryEntry<EntityType<ThrownBubblePearl>> BUBBLE_PEARL = ENTITY_TYPES.register("bubble_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownBubblePearl>> BUBBLE_PEARL = PEARLS.register("bubble_pearl", () ->
         EntityType.Builder.<ThrownBubblePearl>of(ThrownBubblePearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("bubble_pearl"));
 
-    public static final RegistryEntry<EntityType<ThrownSummonerPearl>> SUMMONER_PEARL = ENTITY_TYPES.register("summoner_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownSummonerPearl>> SUMMONER_PEARL = PEARLS.register("summoner_pearl", () ->
         EntityType.Builder.<ThrownSummonerPearl>of(ThrownSummonerPearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("summoner_pearl"));
 
-    public static final RegistryEntry<EntityType<ThrownIcyPearl>> ICY_PEARL = ENTITY_TYPES.register("icy_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownIcyPearl>> ICY_PEARL = PEARLS.register("icy_pearl", () ->
         EntityType.Builder.<ThrownIcyPearl>of(ThrownIcyPearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("icy_pearl"));
 
-    public static final RegistryEntry<EntityType<ThrownCrimsonPearl>> CRIMSON_PEARL = ENTITY_TYPES.register("crimson_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownCrimsonPearl>> CRIMSON_PEARL = PEARLS.register("crimson_pearl", () ->
         EntityType.Builder.<ThrownCrimsonPearl>of(ThrownCrimsonPearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)
             .updateInterval(10)
             .build("crimson_pearl"));
 
-    public static final RegistryEntry<EntityType<ThrownWarpedPearl>> WARPED_PEARL = ENTITY_TYPES.register("warped_pearl", () ->
+    public static final RegistryEntry<EntityType<ThrownWarpedPearl>> WARPED_PEARL = PEARLS.register("warped_pearl", () ->
         EntityType.Builder.<ThrownWarpedPearl>of(ThrownWarpedPearl::new, MobCategory.MISC)
             .sized(0.25f, 0.25f)
             .clientTrackingRange(4)

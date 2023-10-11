@@ -7,12 +7,12 @@ import org.spongepowered.asm.mixin.Unique;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
 import tech.alexnijjar.endermanoverhaul.client.EndermanOverhaulClient;
-import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShielditem;
+import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShieldItem;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-@Mixin(CorruptedShielditem.class)
+@Mixin(CorruptedShieldItem.class)
 public abstract class CorruptedShieldItemMixin extends ShieldItem implements GeoItem {
 
     @Unique

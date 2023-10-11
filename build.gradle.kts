@@ -40,13 +40,6 @@ subprojects {
         maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.minecraftforge.net/")
         maven(url = "https://maven.resourcefulbees.com/repository/maven-public/")
-        maven {
-            url = uri("https://jitpack.io")
-            content {
-                includeGroup("com.github.LlamaLad7")
-                includeGroup("com.github.llamalad7.mixinextras")
-            }
-        }
     }
 
     dependencies {

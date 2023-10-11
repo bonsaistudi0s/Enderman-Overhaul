@@ -8,6 +8,7 @@ import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 
 public class ModEntityTypeTags {
     public static final TagKey<EntityType<?>> CANT_BE_TELEPORTED = tag("cant_be_teleported");
+    public static final TagKey<EntityType<?>> ENDER_PEARLS = tag("ender_pearls");
 
     private static TagKey<EntityType<?>> tag(String name) {
         return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(EndermanOverhaul.MOD_ID, name));

@@ -11,6 +11,7 @@ import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.datagen.provider.client.ModItemModelProvider;
 import tech.alexnijjar.endermanoverhaul.datagen.provider.client.ModLangProvider;
 import tech.alexnijjar.endermanoverhaul.datagen.provider.server.ModBlockTagProvider;
+import tech.alexnijjar.endermanoverhaul.datagen.provider.server.ModEntityTypeTagProvider;
 import tech.alexnijjar.endermanoverhaul.datagen.provider.server.ModLootTableProvider;
 
 import java.util.concurrent.CompletableFuture;
@@ -31,5 +32,6 @@ public final class EndermanOverhaulDataGenerator {
         generator.addProvider(event.includeServer(), new ModLootTableProvider(packOutput));
 
         generator.addProvider(event.includeServer(), new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModEntityTypeTagProvider(packOutput, lookupProvider, existingFileHelper));
     }
 }

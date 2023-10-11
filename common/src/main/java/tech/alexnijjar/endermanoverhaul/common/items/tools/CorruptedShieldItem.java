@@ -18,10 +18,10 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class CorruptedShielditem extends ShieldItem implements GeoItem {
+public class CorruptedShieldItem extends ShieldItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public CorruptedShielditem(Properties properties) {
+    public CorruptedShieldItem(Properties properties) {
         super(properties);
     }
 

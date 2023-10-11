@@ -30,6 +30,7 @@ public class ReplacedEndermanRenderer extends GeoReplacedEntityRenderer<EnderMan
         addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.currentEntity));
     }
 
+    @Override
     public @NotNull Vec3 getRenderOffset(EnderMan entity, float partialTicks) {
         if (entity.isCreepy()) {
             Level level = entity.level();
