@@ -8,7 +8,7 @@ import tech.alexnijjar.endermanoverhaul.networking.NetworkHandler;
 public class EndermanOverhaul {
 
     public static final String MOD_ID = "endermanoverhaul";
-    public static final Configurator CONFIGURATOR = new Configurator();
+    public static final Configurator CONFIGURATOR = new Configurator(true);
 
     public static void init() {
         CONFIGURATOR.registerConfig(EndermanOverhaulConfig.class);
