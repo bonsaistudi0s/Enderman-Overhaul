@@ -407,6 +407,10 @@ public abstract class BasePetEnderman extends BaseEnderman implements IAnimatabl
         }
     }
 
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
     @Override
     protected boolean shouldDespawnInPeaceful() {
         return false;

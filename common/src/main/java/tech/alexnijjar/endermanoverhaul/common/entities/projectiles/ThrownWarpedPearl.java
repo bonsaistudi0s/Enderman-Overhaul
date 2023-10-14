@@ -69,7 +69,6 @@ public class ThrownWarpedPearl extends ThrowableItemProjectile {
                     entity.teleportTo(this.getX(), this.getY(), this.getZ());
                 }
 
-                entity.hurt(DamageSource.FALL, 5.0f);
                 entity.resetFallDistance();
                 entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, 1));
             }

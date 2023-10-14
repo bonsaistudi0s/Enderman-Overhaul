@@ -69,7 +69,6 @@ public class ThrownCrimsonPearl extends ThrowableItemProjectile {
                     entity.teleportTo(this.getX(), this.getY(), this.getZ());
                 }
 
-                entity.hurt(DamageSource.FALL, 5.0f);
                 entity.resetFallDistance();
                 entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 300, 1));
             }

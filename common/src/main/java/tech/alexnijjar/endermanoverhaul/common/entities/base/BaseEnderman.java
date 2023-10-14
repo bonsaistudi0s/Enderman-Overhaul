@@ -188,6 +188,10 @@ public abstract class BaseEnderman extends EnderMan implements IAnimatable {
         return true;
     }
 
+    public boolean canFloat() {
+        return true;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -257,7 +261,9 @@ public abstract class BaseEnderman extends EnderMan implements IAnimatable {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
+        if (canFloat()) {
+            this.goalSelector.addGoal(0, new FloatGoal(this));
+        }
         this.goalSelector.addGoal(1, new EndermanFreezeWhenLookedAt());
         if (isAlwaysHostile()) {
             this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
