@@ -23,11 +23,16 @@ public abstract class TheEndGatewayBlockEntityMixin {
     @Shadow
     private BlockPos exitPortal;
 
+    @Shadow
+    private static BlockPos findExitPosition(Level level, BlockPos pos) {
+        throw new AssertionError();
+    }
+
     @Inject(
         method = "teleportEntity",
         at = @At(
             target = "Lnet/minecraft/world/level/block/entity/TheEndGatewayBlockEntity;teleportEntity(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/block/entity/TheEndGatewayBlockEntity;)V",
-            value = "HEAD")
+            value = "TAIL")
     )
     private static void endermanoverhaul$teleportEntity(Level level, BlockPos pos, BlockState state, Entity entity, TheEndGatewayBlockEntity blockEntity, CallbackInfo ci) {
         if (entity.getType().is(ModEntityTypeTags.ENDER_PEARLS)) {
@@ -38,6 +43,7 @@ public abstract class TheEndGatewayBlockEntityMixin {
 
             if (!((Object) blockEntity instanceof TheEndGatewayBlockEntityMixin gateway)) return;
 
+            if (gateway.exitPortal == null) return;
             BlockPos blockPos = gateway.exactTeleport ? gateway.exitPortal : findExitPosition(level, gateway.exitPortal);
             if (owner != null) {
                 owner.setPortalCooldown();
@@ -48,10 +54,5 @@ public abstract class TheEndGatewayBlockEntityMixin {
                 entity.teleportToWithTicket(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5);
             }
         }
-    }
-
-    @Shadow
-    private static BlockPos findExitPosition(Level level, BlockPos pos) {
-        return null;
     }
 }

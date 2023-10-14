@@ -14,6 +14,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
@@ -25,6 +26,7 @@ public class SwampEnderman extends BaseEnderman {
     public SwampEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
         xpReward = 8;
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
     }
 
     public static @NotNull AttributeSupplier.Builder createAttributes() {
@@ -68,6 +70,11 @@ public class SwampEnderman extends BaseEnderman {
     @Override
     public @Nullable MobEffectInstance getHitEffect() {
         return new MobEffectInstance(new MobEffectInstance(MobEffects.POISON, 100, 2));
+    }
+
+    @Override
+    public boolean canFloat() {
+        return false;
     }
 
     @Override

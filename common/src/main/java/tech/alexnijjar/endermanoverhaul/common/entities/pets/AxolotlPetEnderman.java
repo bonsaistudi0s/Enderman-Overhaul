@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
@@ -17,6 +18,12 @@ public class AxolotlPetEnderman extends BasePetEnderman {
 
     public AxolotlPetEnderman(Level level, Player owner) {
         super(ModEntityTypes.AXOLOTL_PET_ENDERMAN.get(), level, owner);
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
+    }
+
+    @Override
+    public boolean isSensitiveToWater() {
+        return false;
     }
 
     public static @NotNull AttributeSupplier.Builder createAttributes() {

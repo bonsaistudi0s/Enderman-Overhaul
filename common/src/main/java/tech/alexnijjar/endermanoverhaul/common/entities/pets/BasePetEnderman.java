@@ -416,6 +416,10 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         }
     }
 
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
     @Override
     protected boolean shouldDespawnInPeaceful() {
         return false;
