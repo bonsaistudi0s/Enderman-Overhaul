@@ -68,7 +68,7 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
             entity.resetFallDistance();
         }
 
-        level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.BUBBLE_POP.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
+        level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.BUBBLE_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
         this.discard();
     }
 
@@ -87,7 +87,7 @@ public class ThrownBubblePearl extends ThrowableItemProjectile {
                     ModUtils.sendParticles((ServerLevel) level(), ModParticleTypes.BUBBLE.get(), this.getX(), this.getY() + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
                 }
             }
-            level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.BUBBLE_POP.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
+            level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.BUBBLE_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
             this.discard();
         }
     }

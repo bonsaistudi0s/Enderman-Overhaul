@@ -51,6 +51,8 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CRIMSON_PEARL_TOOLTIP.getString(), "Applies Strength II when teleporting");
         add(ConstantComponents.WARPED_PEARL_TOOLTIP.getString(), "Applies Resistance II when teleporting");
 
+        add(ConstantComponents.HOOD_TOOLTIP.getString(), "Allows you to look at endermen without angering them");
+
         add(ConstantComponents.CORRUPTED_BLADE_TOOLTIP.getString(), "Teleports targets randomly");
         add(ConstantComponents.CORRUPTED_SHIELD_TOOLTIP.getString(), "Teleports attackers randomly");
 
@@ -60,7 +62,6 @@ public class ModLangProvider extends LanguageProvider {
 
         add("tag.item.endermanoverhaul.ender_pearls", "Ender Pearls");
 
-        add("subtitles.endermanoverhaul.entity.bubble_pop", "Bubble Pearl Pops");
         add("subtitles.endermanoverhaul.entity.cave_enderman.ambient", "Cave Enderman vwoops");
         add("subtitles.endermanoverhaul.entity.cave_enderman.hurt", "Cave Enderman hurts");
         add("subtitles.endermanoverhaul.entity.plant_enderman.ambient", "Plant Enderman vwoops");
@@ -72,6 +73,13 @@ public class ModLangProvider extends LanguageProvider {
         add("subtitles.endermanoverhaul.entity.dark_oak_enderman.ambient", "Dark Oak Enderman vwoops");
         add("subtitles.endermanoverhaul.entity.dark_oak_enderman.darkness", "Dark Oak Enderman darkens");
         add("subtitles.endermanoverhaul.entity.dark_oak_enderman.stare", "Dark Oak Enderman cries out");
+
+        add("subtitles.endermanoverhaul.entity.ancient_pearl.hit", "Ancient Pearl Hits");
+        add("subtitles.endermanoverhaul.entity.bubble_pearl.hit", "Bubble Pearl Pops");
+        add("subtitles.endermanoverhaul.entity.bubble_pearl.thrown", "Bubble Pearl Thrown");
+        add("subtitles.endermanoverhaul.entity.corrupted_pearl.hit", "Corrupted Pearl Hits");
+        add("subtitles.endermanoverhaul.entity.soul_pearl.hit", "Soul Pearl Hits");
+        add("subtitles.endermanoverhaul.entity.summoner_pearl.hit", "Summoner Pearl Hits");
 
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");

@@ -15,6 +15,8 @@ public class ConstantComponents {
     public static final Component CRIMSON_PEARL_TOOLTIP = Component.translatable("tooltip.endermanoverhaul.crimson_pearl").withStyle(ChatFormatting.GRAY);
     public static final Component WARPED_PEARL_TOOLTIP = Component.translatable("tooltip.endermanoverhaul.warped_pearl").withStyle(ChatFormatting.GRAY);
 
+    public static final Component HOOD_TOOLTIP = Component.translatable("tooltip.endermanoverhaul.hood").withStyle(ChatFormatting.GRAY);
+
     public static final Component CORRUPTED_BLADE_TOOLTIP = Component.translatable("tooltip.endermanoverhaul.corrupted_blade").withStyle(ChatFormatting.GRAY);
     public static final Component CORRUPTED_SHIELD_TOOLTIP = Component.translatable("tooltip.endermanoverhaul.corrupted_shield").withStyle(ChatFormatting.GRAY);
 

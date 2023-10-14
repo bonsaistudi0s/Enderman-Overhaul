@@ -64,7 +64,7 @@ public class EndermanOverhaulClient {
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.SOULSAND_VALLEY_ENDERMAN.get(), BaseEndermanEntityRenderer.SOULSAND_VALLEY_ANIMATION, false));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SWAMP_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.SWAMP_ENDERMAN.get()));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.WARPED_FOREST_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.WARPED_FOREST_ENDERMAN.get(), BaseEndermanEntityRenderer.WARPED_FOREST_ANIMATION));
-        ClientPlatformUtils.registerRenderer(ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN.get()));
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.WINDSWEPT_HILLS_ENDERMAN.get(), BaseEndermanEntityRenderer.WINDSWEPT_HILLS_ANIMATION));
 
         // Pets
         ClientPlatformUtils.registerRenderer(ModEntityTypes.PET_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.PET_ENDERMAN.get()));
@@ -93,6 +93,7 @@ public class EndermanOverhaulClient {
         register.accept(ModParticleTypes.SAND.get(), spriteSet -> new EndermanParticle.Provider(spriteSet, 0.86f, 0.83f, 0.63f));
         register.accept(ModParticleTypes.SOUL_FIRE_FLAME.get(), EndermanParticle.Provider::new);
         register.accept(ModParticleTypes.BUBBLE.get(), EndermanParticle.Provider::new);
+        register.accept(ModParticleTypes.FRIENDERMAN.get(), spriteSet -> new EndermanParticle.Provider(spriteSet, 0.07f, 0.93f, 0.84f));
     }
 
     public static void registerArmorRenderers() {

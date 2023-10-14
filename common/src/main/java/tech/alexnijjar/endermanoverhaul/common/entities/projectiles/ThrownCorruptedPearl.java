@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class ThrownCorruptedPearl extends ThrowableItemProjectile {
     public ThrownCorruptedPearl(EntityType<? extends ThrownCorruptedPearl> type, Level level) {
@@ -79,6 +80,8 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
         ModUtils.teleportTarget(this.level(), target, 80);
         target.resetFallDistance();
         target.hurt(this.damageSources().fall(), 5.0f);
+
+        level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.CORRUPTED_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
         this.discard();
     }
 

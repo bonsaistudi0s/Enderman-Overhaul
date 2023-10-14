@@ -797,7 +797,7 @@
 			}
 		},
 		"animation.enderman.attack": {
-			"animation_length": 0.36,
+			"animation_length": 0.4,
 			"bones": {
 				"right_arm": {
 					"rotation": {
@@ -805,26 +805,21 @@
 							"vector": [0, 0, 0]
 						},
 						"0.12": {
-							"vector": [-25, -20, -2],
+							"vector": [-12.5, -10, 1],
 							"easing": "easeOutSine"
 						},
-						"0.28": {
-							"vector": [-2, -10, -2],
+						"0.32": {
+							"vector": [-2, -10, -1],
 							"easing": "easeInSine"
 						},
-						"0.36": {
+						"0.4": {
 							"vector": [0, 0, 0],
 							"easing": "easeOutSine"
 						}
 					}
-				},
-				"right_leg": {
-					"rotation": {
-						"vector": [0, 0, 0]
-					}
 				}
 			}
-        }
+		}
 	},
 	"geckolib_format_version": 2
 }

@@ -19,6 +19,7 @@ import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 import tech.alexnijjar.endermanoverhaul.common.tags.ModEntityTypeTags;
 
 public class ThrownSoulPearl extends ThrowableItemProjectile {
@@ -95,6 +96,7 @@ public class ThrownSoulPearl extends ThrowableItemProjectile {
             boundEntity.teleportTo(this.getX(), this.getY(), this.getZ());
         }
 
+        level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.SOUL_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
         this.discard();
     }
 }

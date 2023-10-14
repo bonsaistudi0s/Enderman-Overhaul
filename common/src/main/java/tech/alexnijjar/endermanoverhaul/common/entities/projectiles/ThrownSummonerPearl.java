@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 import tech.alexnijjar.endermanoverhaul.common.tags.ModEntityTypeTags;
 
 import java.util.List;
@@ -66,6 +67,7 @@ public class ThrownSummonerPearl extends ThrowableItemProjectile {
             }
         }
 
+        level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.SUMMONER_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
         this.discard();
     }
 

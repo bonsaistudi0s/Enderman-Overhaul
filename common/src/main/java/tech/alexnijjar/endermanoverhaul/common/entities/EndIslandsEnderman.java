@@ -195,7 +195,6 @@ public class EndIslandsEnderman extends BaseEnderman {
         @Override
         public void start() {
             entityData.set(DATA_POSSESSING, true);
-            playSound(SoundEvents.EVOKER_CAST_SPELL, 1.0f, 1.0f);
             this.nextAttackTickCount = tickCount + 400;
             this.summonTicks = 28;
         }
@@ -213,6 +212,7 @@ public class EndIslandsEnderman extends BaseEnderman {
 
             playSound(SoundEvents.SHULKER_SHOOT, 1.0f, 1.0f);
             spawnProjectiles(target);
+            playSound(SoundEvents.EVOKER_CAST_SPELL, 1.0f, 1.0f);
         }
 
         @Override

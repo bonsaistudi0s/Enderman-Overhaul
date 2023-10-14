@@ -19,6 +19,7 @@ import tech.alexnijjar.endermanoverhaul.common.entities.pets.HammerheadPetEnderm
 import tech.alexnijjar.endermanoverhaul.common.entities.pets.PetEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class ThrownAncientPearl extends ThrowableItemProjectile {
     @Nullable
@@ -72,6 +73,7 @@ public class ThrownAncientPearl extends ThrowableItemProjectile {
             }
         }
 
+        level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.ANCIENT_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
         this.discard();
     }
 

@@ -1,6 +1,7 @@
 package tech.alexnijjar.endermanoverhaul.common.entities.pets;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -47,6 +48,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 import java.util.*;
 
@@ -91,7 +93,6 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
             if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
             if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
-            if (getTarget() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ATTACK);
             return PlayState.CONTINUE;
         }));
@@ -156,6 +157,11 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
             setTarget(null);
             setLastHurtByMob(null);
         }
+    }
+
+    @Override
+    public @Nullable ParticleOptions getCustomParticles() {
+        return ModParticleTypes.FRIENDERMAN.get();
     }
 
     @Override
