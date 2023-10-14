@@ -17,7 +17,11 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
+import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
@@ -40,6 +44,37 @@ public class SwampEnderman extends BaseEnderman {
     public static boolean checkMonsterSpawnRules(@NotNull EntityType<? extends Monster> type, ServerLevelAccessor level, @NotNull MobSpawnType spawnType, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (!EndermanOverhaulConfig.spawnSwampEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
         return BaseEnderman.checkMonsterSpawnRules(type, level, spawnType, pos, random);
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 5, state -> {
+            state.getController().setAnimation(state.getLimbSwingAmount() > 0.01 || state.getLimbSwingAmount() < -0.01 ?
+                ConstantAnimations.WALK :
+                ConstantAnimations.IDLE);
+            return PlayState.CONTINUE;
+        }));
+
+        data.addAnimationController(new AnimationController<>(this, "creepy_controller", 5, state -> {
+            if (!canOpenMouth()) return PlayState.STOP;
+            if (!isCreepy()) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.ANGRY);
+            return PlayState.CONTINUE;
+        }));
+
+        data.addAnimationController(new AnimationController<>(this, "hold_controller", 5, state -> {
+            if (!canPickupBlocks()) return PlayState.STOP;
+            if (getCarriedBlock() == null) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.HOLDING);
+            return PlayState.CONTINUE;
+        }));
+
+        data.addAnimationController(new AnimationController<>(this, "attack_controller", 5, state -> {
+            if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
+            if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
+            state.getController().setAnimation(ConstantAnimations.ATTACK);
+            return PlayState.CONTINUE;
+        }));
     }
 
     @Override

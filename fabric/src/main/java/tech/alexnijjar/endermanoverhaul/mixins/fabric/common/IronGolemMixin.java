@@ -1,4 +1,4 @@
-package tech.alexnijjar.endermanoverhaul.mixins.common;
+package tech.alexnijjar.endermanoverhaul.mixins.fabric.common;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.IronGolem;
