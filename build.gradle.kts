@@ -40,13 +40,7 @@ subprojects {
         maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.minecraftforge.net/")
         maven(url = "https://maven.resourcefulbees.com/repository/maven-public/")
-        maven {
-            url = uri("https://jitpack.io")
-            content {
-                includeGroup("com.github.LlamaLad7")
-                includeGroup("com.github.llamalad7.mixinextras")
-            }
-        }
+        maven(url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
     }
 
     dependencies {
@@ -69,9 +63,9 @@ subprojects {
         "modApi"(group = "com.teamresourceful.resourcefullib", name = "resourcefullib-$modLoader-$minecraftVersion", version = resourcefulLibVersion)
         "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-$minecraftVersion", version = resourcefulConfigVersion)
         if (isCommon) {
-            "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-fabric-$minecraftVersion", version = geckolibVersion)
+            "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-fabric-1.19", version = geckolibVersion)
         } else {
-            "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-$modLoader-$minecraftVersion", version = geckolibVersion)
+            "modImplementation"(group = "software.bernie.geckolib", name  = "geckolib-$modLoader-1.19", version = geckolibVersion)
         }
     }
 

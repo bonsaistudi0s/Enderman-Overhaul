@@ -23,6 +23,10 @@ public class ModUtils {
     }
 
     public static void teleportTarget(Level level, LivingEntity target, int range) {
+        teleportTarget(level, target, range, false);
+    }
+
+    public static void teleportTarget(Level level, LivingEntity target, int range, boolean flash) {
         if (level.isClientSide()) return;
         double x = target.getX();
         double y = target.getY();
@@ -41,7 +45,7 @@ public class ModUtils {
                 level.gameEvent(GameEvent.TELEPORT, position, GameEvent.Context.of(target));
                 SoundEvent soundEvent = SoundEvents.CHORUS_FRUIT_TELEPORT;
                 level.playSound(null, x, y, z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
-                if (target instanceof Player player) {
+                if (flash && target instanceof Player player) {
                     NetworkHandler.CHANNEL.sendToPlayer(new ClientboundFlashScreenPacket(), player);
                 }
                 target.playSound(soundEvent, 1.0F, 1.0F);

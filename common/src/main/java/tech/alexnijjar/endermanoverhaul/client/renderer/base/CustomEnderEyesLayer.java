@@ -7,35 +7,41 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.renderer.GeoRenderer;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+import net.minecraft.world.entity.Entity;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
+import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
-public class CustomEnderEyesLayer<T extends GeoAnimatable> extends GeoRenderLayer<T> {
+public class CustomEnderEyesLayer<T extends Entity & IAnimatable> extends GeoLayerRenderer<T> {
     private final RenderType glow;
     private final boolean shader;
 
-    public CustomEnderEyesLayer(GeoRenderer<T> entityRendererIn, ResourceLocation glowTexture) {
+
+    public CustomEnderEyesLayer(IGeoRenderer<T> entityRendererIn, ResourceLocation glowTexture) {
         this(entityRendererIn, glowTexture, true);
     }
 
-    public CustomEnderEyesLayer(GeoRenderer<T> entityRendererIn, ResourceLocation glowTexture, boolean shader) {
+    public CustomEnderEyesLayer(IGeoRenderer<T> entityRendererIn, ResourceLocation glowTexture, boolean shader) {
         super(entityRendererIn);
         this.glow = RenderType.eyes(glowTexture);
         this.shader = shader;
     }
 
     @Override
-    public void render(PoseStack poseStack, T animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        VertexConsumer vertexConsumer = shader ? bufferSource.getBuffer(glow) : buffer;
-        getRenderer().reRender(
-            getDefaultBakedModel(animatable),
-            poseStack, bufferSource, animatable,
-            glow, vertexConsumer,
+    public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn, T animatable, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
+        VertexConsumer vertexConsumer = shader ? bufferSource.getBuffer(glow) :
+            bufferSource.getBuffer(getRenderer().getRenderType(animatable, partialTick, poseStack, bufferSource, null, packedLightIn, getEntityModel().getTextureResource(animatable)));
+
+        getRenderer().render(
+            getEntityModel().getModel(getEntityModel().getModelResource(animatable)),
+            animatable,
             partialTick,
+            glow,
+            poseStack,
+            bufferSource,
+            vertexConsumer,
             LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
-            0.65f, 0.65f, 0.65f, 1
-        );
+            0.65f, 0.65f, 0.65f, 1);
+
     }
 }

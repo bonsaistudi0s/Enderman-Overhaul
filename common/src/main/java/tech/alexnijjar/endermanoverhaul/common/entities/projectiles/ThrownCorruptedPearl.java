@@ -2,6 +2,7 @@ package tech.alexnijjar.endermanoverhaul.common.entities.projectiles;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class ThrownCorruptedPearl extends ThrowableItemProjectile {
     public ThrownCorruptedPearl(EntityType<? extends ThrownCorruptedPearl> type, Level level) {
@@ -47,7 +49,7 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
     @Override
     public Entity changeDimension(@NotNull ServerLevel destination) {
         Entity entity = this.getOwner();
-        if (entity != null && entity.level().dimension() != destination.dimension()) {
+        if (entity != null && entity.level.dimension() != destination.dimension()) {
             this.setOwner(null);
         }
 
@@ -58,9 +60,9 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
     protected void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
 
-        if (this.level().isClientSide() || this.isRemoved()) return;
+        if (this.level.isClientSide() || this.isRemoved()) return;
         for (int i = 0; i < 32; ++i) {
-            ModUtils.sendParticles((ServerLevel) level(), ParticleTypes.PORTAL, this.getX(), (this.getY() - 1) + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
+            ModUtils.sendParticles((ServerLevel) level, ParticleTypes.PORTAL, this.getX(), (this.getY() - 1) + this.random.nextDouble() * 2.0, this.getZ(), 1, 0.0, 0.0, 0.0, -1.3);
         }
 
         if (!(result.getEntity() instanceof LivingEntity target)) {
@@ -68,17 +70,19 @@ public class ThrownCorruptedPearl extends ThrowableItemProjectile {
             return;
         }
 
-        if (this.random.nextFloat() < 0.05f && this.level().getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)) {
-            Endermite endermite = EntityType.ENDERMITE.create(this.level());
+        if (this.random.nextFloat() < 0.05f && this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)) {
+            Endermite endermite = EntityType.ENDERMITE.create(this.level);
             if (endermite != null) {
                 endermite.moveTo(target.getX(), target.getY(), target.getZ(), target.getYRot(), target.getXRot());
-                this.level().addFreshEntity(endermite);
+                this.level.addFreshEntity(endermite);
             }
         }
 
-        ModUtils.teleportTarget(this.level(), target, 80);
+        ModUtils.teleportTarget(this.level, target, 80);
         target.resetFallDistance();
-        target.hurt(this.damageSources().fall(), 5.0f);
+        target.hurt(DamageSource.FALL, 5.0f);
+
+        level.playSound(null, getX(), getY(), getZ(), ModSoundEvents.CORRUPTED_PEARL_HIT.get(), getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
         this.discard();
     }
 

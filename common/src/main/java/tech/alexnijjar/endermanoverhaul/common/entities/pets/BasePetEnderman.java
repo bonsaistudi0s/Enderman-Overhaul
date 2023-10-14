@@ -1,8 +1,9 @@
 package tech.alexnijjar.endermanoverhaul.common.entities.pets;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,10 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
@@ -30,7 +28,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -38,21 +35,22 @@ import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
 import java.util.*;
 
-public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity, OwnableEntity {
+public abstract class BasePetEnderman extends BaseEnderman implements IAnimatable, OwnableEntity {
     protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(BasePetEnderman.class, EntityDataSerializers.OPTIONAL_UUID);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     private EndermanHurtByTargetGoal hurtByTargetGoal;
 
@@ -71,13 +69,13 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
     }
 
     @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public AnimationFactory getFactory() {
+        return factory;
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 5, state -> {
             if (state.isMoving()) {
                 state.getController().setAnimation(isCreepy() ?
                     ConstantAnimations.RUN :
@@ -88,10 +86,9 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "attack_controller", 5, state -> {
             if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
             if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
-            if (getTarget() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ATTACK);
             return PlayState.CONTINUE;
         }));
@@ -132,6 +129,17 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
     }
 
     @Nullable
+    @Override
+    public Entity getOwner() {
+        try {
+            UUID uUID = this.getOwnerUUID();
+            return uUID == null ? null : this.level.getPlayerByUUID(uUID);
+        } catch (IllegalArgumentException var2) {
+            return null;
+        }
+    }
+
+    @Nullable
     public UUID getOwnerUUID() {
         return this.entityData.get(DATA_OWNERUUID_ID).orElse(null);
     }
@@ -147,21 +155,26 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
     @Override
     public void tick() {
         super.tick();
-        if (!level().isClientSide() && getTarget() instanceof BasePetEnderman e && Objects.equals(e.getOwnerUUID(), getOwnerUUID())) {
+        if (!level.isClientSide() && getTarget() instanceof BasePetEnderman e && Objects.equals(e.getOwnerUUID(), getOwnerUUID())) {
             setTarget(null);
             setLastHurtByMob(null);
         }
 
-        if (!level().isClientSide() && getTarget() instanceof Player p && p.getUUID().equals(getOwnerUUID())) {
+        if (!level.isClientSide() && getTarget() instanceof Player p && p.getUUID().equals(getOwnerUUID())) {
             setTarget(null);
             setLastHurtByMob(null);
         }
     }
 
     @Override
+    public @Nullable ParticleOptions getCustomParticles() {
+        return ModParticleTypes.FRIENDERMAN.get();
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level().isClientSide() && this.isAlive() && this.tickCount % 2000 == 0) {
+        if (!this.level.isClientSide() && this.isAlive() && this.tickCount % 2000 == 0) {
             this.heal(1.0f);
         }
     }
@@ -180,7 +193,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
 
     @Override
     public void die(@NotNull DamageSource damageSource) {
-        if (!this.level().isClientSide && this.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES) && this.getOwner() instanceof ServerPlayer) {
+        if (!this.level.isClientSide && this.level.getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES) && this.getOwner() instanceof ServerPlayer) {
             this.getOwner().sendSystemMessage(this.getCombatTracker().getDeathMessage());
         }
 
@@ -207,22 +220,16 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         }
 
         public boolean canUse() {
-            LivingEntity livingEntity = getOwner();
-            if (livingEntity == null) {
-                return false;
-            } else {
-                this.ownerLastHurtBy = livingEntity.getLastHurtByMob();
-                int i = livingEntity.getLastHurtByMobTimestamp();
-                return i != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && wantsToAttack(this.ownerLastHurtBy);
-            }
+            if (!(getOwner() instanceof LivingEntity livingEntity)) return false;
+            this.ownerLastHurtBy = livingEntity.getLastHurtByMob();
+            int i = livingEntity.getLastHurtByMobTimestamp();
+            return i != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && wantsToAttack(this.ownerLastHurtBy);
         }
 
         public void start() {
             this.mob.setTarget(this.ownerLastHurtBy);
-            LivingEntity livingEntity = getOwner();
-            if (livingEntity != null) {
-                this.timestamp = livingEntity.getLastHurtByMobTimestamp();
-            }
+            if (!(getOwner() instanceof LivingEntity livingEntity)) return;
+            this.timestamp = livingEntity.getLastHurtByMobTimestamp();
 
             super.start();
         }
@@ -238,22 +245,16 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         }
 
         public boolean canUse() {
-            LivingEntity livingEntity = getOwner();
-            if (livingEntity == null) {
-                return false;
-            } else {
-                this.ownerLastHurt = livingEntity.getLastHurtMob();
-                int i = livingEntity.getLastHurtMobTimestamp();
-                return i != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && wantsToAttack(this.ownerLastHurt);
-            }
+            if (!(getOwner() instanceof LivingEntity livingEntity)) return false;
+            this.ownerLastHurt = livingEntity.getLastHurtMob();
+            int i = livingEntity.getLastHurtMobTimestamp();
+            return i != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && wantsToAttack(this.ownerLastHurt);
         }
 
         public void start() {
             this.mob.setTarget(this.ownerLastHurt);
-            LivingEntity livingEntity = getOwner();
-            if (livingEntity != null) {
-                this.timestamp = livingEntity.getLastHurtMobTimestamp();
-            }
+            if (!(getOwner() instanceof LivingEntity livingEntity)) return;
+            this.timestamp = livingEntity.getLastHurtMobTimestamp();
 
             super.start();
         }
@@ -262,13 +263,13 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
     @Override
     protected @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
         if (!player.getUUID().equals(getOwnerUUID())) return InteractionResult.PASS;
-        if (!level().isClientSide()) {
+        if (!level.isClientSide()) {
             CompoundTag entityTag = new CompoundTag();
             CompoundTag petTag = new CompoundTag();
             this.saveWithoutId(petTag);
             ItemStack pearl = ModItems.ANCIENT_PEARL.get().getDefaultInstance();
             entityTag.put("PetEntity", petTag);
-            entityTag.putString("PetType", BuiltInRegistries.ENTITY_TYPE.getKey(getType()).getPath());
+            entityTag.putString("PetType", Registry.ENTITY_TYPE.getKey(getType()).getPath());
             pearl.setTag(entityTag);
             BehaviorUtils.throwItem(this, pearl, position());
             playSound(SoundEvents.ENDERMAN_TELEPORT);
@@ -277,7 +278,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         }
 
         for (int i = 0; i < getParticleCount(); i++) {
-            this.level().addParticle(ParticleTypes.PORTAL,
+            this.level.addParticle(ParticleTypes.PORTAL,
                 this.getRandomX(0.5),
                 this.getRandomY() - 0.25,
                 this.getRandomZ(0.5),
@@ -289,7 +290,6 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
 
     public class EndermanFollowOwnerGoal extends Goal {
         private LivingEntity owner;
-        private final LevelReader level;
         private final double speedModifier;
         private final PathNavigation navigation;
         private int timeToRecalcPath;
@@ -299,7 +299,6 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         private final boolean canFly;
 
         public EndermanFollowOwnerGoal(double d, float f, float g, boolean bl) {
-            this.level = level();
             this.speedModifier = d;
             this.navigation = getNavigation();
             this.startDistance = f;
@@ -312,10 +311,8 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         }
 
         public boolean canUse() {
-            LivingEntity livingEntity = getOwner();
-            if (livingEntity == null) {
-                return false;
-            } else if (livingEntity.isSpectator()) {
+            if (!(getOwner() instanceof LivingEntity livingEntity)) return false;
+            if (livingEntity.isSpectator()) {
                 return false;
             } else if (this.unableToMove()) {
                 return false;
@@ -391,16 +388,16 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
         }
 
         private boolean canTeleportTo(BlockPos pos) {
-            BlockPathTypes blockPathTypes = WalkNodeEvaluator.getBlockPathTypeStatic(this.level, pos.mutable());
+            BlockPathTypes blockPathTypes = WalkNodeEvaluator.getBlockPathTypeStatic(level, pos.mutable());
             if (blockPathTypes != BlockPathTypes.WALKABLE) {
                 return false;
             } else {
-                BlockState blockState = this.level.getBlockState(pos.below());
+                BlockState blockState = level.getBlockState(pos.below());
                 if (!this.canFly && blockState.getBlock() instanceof LeavesBlock) {
                     return false;
                 } else {
                     BlockPos blockPos = pos.subtract(blockPosition());
-                    return this.level.noCollision(BasePetEnderman.this, getBoundingBox().move(blockPos));
+                    return level.noCollision(BasePetEnderman.this, getBoundingBox().move(blockPos));
                 }
             }
         }
@@ -430,7 +427,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
             int i = getLastHurtByMobTimestamp();
             LivingEntity livingEntity = getLastHurtByMob();
             if (i != this.timestamp && livingEntity != null) {
-                if (livingEntity.getType() == EntityType.PLAYER && level().getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
+                if (livingEntity.getType() == EntityType.PLAYER && level.getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
                     return false;
                 } else {
                     if (!wantsToAttack(livingEntity)) return false;
@@ -473,7 +470,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
             if (targetMob == null) return;
 
             AABB aabb = AABB.unitCubeFromLowerCorner(position()).inflate(30f);
-            List<BasePetEnderman> pets = level().getEntitiesOfClass(BasePetEnderman.class, aabb, EntitySelector.NO_SPECTATORS);
+            List<BasePetEnderman> pets = level.getEntitiesOfClass(BasePetEnderman.class, aabb, EntitySelector.NO_SPECTATORS);
             pets.remove(BasePetEnderman.this);
 
             List<BasePetEnderman> ownedPets = pets.stream().filter(pet -> owner.equals(pet.getOwnerUUID())).toList();
@@ -484,7 +481,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
                 UUID targetOwner = target.getOwnerUUID();
                 if (targetOwner == null) return;
                 targets.addAll(pets.stream().filter(pet -> targetOwner.equals(pet.getOwnerUUID())).toList());
-                Player player = level().getPlayerByUUID(targetOwner);
+                Player player = level.getPlayerByUUID(targetOwner);
                 if (player != null && player.distanceTo(BasePetEnderman.this) < 30.0f) {
                     targets.add(player);
                 }
@@ -494,7 +491,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
                 targets.addAll(pets.stream().filter(pet -> player.getUUID().equals(pet.getOwnerUUID())).toList());
             } else {
                 AABB aabb2 = AABB.unitCubeFromLowerCorner(position()).inflate(20f);
-                targets.addAll(level().getEntitiesOfClass(targetMob.getClass(), aabb2, EntitySelector.NO_SPECTATORS));
+                targets.addAll(level.getEntitiesOfClass(targetMob.getClass(), aabb2, EntitySelector.NO_SPECTATORS));
             }
 
             for (var pet : ownedPets) {

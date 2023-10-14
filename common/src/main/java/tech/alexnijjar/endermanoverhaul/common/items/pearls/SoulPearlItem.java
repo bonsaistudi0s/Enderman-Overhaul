@@ -2,7 +2,7 @@ package tech.alexnijjar.endermanoverhaul.common.items.pearls;
 
 import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -59,7 +59,7 @@ public class SoulPearlItem extends EnderpearlItem {
 
     @Override
     public @NotNull InteractionResult interactLivingEntity(@NotNull ItemStack stack, @NotNull Player player, @NotNull LivingEntity interactionTarget, @NotNull InteractionHand usedHand) {
-        if (!player.level().isClientSide() && player.isShiftKeyDown() && !interactionTarget.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) {
+        if (!player.level.isClientSide() && player.isShiftKeyDown() && !interactionTarget.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) {
             CompoundTag originalTag = stack.getOrCreateTag();
             if (originalTag.contains("BoundEntity") && interactionTarget.getId() == originalTag.getInt("BoundEntity")) {
                 return InteractionResult.PASS;
@@ -69,9 +69,9 @@ public class SoulPearlItem extends EnderpearlItem {
             copy.setCount(1);
             CompoundTag tag = copy.getOrCreateTag();
             tag.putInt("BoundEntity", interactionTarget.getId());
-            tag.putString("BoundType", BuiltInRegistries.ENTITY_TYPE.getKey(interactionTarget.getType()).toString());
+            tag.putString("BoundType", Registry.ENTITY_TYPE.getKey(interactionTarget.getType()).toString());
             player.displayClientMessage(Component.translatable("tooltip.endermanoverhaul.bound_to", interactionTarget.getDisplayName().getString()), true);
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EVOKER_CAST_SPELL, SoundSource.NEUTRAL, 1.0f, 1.0f);
+            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EVOKER_CAST_SPELL, SoundSource.NEUTRAL, 1.0f, 1.0f);
             if (stack.getCount() == 1) {
                 player.setItemInHand(usedHand, copy);
             } else {
@@ -99,7 +99,7 @@ public class SoulPearlItem extends EnderpearlItem {
             if (entity == null && typeString == null) {
                 tooltipComponents.add(ConstantComponents.NOT_BOUND);
             } else {
-                EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(new ResourceLocation(typeString));
+                EntityType<?> type = Registry.ENTITY_TYPE.get(new ResourceLocation(typeString));
                 Component displayName = entity == null && type != null ? type.getDescription() : entity.getDisplayName();
                 tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.bound_to", displayName.getString()).withStyle(ChatFormatting.GREEN));
             }

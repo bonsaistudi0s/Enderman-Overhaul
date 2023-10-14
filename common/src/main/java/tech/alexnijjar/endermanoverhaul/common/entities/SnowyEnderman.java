@@ -65,7 +65,7 @@ public class SnowyEnderman extends BaseEnderman {
     @Override
     protected void onChangedBlock(@NotNull BlockPos pos) {
         super.onChangedBlock(pos);
-        FrostWalkerEnchantment.onEntityMoved(this, this.level(), pos, 2);
+        FrostWalkerEnchantment.onEntityMoved(this, this.level, pos, 2);
     }
 
     @Override

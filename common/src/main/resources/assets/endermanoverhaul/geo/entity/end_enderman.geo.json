@@ -6,7 +6,7 @@
 				"identifier": "geometry.end_enderman",
 				"texture_width": 64,
 				"texture_height": 64,
-				"visible_bounds_width": 3,
+				"visible_bounds_width": 2,
 				"visible_bounds_height": 4.5,
 				"visible_bounds_offset": [0, 1.75, 0]
 			},
@@ -45,7 +45,12 @@
 					"name": "right_arm",
 					"parent": "body",
 					"pivot": [-4, 29, 3],
-					"rotation": [7.5, 0, 0],
+					"rotation": [7.5, 0, 0]
+				},
+				{
+					"name": "right_held",
+					"parent": "right_arm",
+					"pivot": [-4, 29, 3],
 					"cubes": [
 						{"origin": [-5, 1, 2], "size": [2, 29, 2], "uv": [8, 29]}
 					]
@@ -54,7 +59,12 @@
 					"name": "left_arm",
 					"parent": "body",
 					"pivot": [4, 29, 3],
-					"rotation": [7.5, 0, 0],
+					"rotation": [7.5, 0, 0]
+				},
+				{
+					"name": "left_held",
+					"parent": "left_arm",
+					"pivot": [4, 29, 3],
 					"cubes": [
 						{"origin": [3, 1, 2], "size": [2, 29, 2], "uv": [0, 29]}
 					]

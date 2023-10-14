@@ -41,6 +41,11 @@
 				{
 					"name": "left_arm",
 					"parent": "body",
+					"pivot": [5, 34, 0]
+				},
+				{
+					"name": "left_held",
+					"parent": "left_arm",
 					"pivot": [5, 34, 0],
 					"cubes": [
 						{"origin": [4, 5, -1], "size": [2, 30, 2], "uv": [0, 51]}
@@ -49,6 +54,11 @@
 				{
 					"name": "right_arm",
 					"parent": "body",
+					"pivot": [-5, 34, 0]
+				},
+				{
+					"name": "right_held",
+					"parent": "right_arm",
 					"pivot": [-5, 34, 0],
 					"cubes": [
 						{"origin": [-6, 5, -1], "size": [2, 30, 2], "uv": [8, 51]}

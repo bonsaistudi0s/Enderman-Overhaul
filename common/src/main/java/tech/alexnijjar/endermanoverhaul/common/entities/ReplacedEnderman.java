@@ -1,34 +1,30 @@
 package tech.alexnijjar.endermanoverhaul.common.entities;
 
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoReplacedEntity;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 
-public class ReplacedEnderman implements GeoReplacedEntity {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+import java.util.List;
+
+public class ReplacedEnderman implements IAnimatable {
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     @Override
-    public EntityType<?> getReplacingEntityType() {
-        return EntityType.ENDERMAN;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 0, state -> {
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
 
-            if (state.isMoving()) {
+            if (!state.isMoving()) {
                 state.getController().setAnimation(enderman.isCreepy() ?
                     ConstantAnimations.RUN :
                     ConstantAnimations.WALK);
@@ -38,15 +34,15 @@ public class ReplacedEnderman implements GeoReplacedEntity {
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "creepy_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "creepy_controller", 0, state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
             if (!enderman.isCreepy()) return PlayState.STOP;
-            state.getController().setAnimation(ConstantAnimations.ANGRY);
+            state.getController().setAnimation(ConstantAnimations.HOLDING);
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "hold_controller", 0, state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
             if (enderman.getCarriedBlock() == null) return PlayState.STOP;
@@ -54,24 +50,25 @@ public class ReplacedEnderman implements GeoReplacedEntity {
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "attack_controller", 0, state -> {
             EnderMan enderman = getEndermanFromState(state);
             if (enderman == null) return PlayState.STOP;
             if (enderman.getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
-            if (enderman.getTarget() == null) return PlayState.STOP;
-            state.getController().setAnimation(ConstantAnimations.ATTACK);
+            state.getController().setAnimation(ConstantAnimations.HOLDING);
             return PlayState.CONTINUE;
         }));
     }
 
     @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public AnimationFactory getFactory() {
+        return factory;
     }
 
     @Nullable
-    private EnderMan getEndermanFromState(AnimationState<ReplacedEnderman> state) {
-        Entity entity = state.getData(DataTickets.ENTITY);
+    public EnderMan getEndermanFromState(AnimationEvent<ReplacedEnderman> state) {
+        List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
+        if (list.isEmpty()) return null;
+        Entity entity = list.get(0);
         if (!(entity instanceof EnderMan enderman)) return null;
         return enderman;
     }

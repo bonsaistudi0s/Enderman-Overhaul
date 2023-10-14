@@ -34,20 +34,20 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
-public abstract class BaseEnderman extends EnderMan implements GeoEntity {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public abstract class BaseEnderman extends EnderMan implements IAnimatable {
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     private int lastStareSound = Integer.MIN_VALUE;
 
@@ -56,13 +56,13 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     }
 
     @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public AnimationFactory getFactory() {
+        return factory;
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 5, state -> {
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 5, state -> {
             if (state.isMoving()) {
                 state.getController().setAnimation(isCreepy() && playRunAnimWhenAngry() ?
                     ConstantAnimations.RUN :
@@ -73,24 +73,23 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "creepy_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "creepy_controller", 5, state -> {
             if (!canOpenMouth()) return PlayState.STOP;
             if (!isCreepy()) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ANGRY);
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "hold_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "hold_controller", 5, state -> {
             if (!canPickupBlocks()) return PlayState.STOP;
             if (getCarriedBlock() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.HOLDING);
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "attack_controller", 5, state -> {
             if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
             if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
-            if (getTarget() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ATTACK);
             return PlayState.CONTINUE;
         }));
@@ -196,15 +195,15 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     }
 
     protected void tickAreaEffect() {
-        if (level().isClientSide()) return;
-        if (level().getGameTime() % 20 != 0) return;
+        if (level.isClientSide()) return;
+        if (level.getGameTime() % 20 != 0) return;
         var areaEffect = getAreaEffect();
         if (areaEffect == null || getAreaEffectRange() == 0) return;
         LivingEntity target = getTarget();
         if (target == null) return;
         if (this.distanceToSqr(target) <= getAreaEffectRange() * getAreaEffectRange()) {
             if (getAreaEffectSound() != null && !target.hasEffect(areaEffect.getEffect())) {
-                level().playSound(null, target.blockPosition(), getAreaEffectSound(), SoundSource.HOSTILE, 1, 1);
+                level.playSound(null, target.blockPosition(), getAreaEffectSound(), SoundSource.HOSTILE, 1, 1);
             }
             target.addEffect(areaEffect);
         }
@@ -215,7 +214,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         if (this.tickCount >= this.lastStareSound + 400) {
             this.lastStareSound = this.tickCount;
             if (!this.isSilent()) {
-                this.level().playLocalSound(this.getX(), this.getEyeY(), this.getZ(), getStareSound(), this.getSoundSource(), 2.5F, 1.0F, false);
+                this.level.playLocalSound(this.getX(), this.getEyeY(), this.getZ(), getStareSound(), this.getSoundSource(), 2.5F, 1.0F, false);
             }
         }
     }
@@ -223,9 +222,9 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     @Override
     public void aiStep() {
         ParticleOptions customParticleType = getCustomParticles();
-        if (hasParticles() && this.level().isClientSide() && customParticleType != null && level().getGameTime() % getParticleRate() == 0) {
+        if (hasParticles() && this.level.isClientSide() && customParticleType != null && level.getGameTime() % getParticleRate() == 0) {
             for (int i = 0; i < getParticleCount(); i++) {
-                this.level().addParticle(customParticleType,
+                this.level.addParticle(customParticleType,
                     this.getRandomX(0.5),
                     this.getRandomY() - 0.25,
                     this.getRandomZ(0.5),
@@ -323,20 +322,20 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         if (!this.canTeleport()) return false;
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos(x, y, z);
 
-        while (mutableBlockPos.getY() > this.level().getMinBuildHeight() && !this.level().getBlockState(mutableBlockPos).blocksMotion()) {
+        while (mutableBlockPos.getY() > this.level.getMinBuildHeight() && !this.level.getBlockState(mutableBlockPos).getMaterial().blocksMotion()) {
             mutableBlockPos.move(Direction.DOWN);
         }
 
-        BlockState blockState = this.level().getBlockState(mutableBlockPos);
-        boolean bl = blockState.blocksMotion();
+        BlockState blockState = this.level.getBlockState(mutableBlockPos);
+        boolean bl = blockState.getMaterial().blocksMotion();
         boolean bl2 = blockState.getFluidState().is(FluidTags.WATER);
         if (bl && !bl2) {
             Vec3 vec3 = this.position();
             boolean bl3 = this.randomTeleport(x, y, z, true);
             if (bl3) {
-                this.level().gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(this));
+                this.level.gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(this));
                 if (!this.isSilent()) {
-                    this.level().playSound(null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
+                    this.level.playSound(null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
                     this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
                 }
             }
@@ -352,7 +351,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
             if (!canPickupBlocks()) return false;
             if (BaseEnderman.this.getCarriedBlock() != null) {
                 return false;
-            } else if (!BaseEnderman.this.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+            } else if (!BaseEnderman.this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                 return false;
             } else {
                 return BaseEnderman.this.getRandom().nextInt(reducedTickDelay(20)) == 0;
@@ -361,7 +360,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
         public void tick() {
             RandomSource randomSource = BaseEnderman.this.getRandom();
-            Level level = BaseEnderman.this.level();
+            Level level = BaseEnderman.this.level;
             int i = Mth.floor(BaseEnderman.this.getX() - 2.0 + randomSource.nextDouble() * 4.0);
             int j = Mth.floor(BaseEnderman.this.getY() + randomSource.nextDouble() * 3.0);
             int k = Mth.floor(BaseEnderman.this.getZ() - 2.0 + randomSource.nextDouble() * 4.0);
@@ -383,7 +382,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         public boolean canUse() {
             if (BaseEnderman.this.getCarriedBlock() == null) {
                 return false;
-            } else if (!BaseEnderman.this.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+            } else if (!BaseEnderman.this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                 return false;
             } else {
                 return BaseEnderman.this.getRandom().nextInt(reducedTickDelay(2000)) == 0;
@@ -392,7 +391,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
         public void tick() {
             RandomSource randomSource = BaseEnderman.this.getRandom();
-            Level level = BaseEnderman.this.level();
+            Level level = BaseEnderman.this.level;
             int i = Mth.floor(BaseEnderman.this.getX() - 1.0 + randomSource.nextDouble() * 2.0);
             int j = Mth.floor(BaseEnderman.this.getY() + randomSource.nextDouble() * 2.0);
             int k = Mth.floor(BaseEnderman.this.getZ() - 1.0 + randomSource.nextDouble() * 2.0);
@@ -402,7 +401,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
             BlockState blockState2 = level.getBlockState(blockPos2);
             BlockState blockState3 = BaseEnderman.this.getCarriedBlock();
             if (blockState3 != null) {
-                blockState3 = Block.updateFromNeighbourShapes(blockState3, BaseEnderman.this.level(), blockPos);
+                blockState3 = Block.updateFromNeighbourShapes(blockState3, BaseEnderman.this.level, blockPos);
                 if (this.canPlaceBlock(level, blockPos, blockState3, blockState, blockState2, blockPos2)) {
                     level.setBlock(blockPos, blockState3, 3);
                     level.gameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Context.of(BaseEnderman.this, blockState3));
@@ -463,7 +462,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         }
 
         public boolean canUse() {
-            this.pendingTarget = BaseEnderman.this.level().getNearestPlayer(this.startAggroTargetConditions, BaseEnderman.this);
+            this.pendingTarget = BaseEnderman.this.level.getNearestPlayer(this.startAggroTargetConditions, BaseEnderman.this);
             return this.pendingTarget != null;
         }
 

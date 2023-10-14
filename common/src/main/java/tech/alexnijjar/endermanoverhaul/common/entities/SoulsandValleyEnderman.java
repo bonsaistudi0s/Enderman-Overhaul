@@ -22,9 +22,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -56,9 +56,9 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        super.registerControllers(controllerRegistrar);
-        controllerRegistrar.add(new AnimationController<>(this, "bite_controller", 5, state -> {
+    public void registerControllers(AnimationData data) {
+        super.registerControllers(data);
+        data.addAnimationController(new AnimationController<>(this, "bite_controller", 5, state -> {
             if (entityData.get(DATA_BITING_TICKS) <= 0) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.BITE);
             return PlayState.CONTINUE;
@@ -133,16 +133,16 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     public void die(@NotNull DamageSource damageSource) {
         super.die(damageSource);
         for (int i = 0; i < 3; i++) {
-            Spirit spirit = ModEntityTypes.SPIRIT.get().create(level());
+            Spirit spirit = ModEntityTypes.SPIRIT.get().create(level);
             if (spirit == null) return;
             spirit.setPos(getX(), getY() + 2, getZ());
-            spirit.addDeltaMovement(new Vec3(0, 0.5, 0));
-            level().addFreshEntity(spirit);
+            spirit.setDeltaMovement(new Vec3(0, 0.5, 0));
+            level.addFreshEntity(spirit);
             spirit.setTarget(this.getTarget());
         }
 
         for (int i = 0; i < 10; i++) {
-            this.level().addParticle(ParticleTypes.SOUL,
+            this.level.addParticle(ParticleTypes.SOUL,
                 this.getRandomX(0.5),
                 this.getRandomY() - 1.25,
                 this.getRandomZ(0.5),

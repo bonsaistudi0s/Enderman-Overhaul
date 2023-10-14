@@ -7,6 +7,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -30,9 +31,9 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -73,8 +74,8 @@ public class OceanEnderman extends BaseEnderman {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, 0, state -> {
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 5, state -> {
             if (isInWater()) {
                 state.getController().setAnimation(ConstantAnimations.SWIM);
                 return PlayState.CONTINUE;
@@ -85,10 +86,9 @@ public class OceanEnderman extends BaseEnderman {
             return PlayState.CONTINUE;
         }));
 
-        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", 5, state -> {
+        data.addAnimationController(new AnimationController<>(this, "attack_controller", 5, state -> {
             if (!playArmSwingAnimWhenAttacking()) return PlayState.STOP;
             if (getAttackAnim(state.getPartialTick()) == 0) return PlayState.STOP;
-            if (getTarget() == null) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.ATTACK);
             return PlayState.CONTINUE;
         }));
@@ -199,8 +199,8 @@ public class OceanEnderman extends BaseEnderman {
 
     @Override
     public void updateSwimming() {
-        if (!this.level().isClientSide) {
-            if (this.isEffectiveAi() && level().getBlockState(blockPosition().above().above()).is(Blocks.WATER)) {
+        if (!this.level.isClientSide) {
+            if (this.isEffectiveAi() && level.getBlockState(blockPosition().above().above()).is(Blocks.WATER)) {
                 this.navigation = this.waterNavigation;
                 this.setSwimming(true);
             } else {
@@ -214,7 +214,7 @@ public class OceanEnderman extends BaseEnderman {
     protected void handleAirSupply(int airSupply) {
         if (this.isAlive() && !this.isInWaterOrBubble()) {
             this.setAirSupply(airSupply - 1);
-            if (this.getAirSupply() <= 20 && level().getGameTime() % 20 == 0) {
+            if (this.getAirSupply() <= 20 && level.getGameTime() % 20 == 0) {
                 if (!teleportToWater()) {
                     for (int i = 0; i < 64; i++) {
                         if (this.teleport()) break;
@@ -223,7 +223,7 @@ public class OceanEnderman extends BaseEnderman {
             }
             if (this.getAirSupply() == -20) {
                 this.setAirSupply(0);
-                this.hurt(this.damageSources().drown(), 2.0f);
+                this.hurt(DamageSource.DROWN, 2.0f);
             }
         } else {
             this.setAirSupply(300);
@@ -236,10 +236,10 @@ public class OceanEnderman extends BaseEnderman {
 
         for (int i = 0; i < 100; ++i) {
             BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(30) - 10, 2 - randomSource.nextInt(8), randomSource.nextInt(30) - 10);
-            if (level().getBlockState(blockPos2).is(Blocks.WATER)) {
+            if (level.getBlockState(blockPos2).is(Blocks.WATER)) {
                 Vec3 pos = Vec3.atBottomCenterOf(blockPos2);
                 if (pos == null) return false;
-                level().gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(this));
+                level.gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(this));
                 teleportTo(pos.x() + 0.5, pos.y(), pos.z() + 0.5);
                 playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0f, 1.0f);
                 return true;
@@ -287,7 +287,8 @@ public class OceanEnderman extends BaseEnderman {
             setDeltaMovement(getDeltaMovement().add(j * d * 0.005, j * e * 0.025, j * f * 0.005));
 
             if (isCreepy()) {
-                addDeltaMovement(new Vec3(getDeltaMovement().x * 0.18, 0, getDeltaMovement().z * 0.18));
+                var movement = getDeltaMovement();
+                setDeltaMovement(movement.x + movement.x * 0.18, movement.y, movement.z + movement.z * 0.18);
             }
         }
     }

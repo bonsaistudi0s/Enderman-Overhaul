@@ -43,8 +43,8 @@ public abstract class EnderManMixin extends Monster implements NeutralMob {
     private void endermanoverhaul$aiStep(CallbackInfo ci) {
         if ((Object) this instanceof BaseEnderman enderman && (!enderman.hasParticles() || enderman.getCustomParticles() != null)) {
             this.jumping = false;
-            if (!this.level().isClientSide()) {
-                this.updatePersistentAnger((ServerLevel) this.level(), true);
+            if (!this.level.isClientSide()) {
+                this.updatePersistentAnger((ServerLevel) this.level, true);
             }
             super.aiStep();
             ci.cancel();

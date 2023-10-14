@@ -1,21 +1,21 @@
 package tech.alexnijjar.endermanoverhaul.common.constants;
 
-import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
 
 public class ConstantAnimations {
-    public static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.enderman.idle");
-    public static final RawAnimation WALK = RawAnimation.begin().thenLoop("animation.enderman.walk");
-    public static final RawAnimation RUN = RawAnimation.begin().thenLoop("animation.enderman.run");
-    public static final RawAnimation ANGRY = RawAnimation.begin().thenLoop("animation.enderman.angry");
-    public static final RawAnimation ATTACK = RawAnimation.begin().thenLoop("animation.enderman.attack");
-    public static final RawAnimation HOLDING = RawAnimation.begin().thenLoop("animation.enderman.hold");
-    public static final RawAnimation BITE = RawAnimation.begin().thenLoop("animation.enderman.bite");
-    public static final RawAnimation POSSESS = RawAnimation.begin().thenLoop("animation.enderman.possess");
-    public static final RawAnimation SWIM = RawAnimation.begin().thenLoop("animation.enderman.swim");
+    public static final AnimationBuilder IDLE = new AnimationBuilder().loop("animation.enderman.idle");
+    public static final AnimationBuilder WALK = new AnimationBuilder().loop("animation.enderman.walk");
+    public static final AnimationBuilder RUN = new AnimationBuilder().loop("animation.enderman.run");
+    public static final AnimationBuilder ANGRY = new AnimationBuilder().loop("animation.enderman.angry");
+    public static final AnimationBuilder ATTACK = new AnimationBuilder().loop("animation.enderman.attack");
+    public static final AnimationBuilder HOLDING = new AnimationBuilder().loop("animation.enderman.hold");
+    public static final AnimationBuilder BITE = new AnimationBuilder().loop("animation.enderman.bite");
+    public static final AnimationBuilder POSSESS = new AnimationBuilder().loop("animation.enderman.possess");
+    public static final AnimationBuilder SWIM = new AnimationBuilder().loop("animation.enderman.swim");
 
-    public static final RawAnimation SCARAB_IDLE = RawAnimation.begin().thenLoop("animation.scarab.idle");
-    public static final RawAnimation SCARAB_WALK = RawAnimation.begin().thenLoop("animation.scarab.walk");
-    public static final RawAnimation SPIRIT_FLY = RawAnimation.begin().thenLoop("animation.spirit.fly");
+    public static final AnimationBuilder SCARAB_IDLE = new AnimationBuilder().loop("animation.scarab.idle");
+    public static final AnimationBuilder SCARAB_WALK = new AnimationBuilder().loop("animation.scarab.walk");
+    public static final AnimationBuilder SPIRIT_FLY = new AnimationBuilder().loop("animation.spirit.fly");
 
-    public static final RawAnimation SPIN = RawAnimation.begin().thenLoop("animation.enderman.spin");
+    public static final AnimationBuilder SPIN = new AnimationBuilder().loop("animation.enderman.spin");
 }

@@ -548,17 +548,14 @@
 		"animation.enderman.hold": {
 			"loop": true,
 			"bones": {
-				"left_arm": {
-					"relative_to": {
-						"rotation": "entity"
-					},
-					"rotation": {
-						"vector": [-28.6479, 0, 2.86479]
-					}
-				},
-				"right_arm": {
+				"right_held": {
 					"rotation": {
 						"vector": [-28.6479, 0, -2.86479]
+					}
+				},
+				"left_held": {
+					"rotation": {
+						"vector": [-28.6479, 0, 2.86479]
 					}
 				}
 			}
@@ -566,7 +563,7 @@
 		"animation.enderman.attack": {
 			"animation_length": 0.36,
 			"bones": {
-				"right_arm": {
+				"right_held": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]

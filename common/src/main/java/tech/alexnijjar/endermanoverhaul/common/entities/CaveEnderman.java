@@ -106,10 +106,10 @@ public class CaveEnderman extends BaseEnderman {
     @Override
     public void tick() {
         super.tick();
-        if (level().isClientSide()) return;
-        if (level().getGameTime() % 20 == 0) {
-            if (this.isAlive() && level().canSeeSky(this.blockPosition()) && level().isDay()) {
-                this.hurt(damageSources().onFire(), 1.0f);
+        if (level.isClientSide()) return;
+        if (level.getGameTime() % 20 == 0) {
+            if (this.isAlive() && level.canSeeSky(this.blockPosition()) && level.isDay()) {
+                this.hurt(DamageSource.ON_FIRE, 1.0f);
                 teleportUnderBlock();
             }
         }
@@ -139,10 +139,10 @@ public class CaveEnderman extends BaseEnderman {
                 Mth.floor(getX() + range),
                 Mth.floor(getY()),
                 Mth.floor(getZ() + range))
-            .filter(pos -> level().getBlockState(pos).isAir() && level().getBlockState(pos.above()).isAir() && !level().canSeeSky(pos))
+            .filter(pos -> level.getBlockState(pos).isAir() && level.getBlockState(pos.above()).isAir() && !level.canSeeSky(pos))
             .findAny()
             .ifPresent(pos -> {
-                level().gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(this));
+                level.gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(this));
                 teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
                 playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0f, 1.0f);
             });

@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantComponents;
 import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.ThrownBubblePearl;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class BubblePearlItem extends EnderpearlItem {
             pearl.setItem(itemStack);
             pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 0.4f, 0.01f);
             level.addFreshEntity(pearl);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSoundEvents.BUBBLE_PEARL_THROWN.get(), SoundSource.PLAYERS, 1.0f, level.random.nextFloat() * 0.4f + 0.8f);
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));

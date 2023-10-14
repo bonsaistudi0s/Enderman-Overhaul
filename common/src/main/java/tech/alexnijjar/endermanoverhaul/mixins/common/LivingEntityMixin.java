@@ -2,7 +2,6 @@ package tech.alexnijjar.endermanoverhaul.mixins.common;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -41,9 +40,9 @@ public abstract class LivingEntityMixin extends Entity {
     )
     private void endermanoverhaul$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!(((Object) this) instanceof Player entity)) return;
-        if (level().isClientSide()) return;
+        if (level.isClientSide()) return;
         if (!useItem.is(ModItems.CORRUPTED_SHIELD.get())) return;
-        if (source.is(DamageTypeTags.IS_FIRE) && entity.hasEffect(MobEffects.FIRE_RESISTANCE)) return;
+        if (source.isFire() && entity.hasEffect(MobEffects.FIRE_RESISTANCE)) return;
         if (!(amount >= 3.0f) || !entity.isDamageSourceBlocked(source)) return;
         ((Player) (Object) this).awardStat(Stats.ITEM_USED.get(this.useItem.getItem()));
 
@@ -59,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity {
             }
 
             this.useItem = ItemStack.EMPTY;
-            this.playSound(SoundEvents.SHIELD_BREAK, 0.8f, 0.8f + this.level().random.nextFloat() * 0.4f);
+            this.playSound(SoundEvents.SHIELD_BREAK, 0.8f, 0.8f + this.level.random.nextFloat() * 0.4f);
         }
     }
 
@@ -72,9 +71,9 @@ public abstract class LivingEntityMixin extends Entity {
         if (!useItem.is(ModItems.CORRUPTED_SHIELD.get())) return;
         if (attacker.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) return;
 
-        if (attacker.level().random.nextInt(4) != 0) {
-            ModUtils.teleportTarget(attacker.level(), attacker, 32);
-            attacker.hurt(attacker.damageSources().fall(), 2.0f);
+        if (attacker.level.random.nextInt(4) != 0) {
+            ModUtils.teleportTarget(attacker.level, attacker, 32);
+            attacker.hurt(DamageSource.FALL, 2.0f);
         }
 
         if (attacker.canDisableShield()) {
@@ -83,7 +82,7 @@ public abstract class LivingEntityMixin extends Entity {
             if (this.random.nextFloat() < f) {
                 player.getCooldowns().addCooldown(ModItems.CORRUPTED_SHIELD.get(), 100);
                 player.stopUsingItem();
-                this.level().broadcastEntityEvent(this, (byte) 30);
+                this.level.broadcastEntityEvent(this, (byte) 30);
             }
         }
     }

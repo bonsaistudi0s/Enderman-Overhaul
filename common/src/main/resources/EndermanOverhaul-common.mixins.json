@@ -6,7 +6,8 @@
     "mixins": [
         "common.EnderManMixin",
         "common.IronGolemMixin",
-        "common.LivingEntityMixin"
+        "common.LivingEntityMixin",
+        "common.TheEndGatewayBlockEntityMixin"
     ],
     "client": [
     ],

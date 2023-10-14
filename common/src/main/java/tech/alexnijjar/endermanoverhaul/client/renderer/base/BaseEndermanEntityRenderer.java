@@ -1,13 +1,17 @@
 package tech.alexnijjar.endermanoverhaul.client.renderer.base;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 
@@ -23,6 +27,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     public static final ResourceLocation WARPED_FOREST_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "warped_forest_enderman");
     public static final ResourceLocation OCEAN_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "ocean_enderman");
     public static final ResourceLocation DARK_OAK_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "dark_oak_enderman");
+    public static final ResourceLocation WINDSWEPT_HILLS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "windswept_hills_enderman");
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman) {
         this(renderManager, enderman, ANIMATION);
@@ -34,7 +39,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, EntityType<?> enderman, ResourceLocation animation, boolean turnsHead) {
         this(renderManager,
-            BuiltInRegistries.ENTITY_TYPE.getKey(enderman),
+            Registry.ENTITY_TYPE.getKey(enderman),
             getTexture(enderman),
             animation,
             getGlowTexture(enderman),
@@ -44,9 +49,9 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, ResourceLocation assetPath, ResourceLocation texture, ResourceLocation animation, ResourceLocation glow, boolean turnsHead) {
         super(renderManager, new BaseEndermanModel<>(assetPath, turnsHead, texture, animation));
         if (glow != null) {
-            addRenderLayer(new CustomEnderEyesLayer<>(this, glow));
+            addLayer(new CustomEnderEyesLayer<>(this, glow));
         }
-        addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.animatable));
+        addLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.animatable));
     }
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, BaseEndermanModel<T> model) {
@@ -56,20 +61,25 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     @Override
     public @NotNull Vec3 getRenderOffset(T entity, float partialTicks) {
         if (entity.isCreepy() && entity.canShake()) {
-            Level level = entity.level();
+            Level level = entity.level;
             return new Vec3(level.random.nextGaussian() * 0.02, 0.0, level.random.nextGaussian() * 0.02);
         } else {
             return super.getRenderOffset(entity, partialTicks);
         }
     }
 
+    @Override
+    public RenderType getRenderType(T animatable, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, VertexConsumer buffer, int packedLight, ResourceLocation texture) {
+        return RenderType.entityCutoutNoCull(texture);
+    }
+
     public static ResourceLocation getTexture(EntityType<?> enderman) {
-        String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
+        String name = Registry.ENTITY_TYPE.getKey(enderman).getPath();
         return new ResourceLocation(EndermanOverhaul.MOD_ID, "%s/%s".formatted(name.replace("_enderman", ""), name));
     }
 
     public static ResourceLocation getGlowTexture(EntityType<?> enderman) {
-        String name = BuiltInRegistries.ENTITY_TYPE.getKey(enderman).getPath();
+        String name = Registry.ENTITY_TYPE.getKey(enderman).getPath();
         return new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/%s/%s_glow.png".formatted(name.replace("_enderman", ""), name));
     }
 }

@@ -69,15 +69,15 @@ public class DesertEnderman extends BaseEnderman {
     public void die(@NotNull DamageSource damageSource) {
         super.die(damageSource);
         for (int i = 0; i < 3; i++) {
-            Scarab scarab = ModEntityTypes.SCARAB.get().create(level());
+            Scarab scarab = ModEntityTypes.SCARAB.get().create(level);
             if (scarab == null) return;
             scarab.setPos(this.position());
-            level().addFreshEntity(scarab);
+            level.addFreshEntity(scarab);
             scarab.setTarget(this.getTarget());
         }
 
         for (int i = 0; i < 10; i++) {
-            this.level().addParticle(ParticleTypes.LARGE_SMOKE,
+            this.level.addParticle(ParticleTypes.LARGE_SMOKE,
                 this.getRandomX(0.5),
                 this.getRandomY() - 0.75,
                 this.getRandomZ(0.5),

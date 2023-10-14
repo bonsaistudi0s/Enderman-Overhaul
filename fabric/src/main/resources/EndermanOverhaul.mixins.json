@@ -4,8 +4,6 @@
     "package": "tech.alexnijjar.endermanoverhaul.mixins.fabric",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-        "common.CorruptedShieldItemMixin",
-        "common.CustomGeoArmorItemMixin"
     ],
     "client": [
     ],

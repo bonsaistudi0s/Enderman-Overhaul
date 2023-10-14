@@ -20,9 +20,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
@@ -53,9 +53,9 @@ public class EndIslandsEnderman extends BaseEnderman {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        super.registerControllers(controllerRegistrar);
-        controllerRegistrar.add(new AnimationController<>(this, "possessing_controller", 5, state -> {
+    public void registerControllers(AnimationData data) {
+        super.registerControllers(data);
+        data.addAnimationController(new AnimationController<>(this, "possessing_controller", 5, state -> {
             if (!entityData.get(DATA_POSSESSING)) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.POSSESS);
             return PlayState.CONTINUE;
@@ -129,13 +129,13 @@ public class EndIslandsEnderman extends BaseEnderman {
 
     public void spawnProjectiles(Entity target) {
         for (int i = 0; i < 3; i++) {
-            EnderBullet bullet = new EnderBullet(level(), this, target, getDirection().getAxis());
+            EnderBullet bullet = new EnderBullet(level, this, target, getDirection().getAxis());
             bullet.setPos(
                 getX() + (random.nextDouble() - 0.5) * 2.0,
                 getY() + 1 + (random.nextDouble() - 0.5) * 2.0,
                 getZ() + (random.nextDouble() - 0.5) * 2.0
             );
-            level().addFreshEntity(bullet);
+            level.addFreshEntity(bullet);
         }
     }
 
@@ -195,7 +195,6 @@ public class EndIslandsEnderman extends BaseEnderman {
         @Override
         public void start() {
             entityData.set(DATA_POSSESSING, true);
-            playSound(SoundEvents.EVOKER_CAST_SPELL, 1.0f, 1.0f);
             this.nextAttackTickCount = tickCount + 400;
             this.summonTicks = 28;
         }
@@ -206,13 +205,14 @@ public class EndIslandsEnderman extends BaseEnderman {
             LivingEntity target = getTarget();
             if (target == null) return;
             entityData.set(DATA_POSSESSING, false);
-            level().getEntities(EndIslandsEnderman.this, getBoundingBox().inflate(15.0)).stream()
+            level.getEntities(EndIslandsEnderman.this, getBoundingBox().inflate(15.0)).stream()
                 .filter(entity -> entity instanceof EnderMan)
                 .filter(entity -> !(entity instanceof BasePetEnderman))
                 .forEach(entity -> ((EnderMan) entity).setTarget(target));
 
             playSound(SoundEvents.SHULKER_SHOOT, 1.0f, 1.0f);
             spawnProjectiles(target);
+            playSound(SoundEvents.EVOKER_CAST_SPELL, 1.0f, 1.0f);
         }
 
         @Override

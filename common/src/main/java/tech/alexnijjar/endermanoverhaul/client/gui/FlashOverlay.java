@@ -1,13 +1,14 @@
 package tech.alexnijjar.endermanoverhaul.client.gui;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import tech.alexnijjar.endermanoverhaul.common.entities.EndEnderman;
+import net.minecraft.client.gui.GuiComponent;
 
 public class FlashOverlay {
     public static boolean shouldFlash;
 
-    public static void render(GuiGraphics graphics) {
+    public static void render(PoseStack graphics) {
         if (!shouldFlash) return;
         var player = Minecraft.getInstance().player;
         if (player == null) return;
@@ -15,13 +16,14 @@ public class FlashOverlay {
         if (hurtTime < 5) return;
         var damageSource = player.getLastDamageSource();
         if (damageSource == null) return;
-        var entity = damageSource.getEntity();
-        if (!(entity instanceof EndEnderman)) return;
-        float alpha = (hurtTime - 5) * 0.05f;
+        float alpha = (hurtTime - 5) * 0.1f;
 
-        graphics.setColor(1.0f, 1.0f, 1.0f, alpha);
-        graphics.fill(0, 0, graphics.guiWidth(), graphics.guiHeight(), 0xFFFFFFFF);
-        graphics.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+        int scaledWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        int scaledHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha);
+        GuiComponent.fill(graphics, 0, 0, scaledWidth, scaledHeight, 0xFFFFFFFF);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+
         if (hurtTime == 5) shouldFlash = false;
     }
 }

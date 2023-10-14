@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import tech.alexnijjar.endermanoverhaul.client.EndermanOverhaulClient;
+import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
+import tech.alexnijjar.endermanoverhaul.client.renderers.items.HoodRenderer;
 import tech.alexnijjar.endermanoverhaul.common.items.base.CustomGeoArmorItem;
 
 import java.util.function.Consumer;
@@ -29,10 +29,11 @@ public abstract class CustomGeoArmorItemMixin extends Item {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null) {
-                    this.renderer = EndermanOverhaulClient.getArmorRenderer(CustomGeoArmorItemMixin.this);
+                    this.renderer = new HoodRenderer(itemStack.getItem());
                 }
 
-                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+                this.renderer.setCurrentItem(livingEntity, itemStack, equipmentSlot);
+                this.renderer.applyEntityStats(original);
 
                 return this.renderer;
             }

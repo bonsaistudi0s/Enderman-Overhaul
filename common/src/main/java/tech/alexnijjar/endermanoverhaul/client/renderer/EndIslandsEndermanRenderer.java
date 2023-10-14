@@ -1,7 +1,7 @@
 package tech.alexnijjar.endermanoverhaul.client.renderer;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -16,14 +16,14 @@ public class EndIslandsEndermanRenderer extends BaseEndermanEntityRenderer<EndIs
 
     public EndIslandsEndermanRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new BaseEndermanModel<>(
-            BuiltInRegistries.ENTITY_TYPE.getKey(ModEntityTypes.END_ISLANDS_ENDERMAN.get()),
+            Registry.ENTITY_TYPE.getKey(ModEntityTypes.END_ISLANDS_ENDERMAN.get()),
             true,
             getTexture(ModEntityTypes.END_ISLANDS_ENDERMAN.get()),
             END_ISLANDS_ANIMATION));
 
-        addRenderLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow.png")));
-        addRenderLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_2.png")));
-        addRenderLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_3.png")));
+        addLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow.png")));
+        addLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_2.png")));
+        addLayer(new CustomEnderEyesLayer<>(this, new ResourceLocation(EndermanOverhaul.MOD_ID, "textures/entity/end_islands/end_islands_enderman_glow_3.png")));
     }
 
     @Override

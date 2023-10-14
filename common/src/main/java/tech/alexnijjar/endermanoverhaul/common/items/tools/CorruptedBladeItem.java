@@ -24,8 +24,8 @@ public class CorruptedBladeItem extends SwordItem {
     @Override
     public boolean hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
         if (attacker.getType().is(ModEntityTypeTags.CANT_BE_TELEPORTED)) return false;
-        if (attacker.level().random.nextInt(4) != 0) {
-            ModUtils.teleportTarget(target.level(), target, 32);
+        if (attacker.level.random.nextInt(4) != 0) {
+            ModUtils.teleportTarget(target.level, target, 32);
         }
         return super.hurtEnemy(stack, target, attacker);
     }

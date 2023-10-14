@@ -1,10 +1,4 @@
 {
-    "bubble_pop": {
-        "sounds": [
-            "endermanoverhaul:bubble_pop"
-        ],
-        "subtitle": "subtitles.endermanoverhaul.entity.bubble_pop"
-    },
     "cave_enderman_ambient": {
         "sounds": [
             "endermanoverhaul:cave/idle1",
@@ -76,5 +70,43 @@
             "endermanoverhaul:dark_oak/stare"
         ],
         "subtitle": "subtitles.endermanoverhaul.entity.dark_oak_enderman.stare"
+    },
+    "ancient_pearl_hit": {
+        "sounds": [
+            "endermanoverhaul:pearls/ancient_pearl_hit_1",
+            "endermanoverhaul:pearls/ancient_pearl_hit_2"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.ancient_pearl.hit"
+    },
+    "bubble_pearl_hit": {
+        "sounds": [
+            "endermanoverhaul:pearls/bubble_pearl_hit"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.bubble_pearl.hit"
+    },
+    "bubble_pearl_thrown": {
+        "sounds": [
+            "endermanoverhaul:pearls/bubble_pearl_thrown"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.bubble_pearl.thrown"
+    },
+    "corrupted_pearl_hit": {
+        "sounds": [
+            "endermanoverhaul:pearls/corrupted_pearl_hit_1",
+            "endermanoverhaul:pearls/corrupted_pearl_hit_2"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.corrupted_pearl.hit"
+    },
+    "soul_pearl_hit": {
+        "sounds": [
+            "endermanoverhaul:pearls/soul_pearl_hit"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.soul_pearl.hit"
+    },
+    "summoner_pearl_hit": {
+        "sounds": [
+            "endermanoverhaul:pearls/summoner_pearl_hit"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.summoner_pearl.hit"
     }
 }

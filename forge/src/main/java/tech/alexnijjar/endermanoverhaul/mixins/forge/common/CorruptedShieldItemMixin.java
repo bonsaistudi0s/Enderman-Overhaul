@@ -4,12 +4,12 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.spongepowered.asm.mixin.Mixin;
-import tech.alexnijjar.endermanoverhaul.client.EndermanOverhaulClient;
-import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShielditem;
+import tech.alexnijjar.endermanoverhaul.client.renderers.items.CorruptedShieldRenderer;
+import tech.alexnijjar.endermanoverhaul.common.items.tools.CorruptedShieldItem;
 
 import java.util.function.Consumer;
 
-@Mixin(CorruptedShielditem.class)
+@Mixin(CorruptedShieldItem.class)
 public abstract class CorruptedShieldItemMixin extends ShieldItem {
 
     public CorruptedShieldItemMixin(Properties properties) {
@@ -24,7 +24,7 @@ public abstract class CorruptedShieldItemMixin extends ShieldItem {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (this.renderer == null) {
-                    this.renderer = EndermanOverhaulClient.getItemRenderer(CorruptedShieldItemMixin.this);
+                    this.renderer = new CorruptedShieldRenderer();
                 }
 
                 return this.renderer;

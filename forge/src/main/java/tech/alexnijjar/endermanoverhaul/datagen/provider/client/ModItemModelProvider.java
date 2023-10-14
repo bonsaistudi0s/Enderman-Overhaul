@@ -2,7 +2,7 @@ package tech.alexnijjar.endermanoverhaul.datagen.provider.client;
 
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -14,8 +14,8 @@ import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 import java.util.Objects;
 
 public class ModItemModelProvider extends ItemModelProvider {
-    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, EndermanOverhaul.MOD_ID, existingFileHelper);
+    public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
+        super(generator, EndermanOverhaul.MOD_ID, existingFileHelper);
     }
 
     @Override

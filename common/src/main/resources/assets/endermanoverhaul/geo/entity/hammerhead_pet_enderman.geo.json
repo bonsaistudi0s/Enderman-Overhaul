@@ -7,8 +7,8 @@
 				"texture_width": 128,
 				"texture_height": 128,
 				"visible_bounds_width": 3,
-				"visible_bounds_height": 5,
-				"visible_bounds_offset": [0, 1.5, 0]
+				"visible_bounds_height": 4.5,
+				"visible_bounds_offset": [0, 1.75, 0]
 			},
 			"bones": [
 				{
@@ -40,6 +40,11 @@
 				{
 					"name": "left_arm",
 					"parent": "body",
+					"pivot": [6, 32, 0]
+				},
+				{
+					"name": "left_held",
+					"parent": "left_arm",
 					"pivot": [6, 32, 0],
 					"cubes": [
 						{"origin": [4, 19, -1], "size": [3, 15, 3], "uv": [46, 37]},
@@ -50,6 +55,11 @@
 				{
 					"name": "right_arm",
 					"parent": "body",
+					"pivot": [-6, 32, 0]
+				},
+				{
+					"name": "right_held",
+					"parent": "right_arm",
 					"pivot": [-6, 32, 0],
 					"cubes": [
 						{"origin": [-7, 19, -1], "size": [3, 15, 3], "uv": [34, 37]},

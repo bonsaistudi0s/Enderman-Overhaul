@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
+loaderVersion = "[43,)"
 license = "ARR"
 issueTrackerURL = "https://github.com/bonsaistudi0s/endermanoverhaul/issues"
 
@@ -16,34 +16,34 @@ description = "Enderman overhaul adds biome-specific Enderman!"
 [[dependencies.endermanoverhaul]]
 modId = "forge"
 mandatory = true
-versionRange = "[47,)"
+versionRange = "[43,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20,)"
+versionRange = "[1.19,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
 modId = "resourcefullib"
 mandatory = true
-versionRange = "[2.1.11,)"
+versionRange = "[1.1.24,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
 modId = "resourcefulconfig"
 mandatory = true
-versionRange = "[2.1.0,)"
+versionRange = "[1.0.20,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
-modId = "geckolib"
+modId = "geckolib3"
 mandatory = true
-versionRange = "[4.2.0,)"
+versionRange = "[3.1.34,)"
 ordering = "NONE"
 side = "BOTH"

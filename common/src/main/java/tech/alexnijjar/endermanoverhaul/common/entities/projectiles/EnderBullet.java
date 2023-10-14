@@ -19,19 +19,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.EndIslandsEnderman;
@@ -40,8 +39,8 @@ import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import java.util.List;
 import java.util.UUID;
 
-public class EnderBullet extends Projectile implements GeoEntity {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class EnderBullet extends Projectile implements IAnimatable {
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     private static final double SPEED = 0.25;
     @Nullable
@@ -74,23 +73,25 @@ public class EnderBullet extends Projectile implements GeoEntity {
     }
 
     @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public AnimationFactory getFactory() {
+        return factory;
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, state -> {
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
             state.getController().setAnimation(ConstantAnimations.SPIN);
             return PlayState.CONTINUE;
         }));
     }
 
-    public @NotNull SoundSource getSoundSource() {
+    @Override
+    public SoundSource getSoundSource() {
         return SoundSource.HOSTILE;
     }
 
-    protected void addAdditionalSaveData(@NotNull CompoundTag compound) {
+    @Override
+    protected void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         if (this.finalTarget != null) {
             compound.putUUID("Target", this.finalTarget.getUUID());
@@ -106,7 +107,8 @@ public class EnderBullet extends Projectile implements GeoEntity {
         compound.putDouble("TZD", this.targetDeltaZ);
     }
 
-    protected void readAdditionalSaveData(@NotNull CompoundTag compound) {
+    @Override
+    protected void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.flightSteps = compound.getInt("Steps");
         this.targetDeltaX = compound.getDouble("TXD");
@@ -119,7 +121,6 @@ public class EnderBullet extends Projectile implements GeoEntity {
         if (compound.hasUUID("Target")) {
             this.targetId = compound.getUUID("Target");
         }
-
     }
 
     protected void defineSynchedData() {
@@ -135,53 +136,53 @@ public class EnderBullet extends Projectile implements GeoEntity {
         if (this.finalTarget == null) {
             blockPos = this.blockPosition().below();
         } else {
-            d = this.finalTarget.getBbHeight() * 0.5;
-            blockPos = BlockPos.containing(this.finalTarget.getX(), this.finalTarget.getY() + d, this.finalTarget.getZ());
+            d = (double) this.finalTarget.getBbHeight() * 0.5;
+            blockPos = new BlockPos(this.finalTarget.getX(), this.finalTarget.getY() + d, this.finalTarget.getZ());
         }
 
-        double e = blockPos.getX() + 0.5;
-        double f = blockPos.getY() + d;
-        double g = blockPos.getZ() + 0.5;
+        double e = (double) blockPos.getX() + 0.5;
+        double f = (double) blockPos.getY() + d;
+        double g = (double) blockPos.getZ() + 0.5;
         Direction direction = null;
         if (!blockPos.closerToCenterThan(this.position(), 2.0)) {
             BlockPos blockPos2 = this.blockPosition();
             List<Direction> list = Lists.newArrayList();
             if (axis != Direction.Axis.X) {
-                if (blockPos2.getX() < blockPos.getX() && this.level().isEmptyBlock(blockPos2.east())) {
+                if (blockPos2.getX() < blockPos.getX() && this.level.isEmptyBlock(blockPos2.east())) {
                     list.add(Direction.EAST);
-                } else if (blockPos2.getX() > blockPos.getX() && this.level().isEmptyBlock(blockPos2.west())) {
+                } else if (blockPos2.getX() > blockPos.getX() && this.level.isEmptyBlock(blockPos2.west())) {
                     list.add(Direction.WEST);
                 }
             }
 
             if (axis != Direction.Axis.Y) {
-                if (blockPos2.getY() < blockPos.getY() && this.level().isEmptyBlock(blockPos2.above())) {
+                if (blockPos2.getY() < blockPos.getY() && this.level.isEmptyBlock(blockPos2.above())) {
                     list.add(Direction.UP);
-                } else if (blockPos2.getY() > blockPos.getY() && this.level().isEmptyBlock(blockPos2.below())) {
+                } else if (blockPos2.getY() > blockPos.getY() && this.level.isEmptyBlock(blockPos2.below())) {
                     list.add(Direction.DOWN);
                 }
             }
 
             if (axis != Direction.Axis.Z) {
-                if (blockPos2.getZ() < blockPos.getZ() && this.level().isEmptyBlock(blockPos2.south())) {
+                if (blockPos2.getZ() < blockPos.getZ() && this.level.isEmptyBlock(blockPos2.south())) {
                     list.add(Direction.SOUTH);
-                } else if (blockPos2.getZ() > blockPos.getZ() && this.level().isEmptyBlock(blockPos2.north())) {
+                } else if (blockPos2.getZ() > blockPos.getZ() && this.level.isEmptyBlock(blockPos2.north())) {
                     list.add(Direction.NORTH);
                 }
             }
 
             direction = Direction.getRandom(this.random);
             if (list.isEmpty()) {
-                for (int i = 5; !this.level().isEmptyBlock(blockPos2.relative(direction)) && i > 0; --i) {
+                for (int i = 5; !this.level.isEmptyBlock(blockPos2.relative(direction)) && i > 0; --i) {
                     direction = Direction.getRandom(this.random);
                 }
             } else {
                 direction = list.get(this.random.nextInt(list.size()));
             }
 
-            e = this.getX() + direction.getStepX();
-            f = this.getY() + direction.getStepY();
-            g = this.getZ() + direction.getStepZ();
+            e = this.getX() + (double) direction.getStepX();
+            f = this.getY() + (double) direction.getStepY();
+            g = this.getZ() + (double) direction.getStepZ();
         }
 
         this.setMoveDirection(direction);
@@ -203,19 +204,19 @@ public class EnderBullet extends Projectile implements GeoEntity {
         this.flightSteps = 10 + this.random.nextInt(5) * 10;
     }
 
+    @Override
     public void checkDespawn() {
-        if (this.level().getDifficulty() == Difficulty.PEACEFUL) {
+        if (this.level.getDifficulty() == Difficulty.PEACEFUL) {
             this.discard();
         }
-
     }
 
     public void tick() {
         super.tick();
         Vec3 vec3;
-        if (!this.level().isClientSide) {
+        if (!this.level.isClientSide) {
             if (this.finalTarget == null && this.targetId != null) {
-                this.finalTarget = ((ServerLevel) this.level()).getEntity(this.targetId);
+                this.finalTarget = ((ServerLevel) this.level).getEntity(this.targetId);
                 if (this.finalTarget == null) {
                     this.targetId = null;
                 }
@@ -230,10 +231,10 @@ public class EnderBullet extends Projectile implements GeoEntity {
                 this.targetDeltaY = Mth.clamp(this.targetDeltaY * 1.025, -1.0, 1.0);
                 this.targetDeltaZ = Mth.clamp(this.targetDeltaZ * 1.025, -1.0, 1.0);
                 vec3 = this.getDeltaMovement();
-                this.setDeltaMovement(vec3.add((this.targetDeltaX - vec3.x) * 0.6, (this.targetDeltaY - vec3.y) * 0.6, (this.targetDeltaZ - vec3.z) * 0.6));
+                this.setDeltaMovement(vec3.add((this.targetDeltaX - vec3.x) * 0.2, (this.targetDeltaY - vec3.y) * 0.2, (this.targetDeltaZ - vec3.z) * 0.2));
             }
 
-            HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+            HitResult hitResult = ProjectileUtil.getHitResult(this, this::canHitEntity);
             if (hitResult.getType() != HitResult.Type.MISS) {
                 this.onHit(hitResult);
             }
@@ -242,10 +243,10 @@ public class EnderBullet extends Projectile implements GeoEntity {
         this.checkInsideBlocks();
         vec3 = this.getDeltaMovement();
         this.setPos(this.getX() + vec3.x, this.getY() + vec3.y, this.getZ() + vec3.z);
-        ProjectileUtil.rotateTowardsMovement(this, 10);
-        if (this.level().isClientSide) {
+        ProjectileUtil.rotateTowardsMovement(this, 0.5F);
+        if (this.level.isClientSide) {
             for (int i = 0; i < 5; i++) {
-                this.level().addParticle(ParticleTypes.PORTAL,
+                this.level.addParticle(ParticleTypes.PORTAL,
                     this.getRandomX(0.5),
                     this.getRandomY() - 0.25,
                     this.getRandomZ(0.5),
@@ -263,7 +264,7 @@ public class EnderBullet extends Projectile implements GeoEntity {
             if (this.currentMoveDirection != null) {
                 BlockPos blockPos = this.blockPosition();
                 Direction.Axis axis = this.currentMoveDirection.getAxis();
-                if (this.level().loadedAndEntityCanStandOn(blockPos.relative(this.currentMoveDirection), this)) {
+                if (this.level.loadedAndEntityCanStandOn(blockPos.relative(this.currentMoveDirection), this)) {
                     this.selectNextMoveDirection(axis);
                 } else {
                     BlockPos blockPos2 = this.finalTarget.blockPosition();
@@ -273,9 +274,9 @@ public class EnderBullet extends Projectile implements GeoEntity {
                 }
             }
         }
-
     }
 
+    @Override
     protected boolean canHitEntity(@NotNull Entity target) {
         return super.canHitEntity(target) && !target.noPhysics;
     }
@@ -302,30 +303,25 @@ public class EnderBullet extends Projectile implements GeoEntity {
         super.onHitEntity(result);
         if (!(result.getEntity() instanceof LivingEntity target)) return;
         LivingEntity livingEntity = getOwner() instanceof LivingEntity e ? e : null;
-        if (target.hurt(this.damageSources().mobProjectile(this, livingEntity), 15.0f)) {
+        if (target.hurt(DamageSource.indirectMobAttack(this, livingEntity).setProjectile(), 15.0f)) {
             if (livingEntity != null) {
                 this.doEnchantDamageEffects(livingEntity, target);
             }
-            ModUtils.teleportTarget(level(), target, 32);
+            ModUtils.teleportTarget(level, target, 32);
         }
     }
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult result) {
         super.onHitBlock(result);
-        ((ServerLevel) this.level()).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(), this.getZ(), 2, 0.2, 0.2, 0.2, 0.0);
+        ((ServerLevel) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(), this.getZ(), 2, 0.2, 0.2, 0.2, 0.0);
         this.playSound(SoundEvents.SHULKER_BULLET_HIT, 1.0F, 1.0F);
-    }
-
-    private void destroy() {
-        this.discard();
-        this.level().gameEvent(GameEvent.ENTITY_DAMAGE, this.position(), GameEvent.Context.of(this));
     }
 
     @Override
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
-        this.destroy();
+        this.discard();
     }
 
     @Override
@@ -335,10 +331,10 @@ public class EnderBullet extends Projectile implements GeoEntity {
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float amount) {
-        if (!this.level().isClientSide) {
+        if (!this.level.isClientSide) {
             this.playSound(SoundEvents.SHULKER_BULLET_HURT, 1.0F, 1.0F);
-            ((ServerLevel) this.level()).sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 15, 0.2, 0.2, 0.2, 0.0);
-            this.destroy();
+            ((ServerLevel) this.level).sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 15, 0.2, 0.2, 0.2, 0.0);
+            this.discard();
         }
 
         return true;

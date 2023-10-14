@@ -11,10 +11,14 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 import tech.alexnijjar.endermanoverhaul.EndermanOverhaul;
 import tech.alexnijjar.endermanoverhaul.client.EndermanOverhaulClient;
 import tech.alexnijjar.endermanoverhaul.client.gui.FlashOverlay;
+import tech.alexnijjar.endermanoverhaul.client.renderers.items.HoodRenderer;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
+import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EndermanOverhaulClientForge {
@@ -38,10 +42,17 @@ public class EndermanOverhaulClientForge {
 
     @SubscribeEvent
     public static void onRegisterParticles(RegisterParticleProvidersEvent event) {
-        EndermanOverhaulClient.onRegisterParticles((type, provider) -> event.registerSpriteSet(type, provider::create));
+        EndermanOverhaulClient.onRegisterParticles((type, provider) -> event.register(type, provider::create));
     }
 
     public static void onRegisterClientHud(RenderGuiEvent.Post event) {
-        FlashOverlay.render(event.getGuiGraphics());
+        FlashOverlay.render(event.getPoseStack());
+    }
+
+    @SubscribeEvent
+    public static void clientSetup(final FMLClientSetupEvent event) {
+        GeoArmorRenderer.registerArmorRenderer(HoodItem.class, () -> new HoodRenderer(ModItems.BADLANDS_HOOD.get()));
+        GeoArmorRenderer.registerArmorRenderer(HoodItem.class, () -> new HoodRenderer(ModItems.SAVANNAS_HOOD.get()));
+        GeoArmorRenderer.registerArmorRenderer(HoodItem.class, () -> new HoodRenderer(ModItems.SNOWY_HOOD.get()));
     }
 }

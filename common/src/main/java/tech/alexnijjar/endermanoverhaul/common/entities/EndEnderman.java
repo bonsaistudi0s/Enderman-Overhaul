@@ -19,9 +19,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
@@ -41,7 +41,7 @@ public class EndEnderman extends BaseEnderman {
             .add(Attributes.MAX_HEALTH, 40.0)
             .add(Attributes.MOVEMENT_SPEED, 0.38)
             .add(Attributes.ATTACK_DAMAGE, 10.0)
-            .add(Attributes.FOLLOW_RANGE, 24)
+            .add(Attributes.FOLLOW_RANGE, 16)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
     }
 
@@ -51,9 +51,9 @@ public class EndEnderman extends BaseEnderman {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        super.registerControllers(controllerRegistrar);
-        controllerRegistrar.add(new AnimationController<>(this, "bite_controller", 5, state -> {
+    public void registerControllers(AnimationData data) {
+        super.registerControllers(data);
+        data.addAnimationController(new AnimationController<>(this, "bite_controller", 5, state -> {
             if (entityData.get(DATA_BITING_TICKS) <= 0) return PlayState.STOP;
             state.getController().setAnimation(ConstantAnimations.BITE);
             return PlayState.CONTINUE;
@@ -129,7 +129,7 @@ public class EndEnderman extends BaseEnderman {
             this.playSound(SoundEvents.PHANTOM_BITE, 10.0f, 0.95f + this.random.nextFloat() * 0.1f);
             entityData.set(DATA_BITING_TICKS, 7);
             if (target instanceof LivingEntity entity && random.nextBoolean()) {
-                ModUtils.teleportTarget(level(), entity, 24);
+                ModUtils.teleportTarget(level, entity, 24, true);
             }
             return true;
         } else {
