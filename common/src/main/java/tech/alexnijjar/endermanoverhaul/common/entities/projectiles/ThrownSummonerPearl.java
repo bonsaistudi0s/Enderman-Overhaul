@@ -55,7 +55,7 @@ public class ThrownSummonerPearl extends ThrowableItemProjectile {
         Entity entity = this.getOwner();
         if (entity instanceof ServerPlayer serverPlayer) {
             if (serverPlayer.connection.isAcceptingMessages() && serverPlayer.level() == this.level() && !serverPlayer.isSleeping()) {
-                List<Entity> nearbyEntities = level().getEntities(this, getBoundingBox().inflate(8.0), e -> e instanceof LivingEntity).stream()
+                List<Entity> nearbyEntities = level().getEntities(this, getBoundingBox().inflate(12.0), e -> e instanceof LivingEntity).stream()
                     .limit(serverPlayer.server.getGameRules().getInt(GameRules.RULE_MAX_ENTITY_CRAMMING))
                     .toList();
 
