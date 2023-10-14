@@ -16,7 +16,7 @@ import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
     gradient = @Gradient(value = "45deg", first = "#e8bff2", second = "#181a23"),
 
     links = {
-        @Link(value = "https://discord.gg/terrarium", icon = "gamepad-2", title = "Discord"),
+        @Link(value = "https://discord.gg/sGwxnFV", icon = "gamepad-2", title = "Discord"),
         @Link(value = "https://github.com/bonsaistudi0s/enderman-overhaul", icon = "github", title = "GitHub"),
 
         @Link(value = "https://www.curseforge.com/minecraft/mc-mods/endermanoverhaul", icon = "curseforge", title = "CurseForge"),
