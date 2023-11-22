@@ -38,15 +38,15 @@ import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModParticleTypes;
 
-public class OceanEnderman extends BaseEnderman {
+public class CoralEnderman extends BaseEnderman {
     protected final WaterBoundPathNavigation waterNavigation;
     protected final GroundPathNavigation groundNavigation;
 
-    public OceanEnderman(EntityType<? extends EnderMan> entityType, Level level) {
+    public CoralEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
         xpReward = 6;
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
-        this.moveControl = new OceanEndermanMoveControl();
+        this.moveControl = new CoralEndermanMoveControl();
         this.waterNavigation = new WaterBoundPathNavigation(this, level);
         this.groundNavigation = new GroundPathNavigation(this, level);
     }
@@ -60,13 +60,13 @@ public class OceanEnderman extends BaseEnderman {
     }
 
     public static boolean checkMonsterSpawnRules(@NotNull EntityType<? extends Monster> type, ServerLevelAccessor level, @NotNull MobSpawnType spawnType, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        if (!EndermanOverhaulConfig.spawnOceanEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
+        if (!EndermanOverhaulConfig.spawnCoralEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
         return BaseEnderman.checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     @SuppressWarnings({"deprecation", "unused"})
-    public static boolean checkSpawnRules(EntityType<OceanEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
-        if (!EndermanOverhaulConfig.spawnOceanEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
+    public static boolean checkSpawnRules(EntityType<CoralEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
+        if (!EndermanOverhaulConfig.spawnCoralEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
         if (!serverLevel.getFluidState(pos.below()).is(FluidTags.WATER)) return false;
         boolean bl = serverLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(serverLevel, pos, random) && (mobSpawnType == MobSpawnType.SPAWNER || serverLevel.getFluidState(pos).is(FluidTags.WATER));
         return random.nextInt(40) == 0 && pos.getY() < serverLevel.getSeaLevel() - 5 && bl;
@@ -96,7 +96,7 @@ public class OceanEnderman extends BaseEnderman {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new EndermanFreezeWhenLookedAt());
-        this.goalSelector.addGoal(1, new OceanEndermanSwimGoal());
+        this.goalSelector.addGoal(1, new CoralEndermanSwimGoal());
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
@@ -248,10 +248,10 @@ public class OceanEnderman extends BaseEnderman {
         return false;
     }
 
-    private class OceanEndermanMoveControl extends MoveControl {
+    private class CoralEndermanMoveControl extends MoveControl {
 
-        OceanEndermanMoveControl() {
-            super(OceanEnderman.this);
+        CoralEndermanMoveControl() {
+            super(CoralEnderman.this);
         }
 
         @Override
@@ -291,10 +291,10 @@ public class OceanEnderman extends BaseEnderman {
         }
     }
 
-    private class OceanEndermanSwimGoal extends RandomSwimmingGoal {
+    private class CoralEndermanSwimGoal extends RandomSwimmingGoal {
 
-        public OceanEndermanSwimGoal() {
-            super(OceanEnderman.this, 1.0, 40);
+        public CoralEndermanSwimGoal() {
+            super(CoralEnderman.this, 1.0, 40);
         }
 
         public boolean canUse() {

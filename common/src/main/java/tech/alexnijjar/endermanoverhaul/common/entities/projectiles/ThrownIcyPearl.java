@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import tech.alexnijjar.endermanoverhaul.common.ModUtils;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModItems;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 import java.util.List;
 
@@ -103,7 +103,7 @@ public class ThrownIcyPearl extends ThrowableItemProjectile {
             entity.resetFallDistance();
         }
 
-        level().playSound(null, getX(), getY(), getZ(), SoundEvents.ENDER_EYE_DEATH, getSoundSource(), 1.0f, 1.0f);
+        level().playSound(null, getX(), getY(), getZ(), ModSoundEvents.ICY_PEARL_HIT.get(), getSoundSource(), 1.0f, 1.0f);
         this.discard();
     }
 

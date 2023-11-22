@@ -110,11 +110,11 @@ public final class EndermanOverhaulConfig {
     public static boolean spawnNetherWastesEnderman = true;
 
     @ConfigEntry(
-        id = "spawnOceanEnderman",
+        id = "spawnCoralEnderman",
         type = EntryType.BOOLEAN,
-        translation = "config.endermanoverhaul.spawnOceanEnderman"
+        translation = "config.endermanoverhaul.spawnCoralEnderman"
     )
-    public static boolean spawnOceanEnderman = true;
+    public static boolean spawnCoralEnderman = true;
 
     @ConfigEntry(
         id = "spawnSavannaEnderman",

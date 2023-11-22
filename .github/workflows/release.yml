@@ -74,12 +74,3 @@ jobs:
           loaders: fabric
           game-versions: ${{ steps.properties.outputs.minecraftVersion }}
           version-resolver: exact
-
-      - name: Generate Discord Embed
-        run: ./gradlew injectEmbed
-
-      - name: Upload Discord Embed
-        uses: tsickert/discord-webhook@v5.3.0
-        with:
-          webhook-url: ${{ secrets.WEBHOOK_URL }}
-          raw-data: ./build/embed.json

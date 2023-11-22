@@ -86,10 +86,10 @@ public class ModEntityTypes {
             .fireImmune()
             .build("nether_wastes_enderman"));
 
-    public static final RegistryEntry<EntityType<OceanEnderman>> OCEAN_ENDERMAN = ENTITY_TYPES.register("ocean_enderman", () ->
-        EntityType.Builder.of(OceanEnderman::new, MobCategory.MONSTER)
+    public static final RegistryEntry<EntityType<CoralEnderman>> CORAL_ENDERMAN = ENTITY_TYPES.register("coral_enderman", () ->
+        EntityType.Builder.of(CoralEnderman::new, MobCategory.MONSTER)
             .sized(0.6f, 2.0f)
-            .build("ocean_enderman"));
+            .build("coral_enderman"));
 
     public static final RegistryEntry<EntityType<SavannaEnderman>> SAVANNA_ENDERMAN = ENTITY_TYPES.register("savanna_enderman", () ->
         EntityType.Builder.of(SavannaEnderman::new, MobCategory.MONSTER)
@@ -226,7 +226,7 @@ public class ModEntityTypes {
         attributes.accept(ICE_SPIKES_ENDERMAN, IceSpikesEnderman::createAttributes);
         attributes.accept(MUSHROOM_FIELDS_ENDERMAN, MushroomFieldsEnderman::createAttributes);
         attributes.accept(NETHER_WASTES_ENDERMAN, NetherWastesEnderman::createAttributes);
-        attributes.accept(OCEAN_ENDERMAN, OceanEnderman::createAttributes);
+        attributes.accept(CORAL_ENDERMAN, CoralEnderman::createAttributes);
         attributes.accept(SAVANNA_ENDERMAN, SavannaEnderman::createAttributes);
         attributes.accept(SNOWY_ENDERMAN, SnowyEnderman::createAttributes);
         attributes.accept(SOULSAND_VALLEY_ENDERMAN, SoulsandValleyEnderman::createAttributes);
@@ -256,7 +256,7 @@ public class ModEntityTypes {
         SpawnPlacements.register(ICE_SPIKES_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, IceSpikesEnderman::checkMonsterSpawnRules);
         SpawnPlacements.register(MUSHROOM_FIELDS_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MushroomFieldsEnderman::checkMobSpawnRules);
         SpawnPlacements.register(NETHER_WASTES_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherWastesEnderman::checkMonsterSpawnRules);
-        SpawnPlacements.register(OCEAN_ENDERMAN.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, OceanEnderman::checkMonsterSpawnRules);
+        SpawnPlacements.register(CORAL_ENDERMAN.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CoralEnderman::checkMonsterSpawnRules);
         SpawnPlacements.register(SAVANNA_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SavannaEnderman::checkMonsterSpawnRules);
         SpawnPlacements.register(SNOWY_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SnowyEnderman::checkMonsterSpawnRules);
         SpawnPlacements.register(SOULSAND_VALLEY_ENDERMAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SoulsandValleyEnderman::checkMonsterSpawnRules);

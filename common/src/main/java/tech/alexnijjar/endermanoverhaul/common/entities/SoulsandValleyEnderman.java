@@ -46,7 +46,7 @@ public class SoulsandValleyEnderman extends BaseEnderman {
             .add(Attributes.MAX_HEALTH, 30.0)
             .add(Attributes.MOVEMENT_SPEED, 0.35)
             .add(Attributes.ATTACK_DAMAGE, 10.0)
-            .add(Attributes.FOLLOW_RANGE, 24)
+            .add(Attributes.FOLLOW_RANGE, 16)
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
     }
 

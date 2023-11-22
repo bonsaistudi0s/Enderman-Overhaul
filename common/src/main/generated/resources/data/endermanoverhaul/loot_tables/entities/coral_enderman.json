@@ -25,34 +25,11 @@
               "function": "minecraft:looting_enchant"
             }
           ],
-          "name": "minecraft:ender_pearl"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "function": "minecraft:looting_enchant"
-            }
-          ],
           "name": "endermanoverhaul:bubble_pearl"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "endermanoverhaul:entities/ocean_enderman"
+  "random_sequence": "endermanoverhaul:entities/coral_enderman"
 }

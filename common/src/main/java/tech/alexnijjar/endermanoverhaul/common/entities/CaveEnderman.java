@@ -21,6 +21,7 @@ import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -107,10 +108,17 @@ public class CaveEnderman extends BaseEnderman {
     public void tick() {
         super.tick();
         if (level().isClientSide()) return;
-        if (level().getGameTime() % 20 == 0) {
-            if (this.isAlive() && level().canSeeSky(this.blockPosition()) && level().isDay()) {
+        if (level().getGameTime() % 10 == 0 && isAlive()) {
+            if (level().canSeeSky(this.blockPosition()) && level().isDay()) {
                 this.hurt(damageSources().onFire(), 1.0f);
                 teleportUnderBlock();
+            } else if (level().getBrightness(LightLayer.BLOCK, blockPosition()) > 6) {
+                for (int i = 0; i < 64; i++) {
+                    if (teleport()) {
+                        setTarget(null);
+                        return;
+                    }
+                }
             }
         }
     }

@@ -39,7 +39,7 @@ public class EndermanOverhaulFabric {
         addSpawn(ModEntityTypes.ICE_SPIKES_ENDERMAN, ModBiomeTags.ICE_SPIKES_SPAWNS);
         addSpawnWithCost(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN, tag(ModBiomeTags.MUSHROOM_SPAWNS), 3, 1, 2, 0.7, 0.15);
         addSpawn(ModEntityTypes.NETHER_WASTES_ENDERMAN, tag(ModBiomeTags.NETHER_WASTES_SPAWNS), 1, 4, 4);
-        addSpawnWithCost(ModEntityTypes.OCEAN_ENDERMAN, tag(ModBiomeTags.OCEAN_SPAWNS), 2, 1, 2, 0.7, 0.12);
+        addSpawnWithCost(ModEntityTypes.CORAL_ENDERMAN, tag(ModBiomeTags.CORAL_SPAWNS), 2, 1, 2, 0.7, 0.12);
         addSpawn(ModEntityTypes.SAVANNA_ENDERMAN, ModBiomeTags.SAVANNA_SPAWNS);
         addSpawn(ModEntityTypes.SNOWY_ENDERMAN, ModBiomeTags.SNOWY_SPAWNS);
         addSpawnWithCost(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN, tag(ModBiomeTags.SOUL_SAND_VALLEY_SPAWNS), 2, 1, 2, 0.7, 0.15);

@@ -58,4 +58,7 @@ public class ModSoundEvents {
 
     public static final RegistryEntry<SoundEvent> SUMMONER_PEARL_HIT = SOUND_EVENTS.register("summoner_pearl_hit", () ->
         SoundEvent.createVariableRangeEvent(new ResourceLocation(EndermanOverhaul.MOD_ID, "summoner_pearl_hit")));
+
+    public static final RegistryEntry<SoundEvent> ICY_PEARL_HIT = SOUND_EVENTS.register("icy_pearl_hit", () ->
+        SoundEvent.createVariableRangeEvent(new ResourceLocation(EndermanOverhaul.MOD_ID, "icy_pearl_hit")));
 }

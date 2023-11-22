@@ -4,6 +4,10 @@
     {
       "id": "#c:savanna",
       "required": false
+    },
+    {
+      "id": "#forge:is_savanna",
+      "required": false
     }
   ]
 }

@@ -21,7 +21,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
     public static final ResourceLocation FLOWER_FIELDS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "flower_fields_enderman");
     public static final ResourceLocation END_ISLANDS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "end_islands_enderman");
     public static final ResourceLocation WARPED_FOREST_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "warped_forest_enderman");
-    public static final ResourceLocation OCEAN_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "ocean_enderman");
+    public static final ResourceLocation CORAL_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "coral_enderman");
     public static final ResourceLocation DARK_OAK_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "dark_oak_enderman");
     public static final ResourceLocation WINDSWEPT_HILLS_ANIMATION = new ResourceLocation(EndermanOverhaul.MOD_ID, "windswept_hills_enderman");
 

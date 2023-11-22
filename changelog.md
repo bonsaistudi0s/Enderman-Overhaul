@@ -1,0 +1,8 @@
+- Reduce Soulsand Valley Enderman follow range to 16
+- Rename Ocean Enderman to Coral Enderman 
+- Crimson, Warped, Soul, End, and Ocean Endermen no longer drop default ender pearls.
+- Add some more biome spawns tags so hopefully enderman spawn in modded biomes more often
+- Add icy pearl sound
+- Fix misplaced element on Swamp Enderman
+- Hostile Endermen no longer attack players with hoods
+- Cave Enderman will now teleport away from light sources

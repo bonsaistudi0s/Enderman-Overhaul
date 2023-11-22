@@ -58,7 +58,7 @@ public class EndermanOverhaulClient {
         ClientPlatformUtils.registerRenderer(ModEntityTypes.ICE_SPIKES_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.ICE_SPIKES_ENDERMAN.get(), BaseEndermanEntityRenderer.ICE_SPIKES_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN, MushroomFieldsEndermanRenderer::new);
         ClientPlatformUtils.registerRenderer(ModEntityTypes.NETHER_WASTES_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.NETHER_WASTES_ENDERMAN.get()));
-        ClientPlatformUtils.registerRenderer(ModEntityTypes.OCEAN_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.OCEAN_ENDERMAN.get(), BaseEndermanEntityRenderer.OCEAN_ANIMATION));
+        ClientPlatformUtils.registerRenderer(ModEntityTypes.CORAL_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.CORAL_ENDERMAN.get(), BaseEndermanEntityRenderer.CORAL_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SAVANNA_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.SAVANNA_ENDERMAN.get()));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SNOWY_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.SNOWY_ENDERMAN.get(), BaseEndermanEntityRenderer.SNOWY_ANIMATION));
         ClientPlatformUtils.registerRenderer(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN, c -> new BaseEndermanEntityRenderer<>(c, ModEntityTypes.SOULSAND_VALLEY_ENDERMAN.get(), BaseEndermanEntityRenderer.SOULSAND_VALLEY_ANIMATION, false));

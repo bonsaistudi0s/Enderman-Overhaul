@@ -108,5 +108,11 @@
             "endermanoverhaul:pearls/summoner_pearl_hit"
         ],
         "subtitle": "subtitles.endermanoverhaul.entity.summoner_pearl.hit"
+    },
+    "icy_pearl_hit": {
+        "sounds": [
+            "endermanoverhaul:pearls/icy_pearl_hit"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.icy_pearl.hit"
     }
 }

@@ -62,7 +62,7 @@ public class ModLootTableProvider extends LootTableProvider {
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.1f, 0.025f))));
 
-            output.accept(getEntity(ModEntityTypes.CRIMSON_FOREST_ENDERMAN.get()), getDefaultEndermanLootTable(ModItems.CRIMSON_PEARL)
+            output.accept(getEntity(ModEntityTypes.CRIMSON_FOREST_ENDERMAN.get()), getEmptyLootTable(ModItems.CRIMSON_PEARL)
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CRIMSON_FUNGUS).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
@@ -77,7 +77,7 @@ public class ModLootTableProvider extends LootTableProvider {
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.05f, 0.025f))));
 
-            output.accept(getEntity(ModEntityTypes.END_ENDERMAN.get()), getDefaultEndermanLootTable(ModItems.CORRUPTED_PEARL)
+            output.accept(getEntity(ModEntityTypes.END_ENDERMAN.get()), getEmptyLootTable(ModItems.CORRUPTED_PEARL)
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHORUS_FRUIT).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 2.0f))).apply(LootingEnchantFunction
@@ -110,7 +110,7 @@ public class ModLootTableProvider extends LootTableProvider {
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
                         .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))));
 
-            output.accept(getEntity(ModEntityTypes.OCEAN_ENDERMAN.get()), getDefaultEndermanLootTable(ModItems.BUBBLE_PEARL));
+            output.accept(getEntity(ModEntityTypes.CORAL_ENDERMAN.get()), getEmptyLootTable(ModItems.BUBBLE_PEARL));
 
             output.accept(getEntity(ModEntityTypes.SAVANNA_ENDERMAN.get()), getDefaultEndermanLootTable()
                 .withPool(LootPool.lootPool()
@@ -132,7 +132,7 @@ public class ModLootTableProvider extends LootTableProvider {
                         .setCount(ConstantValue.exactly(1))))
                     .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.1f, 0.025f))));
 
-            output.accept(getEntity(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN.get()), getDefaultEndermanLootTable(ModItems.SOUL_PEARL)
+            output.accept(getEntity(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN.get()), getEmptyLootTable(ModItems.SOUL_PEARL)
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.BONE).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
@@ -140,7 +140,7 @@ public class ModLootTableProvider extends LootTableProvider {
 
             output.accept(getEntity(ModEntityTypes.SWAMP_ENDERMAN.get()), getDefaultEndermanLootTable(ModItems.SUMMONER_PEARL));
 
-            output.accept(getEntity(ModEntityTypes.WARPED_FOREST_ENDERMAN.get()), getDefaultEndermanLootTable(ModItems.WARPED_PEARL)
+            output.accept(getEntity(ModEntityTypes.WARPED_FOREST_ENDERMAN.get()), getEmptyLootTable(ModItems.WARPED_PEARL)
                 .withPool(LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.WARPED_FUNGUS).apply(SetItemCountFunction
                         .setCount(UniformGenerator.between(0.0f, 3.0f))).apply(LootingEnchantFunction
@@ -164,6 +164,14 @@ public class ModLootTableProvider extends LootTableProvider {
                 .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction
                     .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
                     .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f))))
+                .add(LootItem.lootTableItem(additionalPearl.get()).apply(SetItemCountFunction
+                    .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
+                    .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))));
+    }
+
+    private static LootTable.Builder getEmptyLootTable(Supplier<Item> additionalPearl) {
+        return LootTable.lootTable()
+            .withPool(LootPool.lootPool()
                 .add(LootItem.lootTableItem(additionalPearl.get()).apply(SetItemCountFunction
                     .setCount(UniformGenerator.between(0.0f, 1.0f))).apply(LootingEnchantFunction
                     .lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))));

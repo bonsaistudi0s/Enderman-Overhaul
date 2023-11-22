@@ -266,7 +266,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
         }
         this.goalSelector.addGoal(1, new EndermanFreezeWhenLookedAt());
         if (isAlwaysHostile()) {
-            this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+            this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, e -> !(e.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof HoodItem)));
         }
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));

@@ -19,7 +19,7 @@ public class ModBiomeTags {
     public static final TagKey<Biome> ICE_SPIKES_SPAWNS = tag("ice_spikes_spawns");
     public static final TagKey<Biome> MUSHROOM_SPAWNS = tag("mushroom_fields_spawns");
     public static final TagKey<Biome> NETHER_WASTES_SPAWNS = tag("nether_wastes_spawns");
-    public static final TagKey<Biome> OCEAN_SPAWNS = tag("ocean_spawns");
+    public static final TagKey<Biome> CORAL_SPAWNS = tag("coral_spawns");
     public static final TagKey<Biome> SAVANNA_SPAWNS = tag("savanna_spawns");
     public static final TagKey<Biome> SNOWY_SPAWNS = tag("snowy_spawns");
     public static final TagKey<Biome> SOUL_SAND_VALLEY_SPAWNS = tag("soulsand_valley_spawns");

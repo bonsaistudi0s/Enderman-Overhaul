@@ -4,6 +4,14 @@
     {
       "id": "#c:in_the_end",
       "required": false
+    },
+    {
+      "id": "#c:is_end_highland",
+      "required": false
+    },
+    {
+      "id": "#forge:is_end",
+      "required": false
     }
   ]
 }

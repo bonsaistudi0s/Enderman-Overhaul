@@ -80,6 +80,7 @@ public class ModLangProvider extends LanguageProvider {
         add("subtitles.endermanoverhaul.entity.corrupted_pearl.hit", "Corrupted Pearl Hits");
         add("subtitles.endermanoverhaul.entity.soul_pearl.hit", "Soul Pearl Hits");
         add("subtitles.endermanoverhaul.entity.summoner_pearl.hit", "Summoner Pearl Hits");
+        add("subtitles.endermanoverhaul.entity.icy_pearl.hit", "Icy Pearl Hits");
 
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");
@@ -94,7 +95,7 @@ public class ModLangProvider extends LanguageProvider {
         add("config.endermanoverhaul.spawnIceSpikesEnderman", "Spawn Ice Spikes Enderman");
         add("config.endermanoverhaul.spawnMushroomFieldsEnderman", "Spawn Mushroom Fields Enderman");
         add("config.endermanoverhaul.spawnNetherWastesEnderman", "Spawn Nether Wastes Enderman");
-        add("config.endermanoverhaul.spawnOceanEnderman", "Spawn Ocean Enderman");
+        add("config.endermanoverhaul.spawnCoralEnderman", "Spawn Coral Enderman");
         add("config.endermanoverhaul.spawnSavannaEnderman", "Spawn Savanna Enderman");
         add("config.endermanoverhaul.spawnSnowyEnderman", "Spawn Snowy Enderman");
         add("config.endermanoverhaul.spawnSoulsandValleyEnderman", "Spawn Soulsand Valley Enderman");
