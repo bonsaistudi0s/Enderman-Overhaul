@@ -142,7 +142,7 @@ subprojects {
         }
         repositories {
             maven {
-                setUrl("https://maven.resourcefulbees.com/repository/bonsaistudi0s/")
+                setUrl("https://maven.resourcefulbees.com/repository/alexnijjar/")
                 credentials {
                     username = System.getenv("MAVEN_USER")
                     password = System.getenv("MAVEN_PASS")
