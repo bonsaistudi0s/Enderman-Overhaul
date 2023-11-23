@@ -1,6 +1,9 @@
 {
   "block.endermanoverhaul.tiny_skull": "Tiny Skull",
+  "config.endermanoverhaul.allowPickingUpBlocks": "Allow Picking Up Blocks",
   "config.endermanoverhaul.allowSpawning": "Allow Spawning",
+  "config.endermanoverhaul.friendlyEndermanDespawn": "Friendly Enderman Despawn",
+  "config.endermanoverhaul.friendlyEndermanTeleport": "Friendly Enderman Teleport",
   "config.endermanoverhaul.replaceDefaultEnderman": "Replace Default Enderman",
   "config.endermanoverhaul.spawnBadlandsEnderman": "Spawn Badlands Enderman",
   "config.endermanoverhaul.spawnCaveEnderman": "Spawn Cave Enderman",

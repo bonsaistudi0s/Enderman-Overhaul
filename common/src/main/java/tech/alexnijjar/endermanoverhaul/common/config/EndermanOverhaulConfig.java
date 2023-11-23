@@ -26,6 +26,27 @@ import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 public final class EndermanOverhaulConfig {
 
     @ConfigEntry(
+        id = "allowPickingUpBlocks",
+        type = EntryType.BOOLEAN,
+        translation = "config.endermanoverhaul.allowPickingUpBlocks"
+    )
+    public static boolean allowPickingUpBlocks = true;
+
+    @ConfigEntry(
+        id = "friendlyEndermanTeleport",
+        type = EntryType.BOOLEAN,
+        translation = "config.endermanoverhaul.friendlyEndermanTeleport"
+    )
+    public static boolean friendlyEndermanTeleport = true;
+
+    @ConfigEntry(
+        id = "friendlyEndermanDespawn",
+        type = EntryType.BOOLEAN,
+        translation = "config.endermanoverhaul.friendlyEndermanDespawn"
+    )
+    public static boolean friendlyEndermanDespawn = true;
+
+    @ConfigEntry(
         id = "allowSpawning",
         type = EntryType.BOOLEAN,
         translation = "config.endermanoverhaul.allowSpawning"

@@ -40,6 +40,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.items.HoodItem;
 
@@ -354,6 +355,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
     public class EndermanTakeBlockGoal extends Goal {
         public boolean canUse() {
+            if (!EndermanOverhaulConfig.allowPickingUpBlocks) return false;
             if (!canPickupBlocks()) return false;
             if (BaseEnderman.this.getCarriedBlock() != null) {
                 return false;

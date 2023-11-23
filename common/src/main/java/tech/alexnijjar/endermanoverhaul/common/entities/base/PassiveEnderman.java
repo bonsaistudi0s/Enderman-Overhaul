@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 
 public abstract class PassiveEnderman extends BaseEnderman {
 
@@ -46,5 +47,27 @@ public abstract class PassiveEnderman extends BaseEnderman {
     @Override
     protected boolean shouldDespawnInPeaceful() {
         return false;
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return EndermanOverhaulConfig.friendlyEndermanDespawn;
+    }
+
+    @Override
+    protected boolean teleport() {
+        if (!EndermanOverhaulConfig.friendlyEndermanTeleport) return false;
+        return super.teleport();
+    }
+
+    @Override
+    public boolean canTeleport() {
+        return EndermanOverhaulConfig.friendlyEndermanTeleport;
+    }
+
+    @Override
+    public boolean randomTeleport(double x, double y, double z, boolean broadcastTeleport) {
+        if (!EndermanOverhaulConfig.friendlyEndermanTeleport) return false;
+        return super.randomTeleport(x, y, z, broadcastTeleport);
     }
 }

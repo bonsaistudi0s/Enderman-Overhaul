@@ -82,6 +82,10 @@ public class ModLangProvider extends LanguageProvider {
         add("subtitles.endermanoverhaul.entity.summoner_pearl.hit", "Summoner Pearl Hits");
         add("subtitles.endermanoverhaul.entity.icy_pearl.hit", "Icy Pearl Hits");
 
+        add("config.endermanoverhaul.allowPickingUpBlocks", "Allow Picking Up Blocks");
+        add("config.endermanoverhaul.friendlyEndermanTeleport", "Friendly Enderman Teleport");
+        add("config.endermanoverhaul.friendlyEndermanDespawn", "Friendly Enderman Despawn");
+
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");
         add("config.endermanoverhaul.spawnBadlandsEnderman", "Spawn Badlands Enderman");
