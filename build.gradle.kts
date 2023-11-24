@@ -22,6 +22,7 @@ subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
+    apply(plugin = "com.github.johnrengelman.shadow")
 
     val minecraftVersion: String by project
     val modLoader = project.name
@@ -88,7 +89,6 @@ subprojects {
     }
 
     if (!isCommon) {
-        apply(plugin = "com.github.johnrengelman.shadow")
         configure<ArchitectPluginExtension> {
             platformSetupLoomIde()
         }
