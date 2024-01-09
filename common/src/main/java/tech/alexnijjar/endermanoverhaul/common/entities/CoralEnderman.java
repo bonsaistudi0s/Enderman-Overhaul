@@ -213,7 +213,7 @@ public class CoralEnderman extends BaseEnderman {
     protected void handleAirSupply(int airSupply) {
         if (this.isAlive() && !this.isInWaterOrBubble()) {
             this.setAirSupply(airSupply - 1);
-            if (this.getAirSupply() <= 20 && level().getGameTime() % 20 == 0) {
+            if (this.getAirSupply() <= 20 && tickCount % 20 == 0) {
                 if (!teleportToWater()) {
                     for (int i = 0; i < 64; i++) {
                         if (this.teleport()) break;

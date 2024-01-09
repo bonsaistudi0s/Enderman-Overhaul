@@ -108,7 +108,7 @@ public class CaveEnderman extends BaseEnderman {
     public void tick() {
         super.tick();
         if (level().isClientSide()) return;
-        if (level().getGameTime() % 10 == 0 && isAlive()) {
+        if (tickCount % 20 == 0 && isAlive()) {
             if (level().canSeeSky(this.blockPosition()) && level().isDay()) {
                 this.hurt(damageSources().onFire(), 1.0f);
                 teleportUnderBlock();

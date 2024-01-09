@@ -128,7 +128,7 @@ public class EndEnderman extends BaseEnderman {
         if (super.doHurtTarget(target)) {
             this.playSound(SoundEvents.PHANTOM_BITE, 10.0f, 0.95f + this.random.nextFloat() * 0.1f);
             entityData.set(DATA_BITING_TICKS, 7);
-            if (target instanceof LivingEntity entity && random.nextBoolean()) {
+            if (target instanceof LivingEntity entity && random.nextFloat() < EndermanOverhaulConfig.endEndermanTeleportChance) {
                 ModUtils.teleportTarget(level(), entity, 24);
             }
             return true;

@@ -111,7 +111,7 @@ public class SoulPearlItem extends EnderpearlItem {
     @Override
     public void inventoryTick(@NotNull ItemStack stack, Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
         if (level.isClientSide()) return;
-        if (level.getGameTime() % 100 != 0) return;
+        if (entity.tickCount % 100 != 0) return;
         CompoundTag tag = stack.getOrCreateTag();
         if (tag.contains("BoundEntity")) {
             int id = tag.getInt("BoundEntity");

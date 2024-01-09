@@ -1,5 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.common.config;
 
+import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.Config;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
@@ -178,4 +179,12 @@ public final class EndermanOverhaulConfig {
         translation = "config.endermanoverhaul.spawnWindsweptHillsEnderman"
     )
     public static boolean spawnWindsweptHillsEnderman = true;
+
+    @ConfigEntry(
+        id = "endEndermanTeleportChance",
+        type = EntryType.FLOAT,
+        translation = "config.endermanoverhaul.endEndermanTeleportChance"
+    )
+    @Comment("The chance that an End Enderman will teleport you when it hits you")
+    public static float endEndermanTeleportChance = 0.5f;
 }

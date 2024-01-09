@@ -106,5 +106,6 @@ public class ModLangProvider extends LanguageProvider {
         add("config.endermanoverhaul.spawnSwampEnderman", "Spawn Swamp Enderman");
         add("config.endermanoverhaul.spawnWarpedForestEnderman", "Spawn Warped Forest Enderman");
         add("config.endermanoverhaul.spawnWindsweptHillsEnderman", "Spawn Windswept Hills Enderman");
+        add("config.endermanoverhaul.endEndermanTeleportChance", "End Enderman Teleport Chance");
     }
 }

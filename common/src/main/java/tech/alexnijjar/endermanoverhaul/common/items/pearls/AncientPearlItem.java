@@ -22,6 +22,8 @@ import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.ThrownAncien
 import java.util.List;
 
 public class AncientPearlItem extends EnderpearlItem {
+    public static final int HEAL_TICK_RATE = 2500;
+
     public AncientPearlItem(Properties properties) {
         super(properties);
     }
@@ -77,7 +79,7 @@ public class AncientPearlItem extends EnderpearlItem {
     @Override
     public void inventoryTick(@NotNull ItemStack stack, Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
         if (level.isClientSide()) return;
-        if (level.getGameTime() % 5000 != 0) return;
+        if (entity.tickCount % HEAL_TICK_RATE != 0) return;
         CompoundTag tag = stack.getOrCreateTag();
         if (tag.contains("PetEntity")) {
             CompoundTag petTag = tag.getCompound("PetEntity");

@@ -201,7 +201,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
 
     protected void tickAreaEffect() {
         if (level().isClientSide()) return;
-        if (level().getGameTime() % 20 != 0) return;
+        if (tickCount % 20 != 0) return;
         var areaEffect = getAreaEffect();
         if (areaEffect == null || getAreaEffectRange() == 0) return;
         LivingEntity target = getTarget();
@@ -227,7 +227,7 @@ public abstract class BaseEnderman extends EnderMan implements GeoEntity {
     @Override
     public void aiStep() {
         ParticleOptions customParticleType = getCustomParticles();
-        if (hasParticles() && this.level().isClientSide() && customParticleType != null && level().getGameTime() % getParticleRate() == 0) {
+        if (hasParticles() && this.level().isClientSide() && customParticleType != null && tickCount % getParticleRate() == 0) {
             for (int i = 0; i < getParticleCount(); i++) {
                 this.level().addParticle(customParticleType,
                     this.getRandomX(0.5),
