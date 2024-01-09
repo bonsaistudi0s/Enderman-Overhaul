@@ -29,17 +29,17 @@ public class EndermanOverhaulFabric {
 
     private static void addCustomSpawns() {
         addSpawn(ModEntityTypes.BADLANDS_ENDERMAN, ModBiomeTags.BADLANDS_SPAWNS);
-        addSpawn(ModEntityTypes.CAVE_ENDERMAN, ModBiomeTags.CAVE_SPAWNS);
+        addSpawn(ModEntityTypes.CAVE_ENDERMAN, tag(ModBiomeTags.CAVE_SPAWNS), 2, 1, 2);
         addSpawnWithCost(ModEntityTypes.CRIMSON_FOREST_ENDERMAN, tag(ModBiomeTags.CRIMSON_FOREST_SPAWNS), 2, 1, 2, 0.5, 0.1);
         addSpawn(ModEntityTypes.DARK_OAK_ENDERMAN, ModBiomeTags.DARK_OAK_SPAWNS);
         addSpawn(ModEntityTypes.DESERT_ENDERMAN, ModBiomeTags.DESERT_SPAWNS);
         addSpawnWithCost(ModEntityTypes.END_ENDERMAN, tag(ModBiomeTags.END_SPAWNS), 2, 1, 2, 0.6, 0.1);
         addSpawnWithCost(ModEntityTypes.END_ISLANDS_ENDERMAN, tag(ModBiomeTags.END_ISLANDS_SPAWNS), 1, 1, 1, 0.5, 0.08);
-        addSpawn(ModEntityTypes.FLOWER_FIELDS_ENDERMAN, ModBiomeTags.FLOWER_FIELDS_SPAWNS);
+        addSpawn(ModEntityTypes.FLOWER_FIELDS_ENDERMAN, tag(ModBiomeTags.FLOWER_FIELDS_SPAWNS), 5, 1, 2);
         addSpawn(ModEntityTypes.ICE_SPIKES_ENDERMAN, ModBiomeTags.ICE_SPIKES_SPAWNS);
         addSpawnWithCost(ModEntityTypes.MUSHROOM_FIELDS_ENDERMAN, tag(ModBiomeTags.MUSHROOM_SPAWNS), 3, 1, 2, 0.7, 0.15);
         addSpawn(ModEntityTypes.NETHER_WASTES_ENDERMAN, tag(ModBiomeTags.NETHER_WASTES_SPAWNS), 1, 4, 4);
-        addSpawnWithCost(ModEntityTypes.CORAL_ENDERMAN, tag(ModBiomeTags.CORAL_SPAWNS), 2, 1, 2, 0.7, 0.12);
+        addSpawnWithCost(ModEntityTypes.CORAL_ENDERMAN, tag(ModBiomeTags.CORAL_SPAWNS), 5, 1, 2, 0.7, 0.12);
         addSpawn(ModEntityTypes.SAVANNA_ENDERMAN, ModBiomeTags.SAVANNA_SPAWNS);
         addSpawn(ModEntityTypes.SNOWY_ENDERMAN, ModBiomeTags.SNOWY_SPAWNS);
         addSpawnWithCost(ModEntityTypes.SOULSAND_VALLEY_ENDERMAN, tag(ModBiomeTags.SOUL_SAND_VALLEY_SPAWNS), 2, 1, 2, 0.7, 0.15);

@@ -31,11 +31,11 @@
         "endermanoverhaul.mixins.json"
     ],
     "depends": {
-        "fabric": "*",
-        "minecraft": ">=1.20",
+        "fabric-api": "*",
+        "minecraft": ">=1.20.1",
         "java": ">=17",
-        "resourcefullib": ">=2.1.11",
+        "resourcefullib": ">=2.1.20",
         "resourcefulconfig": ">=2.0.0",
-        "geckolib": ">=4.2.3"
+        "geckolib": ">=4.3.1"
   }
 }

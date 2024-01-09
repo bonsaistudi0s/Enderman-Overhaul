@@ -4,8 +4,8 @@
   "spawners":
   {
     "type": "endermanoverhaul:cave_enderman",
-    "weight": 10,
+    "weight": 2,
     "minCount": 1,
-    "maxCount": 4
+    "maxCount": 2
   }
 }

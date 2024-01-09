@@ -23,14 +23,14 @@ side = "BOTH"
 [[dependencies.endermanoverhaul]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20,)"
+versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.endermanoverhaul]]
 modId = "resourcefullib"
 mandatory = true
-versionRange = "[2.1.11,)"
+versionRange = "[2.1.20,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -44,6 +44,6 @@ side = "BOTH"
 [[dependencies.endermanoverhaul]]
 modId = "geckolib"
 mandatory = true
-versionRange = "[4.2.0,)"
+versionRange = "[4.3.1,)"
 ordering = "NONE"
 side = "BOTH"
