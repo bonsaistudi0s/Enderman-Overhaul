@@ -187,4 +187,12 @@ public final class EndermanOverhaulConfig {
     )
     @Comment("The chance that an End Enderman will teleport you when it hits you")
     public static float endEndermanTeleportChance = 0.5f;
+
+    @ConfigEntry(
+        id = "endEndermanTeleportCooldown",
+        type = EntryType.INTEGER,
+        translation = "config.endermanoverhaul.endEndermanTeleportCooldown"
+    )
+    @Comment("The cooldown time in seconds that enderman have before they can teleport you again")
+    public static int endEndermanTeleportCooldown = 0;
 }
