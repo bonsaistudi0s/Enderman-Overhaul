@@ -28,9 +28,12 @@ import tech.alexnijjar.endermanoverhaul.common.constants.ConstantAnimations;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
+import java.util.Date;
+
 public class EndEnderman extends BaseEnderman {
     private static final EntityDataAccessor<Integer> DATA_BITING_TICKS = SynchedEntityData.defineId(EndEnderman.class, EntityDataSerializers.INT);
 
+    private long lastTeleportTime = 0L;
     public EndEnderman(EntityType<? extends EnderMan> entityType, Level level) {
         super(entityType, level);
         xpReward = 8;
@@ -128,8 +131,11 @@ public class EndEnderman extends BaseEnderman {
         if (super.doHurtTarget(target)) {
             this.playSound(SoundEvents.PHANTOM_BITE, 10.0f, 0.95f + this.random.nextFloat() * 0.1f);
             entityData.set(DATA_BITING_TICKS, 7);
-            if (target instanceof LivingEntity entity && random.nextFloat() < EndermanOverhaulConfig.endEndermanTeleportChance) {
+            final long currentTime = new Date().getTime();
+            final long differenceSeconds = (currentTime - this.lastTeleportTime) / 1000;
+            if (target instanceof LivingEntity entity && random.nextFloat() < EndermanOverhaulConfig.endEndermanTeleportChance && differenceSeconds > EndermanOverhaulConfig.endEndermanTeleportCooldown) {
                 ModUtils.teleportTarget(level(), entity, 24);
+                this.lastTeleportTime = currentTime;
             }
             return true;
         } else {
