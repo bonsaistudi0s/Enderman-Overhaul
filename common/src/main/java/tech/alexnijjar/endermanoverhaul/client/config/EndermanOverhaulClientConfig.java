@@ -16,7 +16,16 @@ public final class EndermanOverhaulClientConfig {
         type = EntryType.BOOLEAN,
         translation = "config.endermanoverhaul.replaceDefaultEnderman"
     )
+    @Comment("Replaces the default Enderman model with a better looking animated one.")
     public static boolean replaceDefaultEnderman = true;
+
+    @ConfigEntry(
+        id = "replaceMekanismBabyEnderman",
+        type = EntryType.BOOLEAN,
+        translation = "config.endermanoverhaul.replaceMekanismBabyEnderman"
+    )
+    @Comment("Replaces the Mekanism Baby Enderman model with a better looking animated one when installed.")
+    public static boolean replaceMekanismBabyEnderman = true;
 
     @ConfigEntry(
         id = "flashScreen",

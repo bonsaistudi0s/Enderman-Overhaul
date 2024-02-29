@@ -91,6 +91,7 @@ public class ModLangProvider extends LanguageProvider {
         add("config.endermanoverhaul.friendlyEndermanDespawn", "Friendly Enderman Despawn");
 
         add("config.endermanoverhaul.replaceDefaultEnderman", "Replace Default Enderman");
+        add("config.endermanoverhaul.replaceMekanismBabyEnderman", "Replace Mekanism Baby Enderman");
         add("config.endermanoverhaul.flashScreen", "Flash Screen");
         add("config.endermanoverhaul.allowSpawning", "Allow Spawning");
         add("config.endermanoverhaul.spawnBadlandsEnderman", "Spawn Badlands Enderman");

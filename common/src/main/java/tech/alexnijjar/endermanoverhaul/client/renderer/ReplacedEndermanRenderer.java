@@ -27,7 +27,7 @@ public class ReplacedEndermanRenderer extends GeoReplacedEntityRenderer<EnderMan
             new ReplacedEnderman());
 
         addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW));
-        addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.currentEntity));
+        addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.currentEntity, false));
     }
 
     @Override

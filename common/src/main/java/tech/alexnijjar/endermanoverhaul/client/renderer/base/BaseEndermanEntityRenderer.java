@@ -47,7 +47,7 @@ public class BaseEndermanEntityRenderer<T extends BaseEnderman> extends GeoEntit
         if (glow != null) {
             addRenderLayer(new CustomEnderEyesLayer<>(this, glow));
         }
-        addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.animatable));
+        addRenderLayer(new CustomCarriedBlockLayer<>(this, renderManager.getBlockRenderDispatcher(), () -> this.animatable, false));
     }
 
     public BaseEndermanEntityRenderer(EntityRendererProvider.Context renderManager, BaseEndermanModel<T> model) {

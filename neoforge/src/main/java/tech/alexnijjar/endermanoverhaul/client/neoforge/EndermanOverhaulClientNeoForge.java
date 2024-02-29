@@ -1,5 +1,6 @@
 package tech.alexnijjar.endermanoverhaul.client.neoforge;
 
+import com.teamresourceful.resourcefullib.common.utils.modinfo.ModInfoUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -8,6 +9,8 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import tech.alexnijjar.endermanoverhaul.client.EndermanOverhaulClient;
+import tech.alexnijjar.endermanoverhaul.client.compat.mekanism.ReplacedBabyEndermanRenderer;
+import tech.alexnijjar.endermanoverhaul.client.config.EndermanOverhaulClientConfig;
 import tech.alexnijjar.endermanoverhaul.client.gui.FlashOverlay;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -20,6 +23,11 @@ public class EndermanOverhaulClientNeoForge {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(EndermanOverhaulClient::init);
+        event.enqueueWork(() -> {
+            if (EndermanOverhaulClientConfig.replaceMekanismBabyEnderman && ModInfoUtils.isModLoaded("mekanismadditions")) {
+                ReplacedBabyEndermanRenderer.register();
+            }
+        });
     }
 
     @SubscribeEvent

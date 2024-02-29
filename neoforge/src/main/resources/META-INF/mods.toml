@@ -11,7 +11,7 @@ displayURL = "https://modrinth.com/mod/enderman-overhaul"
 logoFile = "icon.png"
 authors = "Alex Nijjar, Joosh"
 credits = ""
-description = "Enderman overhaul adds biome-specific Enderman!"
+description = "Enderman Overhaul adds over 20 new enderman variants, each with their own sounds, models, and animations!"
 
 [[mixins]]
 config = "endermanoverhaul.mixins.json"

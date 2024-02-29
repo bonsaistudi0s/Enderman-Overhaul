@@ -28,7 +28,14 @@ dependencies {
     }
 
     val neoforgeVersion: String by project
+    val minecraftVersion: String by project
+    val mekanismVersion: String by project
 
     neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
+
+    // Mode maven was failing when trying to remap, curse maven doesn't support neoforge and
+    // mekanism was never updated on modrinth, so I just included them locally.
+    modImplementation(files("libs/Mekanism-1.20.4-10.5.0.22.jar"))
+    modImplementation(files("libs/MekanismAdditions-1.20.4-10.5.0.22.jar"))
 }

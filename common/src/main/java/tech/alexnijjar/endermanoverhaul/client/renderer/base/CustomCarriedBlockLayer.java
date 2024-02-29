@@ -22,11 +22,13 @@ import java.util.function.Supplier;
 public class CustomCarriedBlockLayer<T extends GeoAnimatable> extends GeoRenderLayer<T> {
     private final BlockRenderDispatcher blockRenderer;
     private final Supplier<EnderMan> enderman;
+    private final boolean baby;
 
-    public CustomCarriedBlockLayer(GeoRenderer<T> entityRendererIn, BlockRenderDispatcher blockRenderDispatcher, Supplier<EnderMan> enderman) {
+    public CustomCarriedBlockLayer(GeoRenderer<T> entityRendererIn, BlockRenderDispatcher blockRenderDispatcher, Supplier<EnderMan> enderman, boolean baby) {
         super(entityRendererIn);
         this.blockRenderer = blockRenderDispatcher;
         this.enderman = enderman;
+        this.baby = baby;
     }
 
     @Override
@@ -48,6 +50,10 @@ public class CustomCarriedBlockLayer<T extends GeoAnimatable> extends GeoRenderL
             if (enderman.get() instanceof BaseEnderman base) {
                 var offset = base.getHeldBlockOffset();
                 pose.translate(offset.x, offset.y, offset.z);
+            }
+
+            if (baby) {
+                pose.translate(0, -0.3, -0.3f);
             }
 
             pose.translate(0, 0.6875f, -0.75f);
