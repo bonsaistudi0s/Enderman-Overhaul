@@ -1,5 +1,41 @@
 {
-  "values": [
-    "minecraft:soul_sand_valley"
-  ]
+    "values": [
+        "minecraft:soul_sand_valley",
+        {
+            "id": "betternether:soul_plain",
+            "required": false
+        },
+        {
+            "id": "betternether:wart_forest",
+            "required": false
+        },
+        {
+            "id": "betternether:wart_forest_edge",
+            "required": false
+        },
+        {
+            "id": "betternether:poor_nether_grasslands",
+            "required": false
+        },
+        {
+            "id": "betternether:nether_grasslands",
+            "required": false
+        },
+        {
+            "id": "byg:wailing_garth",
+            "required": false
+        },
+        {
+            "id": "cinderscapes:blackstone_shales",
+            "required": false
+        },
+        {
+            "id": "gardens_of_the_dead:soulblight_forest",
+            "required": false
+        },
+        {
+            "id": "incendium:weeping_valley",
+            "required": false
+        }
+    ]
 }

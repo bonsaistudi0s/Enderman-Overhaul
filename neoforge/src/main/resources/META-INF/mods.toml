@@ -1,0 +1,54 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "ARR"
+issueTrackerURL = "https://github.com/bonsaistudi0s/endermanoverhaul/issues"
+
+[[mods]]
+modId = "endermanoverhaul"
+version = "${version}"
+displayName = "Enderman Overhaul"
+displayURL = "https://modrinth.com/mod/enderman-overhaul"
+logoFile = "icon.png"
+authors = "Alex Nijjar, Joosh"
+credits = ""
+description = "Enderman overhaul adds biome-specific Enderman!"
+
+[[mixins]]
+config = "endermanoverhaul.mixins.json"
+[[mixins]]
+config = "endermanoverhaul-common.mixins.json"
+
+[[dependencies.endermanoverhaul]]
+modId = "neoforge"
+type="required"
+versionRange = "[20.4,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "minecraft"
+type="required"
+versionRange = "[1.20.4,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "resourcefullib"
+type="required"
+versionRange = "[2.4.6,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "resourcefulconfig"
+type="required"
+versionRange = "[2.4.4,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.endermanoverhaul]]
+modId = "geckolib"
+type="required"
+versionRange = "[4.4.2,)"
+ordering = "NONE"
+side = "BOTH"

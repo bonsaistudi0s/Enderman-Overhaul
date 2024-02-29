@@ -1,13 +1,17 @@
 {
-  "values": [
-    "#minecraft:has_structure/village_snowy",
-    {
-      "id": "#c:snowy",
-      "required": false
-    },
-    {
-      "id": "#forge:is_snowy",
-      "required": false
-    }
-  ]
+    "values": [
+        "#minecraft:has_structure/village_snowy",
+        {
+            "id": "#c:snowy",
+            "required": false
+        },
+        {
+            "id": "#forge:is_snowy",
+            "required": false
+        },
+        {
+            "id": "#byg:is_icy",
+            "required": false
+        }
+    ]
 }

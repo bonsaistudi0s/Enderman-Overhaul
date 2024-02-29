@@ -7,6 +7,10 @@
     {
       "id": "#forge:is_mushroom",
       "required": false
+    },
+    {
+      "id": "biomesoplenty:fungal_jungle",
+      "required": false
     }
   ]
 }

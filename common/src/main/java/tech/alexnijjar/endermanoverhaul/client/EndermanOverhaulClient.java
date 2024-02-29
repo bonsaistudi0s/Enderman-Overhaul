@@ -36,7 +36,7 @@ public class EndermanOverhaulClient {
     private static final Map<Item, Supplier<GeoArmorRenderer<?>>> ARMOR_RENDERERS = new HashMap<>();
 
     public static void init() {
-        EndermanOverhaul.CONFIGURATOR.registerConfig(EndermanOverhaulClientConfig.class);
+        EndermanOverhaul.CONFIGURATOR.register(EndermanOverhaulClientConfig.class);
         registerEntityRenderers();
         registerArmorRenderers();
         registerItemRenderers();

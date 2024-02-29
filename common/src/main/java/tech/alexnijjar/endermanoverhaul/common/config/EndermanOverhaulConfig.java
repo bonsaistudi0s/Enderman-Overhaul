@@ -1,29 +1,14 @@
 package tech.alexnijjar.endermanoverhaul.common.config;
 
-import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
-import com.teamresourceful.resourcefulconfig.common.annotations.Config;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import com.teamresourceful.resourcefulconfig.web.annotations.Gradient;
-import com.teamresourceful.resourcefulconfig.web.annotations.Link;
-import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
+import com.teamresourceful.resourcefulconfig.api.annotations.Comment;
+import com.teamresourceful.resourcefulconfig.api.annotations.Config;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
+import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
+import tech.alexnijjar.endermanoverhaul.client.config.info.EndermanOverhaulConfigInfo;
 
 @Config("endermanoverhaul")
-@WebInfo(
-    title = "Enderman Overhaul",
-    description = "Enderman overhaul adds biome-specific Enderman!",
-
-    icon = "circle",
-    gradient = @Gradient(value = "45deg", first = "#e8bff2", second = "#181a23"),
-
-    links = {
-        @Link(value = "https://discord.gg/sGwxnFV", icon = "gamepad-2", title = "Discord"),
-        @Link(value = "https://github.com/bonsaistudi0s/enderman-overhaul", icon = "github", title = "GitHub"),
-
-        @Link(value = "https://www.curseforge.com/minecraft/mc-mods/endermanoverhaul", icon = "curseforge", title = "CurseForge"),
-        @Link(value = "https://modrinth.com/mod/enderman-overhaul", icon = "modrinth", title = "Modrinth"),
-    }
-)
+@ConfigInfo.Provider(EndermanOverhaulConfigInfo.class)
 public final class EndermanOverhaulConfig {
 
     @ConfigEntry(

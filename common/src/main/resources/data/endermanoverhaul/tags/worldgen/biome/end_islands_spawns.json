@@ -1,13 +1,19 @@
 {
-  "values": [
-    "#minecraft:has_structure/end_city",
-    {
-      "id": "#c:end_islands",
-      "required": false
-    },
-    {
-      "id": "#c:is_end_highland",
-      "required": false
-    }
-  ]
+    "values": [
+        "#minecraft:has_structure/end_city",
+        {
+            "id": "#c:end_islands",
+            "required": false
+        },
+        {
+            "id": "#c:is_end_highland",
+            "required": false
+        },
+        "minecraft:small_end_islands",
+        "minecraft:end_barrens",
+        {
+            "id": "betterend:ice_starfield",
+            "required": false
+        }
+    ]
 }

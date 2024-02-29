@@ -1,5 +1,41 @@
 {
-  "values": [
-    "minecraft:warped_forest"
-  ]
+    "values": [
+        "minecraft:warped_forest",
+        {
+            "id": "betternether:bone_reef",
+            "required": false
+        },
+        {
+            "id": "betternether:old_warped_woods",
+            "required": false
+        },
+        {
+            "id": "betternether:nether_jungle",
+            "required": false
+        },
+        {
+            "id": "betternether:upside_down_forest",
+            "required": false
+        },
+        {
+            "id": "betternether:upside_down_forest_cleared",
+            "required": false
+        },
+        {
+            "id": "byg:warped_desert",
+            "required": false
+        },
+        {
+            "id": "byg:glowstone_gardens",
+            "required": false
+        },
+        {
+            "id": "cinderscapes:luminous_grove",
+            "required": false
+        },
+        {
+            "id": "incendium:inverted_forest",
+            "required": false
+        }
+    ]
 }

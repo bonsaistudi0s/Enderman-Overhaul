@@ -12,5 +12,5 @@ import tech.alexnijjar.endermanoverhaul.common.blocks.TinySkullBlock;
 public class ModBlocks {
     public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(BuiltInRegistries.BLOCK, EndermanOverhaul.MOD_ID);
 
-    public static final RegistryEntry<Block> TINY_SKULL = BLOCKS.register("tiny_skull", () -> new TinySkullBlock(Block.Properties.copy(Blocks.SKELETON_SKULL).instabreak()));
+    public static final RegistryEntry<Block> TINY_SKULL = BLOCKS.register("tiny_skull", () -> new TinySkullBlock(Block.Properties.ofFullCopy(Blocks.SKELETON_SKULL).instabreak()));
 }

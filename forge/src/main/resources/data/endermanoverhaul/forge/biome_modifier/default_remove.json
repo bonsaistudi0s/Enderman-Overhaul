@@ -1,5 +1,0 @@
-{
-  "type": "forge:remove_spawns",
-  "biomes": "#endermanoverhaul:all_spawns",
-  "entity_types": "minecraft:enderman"
-}

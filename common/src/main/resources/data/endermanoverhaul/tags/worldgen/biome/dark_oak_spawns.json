@@ -1,5 +1,66 @@
 {
   "values": [
-    "#minecraft:has_structure/woodland_mansion"
+    "#minecraft:has_structure/woodland_mansion",
+    "minecraft:dark_forest",
+    {
+      "id": "byg:ancient_forest",
+      "required": false
+    },
+    {
+      "id": "byg:ebony_woods",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:ominous_woods",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blackwood_forest",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blackwood_taiga",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pumpkin_fields",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:smouldering_woodland",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:ashen_woodland",
+      "required": false
+    },
+    {
+      "id": "terralith:mirage_isles",
+      "required": false
+    },
+    {
+      "id": "vampirism:vampire_forest",
+      "required": false
+    },
+    {
+      "id": "wythers:ancient_moss_forest",
+      "required": false
+    },
+    {
+      "id": "wythers:deep_dark_forest",
+      "required": false
+    },
+    {
+      "id": "wythers:forbidden_forest",
+      "required": false
+    },
+    {
+      "id": "wythers:phantasmal_forest",
+      "required": false
+    },
+    {
+      "id": "wythers:phantasmal_swamp",
+      "required": false
+    }
   ]
 }

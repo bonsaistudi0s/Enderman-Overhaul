@@ -2,6 +2,7 @@ package tech.alexnijjar.endermanoverhaul.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import tech.alexnijjar.endermanoverhaul.client.config.EndermanOverhaulClientConfig;
 import tech.alexnijjar.endermanoverhaul.common.entities.EndEnderman;
 
 public class FlashOverlay {
@@ -9,6 +10,7 @@ public class FlashOverlay {
 
     public static void render(GuiGraphics graphics) {
         if (!shouldFlash) return;
+        if (!EndermanOverhaulClientConfig.flashScreen) return;
         var player = Minecraft.getInstance().player;
         if (player == null) return;
         int hurtTime = player.hurtTime;

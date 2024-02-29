@@ -12,8 +12,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import tech.alexnijjar.endermanoverhaul.networking.NetworkHandler;
-import tech.alexnijjar.endermanoverhaul.networking.messages.ClientboundFlashScreenPacket;
+import tech.alexnijjar.endermanoverhaul.common.network.NetworkHandler;
+import tech.alexnijjar.endermanoverhaul.common.network.messages.ClientboundFlashScreenPacket;
 
 public class ModUtils {
     public static <T extends ParticleOptions> void sendParticles(ServerLevel level, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {

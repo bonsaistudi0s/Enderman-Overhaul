@@ -23,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -50,6 +51,7 @@ public class CaveEnderman extends BaseEnderman {
     @SuppressWarnings("deprecation")
     public static boolean checkSpawnRules(EntityType<CaveEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
         if (!EndermanOverhaulConfig.spawnCaveEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
+        if (serverLevel.getBiome(pos).is(Biomes.DEEP_DARK)) return false;
         return pos.getY() < serverLevel.getSeaLevel() &&
             !serverLevel.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) &&
             Monster.checkMonsterSpawnRules(enderman, serverLevel, mobSpawnType, pos, random);
@@ -108,7 +110,7 @@ public class CaveEnderman extends BaseEnderman {
     public void tick() {
         super.tick();
         if (level().isClientSide()) return;
-        if (tickCount % 20 == 0 && isAlive()) {
+        if (getTickCount() % 20 == 0 && isAlive()) {
             if (level().canSeeSky(this.blockPosition()) && level().isDay()) {
                 this.hurt(damageSources().onFire(), 1.0f);
                 teleportUnderBlock();

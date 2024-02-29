@@ -1,3 +1,4 @@
-// 1.20.1	2023-10-11T11:13:41.596193	Tags for minecraft:entity_type mod id endermanoverhaul
+// 1.20.4	2024-01-30T23:53:23.343044	Tags for minecraft:entity_type mod id endermanoverhaul
 100aa4003b6904d1f380993f23d5be8bdf353cdf data/endermanoverhaul/tags/entity_types/cant_be_teleported.json
 dd7b24206098821eb4d50a1c9ef9fb80025c85b8 data/endermanoverhaul/tags/entity_types/ender_pearls.json
+661cc7c8ca7d7174d0193d0a96d44a761b034e2c data/minecraft/tags/entity_types/can_breathe_under_water.json

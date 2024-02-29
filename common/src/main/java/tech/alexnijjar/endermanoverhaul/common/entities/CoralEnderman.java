@@ -170,11 +170,6 @@ public class CoralEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean canBreatheUnderwater() {
-        return true;
-    }
-
-    @Override
     public boolean checkSpawnObstruction(LevelReader level) {
         return level.isUnobstructed(this);
     }
@@ -213,7 +208,7 @@ public class CoralEnderman extends BaseEnderman {
     protected void handleAirSupply(int airSupply) {
         if (this.isAlive() && !this.isInWaterOrBubble()) {
             this.setAirSupply(airSupply - 1);
-            if (this.getAirSupply() <= 20 && tickCount % 20 == 0) {
+            if (this.getAirSupply() <= 20 && getTickCount() % 20 == 0) {
                 if (!teleportToWater()) {
                     for (int i = 0; i < 64; i++) {
                         if (this.teleport()) break;
@@ -237,7 +232,6 @@ public class CoralEnderman extends BaseEnderman {
             BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(30) - 10, 2 - randomSource.nextInt(8), randomSource.nextInt(30) - 10);
             if (level().getBlockState(blockPos2).is(Blocks.WATER)) {
                 Vec3 pos = Vec3.atBottomCenterOf(blockPos2);
-                if (pos == null) return false;
                 level().gameEvent(GameEvent.TELEPORT, position(), GameEvent.Context.of(this));
                 teleportTo(pos.x() + 0.5, pos.y(), pos.z() + 0.5);
                 playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0f, 1.0f);

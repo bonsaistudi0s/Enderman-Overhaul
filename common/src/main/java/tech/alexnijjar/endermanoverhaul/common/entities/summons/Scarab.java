@@ -98,8 +98,8 @@ public class Scarab extends Monster implements GeoEntity {
     }
 
     @Override
-    public double getMyRidingOffset() {
-        return 0.1;
+    public float getMyRidingOffset(Entity entity) {
+        return 0.1f;
     }
 
     @Override

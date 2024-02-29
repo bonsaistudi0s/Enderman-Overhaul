@@ -38,9 +38,8 @@ subprojects {
     }
 
     repositories {
-        maven(url = "https://maven.architectury.dev/")
-        maven(url = "https://maven.minecraftforge.net/")
-        maven(url = "https://maven.resourcefulbees.com/repository/maven-public/")
+        maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
+        maven(url = "https://maven.neoforged.net/releases/")
     }
 
     dependencies {
@@ -56,10 +55,9 @@ subprojects {
 
             officialMojangMappings()
 
-            parchment(create(group = "org.parchmentmc.data", name = "parchment-$minecraftVersion", version = parchmentVersion))
+            parchment(create(group = "org.parchmentmc.data", name = "parchment-1.20.3", version = parchmentVersion))
         })
 
-        compileOnly(group = "com.teamresourceful", name = "yabn", version = "1.0.3")
         "modApi"(group = "com.teamresourceful.resourcefullib", name = "resourcefullib-$modLoader-$minecraftVersion", version = resourcefulLibVersion)
         "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-$minecraftVersion", version = resourcefulConfigVersion)
         if (isCommon) {
@@ -142,7 +140,7 @@ subprojects {
         }
         repositories {
             maven {
-                setUrl("https://maven.resourcefulbees.com/repository/alexnijjar/")
+                setUrl("https://maven.teamresourceful.com/repository/alexnijjar/")
                 credentials {
                     username = System.getenv("MAVEN_USER")
                     password = System.getenv("MAVEN_PASS")

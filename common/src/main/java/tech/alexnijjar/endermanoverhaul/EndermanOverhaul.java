@@ -1,17 +1,17 @@
 package tech.alexnijjar.endermanoverhaul;
 
-import com.teamresourceful.resourcefulconfig.common.config.Configurator;
+import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.registry.*;
-import tech.alexnijjar.endermanoverhaul.networking.NetworkHandler;
+import tech.alexnijjar.endermanoverhaul.common.network.NetworkHandler;
 
 public class EndermanOverhaul {
 
     public static final String MOD_ID = "endermanoverhaul";
-    public static final Configurator CONFIGURATOR = new Configurator();
+    public static final Configurator CONFIGURATOR = new Configurator(MOD_ID);
 
     public static void init() {
-        CONFIGURATOR.registerConfig(EndermanOverhaulConfig.class);
+        CONFIGURATOR.register(EndermanOverhaulConfig.class);
         NetworkHandler.init();
         ModBlocks.BLOCKS.init();
         ModItems.ITEMS.init();

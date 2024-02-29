@@ -1,3 +1,3 @@
-- Reduced cave enderman, flower fields enderman, and mushroom enderman spawns.
-- Increased coral enderman spawns
-- Added End Enderman teleport chance config
+- 1.20.4 port.
+- Turn on replaced enderman renderer by default.
+- Add more tags (Thanks telepathicgrunt).

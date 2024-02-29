@@ -79,7 +79,7 @@ public class AncientPearlItem extends EnderpearlItem {
     @Override
     public void inventoryTick(@NotNull ItemStack stack, Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
         if (level.isClientSide()) return;
-        if (entity.tickCount % HEAL_TICK_RATE != 0) return;
+        if ((entity.tickCount + entity.getId()) % HEAL_TICK_RATE != 0) return;
         CompoundTag tag = stack.getOrCreateTag();
         if (tag.contains("PetEntity")) {
             CompoundTag petTag = tag.getCompound("PetEntity");

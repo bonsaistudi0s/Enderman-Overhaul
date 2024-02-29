@@ -70,7 +70,9 @@ public class SoulPearlItem extends EnderpearlItem {
             CompoundTag tag = copy.getOrCreateTag();
             tag.putInt("BoundEntity", interactionTarget.getId());
             tag.putString("BoundType", BuiltInRegistries.ENTITY_TYPE.getKey(interactionTarget.getType()).toString());
-            player.displayClientMessage(Component.translatable("tooltip.endermanoverhaul.bound_to", interactionTarget.getDisplayName().getString()), true);
+            Component displayName = interactionTarget.getDisplayName();
+            if (displayName == null) return InteractionResult.FAIL;
+            player.displayClientMessage(Component.translatable("tooltip.endermanoverhaul.bound_to", displayName), true);
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EVOKER_CAST_SPELL, SoundSource.NEUTRAL, 1.0f, 1.0f);
             if (stack.getCount() == 1) {
                 player.setItemInHand(usedHand, copy);
@@ -96,13 +98,10 @@ public class SoulPearlItem extends EnderpearlItem {
             int id = tag.getInt("BoundEntity");
             String typeString = tag.getString("BoundType");
             Entity entity = level.getEntity(id);
-            if (entity == null && typeString == null) {
-                tooltipComponents.add(ConstantComponents.NOT_BOUND);
-            } else {
-                EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(new ResourceLocation(typeString));
-                Component displayName = entity == null && type != null ? type.getDescription() : entity.getDisplayName();
-                tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.bound_to", displayName.getString()).withStyle(ChatFormatting.GREEN));
-            }
+            EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(new ResourceLocation(typeString));
+            Component displayName = entity == null ? type.getDescription() : entity.getDisplayName();
+            if (displayName == null) return;
+            tooltipComponents.add(Component.translatable("tooltip.endermanoverhaul.bound_to", displayName.getString()).withStyle(ChatFormatting.GREEN));
         } else {
             tooltipComponents.add(ConstantComponents.NOT_BOUND);
         }
@@ -111,7 +110,7 @@ public class SoulPearlItem extends EnderpearlItem {
     @Override
     public void inventoryTick(@NotNull ItemStack stack, Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
         if (level.isClientSide()) return;
-        if (entity.tickCount % 100 != 0) return;
+        if ((entity.tickCount + entity.getId()) % 100 != 0) return;
         CompoundTag tag = stack.getOrCreateTag();
         if (tag.contains("BoundEntity")) {
             int id = tag.getInt("BoundEntity");

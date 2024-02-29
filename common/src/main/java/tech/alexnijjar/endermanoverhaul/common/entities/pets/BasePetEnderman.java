@@ -167,7 +167,7 @@ public abstract class BasePetEnderman extends BaseEnderman implements GeoEntity,
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level().isClientSide() && this.isAlive() && this.tickCount % 2000 == 0) {
+        if (!this.level().isClientSide() && this.isAlive() && this.getTickCount() % 2000 == 0) {
             this.heal(1.0f);
         }
     }
