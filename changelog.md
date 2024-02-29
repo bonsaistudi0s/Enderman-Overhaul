@@ -1,3 +1,4 @@
 - 1.20.4 port.
-- Turn on replaced enderman renderer by default.
-- Add more tags (Thanks telepathicgrunt).
+- Turned on replaced enderman renderer by default.
+- Added more tags (Thanks telepathicgrunt).
+- Added eye of ender recipes (#32).
