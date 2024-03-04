@@ -10,7 +10,7 @@
   },
   "spawn_cost": {
     "energy_budget": 0.7,
-    "charge": 0.12
+    "charge": 0.15
   },
   "entity_types": ["endermanoverhaul:soulsand_valley_enderman"]
 }

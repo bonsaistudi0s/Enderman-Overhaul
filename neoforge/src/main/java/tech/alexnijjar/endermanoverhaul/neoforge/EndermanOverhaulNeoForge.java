@@ -15,7 +15,7 @@ public class EndermanOverhaulNeoForge {
     public EndermanOverhaulNeoForge(IEventBus bus) {
         EndermanOverhaul.init();
         bus.addListener(EndermanOverhaulNeoForge::onAttributes);
-//        bus.addListener(EndermanOverhaulNeoForge::commonSetup);
+        bus.addListener(EndermanOverhaulNeoForge::commonSetup);
         if (FMLEnvironment.dist.isClient()) {
             EndermanOverhaulClientNeoForge.init();
         }

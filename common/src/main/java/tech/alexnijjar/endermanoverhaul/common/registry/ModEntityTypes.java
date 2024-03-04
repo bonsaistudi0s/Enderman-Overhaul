@@ -66,7 +66,7 @@ public class ModEntityTypes {
             .build("end_islands_enderman"));
 
     public static final RegistryEntry<EntityType<FlowerFieldsEnderman>> FLOWER_FIELDS_ENDERMAN = ENTITY_TYPES.register("flower_fields_enderman", () ->
-        EntityType.Builder.of(FlowerFieldsEnderman::new, MobCategory.MONSTER)
+        EntityType.Builder.of(FlowerFieldsEnderman::new, MobCategory.CREATURE)
             .sized(0.5f, 1.5f)
             .build("flower_fields_enderman"));
 
@@ -76,7 +76,7 @@ public class ModEntityTypes {
             .build("ice_spikes_enderman"));
 
     public static final RegistryEntry<EntityType<MushroomFieldsEnderman>> MUSHROOM_FIELDS_ENDERMAN = ENTITY_TYPES.register("mushroom_fields_enderman", () ->
-        EntityType.Builder.of(MushroomFieldsEnderman::new, MobCategory.AMBIENT)
+        EntityType.Builder.of(MushroomFieldsEnderman::new, MobCategory.CREATURE)
             .sized(0.6f, 2.6f)
             .build("mushroom_fields_enderman"));
 
