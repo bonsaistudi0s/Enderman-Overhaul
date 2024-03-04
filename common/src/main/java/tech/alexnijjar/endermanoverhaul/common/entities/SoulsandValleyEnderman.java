@@ -104,11 +104,6 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean isAlwaysHostile() {
-        return true;
-    }
-
-    @Override
     public double getVisionRange() {
         return 32.0;
     }

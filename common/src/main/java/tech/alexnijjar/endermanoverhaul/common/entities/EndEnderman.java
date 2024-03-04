@@ -99,11 +99,6 @@ public class EndEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean isAlwaysHostile() {
-        return true;
-    }
-
-    @Override
     public boolean canTeleport() {
         return false;
     }

@@ -5,7 +5,12 @@
   {
     "type": "endermanoverhaul:nether_wastes_enderman",
     "weight": 1,
-    "minCount": 4,
-    "maxCount": 4
-  }
+    "minCount": 1,
+    "maxCount": 2
+  },
+  "spawn_cost": {
+    "energy_budget": 0.7,
+    "charge": 0.12
+  },
+  "entity_types": ["endermanoverhaul:nether_wastes_enderman"]
 }

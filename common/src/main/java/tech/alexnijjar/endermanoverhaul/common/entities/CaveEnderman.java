@@ -51,6 +51,7 @@ public class CaveEnderman extends BaseEnderman {
     @SuppressWarnings("deprecation")
     public static boolean checkSpawnRules(EntityType<CaveEnderman> enderman, ServerLevelAccessor serverLevel, MobSpawnType mobSpawnType, BlockPos pos, RandomSource random) {
         if (!EndermanOverhaulConfig.spawnCaveEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
+        if (random.nextBoolean()) return false;
         if (serverLevel.getBiome(pos).is(Biomes.DEEP_DARK)) return false;
         return pos.getY() < serverLevel.getSeaLevel() &&
             !serverLevel.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) &&
@@ -63,7 +64,6 @@ public class CaveEnderman extends BaseEnderman {
         this.goalSelector.addGoal(1, new FleeSunGoal(this, 1.0));
         this.goalSelector.addGoal(2, new FloatGoal(this));
         this.goalSelector.addGoal(3, new EndermanFreezeWhenLookedAt());
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0, 0.0F));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
@@ -89,11 +89,6 @@ public class CaveEnderman extends BaseEnderman {
     @Override
     public ParticleOptions getCustomParticles() {
         return ModParticleTypes.DUST.get();
-    }
-
-    @Override
-    public boolean isAlwaysHostile() {
-        return true;
     }
 
     @Override

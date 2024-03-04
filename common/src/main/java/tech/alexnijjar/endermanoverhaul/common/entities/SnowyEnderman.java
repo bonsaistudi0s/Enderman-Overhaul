@@ -59,7 +59,7 @@ public class SnowyEnderman extends BaseEnderman {
 
     @Override
     public @Nullable MobEffectInstance getHitEffect() {
-        return new MobEffectInstance(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3));
+        return new MobEffectInstance(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
     }
 
     @Override

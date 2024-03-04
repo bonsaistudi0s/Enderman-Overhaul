@@ -8,10 +8,9 @@
     "minCount": 1,
     "maxCount": 2
   },
-  "spawn_costs": {
-    "endermanoverhaul:soulsand_valley_enderman": {
-      "charge": 0.7,
-      "energy_budget": 0.15
-    }
-  }
+  "spawn_cost": {
+    "energy_budget": 0.7,
+    "charge": 0.12
+  },
+  "entity_types": ["endermanoverhaul:soulsand_valley_enderman"]
 }
