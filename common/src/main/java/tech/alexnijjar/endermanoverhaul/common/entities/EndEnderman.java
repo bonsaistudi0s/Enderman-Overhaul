@@ -94,11 +94,6 @@ public class EndEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean isProvokedByEyeContact() {
-        return false;
-    }
-
-    @Override
     public boolean canTeleport() {
         return false;
     }

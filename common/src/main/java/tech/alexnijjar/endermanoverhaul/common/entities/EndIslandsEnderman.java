@@ -48,7 +48,7 @@ public class EndIslandsEnderman extends BaseEnderman {
 
     public static boolean checkMonsterSpawnRules(@NotNull EntityType<? extends Monster> type, ServerLevelAccessor level, @NotNull MobSpawnType spawnType, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (!EndermanOverhaulConfig.spawnEndIslandsEnderman || !EndermanOverhaulConfig.allowSpawning) return false;
-        if (random.nextInt(5) != 0) return false;
+        if (random.nextInt(20) != 0) return false;
         return BaseEnderman.checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 

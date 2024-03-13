@@ -94,11 +94,6 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean isProvokedByEyeContact() {
-        return false;
-    }
-
-    @Override
     public @Nullable ParticleOptions getCustomParticles() {
         return ModParticleTypes.SOUL_FIRE_FLAME.get();
     }

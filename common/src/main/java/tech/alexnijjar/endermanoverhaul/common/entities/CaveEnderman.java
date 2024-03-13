@@ -82,11 +82,6 @@ public class CaveEnderman extends BaseEnderman {
     }
 
     @Override
-    public boolean isProvokedByEyeContact() {
-        return false;
-    }
-
-    @Override
     public ParticleOptions getCustomParticles() {
         return ModParticleTypes.DUST.get();
     }

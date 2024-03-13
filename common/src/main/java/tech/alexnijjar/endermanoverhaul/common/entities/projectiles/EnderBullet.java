@@ -274,6 +274,9 @@ public class EnderBullet extends Projectile implements GeoEntity {
             }
         }
 
+        if (this.tickCount >= 400) {
+            this.discard();
+        }
     }
 
     protected boolean canHitEntity(@NotNull Entity target) {
@@ -302,7 +305,7 @@ public class EnderBullet extends Projectile implements GeoEntity {
         super.onHitEntity(result);
         if (!(result.getEntity() instanceof LivingEntity target)) return;
         LivingEntity livingEntity = getOwner() instanceof LivingEntity e ? e : null;
-        if (target.hurt(this.damageSources().mobProjectile(this, livingEntity), 15.0f)) {
+        if (target.hurt(this.damageSources().mobProjectile(this, livingEntity), 7.0f)) {
             if (livingEntity != null) {
                 this.doEnchantDamageEffects(livingEntity, target);
             }

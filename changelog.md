@@ -1,4 +1,6 @@
-- 1.20.4 port.
-- Turned on replaced enderman renderer by default.
-- Added more tags (Thanks telepathicgrunt).
-- Added eye of ender recipes (#32).
+- Fixed spawn placements not registered on neoforge causing insane amounts of spawning
+- Added recipes for converting custom pearls into ender pearls
+- Fixed ender bullets not despawning
+- Made cave enderman, soulsand valley enderman, and end enderman not hostile by default
+- Reduced end islands enderman damage
+- Added compat for Mekanism's baby enderman
