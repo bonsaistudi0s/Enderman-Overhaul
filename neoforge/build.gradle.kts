@@ -34,6 +34,6 @@ dependencies {
     neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
 
-    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.5.8.30")
-    modLocalRuntime(group = "maven.modrinth", name = "mekanism-additions", version = "10.5.8.30")
+    modImplementation(group = "maven.modrinth", name = "mekanism", version = "10.5.8.30")
+    modImplementation(group = "maven.modrinth", name = "mekanism-additions", version = "10.5.8.30")
 }
