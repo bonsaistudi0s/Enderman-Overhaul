@@ -34,8 +34,6 @@ dependencies {
     neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
 
-    // Mode maven was failing when trying to remap, curse maven doesn't support neoforge and
-    // mekanism was never updated on modrinth, so I just included them locally.
-    modImplementation(files("libs/Mekanism-1.20.4-10.5.0.22.jar"))
-    modImplementation(files("libs/MekanismAdditions-1.20.4-10.5.0.22.jar"))
+    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.5.8.30")
+    modLocalRuntime(group = "maven.modrinth", name = "mekanism-additions", version = "10.5.8.30")
 }
