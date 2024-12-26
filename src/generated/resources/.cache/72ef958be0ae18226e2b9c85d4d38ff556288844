@@ -1,3 +1,5 @@
-// 1.21	2024-06-22T00:36:39.190557	Tags for minecraft:entity_type mod id endermanoverhaul
+// 1.21	2024-12-25T17:23:41.301422	Tags for minecraft:entity_type mod id endermanoverhaul
 dd7b24206098821eb4d50a1c9ef9fb80025c85b8 data/endermanoverhaul/tags/entity_type/ender_pearls.json
+49c968da4ba0df22716065706d09d36f71eeb3f4 data/minecraft/tags/entity_type/arthropod.json
 661cc7c8ca7d7174d0193d0a96d44a761b034e2c data/minecraft/tags/entity_type/can_breathe_under_water.json
+49c968da4ba0df22716065706d09d36f71eeb3f4 data/minecraft/tags/entity_type/powder_snow_walkable_mobs.json

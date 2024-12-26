@@ -22,5 +22,7 @@ public class ModEntityTypeTagProvider extends EntityTypeTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         ModEntityTypes.PEARLS.stream().forEach(pearl -> tag(ModEntityTypeTags.ENDER_PEARLS).add(pearl.get()));
         tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(ModEntityTypes.CORAL_ENDERMAN.get());
+        tag(EntityTypeTags.ARTHROPOD).add(ModEntityTypes.SCARAB.get());
+        tag(EntityTypeTags.POWDER_SNOW_WALKABLE_MOBS).add(ModEntityTypes.SCARAB.get());
     }
 }
