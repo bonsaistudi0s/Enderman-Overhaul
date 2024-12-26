@@ -2,20 +2,24 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
+    "W": {
+      "tag": "minecraft:planks"
     },
-    "X": {
+    "o": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
       "item": "endermanoverhaul:enderman_tooth"
     }
   },
   "pattern": [
-    "X",
-    "X",
-    "#"
+    "ToT",
+    "oWo",
+    "ToT"
   ],
   "result": {
-    "item": "endermanoverhaul:corrupted_blade"
+    "count": 1,
+    "id": "endermanoverhaul:corrupted_shield"
   },
   "show_notification": true
 }

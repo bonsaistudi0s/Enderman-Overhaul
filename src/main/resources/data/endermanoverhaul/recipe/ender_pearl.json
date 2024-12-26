@@ -4,12 +4,10 @@
   "ingredients": [
     {
       "tag": "endermanoverhaul:ender_pearls"
-    },
-    {
-      "item": "minecraft:blaze_powder"
     }
   ],
   "result": {
-    "item": "minecraft:ender_eye"
+    "count": 1,
+    "id": "minecraft:ender_pearl"
   }
 }
