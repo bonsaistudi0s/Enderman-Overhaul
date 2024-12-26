@@ -1,7 +1,7 @@
 plugins {
     java
     idea
-    id("net.neoforged.moddev") version "1.0.14" // https://projects.neoforged.net/neoforged/ModDevGradle
+    id("net.neoforged.moddev") version "2.0.62-beta" // https://projects.neoforged.net/neoforged/ModDevGradle
     id("maven-publish")
 }
 
@@ -24,8 +24,8 @@ repositories {
 }
 
 dependencies {
-    implementation("com.teamresourceful.resourcefullib:resourcefullib-neoforge-$minecraftVersion:$resourcefulLibVersion")
-    implementation("com.teamresourceful.resourcefulconfig:resourcefulconfig-neoforge-$minecraftVersion:$resourcefulConfigVersion")
+    implementation("com.teamresourceful.resourcefullib:resourcefullib-neoforge-1.21:$resourcefulLibVersion")
+    implementation("com.teamresourceful.resourcefulconfig:resourcefulconfig-neoforge-1.21:$resourcefulConfigVersion")
     implementation("software.bernie.geckolib:geckolib-neoforge-$minecraftVersion:$geckolibVersion")
     implementation("mekanism:Mekanism:$minecraftVersion-$mekanismVersion")
     implementation("mekanism:Mekanism:$minecraftVersion-$mekanismVersion:additions")

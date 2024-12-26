@@ -1,1 +1,2 @@
-- Fixed Mekanism baby enderman not holding blocks correctly
+- Fix recipes and ender pearl tag #76
+- Add scarab to `arthropod` and `powder_snow_walkable_mobs` tags #70
