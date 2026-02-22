@@ -1,2 +1,6 @@
-- Fix recipes and ender pearl tag #76
-- Add scarab to `arthropod` and `powder_snow_walkable_mobs` tags #70
+- Added custom spawn egg textures for all enderman variants
+- Added Flower Fields Enderman sounds
+- Fixed missing teleport sounds for Crimson Pearl and Warped Pearl
+- Fixed Spirit soul flame emissive glow only rendering on one side
+- Fixed Bubble Pearl getting affected by gravity in water
+- Updated translations, added French and Italian translations

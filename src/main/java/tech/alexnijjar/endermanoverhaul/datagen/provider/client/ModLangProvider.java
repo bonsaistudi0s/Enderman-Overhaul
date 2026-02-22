@@ -44,7 +44,8 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CORRUPTED_PEARL_TOOLTIP.getString(), "Teleports targets to a random location");
         add(ConstantComponents.SOUL_PEARL_TOOLTIP_1.getString(), "Crouch-right-click to bind an entity");
         add(ConstantComponents.SOUL_PEARL_TOOLTIP_2.getString(), "Teleports the bound entity to the target location");
-        add(ConstantComponents.ANCIENT_PEARL_TOOLTIP.getString(), "Summons a friendly enderman to fight for you");
+        add(ConstantComponents.ANCIENT_PEARL_TOOLTIP_1.getString(), "Summons a friendly enderman to fight for you");
+        add(ConstantComponents.ANCIENT_PEARL_TOOLTIP_2.getString(), "Crouch-right-click a summoned enderman to retrieve the pearl");
         add(ConstantComponents.BUBBLE_PEARL_TOOLTIP.getString(), "Accurate Ender Pearl with no gravity");
         add(ConstantComponents.ICY_PEARL_TOOLTIP.getString(), "Freezes nearby targets on hit");
         add(ConstantComponents.SUMMONER_PEARL_TOOLTIP.getString(), "Teleports nearby targets on hit");

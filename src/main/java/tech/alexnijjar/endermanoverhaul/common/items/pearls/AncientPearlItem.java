@@ -72,7 +72,8 @@ public class AncientPearlItem extends EnderpearlItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(ConstantComponents.ANCIENT_PEARL_TOOLTIP);
+        tooltipComponents.add(ConstantComponents.ANCIENT_PEARL_TOOLTIP_1);
+        tooltipComponents.add(ConstantComponents.ANCIENT_PEARL_TOOLTIP_2);
 
         if (hasPet(stack)) {
             CustomData data = getPet(stack);

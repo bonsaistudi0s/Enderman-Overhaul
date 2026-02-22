@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.entities.projectiles.base.BaseThrownPearl;
 import tech.alexnijjar.endermanoverhaul.common.registry.ModEntityTypes;
@@ -38,7 +39,7 @@ public class ThrownBubblePearl extends BaseThrownPearl {
 
     @Override
     protected double getDefaultGravity() {
-        return isInWater() ? 0.01f : 0;
+        return 0;
     }
 
     protected void onHit(@NotNull HitResult result) {
@@ -72,7 +73,11 @@ public class ThrownBubblePearl extends BaseThrownPearl {
 
     @Override
     public void tick() {
+        Vec3 velocity = getDeltaMovement();
         super.tick();
+        if (isInWater()) {
+            setDeltaMovement(velocity);
+        }
         setDeltaMovement(getDeltaMovement().multiply(1.01, 1.01, 1.01));
         if (this.tickCount >= 420) {
             if (!level().isClientSide()) {

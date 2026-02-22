@@ -85,6 +85,11 @@ public class SoulsandValleyEnderman extends BaseEnderman {
     }
 
     @Override
+    public boolean speedUpWhenAngry() {
+        return false;
+    }
+
+    @Override
     public boolean playRunAnimWhenAngry() {
         return false;
     }

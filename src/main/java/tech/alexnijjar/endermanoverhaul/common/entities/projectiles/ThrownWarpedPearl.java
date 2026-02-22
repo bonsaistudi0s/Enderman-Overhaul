@@ -3,6 +3,7 @@ package tech.alexnijjar.endermanoverhaul.common.entities.projectiles;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -73,6 +74,7 @@ public class ThrownWarpedPearl extends ThrowableItemProjectile {
             entity.resetFallDistance();
         }
 
+        level().playSound(null, getX(), getY(), getZ(), SoundEvents.ENDERMAN_TELEPORT, getSoundSource(), 1.0f, random.nextFloat() * 0.4f + 0.8f);
         this.discard();
     }
 }
