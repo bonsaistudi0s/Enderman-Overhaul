@@ -16,7 +16,7 @@ public class SpiritRenderer extends GeoEntityRenderer<Spirit> {
         super(renderManager, new DefaultedEntityGeoModel<Spirit>(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "spirit"))
             .withAltTexture(TEXTURE)
             .withAltAnimations(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "spirit")));
-        addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW, false));
-        addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW, true));
+        addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW, false, true));
+        addRenderLayer(new CustomEnderEyesLayer<>(this, GLOW, true, true));
     }
 }
