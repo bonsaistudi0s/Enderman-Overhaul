@@ -41,6 +41,15 @@ public class ModSoundEvents {
     public static final RegistryEntry<SoundEvent> DARK_OAK_ENDERMAN_STARE = SOUND_EVENTS.register("dark_oak_enderman_stare", () ->
         SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "dark_oak_enderman_stare")));
 
+    public static final RegistryEntry<SoundEvent> FLOWER_FIELDS_ENDERMAN_AMBIENT = SOUND_EVENTS.register("flower_fields_enderman_ambient", () ->
+        SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "flower_fields_enderman_ambient")));
+
+    public static final RegistryEntry<SoundEvent> FLOWER_FIELDS_ENDERMAN_HURT = SOUND_EVENTS.register("flower_fields_enderman_hurt", () ->
+        SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "flower_fields_enderman_hurt")));
+
+    public static final RegistryEntry<SoundEvent> FLOWER_FIELDS_ENDERMAN_DEATH = SOUND_EVENTS.register("flower_fields_enderman_death", () ->
+        SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "flower_fields_enderman_death")));
+
     public static final RegistryEntry<SoundEvent> ANCIENT_PEARL_HIT = SOUND_EVENTS.register("ancient_pearl_hit", () ->
         SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(EndermanOverhaul.MOD_ID, "ancient_pearl_hit")));
 

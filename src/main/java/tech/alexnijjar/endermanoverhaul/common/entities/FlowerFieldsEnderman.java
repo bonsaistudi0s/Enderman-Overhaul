@@ -2,6 +2,7 @@ package tech.alexnijjar.endermanoverhaul.common.entities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import tech.alexnijjar.endermanoverhaul.common.config.EndermanOverhaulConfig;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.BaseEnderman;
 import tech.alexnijjar.endermanoverhaul.common.entities.base.PassiveEnderman;
+import tech.alexnijjar.endermanoverhaul.common.registry.ModSoundEvents;
 
 public class FlowerFieldsEnderman extends PassiveEnderman {
 
@@ -53,6 +55,21 @@ public class FlowerFieldsEnderman extends PassiveEnderman {
     @Override
     public boolean canPickupBlocks() {
         return false;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSoundEvents.FLOWER_FIELDS_ENDERMAN_AMBIENT.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
+        return ModSoundEvents.FLOWER_FIELDS_ENDERMAN_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundEvents.FLOWER_FIELDS_ENDERMAN_DEATH.get();
     }
 
     @Override

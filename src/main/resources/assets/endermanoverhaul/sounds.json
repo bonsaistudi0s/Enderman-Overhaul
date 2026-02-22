@@ -71,6 +71,31 @@
         ],
         "subtitle": "subtitles.endermanoverhaul.entity.dark_oak_enderman.stare"
     },
+    "flower_fields_enderman_ambient": {
+        "sounds": [
+            "endermanoverhaul:flower_fields/idle1",
+            "endermanoverhaul:flower_fields/idle2",
+            "endermanoverhaul:flower_fields/idle3",
+            "endermanoverhaul:flower_fields/idle4",
+            "endermanoverhaul:flower_fields/idle5"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.flower_fields_enderman.ambient"
+    },
+    "flower_fields_enderman_hurt": {
+        "sounds": [
+            "endermanoverhaul:flower_fields/hurt1",
+            "endermanoverhaul:flower_fields/hurt2",
+            "endermanoverhaul:flower_fields/hurt3",
+            "endermanoverhaul:flower_fields/hurt4"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.flower_fields_enderman.hurt"
+    },
+    "flower_fields_enderman_death": {
+        "sounds": [
+            "endermanoverhaul:flower_fields/death1"
+        ],
+        "subtitle": "subtitles.endermanoverhaul.entity.flower_fields_enderman.death"
+    },
     "ancient_pearl_hit": {
         "sounds": [
             "endermanoverhaul:pearls/ancient_pearl_hit_1",

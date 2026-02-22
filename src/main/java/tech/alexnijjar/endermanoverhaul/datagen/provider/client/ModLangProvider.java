@@ -70,6 +70,10 @@ public class ModLangProvider extends LanguageProvider {
         add("subtitles.endermanoverhaul.entity.tall_enderman.death", "Tall Enderman dies");
         add("subtitles.endermanoverhaul.entity.tall_enderman.stare", "Tall Enderman cries out");
 
+        add("subtitles.endermanoverhaul.entity.flower_fields_enderman.ambient", "Flower Fields Enderman vwoops");
+        add("subtitles.endermanoverhaul.entity.flower_fields_enderman.hurt", "Flower Fields Enderman hurts");
+        add("subtitles.endermanoverhaul.entity.flower_fields_enderman.death", "Flower Fields Enderman dies");
+
         add("subtitles.endermanoverhaul.entity.dark_oak_enderman.ambient", "Dark Oak Enderman vwoops");
         add("subtitles.endermanoverhaul.entity.dark_oak_enderman.darkness", "Dark Oak Enderman darkens");
         add("subtitles.endermanoverhaul.entity.dark_oak_enderman.stare", "Dark Oak Enderman cries out");
