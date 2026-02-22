@@ -27,6 +27,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.BADLANDS_HOOD.get());
         basicItem(ModItems.SAVANNAS_HOOD.get());
         basicItem(ModItems.SNOWY_HOOD.get());
-        ModItems.SPAWN_EGGS.getEntries().stream().map(RegistryEntry::get).forEach(this::spawnEggItem);
+        ModItems.SPAWN_EGGS.getEntries().stream().map(RegistryEntry::get).forEach(this::basicItem);
     }
 }
